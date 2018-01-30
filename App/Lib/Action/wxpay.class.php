@@ -3,12 +3,12 @@
 class Wxpay {
 
 	//微信支付
-	public function wx_Pay($tel){
+	public function wx_Pay($tel, $price){
 		$arr_we = C('wechat');
 
 		$appid =        $arr_we['appid'];//小程序的appid
 		$body =         '房间预订';//商品描述
-		$total_fee =    '1';//总金额,最低为一分钱，必须是整数
+		$total_fee =    $price;//总金额,最低为一分钱，必须是整数
 		$mch_id =       $arr_we['mch_id'];//商户号
 		$KEY = 			$arr_we['key'];//商户号key
 		$nonce_str =    $this->nonce_str();//随机字符串

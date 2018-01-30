@@ -223,9 +223,9 @@ class CommonwapAction extends ApiAction{
         return $pay->driver('wechat')->gateway('app')->pay($config_biz);
     }
 
-    public function wechat($orderid)
+    public function wechat($orderid, $price)
     {
         $pay = new Wxpay();
-        return $pay->wx_Pay($orderid);
+        return $pay->wx_Pay($orderid, $price);
     }
 }

@@ -2507,16 +2507,17 @@ class WechatAction extends CommonwapAction {
 			// echo $order_string;
  
 		} elseif ($type == 2) {
+			$price = intval($price)*100;
 			$config_biz = [
 				'out_trade_no' => $id,
-				'total_fee' => $price, // **单位：分**
+				'total_fee' => "$price", // **单位：分**
 				'body' => '房间预订',
 				// 'spbill_create_ip' => $_SERVER["REMOTE_ADDR"],
 				'spbill_create_ip' => '192.168.1.125',
 				// 'openid' => 'onkVf1FjWS5SBIihS-123456_abc',
 			];
 			// $order_string = $this->wechatpay($config_biz);
-			$order_string = $this->wechat($id);
+			$order_string = $this->wechat($id, $price);
 			$this->response(['result' => 1, 'data' => $order_string, 'code' => 200]);
 		} elseif ($type == 3) {
 			$url = '/order-pay/score-pay.do';
