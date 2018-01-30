@@ -176,10 +176,10 @@ class PayAction extends Action{
 		$data = [];
 		$data['orderid'] = $orderid;
 		$data['status'] = 3;				// 未付款状态
-		$data['username'] = session('name');
+		$data['username'] = session('id');
 		$price = M('order')->where($data)->getField('shoufei');
 		// echo $price;exit();
-	$price = 0.01;
+	// $price = 0.01;
 		$config_biz = [
             'out_trade_no' => $id,
 			'total_amount' => $price,
@@ -222,6 +222,7 @@ class PayAction extends Action{
 		// $data['username'] = session('name');
 		$price = M('order')->where($data)->getField('shoufei');
 		// echo $price;exit();
+		$price = intval($price)*100;     //微信  换算成分计算
 		if (!$price) {
 			die(json_encode(['msg' => '下单失败','status' => 0]));
 		}
@@ -249,7 +250,7 @@ class PayAction extends Action{
 		
 		// $pay = new Pay($config_wechat);
 		// echo $pay->driver('wechat')->gateway('scan')->pay($config_biz);
-		echo $this->wxpay($id);
+		echo $this->wxpay($id, $price);
 	}
 
 	public function scorepay()
@@ -283,7 +284,7 @@ class PayAction extends Action{
 			$r = M('order')->where(['orderid' => $orderid])->save($d);
 			die(json_encode(['status' => 1, 'msg' => '您已成功支付跳转至订单页', 'url' => __ROOT__ . '/Member/member_order.html']));
 		} else {
-			die(json_encode(['status'=> 0,'msg'=>'积分支付失败，请选择其它方式支付']));
+			die(json_encode(['status'=> 0,'msg'=>$res->message]));
 		}
 	}
 
@@ -379,13 +380,13 @@ class PayAction extends Action{
 	/**
 	 * 微信扫码支付
 	 */
-	public function wxpay($id)
+	public function wxpay($id, $price)
 	{
 		$arr_we = C('wechat');
 
 		$appid =        $arr_we['appid'];//小程序的appid
 		$body =         '房间预订';//商品描述
-		$total_fee =    '1';//总金额,最低为一分钱，必须是整数
+		$total_fee =    "$price";//总金额,最低为一分钱，必须是整数
 		$mch_id =       $arr_we['mch_id'];//商户号
 		$KEY = 			$arr_we['key'];//商户号key
 		$nonce_str =    $this->nonce_str();//随机字符串

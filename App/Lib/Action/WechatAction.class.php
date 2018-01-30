@@ -2483,8 +2483,8 @@ class WechatAction extends CommonwapAction {
 		// $data['username'] = session('name');
 		$order = M('order')->where($data)->field('shoufei,orderid,addtime')->find();
 		$id = $order['addtime'].$order['orderid'];
-		// $price = $order['shoufei'];
-		$price = 0.01;
+		$price = $order['shoufei'];
+		// $price = 0.01;
 		if (!$order) {
 			$err = [
 				'result'	=> 1,
