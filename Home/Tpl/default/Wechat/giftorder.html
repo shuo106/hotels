@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>积分商品预订</title>
+<link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+<link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.daymoney.css" />
+<link href="__PUBLIC__/wap/css/index.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<script type="text/javascript">
+   function doorder(){
+ 	$("#order").submit();
+ }
+$(function(){
+     var  point = $("#point").val();
+     $("#min").click(function(){
+       if($("#nums").val()<=1){
+       	 $("#nums").val(1);
+       }else{
+       	 $("#nums").val(parseInt($("#nums").val())-1);
+       }
+     $("#total").html(point *  $("#nums").val());
+    });
+     $("#plus").click(function(){
+      $("#nums").val(parseInt($("#nums").val())+1);
+     $("#total").html(point *  $("#nums").val());
+    });
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status>0){
+			window.location.href="__ROOT__/Wechat/mygiftorder";
+		}
+		if(data.status==-2){
+				window.location.href='__ROOT__/Wechat/login.html';
+		}
+	});
+	return false;
+})
+</script>
+<body>
+<!-- Header -->
+<header data-am-widget="header"
+          class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="javascript:history.back();" class="">
+			<i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title"  style=" margin: 0 15%;">
+      {$gift.name}预订
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="__ROOT__/Wechat/index/wechatid/{$smarty.get.wechatid}" class="">
+			<i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+          </a>
+      </div>
+  </header>
+<!-- Slider -->
+<div class="my">
+<form action="__APP__/Wap/dogiftorder" method="post" id="order">
+<div class="xinxi">
+  <ul>  
+  	<li style=" height:40px;"><label>商品名称：</label>{$gift['name']}</li>
+  	<li><label>商品类型：</label>{getGiftCateName($gift['cateid'])}</li>
+    <!--兑换类型-->
+	<li>
+		<label>预订数量：</label> 
+		<button style="width: 20px;" id="min" type="button">-</button>
+		<input type="text" name="nums" class="txt" id="nums"  readonly="1" value="1" style="width: 50px; text-align:center; float:none" />
+		<button style="width: 20px;" id="plus" type="button">+</button>
+	</li>	
+	<input type="hidden"  name="point"  id="point"  value="{$gift['point']}"/>
+	<input type="hidden"  name="tid"  value="{$gift['id']}" />
+  </ul>
+</div>
+<div class="boox">
+  <ul style="padding:0px 0px">
+    <li class="clearfix"><label>联系姓名：</label> <input type="text" name="linkman" class="txt" id="linkman"  value="{$member.truename}"/></li>
+    <li class="clearfix"><label>联系电话：</label><input type="text" class="txt" name="mobile" id="mobile" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  value="{$member.telephone}"></li>
+    <!-- <li class="clearfix"><label>支付方式：</label><span class="ckradio">{if $room['paytype']}在线支付{else}到店支付{/if}</span></li> -->
+    <li class="clearfix"><label>收货地址：</label><textarea name="address"></textarea></li>
+  </ul>
+</div>
+</form>
+<div class="button"><span><a id="doorder" href="javascript:doorder();">提交</a></span>应付积分：<strong id="total">{$gift['point']}</strong></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{include file="../Common/header.html"}
+<div class="blank20"></div>
+<div class="wrapper clearfix">
+<div class="mainCon">
+        <div class="m-column">
+            <h5 class="cm-lineTit"><i class="am-icon-book"></i>{$cate['name']}</h5>
+        </div>
+	<div class="mainLayout">
+		<div class="c_mt p_rel">
+			<div class="publicMain">
+				<div class="informationDetailMain">
+					<div class="informationDetailMainTitle">
+						<h2>{$art['title']}</h2>
+						<h3><span>作者：{$art['username']}　|　</span><span>时间：{date('Y-m-d',$art['addtime'])}　|　</span><span><i class="am-icon-eye"></i>{$art['hits']}　</span></h3>
+					</div>
+					<div class="informationDetailMainNote">
+						<div class="bfhd_Layout_proseMainNote">
+						{$art['content']}
+						</div>
+					</div>
+                    	<div class="informationMainTitleLink">
+							<span>分享到：</span>
+							<!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_32x32">
+                                <a class="jiathis_button_qzone"></a>
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_tqq"></a>
+                                <a class="jiathis_button_weixin"></a>
+                                <a class="jiathis_button_renren"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                                <a class="jiathis_counter_style"></a>
+                            </div>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+					</div>
+						<div class="nextpage">{$shang}</div>
+                        <div class="nextpage">{$xia}</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+    <!-- 侧边栏 -->
+    <div class="sideBar">
+        <!-- 热门目的地 -->
+        <div class="hot-address">
+            <h5 class="cm-lineTit">热门目的地</h5>
+            <div class="city-box">
+					{foreach from=$hotList item=vo}
+					<a href="__ROOT__/Hotels/search-{$vo.id}-0-0-0-0-0-0-0-0.html" target="_blank"  class="city-bg">{$vo.name}</a>
+					{/foreach}
+            </div>
+        <!-- 热门文章 -->
+<div class="hot-articles mt20" id="sidebar-hotrec">
+    <h5 class="cm-lineTit">热门文章</h5>
+    <div class="art-lis">
+        <ul id="hot-Rec-Articles">
+		{foreach  from=$hot  key=key item=vo}
+        <li><span class="am-badge {if $key<3}am-badge-warning{else}am-badge-secondary{/if}">{$key+1}</span><a target="_blank" href="__ROOT__/Article/show-{$vo['articleid']}.html">{$vo['title']}</a></li>
+	    {/foreach}
+		</ul>
+	</div>
+</div>
+    </div>   
+</div>
+</div> 
+{include file="../Common/footer.html"}

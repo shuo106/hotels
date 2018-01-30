@@ -1,0 +1,43 @@
+<div class="bjui-pageContent tableContent">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Single/lists" method="get" >
+		<input type="hidden" name="btn_submit" value="true">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height: 36px; line-height: 36px;">
+					<th style="background:#1078C1;color:#fff;" data-order-field="id" width="50">ID</th>
+					<th style="background:#1078C1;color:#fff;" data-order-field="sort" width="50">排序</th>
+					<th style="background:#1078C1;color:#fff;">标题</th>
+					<th style="background:#1078C1;color:#fff;">作者</th>
+					<th style="background:#1078C1;color:#fff;" data-order-field="addtime">添加时间</th>
+					<th style="background:#1078C1;color:#fff;" width="280">操作
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Single/index" class="btn btn-green" data-toggle="dialog" data-width="1000" data-height="600">新增</a></th> -->
+				</tr>
+			</thead>
+			</form>
+			<form name="sortform" data-toggle="ajaxform" action="__APP__/Single/sort" method="post">
+			<tbody>
+				{foreach from=$list item=v key=k}
+				<tr data-id="{$k}">
+					<td>{$v.id}</td>
+					<td>
+						<input type="text" class="ids" name="sort[{$v.id}]" value="{$v.sort}" style="width:100%" />
+					</td>					
+					<td>{$v.title|indent:($v.lev-1):'——'}</td>
+					<td>{$v.username}</td>
+					<td>{$v.addtime|date_format:"%Y-%m-%d"}</td>
+					<td>
+						<!-- <a href="__APP__/Single/index/pid/{$v.id}" class="btn btn-blue" data-toggle="dialog" data-width="1000" data-height="600">添加子级页面</a> -->
+						<a href="__APP__/Single/index/id/{$v.id}" class="btn btn-green" data-toggle="dialog" data-width="1000" data-height="600" data-id="upload" data-reload-warn="本页已有打开的内容，确定将刷新本页内容，是否继续？" data-title="编辑-{$v.name}">编辑</a>
+						<!-- <a href="__APP__/Single/del/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a> -->
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+			</form>
+		</table>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+</div>

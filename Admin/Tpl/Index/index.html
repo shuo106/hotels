@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>网站管理登录-{$title}</title>
+
+        <meta name="keywords" content="{$keywords}" />
+
+        <meta name="description" content="{$description}" />
+
+        <meta name="author" content="郑州鹏程计算机技术有限公司（www.pengchengsoft.com）">
+
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/BJUI/themes/all.css">	
+
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/BJUI/themes/quanguo.css">
+
+        <!--[if lte IE 7]>
+
+		<link href="__PUBLIC__/BJUI/themes/css/ie7.css" rel="stylesheet">
+
+        <![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+        <!--[if lte IE 9]>
+
+        <script src="__PUBLIC__/BJUI/other/html5shiv.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/other/respond.min.js"></script>
+
+        <![endif]-->
+
+        <!-- jquery -->
+
+        <script src="__PUBLIC__/BJUI/js/jquery-1.7.2.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/jquery.cookie.js"></script>
+
+        <!--[if lte IE 9]>
+
+		<script src="__PUBLIC__/BJUI/other/jquery.iframe-transport.js"></script>    
+
+        <![endif]-->
+
+        <!-- BJUI.all 分模块压缩版 
+
+        <script src="__PUBLIC__/BJUI/js/bjui-all.js"></script>
+
+        -->
+
+        <script src="__PUBLIC__/BJUI/js/bjui-core.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-regional.zh-CN.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-frag.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-extends.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-basedrag.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-slidebar.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-contextmenu.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-navtab.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-dialog.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-taskbar.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-ajax.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-alertmsg.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-pagination.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-util.date.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-datepicker.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-ajaxtab.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-datagrid.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-tablefixed.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-tabledit.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-spinner.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-lookup.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-tags.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-upload.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-theme.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-initui.js"></script>
+
+        <script src="__PUBLIC__/BJUI/js/bjui-plugins.js"></script>
+
+        <!-- plugins -->
+
+        <!-- swfupload for uploadify && kindeditor -->
+
+        <script src="__PUBLIC__/BJUI/plugins/swfupload/swfupload.js"></script>
+
+        <!-- kindeditor -->
+
+        <script src="__PUBLIC__/BJUI/plugins/kindeditor_4.1.10/kindeditor-all.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/kindeditor_4.1.10/lang/zh_CN.js"></script>
+
+        <!-- colorpicker -->
+
+        <script src="__PUBLIC__/BJUI/plugins/colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
+        <!-- ztree -->
+
+        <script src="__PUBLIC__/BJUI/plugins/ztree/jquery.ztree.all-3.5.js"></script>
+
+        <!-- nice validate -->
+
+        <script src="__PUBLIC__/BJUI/plugins/niceValidator/jquery.validator.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/niceValidator/jquery.validator.themes.js"></script>
+
+        <!-- bootstrap plugins -->
+
+        <script src="__PUBLIC__/BJUI/plugins/bootstrap.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/bootstrapSelect/bootstrap-select.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/bootstrapSelect/defaults-zh_CN.min.js"></script>
+
+        <!-- icheck -->
+
+        <script src="__PUBLIC__/BJUI/plugins/icheck/icheck.min.js"></script>
+
+        <!-- dragsort -->
+
+        <script src="__PUBLIC__/BJUI/plugins/dragsort/jquery.dragsort-0.5.1.min.js"></script>
+
+        <!-- HighCharts -->
+
+        <script src="__PUBLIC__/BJUI/plugins/highcharts/highcharts.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/highcharts/highcharts-3d.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/highcharts/themes/gray.js"></script>
+
+        <!-- ECharts -->
+
+        <script src="__PUBLIC__/BJUI/plugins/echarts/echarts.js"></script>
+
+        <!-- other plugins -->
+
+        <script src="__PUBLIC__/BJUI/plugins/other/jquery.autosize.js"></script>
+
+        <link href="__PUBLIC__/BJUI/plugins/uploadify/css/uploadify.css" rel="stylesheet">
+
+        <script src="__PUBLIC__/BJUI/plugins/uploadify/scripts/jquery.uploadify.min.js"></script>
+
+        <script src="__PUBLIC__/BJUI/plugins/download/jquery.fileDownload.js"></script>
+
+        <!-- object js -->
+
+        <script type="text/javascript">
+
+            var public = "__PUBLIC__";
+
+            var root = "__ROOT__";
+
+        </script>
+
+        <script src="__PUBLIC__/BJUI/js/quanguo.js"></script>
+
+		<style>
+
+        .panel-heading i { width:14px; text-align:center; margin-right:5px }
+        .bjui-navbar-logo {
+            position: relative;
+            display: flex;
+            width: 500px;
+        }
+        .logo-title {
+            font-size: 30px;
+            color:#fff;
+            margin-top: 10px;
+            /* float: left; */
+            position: absolute;
+            top: 10px;
+            left: 110px;
+            
+        }
+        
+		</style>    
+
+		</head>
+
+    <body>
+
+	<!--[if lte IE 7]>
+
+	<div id="errorie"><div>您还在使用老掉牙的IE，正常使用系统前请升级您的浏览器到 IE8以上版本 <a target="_blank" href="http://windows.microsoft.com/zh-cn/internet-explorer/ie-8-worldwide-languages">点击升级</a>&nbsp;&nbsp;强烈建议您更改换浏览器：<a href="http://down.tech.sina.com.cn/content/40975.html" target="_blank">谷歌 Chrome</a></div></div>
+
+	<![endif]-->
+
+        <header id="bjui-header">
+
+            <div class="bjui-navbar-header">
+
+                <!-- <button type="button" class="bjui-navbar-toggle btn-default" data-toggle="collapse" data-target="#bjui-navbar-collapse">
+
+                    <i class="fa fa-bars"></i>
+
+                </button> -->
+
+                <div class="bjui-navbar-logo">
+                    <img src="__PUBLIC__/bestjui/images/logo.png" style="height: 50px;margin-left: 20px;margin-top: 10px;">
+                    <div class="logo-title">缘中源酒店预订管理系统</div>
+                </div>
+                
+            </div>
+
+            <nav id="bjui-navbar-collapse">
+
+                <ul class="bjui-navbar-right">
+
+<li><a href="__APP__/Rbac/addadmin/uid/{$smarty.session.admin_id}"   data-title="编辑资料" data-toggle="navtab"  data-id="changepwd_page"  data-mask="true" data-width="400" data-height="200"><img src="__PUBLIC__/assets/images/huiyuanico.png" style=" width:18px;">{$rolename}</a></li>  
+
+                    <li class="datetime">
+
+                        <div> 欢迎您<b>&nbsp;&nbsp;&nbsp;&nbsp;{$smarty.session.admin_name}（{$role}）</b></div>
+
+                    </li>                   
+
+                    <li><a href="#">&nbsp;<span class="glyphicon glyphicon-user"></span> 我的资料</a></li>
+
+                    <li><a href="__APP__/Index/exits" >&nbsp;<span class="glyphicon glyphicon-off"></span> 我要注销</a></li>
+
+                    <li><a href="__ROOT__/index.php" target="_blank">&nbsp;<span class="glyphicon glyphicon-home"></span> 网站首页</a></li>                   
+
+                </ul>
+
+            </nav>
+
+            <div id="bjui-hnav">
+
+                <ul class="kjdh">
+
+                    {if $smarty.session.role_id eq 16}
+
+                    <li><a href="__APP__/Article/lists" data-toggle="navtab" data-options="{ id:'Article-index', faicon:'caret-right'}" data-fresh="true">文章管理</a></li>
+
+                    <li><a href="__APP__/Hotels/lists"  data-toggle="navtab" data-options="{ id:'Hotels-lists', faicon:'caret-right'}" data-fresh="true">酒店管理</a></li>
+
+                    <li><a href="__APP__/Order/index" data-toggle="navtab" data-options="{ id:'Order-index', faicon:'caret-right'}" data-fresh="true">订单管理</a></li>
+
+                    <li><a href="__APP__/Comment/index" data-toggle="navtab" data-options="{ id:'Comment-index', faicon:'caret-right'}" data-fresh="true">点评管理</a></li>
+
+                    <li><a href="__APP__/Member/member" data-toggle="navtab" data-options="{ id:'Member-member', faicon:'caret-right'}" data-fresh="true">会员管理</a></li>
+
+                    {/if}
+
+                </ul>
+
+                <button type="button" class="btn-default bjui-hnav-more-left" title="导航菜单左移"><i class="fa fa-angle-double-left"></i></button>
+
+                <div id="bjui-hnav-navbar-box">
+
+                    <ul id="bjui-hnav-navbar">
+
+                        <li class="active" style="border: 0;">
+
+                            <a href="javascript:;" data-toggle="slidebar" style="width: 0;height: 0;"></a>
+
+                            <div class="items hide" data-noinit="true" id="liu">
+
+                                {if $smarty.session.role_id eq 16}
+
+                                <ul class="menu-items" data-faicon="fa fa-cog" data-tit="常规设置">
+
+                                    <li><a href="__APP__/Basic/index" data-toggle="navtab" data-options="{ id:'Basic-index', faicon:'caret-right'}" data-fresh="true">基本设置</a></li>
+
+                                    <li><a href="__APP__/Basic/safety" data-toggle="navtab" data-options="{ id:'Safety-index', faicon:'caret-right'}" data-fresh="true">安全设置</a></li>
+
+                                    <!-- <li><a href="__APP__/Basic/pay" data-toggle="navtab" data-options="{ id:'Pay-pay', faicon:'caret-right'}" data-fresh="true">支付设置</a></li> -->
+
+                                    <!-- <li><a href="__APP__/Basic/sms" data-toggle="navtab" data-options="{ id:'Sms-index', faicon:'caret-right'}" data-fresh="true">短信设置</a></li> -->
+
+                                    <!-- <li><a href="__APP__/Basic/email" data-toggle="navtab" data-options="{ id:'Email-index', faicon:'caret-right'}" data-fresh="true">邮箱设置</a></li> -->
+
+                                    <!-- <li><a href="__APP__/Basic/qq" data-toggle="navtab" data-options="{ id:'Qq-index', faicon:'caret-right'}" data-fresh="true">客服设置</a></li> -->
+
+                                    <!-- <li><a href="__APP__/Basic/authorize" data-toggle="navtab" data-options="{ id:'Authorize-index', faicon:'caret-right'}" data-fresh="true">授权信息</a></li> -->
+
+                                    <li><a href="__APP__/Basic/server" data-toggle="navtab" data-options="{ id:'Server-index', faicon:'caret-right'}" data-fresh="true">服务器信息</a></li>
+
+                                    <li><a href="__APP__/Category/chanellists" data-toggle="navtab" data-options="{ id:'Category-chanellists', faicon:'caret-right'}" data-fresh="true">导航列表</a></li>
+
+                                    <li><a href="__APP__/Ads/index" data-toggle="navtab" data-options="{ id:'Ads-index', faicon:'caret-right'}" data-fresh="true">广告位管理</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-bar-chart" data-tit="城市地标">
+
+                                    <li><a href="__APP__/Area/index" data-toggle="navtab" data-options="{ id:'Area-index', faicon:'caret-right'}" data-fresh="true">城市管理</a></li>
+
+                                    <li><a href="__APP__/College/index" data-toggle="navtab" data-options="{ id:'College-index', faicon:'caret-right'}" data-fresh="true">高校管理</a></li>  
+
+                                    <li><a href="__APP__/Trains/index" data-toggle="navtab" data-options="{ id:'Trains-index', faicon:'caret-right'}" data-fresh="true">车站管理</a></li>
+
+                                   <li><a href="__APP__/Exhibit/index" data-toggle="navtab" data-options="{ id:'Exhibit-index', faicon:'caret-right'}" data-fresh="true">会展管理</a></li> 
+
+                                   <li><a href="__APP__/Airport/index" data-toggle="navtab" data-options="{ id:'Airport-index', faicon:'caret-right'}" data-fresh="true">机场管理</a></li>  
+
+                                   <li><a href="__APP__/Subway/index" data-toggle="navtab" data-options="{ id:'Subway-index', faicon:'caret-right'}" data-fresh="true">地铁管理</a></li>                        
+
+                                </ul>                                
+
+<!--                                 <ul class="menu-items" data-faicon="fa fa-weixin" data-tit="微信管理">
+
+                                    <li><a href="__APP__/Wechat/index" data-toggle="navtab" data-options="{ id:'Wechat-index', faicon:'caret-right'}" data-fresh="true">微信配置</a></li>
+
+                                    <li><a href="__APP__/Wechat/textreply" data-toggle="navtab" data-options="{ id:'Wechat-textreply', faicon:'caret-right'}" data-fresh="true">文字回复</a></li>
+
+                                    <li><a href="__APP__/Wechat/imagetextreply" data-toggle="navtab" data-options="{ id:'Wechat-imagetextreply', faicon:'caret-right'}" data-fresh="true">图文回复</a></li>
+
+                                    <li><a href="__APP__/Wechat/menu" data-toggle="navtab" data-options="{ id:'Wechat-menu', faicon:'caret-right'}" data-fresh="true">自定义菜单</a></li>
+
+
+
+                                </ul> -->
+
+                                <ul class="menu-items" data-faicon="fa fa-indent" data-tit="文章管理">
+
+                                    <li><a href="__APP__/Article/index" data-toggle="navtab" data-options="{ id:'Article-index', faicon:'caret-right'}" data-fresh="true">文章添加</a></li>
+
+                                    <li><a href="__APP__/Article/lists" data-toggle="navtab" data-options="{ id:'Article-lists', faicon:'caret-right'}" data-fresh="true">文章列表</a></li>
+
+                                    <li><a href="__APP__/Article/huishou" data-toggle="navtab" data-options="{ id:'Article-huishou', faicon:'caret-right'}" data-fresh="true">文章回收站</a></li>
+
+                                    <li><a href="__APP__/Single/lists" data-toggle="navtab" data-options="{ id:'Single-lists', faicon:'caret-right'}" data-fresh="true">单页管理</a></li>
+
+                                    <li><a href="__APP__/Notic/lists" data-toggle="navtab" data-options="{ id:'Notic-lists', faicon:'caret-right'}" data-fresh="true">公告管理</a></li>
+
+                                    <li><a href="__APP__/Cate/lists" data-toggle="navtab" data-options="{ id:'Cate-lists', faicon:'caret-right'}" data-fresh="true">分类管理</a></li>
+
+                                    <li><a href="__APP__/Cate/huishou" data-toggle="navtab" data-options="{ id:'Cate-huishou', faicon:'caret-right'}" data-fresh="true">分类回收站</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-bed" data-tit="酒店管理">
+
+                                    <li><a href="__APP__/Hotels/register" data-toggle="navtab" data-options="{ id:'Hotels-register', faicon:'caret-right'}" data-fresh="true">添加酒店</a></li>
+
+                                    <li><a href="__APP__/Hotels/lists" data-toggle="navtab" data-options="{ id:'Hotels-lists', faicon:'caret-right'}" data-fresh="true">酒店管理</a></li>	
+
+                                    <li><a href="__APP__/Hotels/huishou" data-toggle="navtab" data-options="{ id:'Hotels-huishou', faicon:'caret-right'}" data-fresh="true">酒店回收站</a></li>	
+
+                                    <li><a href="__APP__/Hotels/sheshi/cid/1" data-toggle="navtab" data-options="{ id:'Hotels-sheshi1', faicon:'caret-right'}" data-fresh="true">酒店设施</a></li>	
+
+                                    <li><a href="__APP__/Hotels/sheshi/cid/4" data-toggle="navtab" data-options="{ id:'Hotels-sheshi4', faicon:'caret-right'}" data-fresh="true">客房设施</a></li>	
+
+                                    <li><a href="__APP__/Hotels/sheshi/cid/2" data-toggle="navtab" data-options="{ id:'Hotels-sheshi2', faicon:'caret-right'}" data-fresh="true">餐饮设施</a></li>	
+
+                                    <li><a href="__APP__/Hotels/sheshi/cid/3" data-toggle="navtab" data-options="{ id:'Hotels-sheshi3', faicon:'caret-right'}" data-fresh="true">娱乐设施</a></li>
+
+                                    <li><a href="__APP__/Hotels/sheshi/cid/5" data-toggle="navtab" data-options="{ id:'Hotels-sheshi5', faicon:'caret-right'}" data-fresh="true">酒店星级</a></li>										
+
+                                    <!-- <li><a href="__APP__/Hotels/sheshi/cid/6" data-toggle="navtab" data-options="{ id:'Hotels-sheshi6', faicon:'caret-right'}" data-fresh="true">信用卡管理</a></li> -->
+
+                                    <li><a href="__APP__/Hotels/lslist" data-toggle="navtab" data-options="{ id:'Hotels-lslist', faicon:'caret-right'}" data-fresh="true">连锁品牌</a></li>	
+
+                                    <li><a href="__APP__/Hotels/theme" data-toggle="navtab" data-options="{ id:'Hotels-theme', faicon:'caret-right'}" data-fresh="true">特色主题</a></li>                                       
+
+                                    <li><a href="__APP__/Custom/index" data-toggle="navtab" data-options="{ id:'Custom-index', faicon:'caret-right'}" data-fresh="true">客房配置</a></li>																						
+
+                                </ul>									
+
+                                <ul class="menu-items" data-faicon="fa fa-bed" data-tit="客房管理">			
+
+                                    <li><a href="__APP__/Hotels/room" data-toggle="navtab" data-options="{ id:'Hotels-room', faicon:'caret-right'}" data-fresh="true">客房列表</a></li>
+
+                                    <li><a href="__APP__/Hotels/roomhuishou" data-toggle="navtab" data-options="{ id:'Hotels-roomhuishou', faicon:'caret-right'}" data-fresh="true">客房回收站</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-pencil-square-o" data-tit="订单管理">
+
+                                    <li><a href="__APP__/Order/index" data-toggle="navtab" data-options="{ id:'Order-index', faicon:'caret-right'}" data-fresh="true">所有订单</a></li>
+
+                                    {foreach from=C('order.status') item=vv key=kk}<li><a href="__APP__/Order/index/status/{$kk}" data-toggle="navtab" data-options="{ id:'Order-index{$kk}', faicon:'caret-right'}" data-fresh="true">{$vv}</a></li>{/foreach}
+
+                                </ul>
+
+								<ul class="menu-items" data-faicon="fa fa-bar-chart" data-tit="数据统计">
+
+                                    <li><a href="__APP__/Data/order_from" data-toggle="navtab" data-options="{ id:'Basic-index1', faicon:'caret-right'}" data-fresh="true">网络订单来源</a></li>
+
+                                    <li><a href="__APP__/Data/keliu" data-toggle="navtab" data-options="{ id:'Safety-index1', faicon:'caret-right'}" data-fresh="true">客流区域分布</a></li>
+
+                                    <li><a href="__APP__/Data/order_status" data-toggle="navtab" data-options="{ id:'Pay-pay1', faicon:'caret-right'}" data-fresh="true">订单状态统计</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-comment-o" data-tit="点评管理">
+
+                                    <li><a href="__APP__/Comment/index" data-toggle="navtab" data-options="{ id:'Comment-index', faicon:'caret-right'}" data-fresh="true">点评列表</a></li>
+
+                                    <li><a href="__APP__/Comment/huishou" data-toggle="navtab" data-options="{ id:'Comment-huihsou', faicon:'caret-right'}" data-fresh="true">点评回收站</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-user" data-tit="会员管理">
+
+                                    <li><a href="__APP__/Member/index"   data-toggle="navtab"   data-options="{ id:'Member-index', faicon:'caret-right'}" data-fresh="true">会员添加</a></li>
+
+                                    <li><a href="__APP__/Member/member"  data-toggle="navtab"   data-options="{ id:'Member-member', faicon:'caret-right'}" data-fresh="true">个人会员</a></li>
+
+                                    <li><a href="__APP__/Member/hotel"  data-toggle="navtab"   data-options="{ id:'Member-hotel', faicon:'caret-right'}" data-fresh="true">酒店会员</a></li>                                    
+
+                                </ul>
+
+<!--                                 <ul class="menu-items" data-faicon="fa fa-jpy" data-tit="财务管理">
+
+                                    <li><a href="__APP__/Point/lists" data-toggle="navtab" data-options="{ id:'Point-lists', faicon:'caret-right'}" data-fresh="true">积分记录</a></li>									
+
+                                    <li><a href="__APP__/Hotel/tixian/status/0,1" data-toggle="navtab" data-options="{ id:'Hotel-tixian0', faicon:'caret-right'}" data-fresh="true">申请记录</a></li>
+
+                                    <li><a href="__APP__/Hotel/tixian/status/1,2" data-toggle="navtab" data-options="{ id:'Hotel-tixian1', faicon:'caret-right'}" data-fresh="true">提现记录</a></li>					
+
+                                </ul> -->
+                                <ul class="menu-items" data-faicon="fa fa-user-secret" data-tit="账单管理">
+                                        <li><a href="__APP__/Accounts/lists"  data-toggle="navtab"   data-options="{ id:'Accounts-lists', faicon:'caret-right'}" data-fresh="true">账单列表</a></li>
+                                    </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-link" data-tit="友情链接">
+
+                                    <li><a href="__APP__/Link/index"  data-toggle="navtab"       data-options="{ id:'Link-index', faicon:'caret-right'}" data-fresh="true">添加链接</a></li>
+
+                                    <li><a href="__APP__/Link/lists"  data-toggle="navtab"       data-options="{ id:'Link-lists', faicon:'caret-right'}" data-fresh="true">链接列表</a></li>
+
+                                </ul>
+
+                                <ul class="menu-items" data-faicon="fa fa-wrench" data-tit="管理员管理">
+
+                                    <li><a href="__APP__/Rbac/adminlist"   data-toggle="navtab"  data-options="{ id:'Rbac-adminlist', faicon:'caret-right'}" data-fresh="true">管理员列表</a></li>
+
+                                    <li><a href="__APP__/Rbac/depalist"    data-toggle="navtab"  data-options="{ id:'Rbac-depalist', faicon:'caret-right'}" data-fresh="true">部门列表</a></li>
+
+                                    <li><a href="__APP__/Rbac/rolelist"    data-toggle="navtab"  data-options="{ id:'Rbac-rolelist', faicon:'caret-right'}" data-fresh="true">职位列表</a></li>										
+
+                                    <li><a href="__APP__/Rbac/nodelist"    data-toggle="navtab"  data-options="{ id:'Rbac-nodelist', faicon:'caret-right'}" data-fresh="true">权限列表</a></li>
+
+                                    <li><a href="__APP__/Rbac/logs"        data-toggle="navtab"  data-options="{ id:'Rbac-nodelist', faicon:'caret-right'}" data-fresh="true">操作日志</a></li>										
+
+                                </ul>
+
+                                {else}
+
+                                    {foreach from=$_MENU item=vo}
+
+                                            {if $vo.is_show}
+
+                                            <ul class="menu-items" data-faicon="fa fa-{$vo.icon}" data-tit="{$vo.title}">
+
+                                            {foreach from=$vo.list item=v}
+
+                                                {if $v.is_show}
+
+                                                <li><a href="__APP__/{$v.url}" data-options="{ id:'{$v['model']}-{$v['action']}', faicon:'caret-right'}"  data-toggle="navtab" data-fresh="true">{$v.title}</a></li>        
+
+                                                {/if}
+
+                                            {/foreach}
+
+                                            </ul>
+
+                                            {/if}
+
+                                        {/foreach}
+
+                                {/if}
+
+								{if $smarty.session.role_id neq 16}
+
+                                <ul class="menu-items" data-faicon="fa fa-wrench" data-tit="资料修改">
+
+                                    <li><a href="__APP__/Rbac/addadmin/uid/{$smarty.session.admin_id}"   data-toggle="navtab"  data-options="{ id:'Rbac-addadmin', faicon:'caret-right'}" data-fresh="true">修改密码</a></li>							
+
+                                </ul>
+
+								{/if}
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <button type="button" class="btn-default bjui-hnav-more-right" title="导航菜单右移"><i class="fa fa-angle-double-right"></i></button>
+
+            </div>
+
+        </header>
+
+        <div id="bjui-container" class="clearfix" style="padding-bottom: 10px;">
+
+            <div id="bjui-leftside">
+
+                <div id="bjui-sidebar-s">
+
+                    <div class="collapse"></div>
+
+                </div>
+
+                <div id="bjui-sidebar" style="overflow-y: auto;overflow-x: hidden;">
+
+                    <div class="toggleCollapse">
+
+                        <h2><i class="fa fa-bars"></i> 导航栏 <i class="fa fa-bars"></i></h2><a href="javascript:;" class="lock"><i class="fa fa-lock"></i></a></div>
+
+                    <div class="panel-group panel-main" data-toggle="accordion" id="bjui-accordionmenu">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="bjui-navtab" class="tabsPage">
+
+                <div class="tabsPageHeader">
+
+                    <div class="tabsPageHeaderContent" style="margin:0">
+
+                        <span class="fa fa-home" style="font-size:13px;float:left;height:37px;line-height:37px;padding-left:10px;padding-right:20px;background: #fff;z-index: 30;">&nbsp;当前位置：<a href="__APP__/">首页</a> >> <span id="locations">我的主页</span></span>								
+
+                        <ul class="navtab-tab nav nav-tabs" style="position: relative;margin-left:235px;min-width:1000%; border-bottom: none;">
+
+                            <li data-tabid="main" class="main active"><a href="javascript:;"><span>#maintab#</span></a></li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="tabsLeft" style="height:38px;width:30px;position: absolute;left: 196px;z-index: 1025;"><i class="fa fa-angle-double-left" style="margin-top: 9px;"></i></div>
+
+                    <div class="tabsRight" style="height:38px;position: absolute;right: -2px;"><i class="fa fa-angle-double-right" style="margin-top: 9px;"></i></div>
+
+                </div>
+
+                <ul class="tabsMoreList">
+
+                    <li><a href="javascript:;">#maintab#</a></li>
+
+                </ul>
+
+                <div class="navtab-panel tabsPageContent">
+
+                    <div class="navtabPage unitBox">
+
+                        <div class="bjui-pageContent">
+
+                            {if $smarty.session.role_id eq 16}
+
+                            <ul class="content_nav">
+
+                                <li>
+
+                                    <a href="__APP__/Order/index/status/1" data-toggle="navtab" data-options="{ id:'Order-index1',title:'新订单'}"  class="xdd">
+
+                                        <img src="__PUBLIC__/bestjui/images/xdd.png"/>
+
+                                        <span class="p">新订单</span>
+
+                                        <span>{$newCount}</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="__APP__/Order/index/status/4" data-toggle="navtab" data-options="{ id:'Order-index4',title:'已付款订单'}" class="yfk">
+
+                                        <img src="__PUBLIC__/bestjui/images/yfk.png"/>
+
+                                        <span class="p">已付款订单</span>
+
+                                        <span>{$payCount}</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="__APP__/Hotels/lists" data-toggle="navtab" data-options="{ id:'Hotels-lists',title:'酒店管理'}" class="jdkf">
+
+                                        <img src="__PUBLIC__/bestjui/images/jdkf.png"/>
+
+                                        <span class="p">酒店数量</span>
+
+                                        <span>{$roomCount}</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="__APP__/Member/member" data-toggle="navtab" data-options="{ id:'Member-member',title:'个人会员'}" class="grhy">
+
+                                        <img src="__PUBLIC__/bestjui/images/grhy.png"/>
+
+                                        <span class="p">个人会员</span>
+
+                                        <span>{$memberCount}</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li class="last">
+
+                                    <a href="__APP__/Comment/index" data-toggle="navtab" data-options="{ id:'Comment-index',title:'酒店点评'}" class="jddp">
+
+                                        <img src="__PUBLIC__/bestjui/images/jddp.png"/>
+
+                                        <span class="p">酒店点评</span>
+
+                                        <span>{$commentCount}</span>
+
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                            {/if}
+
+                            <!--<div style="margin:15px auto 0; width:100%;">-->
+
+                            <!--<div class="row" style="padding: 0; margin: 0;">-->
+
+                            <div class="col-md-6">
+
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+
+                                        <h3 class="panel-title"><i class="fa fa-pie-chart fa-fw" style="color: #7dcbf1;"></i><a href="__APP__/Data/order_from" data-toggle="navtab"  data-options="{ id:'Data-order_from'}" data-fresh="true" style="font-size:16px;">网络订单来源</a></h3></div>
+
+                                    <div class="panel-body">
+
+                                        <div style="mini-width:400px;height:250px" data-toggle="echarts" data-type="pie,funnel" data-url="__ROOT__/admin.php/index/source"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+
+                                        <h3 class="panel-title"><i class="fa fa-globe" style="color: #7dcbf1;"></i><a href="__APP__/Data/keliu" data-toggle="navtab"  data-options="{ id:'Data-keliu'}" data-fresh="true" style="font-size:16px;">客流区域分布图</a></h3></div>
+
+                                    <div class="panel-body">
+
+                                        <div style="mini-width:400px;height:250px" data-toggle="echarts" data-type="map" data-url="__ROOT__/admin.php/index/mapdate"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+
+                                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw" style="color: #7dcbf1;"></i><a href="__APP__/Data/order_status" data-toggle="navtab"  data-options="{ id:'Data-order_status'}" data-fresh="true" style="font-size:16px;">订单状态统计</a></h3></div>
+
+                                    <div class="panel-body">
+
+                                        <div style="mini-width:400px;height:250px" data-toggle="echarts" data-type="line" data-url="__ROOT__/admin.php/index/bardata?type=year"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {if $smarty.session.role_id eq 16}
+
+                  <!--           <div class="col-md-12">
+
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+
+                                        <h3 class="panel-title"><i class="fa fa-heart fa-fw" style="color: #7dcbf1;"></i>增值服务 <a href="doc/chart/echarts.html" data-toggle="navtab" data-id="doc-echarts" data-title="ECharts图表说明"></a></h3></div>
+
+                                    <div class="panel-body zengzhi">
+
+                                        <div style="cursor: default; background-color: rgba(0, 0, 0, 0);">
+
+                                            <div style="position: relative; overflow: hidden;">
+
+                                                <div class="zfb">
+
+                                                    <span>支付宝收款</span><a href="__APP__/Basic/pay" data-toggle="navtab" data-id="Pay-pay" data-title="支付设置">设置</a>
+
+                                                </div>
+
+                                                <div class="dxb">
+
+                                                    <span>短信提醒</span><a href="__APP__/Basic/sms" data-toggle="navtab" data-id="Sms-index" data-title="短信设置">设置</a>
+
+                                                </div>
+
+                                                <div class="bzsc">
+
+                                                    <span>帮助手册</span><a href="http://duanzu.pchotelcms.com/help/help.pdf" target="_Blank">查看</a>
+
+                                                </div>
+
+                                                <div class="yssp">
+
+                                                    <span>演示视频</span><a href="http://www.pchotelcms.com/html/newslist/list-104-1.html" target="_Blank">查看</a>
+
+                                                </div>
+
+                                                <div class="xtdz">
+
+                                                    <span>系统定制</span><a href="http://www.pengchengsoft.com/web/authorize/" target="_Blank">查看</a>
+
+                                                </div>
+
+                                                <div class="sysq">
+
+                                                    <span>商业授权</span><a href="__APP__/Basic/authorize" data-toggle="navtab" data-id="authorize-index" data-title="商业授权">查看</a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div> -->
+
+                            {/if}
+
+                            <!--</div>-->
+
+                            <!--</div>-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer id="bjui-footer" style="height: 30px;line-height: 30px; margin-top: 2px;">Copyright &copy; 2012-2018 缘中源酒店预订网站管理系统
+
+        </footer>
+
+    </body>
+
+</html>

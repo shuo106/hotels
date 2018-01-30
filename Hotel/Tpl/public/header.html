@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>酒店管理后台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.home.css"/>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/admin.css">
+  <script type="text/javascript">
+    var root="__ROOT__",app="__APP__",publics="__PUBLIC__";
+  </script>
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，系统暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+<header class="am-topbar am-topbar-inverse admin-header">
+  <div class="am-topbar-brand">
+    <!-- <a href="#" class="am-text-ir">酒店网站管理系统</a>  -->
+    <img src="__PUBLIC__/assets/i/examples/logokf.png" style="height: 40px;">
+    <b>源中缘酒店管理后台</b>
+  </div>
+    <ul class="am-nav am-nav-pills am-topbar-nav am-text-lg am-hide-sm-only am-nav-left">
+    <li <eq name="Think.const.MODULE_NAME" value="Index">class="am-active"</eq>><a href="__APP__/">酒店首页</a></li>
+    <li <eq name="Think.const.MODULE_NAME" value="Hotel">class="am-active"</eq>><a href="__APP__/Hotel/roomlist">房间管理</a></li>
+    <li <eq name="Think.const.MODULE_NAME" value="Order">class="am-active"</eq>><a href="__APP__/Order/index">订单管理</a></li>
+    <li <eq name="Think.const.MODULE_NAME" value="Comment">class="am-active"</eq>><a href="__APP__/Comment/index">点评管理</a></li>
+    <li <eq name="Think.const.MODULE_NAME" value="Data">class="am-active"</eq>><a href="__APP__/Data/index">数据分析</a></li>
+     <li <eq name="Think.const.MODULE_NAME" value="Member">class="am-active"</eq>><a href="__APP__/Member/hotel">资料维护</a></li>
+    </ul>
+  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="__ROOT__/" target="_blank"><span class="am-icon-home"></span> 网站首页 </a></li>
+      <li class="am-dropdown">
+        <a class="am-dropdown-toggle" href="__APP__/Member/change">
+          <img src="__PUBLIC__/assets/images/huiyuanico.png" style=" height:16px; position: relative; top: -2px;">  您好，
+          <b>{$Think.session.hotel_name} (酒店会员)</b>
+        </a>
+      </li>
+      <li class="am-hide-sm-only"><a href="__APP__/Index/loginout"><span class="am-icon-power-off"></span> 安全退出</a></li>
+    </ul>
+  </div>
+</header>

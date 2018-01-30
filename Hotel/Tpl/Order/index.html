@@ -1,0 +1,124 @@
+<include file="Tpl/public/header.html" />
+<style type="text/css">
+.am-btn-default{
+    border-color:#ccc;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单管理</strong> / <small>Order</small></div>
+            </div>
+            <hr>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                <form action="__APP__/Order/index/status/{$Think.get.status}" class="am-form-inline">
+                  <div class="am-form-group" style="padding-left: 5px;">
+                    <label for="doc-ipt-3" class="am-form-label">类别：</label>
+                        <select data-am-selected name="status" class="am-select" style="height:28px">
+                        <option value="0">全部订单</option>
+                            <volist name="lang.status" id="vo">
+                            <option value="{$key}" <php>if($key==$_GET['status'])echo 'selected';</php>>{$vo}</option>
+                            </volist>
+                        </select>
+                  </div>   
+                  <div class="am-form-group" style="padding-left: 5px;">
+                    <label for="doc-ipt-3" class="am-form-label">来源：</label>
+                        <select data-am-selected name="from" class="am-select" style="height:28px">
+                        <option value="0">全部订单</option>
+                            <volist name="lang.from" id="vo">
+                            <option value="{$key}" <php>if($key==$_GET['from'])echo 'selected';</php>>{$vo}</option>
+                            </volist>
+                        </select>
+                  </div> 
+                   <div class="am-form-group">
+                    <label for="doc-ipt-3" class="am-form-label">订单编号：</label>
+                    <input type="text" name="orderid" class="am-form-field" placeholder="订单编号" style=" font-size:1.2rem;height:28px" value="{$_GET['orderid']}">
+                  </div>
+                  <div class="am-form-group" style="padding-left: 5px;">
+                    <label for="doc-ipt-3" class="am-form-label">预订客人：</label>
+                     <input type="text" name="linkman" class="am-form-field" placeholder="预订客人" style=" font-size:1.2rem;height:28px"  value="{$_GET['linkman']}">
+                  </div>                                                     
+                  <button type="submit" class="am-btn am-btn-primary">查询</button>
+                  <div class="am-form-group" style="padding-left: 20px;">
+                    <!-- <span class="am-form-label am-text-primary" style="font-size: 12px;">订单总额：{$totalprice|default=0}元</span>
+                    <span class="am-form-label am-text-primary" style="font-size: 12px;">订单数量：{$total}个</span>   -->
+                    <span class="am-form-label am-text-primary" style="font-size: 12px;">订单数量：{$total}个</span>  
+                    &nbsp;&nbsp;
+                    <span class="am-form-label am-text-primary" style="font-size: 12px;">订单总额：{$totalprice|default=0}元</span>
+                    <!--
+                    <label for="doc-ipt-3" class="am-form-label">订单总额:</label>   
+                    <span class="am-form-label am-text-primary">{$totalprice|default=0}元</span>  
+                     -->              
+                  </div>                   
+                </form>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-id" style="width:120px">订单编号</th>
+                                    <th class="table-title am-hide-sm-only">预订房型</th>
+                                    <th class="table-type am-hide-sm-only">预订客人</th>
+                                    <th class="table-author am-hide-sm-only">预订电话</th>
+                                    <th class="table-date am-hide-sm-only">入住时间</th>
+                                    <th class="table-date am-hide-sm-only">离店时间</th>
+                                    <th class="table-author am-hide-sm-only">应付金额</th>
+                                    <th class="table-date am-hide-sm-only">订单来源</th>  
+                                    <th class="table-date am-hide-sm-only">订单状态</th>               
+                                    <th class="table-set">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="orders" id="vo">
+                                    <tr>
+                                        <td>{$vo.addtime}{$vo.orderid}</td>
+                                        <td class=" am-hide-sm-only"><a href="javascript:">{$vo.roomtype}</a></td>
+                                        <td class=" am-hide-sm-only">{$vo.linkman}</td>
+                                        <td class="am-hide-sm-only">{$vo.telephone}</td>
+                                        <td class="am-hide-sm-only"><php>echo date('Y-m-d',$vo['ruzhudate']);</php></td>
+                                        <td class="am-hide-sm-only"><php>echo date('Y-m-d',$vo['lidiandate']);</php></td>                                        
+                                        <td class=" am-hide-sm-only">{$vo.shoufei}元</td>
+                                        <td class=" am-hide-sm-only">
+                                            {$lang['from'][$vo['from']]}
+                                        </td>                                        
+                                        <td class=" am-hide-sm-only">
+                                        <span style="background-color: {$lang['color'][$vo['status']]};color:#FFF;padding: 5px;">{$lang['status'][$vo['status']]}</span></td>
+                                        <td>
+                                            <div class="am-btn-toolbar">
+                                                <div class="am-btn-group am-btn-group-xs">
+                                                    <a class="am-btn am-btn-default am-btn-xs" href="__APP__/Order/edit/id/{$vo.orderid}"><span class="am-icon-pencil-square-o"></span> 管理</a>
+                                                    <?php if($vo['payment_plugin_id'] == -1) {?>
+                                                    <span class="am-btn am-btn-default am-btn-xs" style="margin-left: 10px;color: red;" id="comp">已结算</span>
+                                                    <?php } else {?>
+                                                    <a class="am-btn am-btn-default am-btn-xs" href='javascript:complete({$vo.orderid})' style="margin-left: 10px;" id="comp">结算</a>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                        <div class="am-cf am-margin">
+                            共 {$total} 条订单记录
+                            <div class="am-fr">
+                            {$page}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+
+<include file="Tpl/public/bottom.html" />

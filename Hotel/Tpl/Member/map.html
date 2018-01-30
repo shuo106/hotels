@@ -1,0 +1,65 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-u-sm-2 {
+    width: 12%;
+}
+.am-u-sm-10 {
+    width: 88%;
+}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">地图标注</strong> / <small>Map</small></div>
+            </div>
+            <input type="hidden" id="x" value="{$x}">
+            <input type="hidden" id="y" value="{$y}">
+            <input type="hidden" id="hotelname" value="{$hotelname}">
+            <div id="allmap" style="width: 100%;height: 500px;">
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+    <script type="text/javascript">
+    var x = document.getElementById("x").value;
+    var y = document.getElementById("y").value;
+    var map = new BMap.Map("allmap"); // 创建Map实例
+    if(x&&y){
+      var point = new BMap.Point(x, y); // 创建点坐标
+      map.centerAndZoom(point, 15); // 初始化地图,设置中心点坐标和地图级别。
+      map.enableScrollWheelZoom(); //启用滚轮放大缩小
+      var marker = new BMap.Marker(point); // 创建标注        
+    }else{
+       map.centerAndZoom('北京', 15); // 初始化地图,设置中心点坐标和地图级别。
+    }
+    map.addOverlay(marker);
+    var opts = {
+        width: 180, // 信息窗口宽度  
+        height: 90, // 信息窗口高度  
+        title: "" // 信息窗口标题  
+    }
+    var hotelname = document.getElementById("hotelname").value;
+    var infoWindow = new BMap.InfoWindow(hotelname, opts); // 创建信息窗口对象  
+    map.openInfoWindow(infoWindow, map.getCenter()); // 打开信息窗口
+    map.addControl(new BMap.NavigationControl()); //平移缩放控件
+    map.addControl(new BMap.OverviewMapControl()); //缩略地图控件
+    map.addControl(new BMap.ScaleControl()); //比例尺控件
+    map.addControl(new BMap.MapTypeControl()); //地图类型控件
+    map.addEventListener("click", function(e) {
+        var a = e.point.lng;
+        var b = e.point.lat;
+        $.get("__APP__/Hotel/biaozhu/x/" + a + "/y/" + b,function(rs){
+          alert(rs.info);
+          if(rs.status==1){
+            window.location.reload();
+          }
+        },'json');
+    });
+    </script>
+</div>
+<include file="Tpl/public/bottom.html" />

@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Reset Style Bg*/
+body,h1,h2,h3,h4,a,p,span,strong,cite,em,i,ul,li,dl,dt,dd,form,input,fieldset,table,font{
+	margin:0;
+	padding:0;}
+body{
+	font-family:"微软雅黑";
+	background: url(../../admin/images/bg_02.png) repeat-x left top;
+}
+ul li{
+	list-style:none;}
+a{
+	color:#000;
+	text-decoration:none;}
+fieldset,img{
+	border:0 none;}
+cite,em,i{
+	font-style:normal;}
+h1,h2,h3,h4,strong,b{
+	font-weight:normal;}
+.clear{ clear:both;}
+/*Reset Style End*/
+
+/*----------------------------------------------企业登录页面---------------------------------------------*/
+.box{ background:url(../images/dldb.jpg) repeat-x; height:700px;}
+.logo{width:460px; height:73px; padding-top:90px; margin-left:340px;}
+.zt_dl{width:1007px; height:300px; margin: 0 auto;}
+.ztk{width:381px; height:221px; background:url(../images/zt.gif) no-repeat; margin-left:130px; margin-top:20px; float:left; display:inline;}
+.ztk form{margin-left:140px; margin-top:60px; line-height:35px;}
+.ztk form .yhxx_write{ vertical-align:middle;}
+.ztdl_right{margin-right:223px; margin-top:100px; float:right; display:inline; line-height:34px;}
+
+
+
+/*--------企业登陆------*/
+input.denglu{width:64px; height:22px; margin:10px 0px 0px 50px; border:none; background:url(../images/dlan2.jpg);}
+.chongzhi{width:64px; height:22px; border:0px; background:url(../images/czan.jpg); background-repeat:no-repeat; margin-top:10px;}
+	
+.footer{text-align: center;}

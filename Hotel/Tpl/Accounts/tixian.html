@@ -1,0 +1,100 @@
+<include file="Tpl/public/header.html" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<style>
+.input_border{ height:28px; line-height:28px; }
+.am-table > tbody > tr > td { vertical-align: baseline; }
+</style>
+<div class="am-cf admin-main">
+  <include file="Tpl/public/menu.html" />
+  <div class="admin-content">
+      <div class="admin-content-body">
+                  <div class="am-cf am-padding am-padding-bottom-0">
+                      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">申请提现</strong> / <small>Accounts</small></div>
+                  </div>
+                  <hr>
+                  <div class="cjsj">
+                    <table class="am-table">
+                    <form id="form1"  method="post" action="__APP__/Accounts/tixiantj">
+                    <tr class="">
+                      <td align="center" style="padding-right:10px;width: 15%;">账户余额：</td>
+                      <td align="left" style="padding-left:10px;font-weight:bold;color:red;font-size:15px">
+                        {$yue}元
+                        <span style="font-weight:normal;color:#9c9a9c">（正在“审核中、待支付”的提现金额会冻结）</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">提现金额：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text" onchange="chkmoney(this)"  name="txjine" class="input_border" style="width:146px;" value="{$smarty.get.txjine}" onkeyup="this.value=this.value.replace(/\D/g,'')" >
+                        <span style="font-weight:normal;color:#9c9a9c"><span style="color:red;margin:0px 5px">*</span>不足200元时，不能提现</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">提现银行：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text" name="txhang" class="input_border" id="txhang" value="{$smarty.get.txhang}" style="width:146px;" >
+                        <span style="font-weight:normal;color:#9c9a9c"><span style="color:red;margin:0px 5px">*</span>填写正确的开户行信息可以加快支付速度</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">开户姓名：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text" class="input_border" name="txname" id="txname"  value="{$smarty.get.txname}" style="width:146px;">
+                        <span style="font-weight:normal;color:#9c9a9c"><span style="color:red;margin:0px 5px">*</span>必须为您开户时的姓名</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">银行账号：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text"  name="txhangnum" id="txhangnum" value="{$smarty.get.txhangnum}" maxlength="19" onkeyup="this.value=this.value.replace(/\D/g,'')"  style="width:146px;" class="input_border"><span style="color:red;margin:0px 5px">*</span>
+                        <span style="font-weight:normal;color:#9c9a9c">帐号填写准确（不要填信用卡及存折，否则会造成支付失败）</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">身份证号：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text"  class="input_border" name="txshenfen" id="txshenfen" maxlength="18" onkeyup="this.value=this.value.replace(/\D/g,'')"  value="{$smarty.get.txshenfen}" style="width:146px;">
+                        <span style="color:red;margin:0px 5px">*</span><span style="font-weight:normal;color:#9c9a9c">必须为开户人的身份证号</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">手机号码：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <input type="text" class="input_border"  name="txmobile" id="txmobile" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  value="{$smarty.get.txmobile}" style="width:146px;">
+                        <span style="color:red; margin:0px 5px">*</span><span style="font-weight:normal;color:#9c9a9c">提现成功后发送短信到此手机上</span>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px">备　　注：</td>
+                      <td align="left" style="padding-left:10px;">
+                        <textarea class="input_border" rows="3" name="txbeizhu" id="txbeizhu" style="width:280px; height:auto; border: 1px solid #CCC;"></textarea>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td align="center" style="padding-right:10px"></td>
+                      <td align="left" style="padding-left:10px;">
+                        <button type="button" ajaxform data-form="#form1" class="am-btn am-btn-primary">提交</button>
+                      </td>
+                    </tr>
+                    </form>
+                    </table>
+              </div>
+          </div>
+          <script type="text/javascript">
+              function callback(rs) {
+                  alert(rs.msg);
+                  if(rs.status==1){
+                      window.location.href="__APP__/Accounts/tixian_log";
+                  }
+              }
+            function chkmoney(obj){
+                    var m = {$yue} ;
+                    var t = obj.value;
+                    if(t>m){
+                      alert('余额不足....');
+                    }
+                  }
+          </script>
+  </div>
+</div>
+<include file="Tpl/public/bottom.html" />

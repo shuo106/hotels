@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>{$cate}</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+<link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+<link href="__PUBLIC__/wap/css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- Header -->
+<header data-am-widget="header"
+          class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="javascript:history.back();" class="">
+			<i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+          </a>
+      </div>
+      <h1 class="am-header-title">
+        {$cate}
+      </h1>
+      <div class="am-header-right am-header-nav">
+          <a href="__ROOT__/Wechat/index/wechatid/{$smarty.get.wechatid}" class="">
+			<i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+          </a>
+      </div>
+  </header>
+<!-- Slider -->
+<div class="kuai" style="margin-top: 2px;">
+			{if $news}
+			{foreach from=$news item=vo}
+				<div class="fangzi artlist">
+					<i class="guanzhu on"></i>
+					<a href="__ROOT__/Wechat/artshow/id/{$vo['articleid']}">
+                    {if $vo['thumb']}
+					<img src="__ROOT__{$vo['thumb']}" />
+					{else}
+					<img src="__PUBLIC__/assets/i/nopic.jpg"/>
+					{/if}
+					</a>
+					<div class="jieshao jieshaot">
+						<a href="__ROOT__/Wechat/artshow/id/{$vo['articleid']}" style="margin: 0; padding: 0; ">
+						<h4><span style="color: #f60;  height: 30px; width: 100px; overflow: hidden;">{$vo['title']|truncate:22:''}</span></h4>
+						</a>
+					</div>
+				</div>
+			{/foreach}
+            {else}
+			<p style="text-align: center; line-height: 40px;">没有数据</p>
+			{/if}
+            <div class="pages" style="clear: both;height: 42px;text-align: center;color: #585858;padding-bottom: 10px;margin-top: 15px;">{$page}</div>
+</div>
+</body>
+</html>

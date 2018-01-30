@@ -1,0 +1,72 @@
+<style type="text/css">
+	label.control-label{ width:85px;}
+</style>
+<form action="__APP__/Category/add" method="post" data-toggle="ajaxform">
+<div class="bjui-pageContent">
+		<input type="hidden" name="id" value="{$id}" />
+		<input type="hidden" name="btn_submit" value="true">
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="album_name" class="control-label x85">
+							栏目名称：
+						</label>
+						<input type="text" name="name" id="album_name" value="{$cateinfo.name}" size="60">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85">
+							父级栏目：
+						</label>
+						<select name="pid" data-toggle="selectpicker">
+							<option value="0">选择父级栏目</option>
+							{foreach from=$list item=v}
+							<option value="{$v.id}" {if $pid==$v.id}selected{/if}>{$v.name|indent:$v.lev:'-'}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85">
+							导航类型：
+						</label>
+						<select name="type" data-toggle="selectpicker">
+							<option value="no">选择导航类型</option>
+							<option value="1" {if $cateinfo.type==1}selected{/if}>顶部导航</option>
+							<option value="2" {if $cateinfo.type==2}selected{/if}>底部导航</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85">
+							链接地址：
+						</label>
+						<input type="text" name="url" id="url" value="{$cateinfo.url}" size="60"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="album_description" class="control-label x85">
+							导航描述：
+						</label>
+						<textarea name="description" id="album_description" data-toggle="autoheight" cols="60" rows="3">{$cateinfo.description}</textarea>
+					</td>
+				</tr>
+                <tr>
+						<td colspan="4">
+                        <div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                        </td>
+                    </tr>
+</tbody>
+		</table>
+</div>
+</form>

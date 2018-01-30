@@ -1,0 +1,91 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+	.table-order .control-label {
+		
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Accounts/update" id="j_form_form" class="pageForm" method="post" data-toggle="validate">
+		<input type="hidden" name="id" value="{$info.acc_id}" />
+		<div>
+			<fieldset>
+				<legend>账单详情</legend>
+				<table class="table-bordered table-condensed table-hover table-order" width="100%">
+					<tbody>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">账单编号：</label>
+								{$info.acc_addtime}{$info.acc_id}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">账单标题：</label>
+								{$info.acc_title}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">酒店名称：</label>
+								{$info.acc_hotelname}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">开始时间：</label>
+								{$info.acc_start} 
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">结束时间：</label>
+								{$info.acc_end}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">总&nbsp;金&nbsp;额：</label>
+								{$info['acc_total']} 元
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85">账单状态：</label>
+								{if !$smarty.get.read}
+								<select name="status"  data-toggle="selectpicker">
+									{foreach from=C('order.acc_status') item=v key=kk}<option value="{$kk}" {if $info.acc_status==$kk}selected{/if}>{$v}</option>{/foreach}
+								</select>
+								{else}
+								{foreach from=C('order.status') item=v key=kk}{if $order.status==$kk}{$v}{/if}{/foreach}
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">备注：</label>
+								<textarea name="beizhu" cols="30" rows="2">{$info.acc_beizhu}</textarea>
+							</td>
+						</tr>
+						<tr>
+						<td>
+							<ul style="margin-left:100px;">
+								{if !$smarty.get.read}<button type="submit" class="btn-default" data-icon="save">保存</button>{/if}
+								<button type="button" class="btn-close" data-icon="close">关闭</button>
+							</ul>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div style="padding-top: 10px;margin: 5px;">
+				<ul>
+				{foreach from=$log item=v}
+				<li style="line-height:24px;margin-left:40px"><b>操作说明：</b>{if $v.remark}{$v.remark}{else}暂无。{/if}  操作人：{$v.username} 于 {$v.addtime|date_format:'%Y-%m-%d %H:%M:%S'} 修改订单为 {$v.text} 状态。</li>
+				{/foreach}
+				</ul>
+				</div>
+			</fieldset>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,66 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Wechat/addmenu" method="get" id="j_custom_form" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$menu['id']}" />
+		<input type="hidden" name="btn_submit" value="1" />
+		<table class="table table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							名称：
+						</label>
+						<input type="text" name="names" value="{$menu.name}" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="pid" class="control-label x85">
+							父级栏目：
+						</label>
+						<select name="pid" data-toggle="selectpicker">
+							<option value="0" >顶级栏目</option>
+							{foreach from=$cate item=v}
+							<option value="{$v.id}" {if $menu.pid==$v.id}selected{/if}>{$v.name}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="type" class="control-label x85">
+							类型:
+						</label>
+						<input type="text" name="type" id="type" value="{$menu.type}" size="35">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="content" class="control-label x85">
+							值:
+						</label>
+						<input type="text" name="value" value="{$menu.value}" size="35">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 100px;float:left">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" id="btn_submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>

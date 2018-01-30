@@ -1,0 +1,117 @@
+/* CSS Document */
+
+/*全局预设*/
+
+.wrapper {
+    width: 1190px;
+    margin: 0 auto;
+}
+
+.blank20 {
+    clear: both;
+    height: 20px;
+}
+
+.clear{clear:both;}
+
+.Fleft{float:left;}
+
+.Fright{float:right;}
+
+.FAlignLeft{text-align:left;}
+
+.FAlignRight{text-align:right;}
+
+.FB{font-weight:bold;}
+
+/*字号预设*/
+
+.FS10{font-size:10px;}
+
+.FS12{font-size:12px;}
+
+.FS14{font-size:14px;}
+
+.FS18{font-size:18px;}
+
+/*字体预设*/
+
+.FArial{font-family:Arial, Helvetica, sans-serif;}
+
+.FMicrosoft{font-family:MicrosoftYaHei;}
+
+/*文字颜色预设*/
+
+.Cffa800{color:#ffa800;}
+
+.C000{color:#000;}
+
+.C333{color:#333;}
+
+.C666{color:#666;}
+
+.Cff6600{color:#ff6600;}
+
+.Cff5400{color:#ff5400;}
+
+.C733f0b{color:#733f0b;}
+
+.Cc01f4b{color:#c01f4b;}
+
+.Ca3a3a3{color:#a3a3a3;}
+
+.Cff6000{color:#ff6000;}
+
+.Cc90010{color:#c90010;}
+
+.Ca84a0b{color:#a84a0b;}
+
+/*居中显示*/
+
+.c_mt{margin:0 auto;width:100%;}
+
+/*定位预设*/
+
+.p_rel{position:relative;}
+
+.p_abs{position:absolute;}
+
+.p_fix{position:fixed;}
+
+/*间距预设*/
+
+.mT20{margin-top:20px;}
+
+.mB1{margin-bottom:1px;}
+
+.for{_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled="true", src="images/pic.png",sizingMethod="images");filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.6;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;color:#167aeb;}
+
+/*内页*/
+
+.publicMain{float:left;width:100%;background:#fff;}
+
+.publicMainColumn{float:left;width:100%;height:60px;}
+
+/*详细页*/
+
+.informationDetailMain{float:left;width:100%;padding:10px 20px 0px 20px;}
+
+.informationDetailMainTitle{float:left;width:100%;text-align: center;}
+
+.informationDetailMainTitle h2{float:left;height:35px;font-size:18px;font-weight:bold;color:#129fd5; width: 100%; text-align:center}
+
+.informationDetailMainTitle h3 { text-align:center; margin-top: 0em; display:inline-block; }
+
+.informationDetailMainTitle h3 span{float:left; line-height:30px; color:#999; font-size:12px}
+.informationDetailMainTitle h3 span i { margin-right:5px;}
+
+.informationMainTitleLink{float:left;width:100%;margin-bottom:20px; margin-top:10px; padding-left:24px;}
+.informationMainTitleLink span { float:left; line-height:30px;}
+.bfhd_Layout_proseMainNote h1,.bfhd_Layout_proseMainNote h2,.bfhd_Layout_proseMainNote h3,.bfhd_Layout_proseMainNote p {margin-top: 0em; line-height:30px;}
+.bfhd_Layout_proseMainNote strong { font-weight:bold}
+.informationDetailMainNote{float:left;width:100%;line-height:24px;color:#5c5c5c;margin-bottom:10px;}
+.bfhd_Layout_proseMainNote img { max-width:100%; height:auto; margin:0px 10px 0px 10px;}
+
+.nextpage{ clear:both; padding-bottom:10px;padding-left:24px;}
+.nextpage span { font-weight:bold; color:#999}
+

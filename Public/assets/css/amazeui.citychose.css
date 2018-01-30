@@ -1,0 +1,27 @@
+.am-city-chose {
+	max-width: 500px;
+    position: absolute;
+    z-index: 99999;
+    display: none;
+    background-color: #FFF;
+    border:1px solid #1191da;
+}
+.am-city-chose .am-nav-tabs li a{
+	color: #1191da;
+}
+.am-city-chose .am-badge{
+	font-weight:normal;
+}
+.am-city-chose .am-tabs-bd li {
+    float: left;
+    margin: 0.3rem;
+    list-style: none;
+}
+
+.am-city-chose .am-tabs-bd li span {
+    cursor: pointer;
+}
+.am-city-chose .am-tabs-nav li { width:50px;}
+
+.am-city-chose .am-nav > li > a {
+	padding: 0.4em 0.5em;}

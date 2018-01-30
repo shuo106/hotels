@@ -1,0 +1,50 @@
+{include file="../Common/header.html"}  
+<script type="text/javascript">
+	function checkLogin(){
+		//return true;
+		if($("#text_1").val() && $("#text_2").val()){
+			$("#login").submit();
+		}else if(!$("#text_1").val()){
+			alert('用户名为空');
+			$("#text_1").focus();
+		}else{
+			alert('密码为空');
+			$("#text_2").focus();
+		}
+	}
+	$(function(){
+		$('form').ajaxForm(function(data){
+			eval('data='+data);
+			alert(data.msg);
+			if(data.status==1){
+				window.location.href='__APP__/Member/index';
+			}
+		});
+		return false;
+	})
+</script>
+<!--======找回密码=====-->
+<script type="text/javascript">
+     var uid='{$uid}';
+     var locationUrl='__APP__/Login';
+     var emailtourl='__APP__/Findpwd/doreset';
+</script>
+<script type="text/javascript" src="__PUBLIC__/home/js/reset.js"></script>
+  <div class="hylogin_register">
+     <h3>密码重置</h3>
+    <div class="wraplogin">
+      <div class="demo" style="width:450px;">
+                    <p>请重新填写您的密码</p>
+                    <p>
+                      输入新密码: <input type="password" class="input" name="onepwd"><span id="chkmsg"></span>
+                    </p>
+                    <p>
+                      请再次输入: <input type="password" class="input" name="twopwd"><span id="twochkmsg"></span>
+                    </p>
+                    <p style="text-align:center;width:380px;">                    
+                    <input type="button" class="btn" id="sub_btn"  value="提 交">
+                    </p>
+                  </div>
+    </div>
+  </div>
+{include file="../Common/footer.html"}  

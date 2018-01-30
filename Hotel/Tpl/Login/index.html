@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{$title}</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/hotel/css/ny_new.css">
+	<link href="__PUBLIC__/admin/css/login.css" rel="stylesheet" type="text/css" />
+	<script language="javascript">
+	function checkform()
+	{
+		if(document.loginform.username.value=="")
+		{
+			alert("请输入用户名！");
+			document.loginform.username.focus();
+			return false;
+		}
+		if(document.loginform.password.value == "")
+		{
+			alert("请输入密码！");
+			document.loginform.password.focus();
+			return false;
+		}
+		if(document.loginform.checkcodestr.value == "")
+		{
+			alert("请输入验证码！");
+			document.loginform.checkcodestr.focus();
+			return false;
+		}
+		return true;
+	}
+	function changeVerify() {
+		var timenow = new Date().getTime();
+		document.getElementById('checkcode').src = '__ROOT__/index.php/register/verify/' + timenow;
+	}
+	</script>
+	<style>
+		.logo {
+			margin-top: 30px;
+			margin-bottom: 0px;
+		}
+		.head{
+			/* margin-top: 80px; */
+			display: flex;
+		}
+		.logo-img {
+			height: 70px;
+		}
+		.logo-title {
+			margin: 10px 0 0 10px;
+			font-size: 32px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="logo">
+		<div class="head">
+			<img class="logo-img" src="__PUBLIC__/bestjui/images/logo.png" />
+			<p class="logo-title">缘中源酒店会员管理系统</p>
+		</div>
+	</div>
+	<div class="loginbg">
+		<div class="login"> <img src="__PUBLIC__/admin/regimg/htdl_03.jpg" class="float" style="width:340px;height:320px;"/>
+			<div class="logincon">
+				<h2>会员登录</h2>
+				<form action="__ROOT__/Hotel/index.php/Login/login" method="post">
+					<p class="inputMD" style="position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_06.jpg" class="float" />
+						<input class="phInput" type="text" value="" id="myinput" name="username" placeholder="用户名"/>
+						<!-- <span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 40px; top: 0;">用户名</span> -->
+					</p>
+					<p class="inputMD" style="position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_10.png" class="float" />
+						<input class="phInput" type="password" value="" id="myinputmm" name="password" placeholder="密码"/>
+						<!-- <span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 40px; top: 0;">密　码</span> -->
+					</p>
+					<p class="inputMD" style="height:37px;position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_11.png" class="float" />
+						<img id="checkcode" src="__ROOT__/index.php/register/verify" style="float:right; margin: 2px 2px 0 10px;width: 91px;height: 34px;" onclick="changeVerify()" />
+						<input class="phInput" type="text" value="" id="myinputyz" name="verify" checked="checked" style="width:100px;float:left;height: 34px;padding: 0px;" placeholder="验证码"/>
+						<!-- <span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 45px; top: 0;">验证码</span> -->
+					</p>
+					<p style="border:none; font-size:12px; height:17px"><span><a href="__ROOT__/index.php/Register/hotelreg">您还不是我们酒店合作会员？</a></span>
+						<input type="checkbox" id="ck_rmbUser" style="width:15px; float:left; margin-right:10px; padding-top: 0px;" />记住密码</p>
+					<p style=" border:none; height:50px">
+						<input type="submit" name="dosubmit" value="" style="background:url(__PUBLIC__/admin/regimg/htdl_16.jpg);width: 299px;height: 49px;cursor:pointer;border: 0;" />
+						<!--<a href="#"><img src="__PUBLIC__/admin/regimg/htdl_16.jpg" /></a>-->
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="footer">Copyright &copy; 2012-2018 缘中源酒店预订网站管理系统 <a href="http://hotel.58yuanbao.com/Hotel" target="_top"></a></div>
+</body>
+</html>

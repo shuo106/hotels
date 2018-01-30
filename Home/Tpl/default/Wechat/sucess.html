@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>订单提示</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/index.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/style.css">
+</head>
+<body>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>酒店预订<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="ordersucess">
+  <div>
+    <p class="icons4 icons4_success"></p>
+	{if $smarty.get.oid}
+    <h5>恭喜您</h5>
+    <p>您的订单已经提交成功！</p>
+	{if $isReg}
+		 <p>您好，会员同步注册成功!</p>
+		 <p>用户名：{$username}</p>
+		 <p>密&nbsp;&nbsp;&nbsp;码：{$username}</p>
+		 <p>为了帐号安全，请及时登录修改您密码！</p>
+	{/if}
+	{else}
+	<h5>SORRY</h5>
+    <p>预订失败</p>
+	{/if}
+  </div>
+  <div class="group_pay_btn">
+    <ul>
+      {if $smarty.get.oid}
+		<li><a href="__ROOT__/Wechat/orderdetail/id/{$smarty.get.oid}" class="btn">查看订单</a></li>
+	  {/if}
+	   <li><a href="__ROOT__/Wechat/index" class="btn gray">返回首页</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

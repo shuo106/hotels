@@ -1,0 +1,97 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单详情</strong> / <small>Order</small></div>
+            </div>
+            <hr>
+            <form method="post" action="__APP__/Order/update/" class="ajaxform">
+                <input type="hidden" name="id" value="{$order.orderid}">
+                <table class="am-table am-margin-left  am-table-hover">
+                    <tr>
+                        <td style="width:100px;">订单编号：</td>
+                        <td>{$order.addtime}{$order.orderid}</td>
+                    </tr>
+                    <tr>
+                        <td style="width:100px;">订单来源：</td>
+                        <td>{$lang['from'][$order['from']]}</td>
+                    </tr>                    
+                    <tr>
+                        <td style="width:100px;">预订房型：</td>
+                        <td>{$order.roomtype}</td>
+                    </tr>
+                    <tr>
+                        <td>入住客人：</td>
+                        <td>{$order.kename}</td>
+                    </tr>
+                    <tr>
+                        <td>预订间数：</td>
+                        <td>{$order.nums}间</td>
+                    </tr>
+                    <tr>
+                        <td>预订客人：</td>
+                        <td>{$order.linkman}</td>
+                    </tr>
+                    <tr>
+                        <td>应付金额：</td>
+                        <td>{$order.shoufei}元</td>
+                    </tr>
+                    <tr>
+                        <td>入住人数：</td>
+                        <td>{$order.rennums}</td>
+                    </tr>
+                    <tr>
+                        <td>联系电话：</td>
+                        <td>{$order.telephone}</td>
+                    </tr>
+                    <tr>
+                        <td>预订时间：</td>
+                        <td>{$order.ruzhudate|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr>
+                        <td>入住时间：</td>
+                        <td>{$order.ruzhudate|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr>
+                        <td>离开时间：</td>
+                        <td>{$order.lidiandate|date="Y-m-d",###}</td>
+                    </tr>
+                    <tr>
+                        <td>其他要求：</td>
+                        <td>{$order.beizhu}</td>
+                    </tr>
+                    <tr>
+                        <td>订单状态：</td>
+                        <td>
+                            <volist name="lang.status" id="vo">
+                                <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                                    <input data-am-ucheck name="status" value="{$key}" type="radio" <php>if($key==$order['status'])echo 'checked="checked"'; </php> >{$vo}
+                                </label>
+                            </volist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input name="submit" type="submit" class="am-btn am-btn-primary am-btn-xs" value="确认操作">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<script type="text/javascript">
+function callback(rs) {
+    alert(rs.msg);
+    if(rs.status==1){
+        window.location.href="__APP__/Order/index";
+    }
+}
+</script>
+<include file="Tpl/public/bottom.html" />

@@ -1,0 +1,38 @@
+/* CSS Document */
+
+*{ margin:0; padding:0}
+ul{list-style:none}
+a img {border:none}
+a{color:#000; text-decoration:none}
+a:hover{color:#F00; text-decoration:none}
+.clear{clear:both;}
+.float{float:left}
+body{font-family:"微软雅黑"; background: url(../images/bg_02.png) repeat-x left top;}
+.logo{width:717px; margin:30px auto; height:106px;}
+.loginbg{width:717px; margin:0 auto; padding:10px;background:rgba(255, 255, 255, 0.3) none repeat scroll 0 0 !important;filter:Alpha(opacity=30); background:#fff; border-radius:3px}
+.login{ position:relative; padding:20px; background:#fff;border-radius:3px; overflow:hidden}
+.logincon{width:300px; float:right; margin-right:20px;}
+.logincon h2{ font-weight:normal; line-height:50px; font-size:22px; color:#666;text-align: center;}
+.logincon p{height:35px; border:1px solid #CCC; margin:17px 0; overflow:hidden}
+.logincon p input{border:none; padding:10px 0; width:255px; height:15px; font-size:14px; color:#666; text-indent:10px;outline:0px;border:0}
+.logincon p span{float:right; margin-right:30px}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#checkbox{position:relative; top:2px}
+}
+.footer{width:717px; margin:30px auto; color:#fff; text-align:center}
+.footer a{color:#fff}
+
+.zhuyi{ text-align: center; width: 500px; margin: 0 auto; color: #fff;}
+.zhuyi p{margin-bottom: 15px; font-size: 14px;}
+.zhuyi span{display: block; float: left; width: 86px; color: #666; text-align: center; margin: 0 40px; font-size: 12px;}
+.zhuyi img{ display: block; width: 32px; height: 32px; margin: 0 auto;}
+
+.clearfix{overflow: hidden; _height:1%}
+.phcolor{ color:#fff;}
+
+
+
+
+
+

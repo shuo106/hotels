@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邮件设置</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>邮件设置</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Email/setemail">
+	<input type="hidden" name="id" value="{$id}" />
+    <table border="1" class="table_border">
+      <tr>
+        <th colspan="2" align="center" class="table_border_title">邮件设置</th>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">邮箱SMTP</span><br />SMTP服务器，只有正确设置才能使用发邮件功能</td>
+        <td><input type="text" maxlength="100" class="inputtxt" name="smtp" value="{$smtp}" /></td>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">邮箱帐号</span><br />SMTP服务器的用户帐号，只有正确设置才能使用发邮件功能</td>
+        <td><input type="text" maxlength="100"  class="inputtxt" name="user" value="{$user}" /></td>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">邮箱密码</span></td>
+        <td><input type="password" maxlength="100" class="inputtxt"  name="password" value="{$password}" /></td>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">SMTP端口</span><br />默认为25，一般不需要改</td>
+        <td><input type="text" maxlength="100"  class="inputtxt" name="port" value="25" /></td>
+      </tr>
+	   <tr>
+        <td><span style="font-weight:900">检查邮件设置</span></td>
+        <td><input type="text" maxlength="100"  class="inputtxt" value="@" /><input type="button" value="发送测试邮件" /></td>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">邮件内是否携带签名</span></td>
+        <td><input type="radio" maxlength="100" name="status" checked="checked" value="1" />是
+			<input type="radio" maxlength="100" name="status" value="0" />否
+		</td>
+      </tr>
+	  <tr>
+        <td width="35%"><span style="font-weight:900">邮件签名</span><br /></td>
+        <td><textarea name="content" rows="7" cols="40">{$content}</textarea></td>
+      </tr>
+	  <tr>
+      	<td></td>
+        <td><input type="submit" name="btn_submit" class="saving" maxlength="100"  value="保存" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+<script>
+$(function(){
+	{if $status != 1}
+	$("input[type='radio'][name='status'][value=0]").attr('checked','checked');
+	{/if}
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.reload();
+		}
+	});
+	return false;
+})
+</script>
+</html>

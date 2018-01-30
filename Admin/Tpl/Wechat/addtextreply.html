@@ -1,0 +1,53 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Wechat/doSaveTextReply" method="post" id="j_custom_form" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$reply['id']}" />
+		<input type="hidden" name="rid" value="{$reply['rid']}" />
+		<table class="table table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							规则名称：
+						</label>
+						<input type="text" name="name" id="name" value="{$reply.name}" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="key" class="control-label x85">
+							触发关键字:
+						</label>
+						<input type="text" name="key" id="key" value="{$reply.key}" size="35">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="content" class="control-label x85">
+							回复内容:
+						</label>
+						<textarea name="content" rows="3" cols="35">{$reply.content}</textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 100px;float:left">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" id="btn_submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>

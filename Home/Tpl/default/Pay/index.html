@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.qrcode.min.js"></script>
+<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script> 
+<title>支付选择</title> 
+<script type="text/javascript">
+	function doPay(t, orderid){
+		// window.location.href="__APP__/Pay/goPay/payType/"+t+"/id/{$smarty.get.id}";
+		if (t == 1) {
+			window.location.href="__APP__/Pay/alipay/id/{$smarty.get.id}/from/{$from}";
+		} else if (t == 2) {
+			// window.location.href="__APP__/Pay/wechatpay/id/{$smarty.get.id}/from/{$from}";
+			var data = {
+				id: orderid
+			};
+			$.ajax({
+				type:'GET',
+				url: '/index.php/pay/wechatpay',
+				data: data,
+				success: function(res) {
+					console.log(res);
+					let data = JSON.parse(res);
+					if (data.status == 0) {
+						alert(data.msg);
+					} else {
+						let url = data.data;
+						// console.log(data);
+						$('.wx-bg').css('display', 'block');
+						$("#wxcode").qrcode(url);
+					}
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			})
+		} else if (t == 3) {
+			// window.location.href="__APP__/Pay/scorepay/id/{$smarty.get.id}/from/{$from}";
+			$('.score-bg').css('display', 'block');
+		}
+	}
+	$(function(){
+		$('#close').click(function () {
+			$('.score-bg').css('display', 'none');	
+		});
+		$('#wxclose').click(function () {
+			$('.wx-bg').css('display', 'none');
+			$('#wxcode').empty();
+		});
+		$('#submit').click(function () {
+			// alert('提交');
+			var ordernumber = $("input[name='id']").val();
+			var psd = $("input[name='psdone']").val();
+			if (psd.length < 6) {
+				$("#err").text('密码不能少于6位');
+				$("input[type=reset]").trigger("click");
+			} else {
+				var data = {
+					id: ordernumber,
+					psdone: md5(psd)
+				};
+				$.ajax({
+					type: "POST",
+					url: '/index.php/pay/scorepay',
+					data: data,
+					success: function(data) {
+						$('.score-bg').css('display', 'none');
+						var data = JSON.parse(data) || data;
+						console.log(data);
+						alert(data.msg);
+						if (data.status == 1) {
+							window.location.href="__APP__/Member";
+						}
+					}
+				});
+			}
+		})
+	})
+</script>
+<style>
+	*{ margin:0; padding:0; }
+	ul{ list-style:none; }
+	a img{ border:none }
+	.box{ width:900px; border:1px solid #CCC; margin:20px auto; padding:20px; overflow:hidden }
+	.box h2{ font-size:14px; line-height:30px; }
+	.box ul{ width:900px; margin:20px 0 ; overflow:hidden }
+	.box li{ width:145px; height:45px; float:left; margin-left:40px; border:1px solid #CCC; margin-bottom:10px }
+	.box li a{ width:145px; height:45px; display:block; }
+
+	.score-bg,.wx-bg{
+		top:0%;
+		left:0%;
+		display:none;
+		background:rgba(0,0,0,0.3);
+		width:100%;
+		height:100%;
+		position:fixed;
+		z-index:9999
+	}
+	.score-form {
+		position: absolute;
+		left: 35%;
+		top: 25%;
+		border-radius: 8px;
+		width: 500px;
+		height: 400px;
+		background-color: #fff;
+		text-align: center;
+	}
+	.score-title {
+		line-height: 40px;
+		font-size: 16px;
+		/* position: relative; */
+	}
+	.input-swap {
+		display: flex;
+		flex-direction: column;
+		/* text-align: center; */
+
+	}
+	.input-label {
+		display: inline-block;
+		width: 300px;
+		font-size: 16px;
+		line-height: 40px;
+		text-align: left;
+	}
+	.input {
+		height: 30px;
+		width: 300px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		font-size: 16px;
+	}
+	.btn {
+		margin-top: 30px;
+		width: 60px;
+		height: 30px;
+	}
+	.err {
+		color: red;
+	}
+	.icon {
+		position: absolute;
+		display: inline-block;
+		right: 10px;
+		top: 5px;
+		width: 20px;
+		height: 20px;
+		font-size: 20px;
+		cursor: pointer;
+		
+	}
+	.wxbtn {
+		margin-top: 20px;
+	}
+</style>
+</head>
+<body style="font-size:12px">
+	<div class="box">
+		<p>
+		您的订单已成功提交。
+	您的订单号：{$smarty.get.id}   应支付金额：{$total} 元
+		</p>
+	<h2>请选择以下支付平台和支付机构</h2>
+	<ul>
+	{foreach from=$pay key=k item=vo}
+		<li {if $k eq 0}style="margin-left:0"{/if}><a href="javascript:doPay({$vo['interface']},{$smarty.get.id});"><img src="__PUBLIC__/pay/{$vo['interface']}.gif"/></a></li>
+		{/foreach}
+	</ul>
+	</div>
+	<div class="score-bg">
+		<div class="score-form">
+			<form>
+				<h3 class="score-title">
+					积分支付
+				</h3>
+				<a class="icon" id="close">x</a>
+				<input type="hidden" name="id" value="{$smarty.get.id}">
+				<div class="input-wap">
+					<label for="" class="input-label">请输入支付密码：</label>
+					<input type="password" name="psdone" class="input">
+				</div>
+				<div id="err" class="input-label err"></div>
+				<input type="reset" name="reset" style="display: none;" />
+				<!-- <div class="input-wap">
+					<label for="" class="input-label">请确认支付密码：</label>
+					<input type="password" name="psdtwo" id="psdtwo" class="input">
+				</div> -->
+			</form>
+			<button id="submit" class="btn">确认</button>
+		</div>
+	</div>
+	<div class="wx-bg">
+		<div class="score-form">
+				<h3 class="score-title">
+					打开微信扫一扫即可支付
+				</h3>
+				<a class="icon" id="wxclose">x</a>
+				<div id="wxcode" style="margin-top: 20px;"></div>
+			<a href="/index.php/Member/order_content/pid/{$orderid}" class="wxbtn">付款完成后点击进入我的订单</a>
+		</div>
+	</div>
+	<!-- <div id="wxcode"></div> -->
+</body>
+</html>

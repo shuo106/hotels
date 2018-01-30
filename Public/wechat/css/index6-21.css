@@ -1,0 +1,29 @@
+/* CSS Document */
+
+
+
+*{margin:0; padding:0}
+
+ul{list-style-type:none}
+
+a img{border:none}
+
+a{color:#000;text-decoration:none;}
+
+a:hover{ color:#F00}
+
+.clear{ clear:both}
+
+.float{float:left}
+
+body { font-family:"微软雅黑" ;font-size:24px; background: url(../images/bg.jpg) no-repeat center top;}
+
+.nav{width:538px; margin:390px auto 500px; overflow:hidden}
+
+.nav a{width:260px; height:50px; line-height:50px; text-align:center; display:block; float:left; background:#FFF; color:#999; margin:10px 7px 0 0;filter:alpha(opacity=80);opacity:0.8;
+
+}
+
+.foot{overflow:hidden;text-align:center; margin:0 auto ;text-align:center;}
+
+.foot a{ font-size:18px; color:#FFF}

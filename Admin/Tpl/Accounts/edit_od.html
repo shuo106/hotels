@@ -1,0 +1,105 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+	.table-order .control-label {
+		
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Accounts/update_od" id="j_form_form" class="pageForm" method="post" data-toggle="validate">
+		<input type="hidden" name="id" value="{$info.id}" />
+		<div>
+			<fieldset>
+				<legend>订单详情</legend>
+				<table class="table-bordered table-condensed table-hover table-order" width="100%">
+					<tbody>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">订单编号：</label>
+								{$info.yd_addtime}{$info.oid}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">预订房间：</label>
+								{$info.roomname}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">预订姓名：</label>
+								{$info.yd_name}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">预订电话：</label>
+								{$info['yd_tel']}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">预订时间：</label>
+								<input type="text" name="addtime" id="order_date" value="{date('Y-m-d',$info.yd_addtime)}" data-toggle="datepicker" data-rule="date" size="12">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">入住时间：</label>
+								<input type="text" name="start" id="order_date" value="{date('Y-m-d',$info.yd_start)}" data-toggle="datepicker" data-rule="date" size="12">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">离店时间：</label>
+								<input type="text" name="end" id="order_date" value="{date('Y-m-d',$info.yd_end)}" data-toggle="datepicker" data-rule="date" size="12">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">预订数量：</label>
+								<input type="text" name="nums" value="{$info.nums}" size="12"> 间 
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">总&nbsp;金&nbsp;额：</label>
+								<input type="text" name="total" value="{$info['total']}" size="12">  元
+
+							</td>
+						</tr>
+
+						
+						<tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">订单来源：</label>
+								{foreach from=C('order.from') item=vv key=kk}{if $info.yd_from==$kk}{$vv}{/if}{/foreach}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label x85">订单状态：</label>
+								{foreach from=C('order.status') item=v key=kk}{if $info.status==$kk}{$v}{/if}{/foreach}
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>
+								<label class="control-label x85"   style="vertical-align:initial">备注：</label>
+								<textarea name="beizhu" cols="30" rows="2">{$info.acc_beizhu}</textarea>
+							</td>
+						</tr> -->
+						<tr>
+						<td>
+							<ul style="margin-left:100px;">
+								{if !$smarty.get.read}<button type="submit" class="btn-default" data-icon="save">保存</button>{/if}
+								<button type="button" class="btn-close" data-icon="close">关闭</button>
+							</ul>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+	</form>
+</div>

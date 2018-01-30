@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>会员登录_密码找回_</title>
+<link href="__PUBLIC__/wechat/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	function checkLogin(){
+		//return true;
+		if($("#text_1").val() && $("#text_2").val()){
+			$("#login").submit();
+		}else if(!$("#text_1").val()){
+			alert('用户名为空');
+			$("#text_1").focus();
+		}else{
+			alert('密码为空');
+			$("#text_2").focus();
+		}
+	}
+	$(function(){
+		$('form').ajaxForm(function(data){
+			eval('data='+data);
+			alert(data.msg);
+			if(data.status==1){
+				window.location.href='__APP__/Member/index';
+			}
+		});
+		return false;
+	})
+	 var emailtourl='__APP__/Findpwd/sendmail';
+</script>
+<script type="text/javascript" src="__PUBLIC__/home/js/findpwd.js"></script>
+	<div id="preloader">
+		<div id="status">
+			<p class="center-text">网页内容加载中...</p>
+		</div>
+	</div>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>密码找回<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+	<div class="wrapBox">
+		<div class="main">
+			<div class="content">
+				<div class="container">
+						<div align="center">
+						  <div class="demo">
+							<table class="formTable">
+								<tr><td><input type="text" placeholder="请填写注册时的邮箱" name="email" id="email" /><span id="chkmsg"></span></td></tr>
+								<tr><td><input type="button" id="sub_btn" class="buttonWrap button button-red buttonLong" value="找回密码"></td></tr>
+							</table>
+						</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 
+    <script type="text/javascript" src="__PUBLIC__/wap/js/jquery.js"></script> -->
+    <script type="text/javascript" src="__PUBLIC__/wap/js/jquery.poshytip.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/wap/js/jq.validate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/wap/js/custom.js"></script>
+</body>
+</html>

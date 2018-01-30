@@ -1,0 +1,140 @@
+<style type="text/css">
+	label.control-label {
+		width: 130px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Basic/sms" id="j_form_form" data-toggle="ajaxform" class="pageForm" method="post">
+		<div>
+				<!-- Tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a href="#interface" role="tab" data-toggle="tab">接口信息</a></li>
+					<li><a href="#register" role="tab" data-toggle="tab">会员注册</a></li>
+					<li><a href="#subscribe" role="tab" data-toggle="tab">酒店预订</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane fade active in" id="interface">
+						<table class="table-bordered table-condensed table-hover" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<label for="interface_account" class="control-label x85">接口帐号：</label>
+										<input type="text" name="smsname" id="interface_account" value="{$sms['smsname']}" size="45">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="interface_pwd" class="control-label x85">接口密码：</label>
+										<input type="password" name="smspwd" id="interface_pwd" value="{$sms['smspwd']}" size="45">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="note_sign" class="control-label x85">短信签名：</label>
+										<input type="text" name="sign" id="note_sign" value="{$sms['sign']}" size="45">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="phone_manage" class="control-label x85">管理手机：</label>
+										<input type="text" name="glsj" id="phone_manage" value="{$sms['glsj']}" size="45">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="register">
+						<table class="table-bordered table-condensed table-hover" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<label for="phone_manage" class="control-label x85">变量标签：</label>
+										网站名：#WEBNAME# 帐号：#LOGINNAME# 密码：#PASSWORD# 注册时间：#REGTIME#
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="" class="control-label x85">是否发送：</label>
+										<input type="radio" name="regSend" id="note_type1" data-toggle="icheck" {if $sms[ 'regSend'] eq 0 }checked{/if} value="0" data-label="不发送&nbsp;&nbsp;">
+										<input type="radio" name="regSend" id="note_type2" data-toggle="icheck" {if $sms[ 'regSend'] eq 1 }checked{/if} value="1" data-label="发送&nbsp;&nbsp;">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										<label for="note_content" class="control-label x85">
+											短信内容：
+										</label>
+										<textarea name="regSms" id="note_content" data-toggle="autoheight" cols="55" rows="2">{$sms['regSms']}</textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="subscribe">
+						<table class="table-bordered table-condensed table-hover" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										<label for="phone_manage" class="control-label x85" style="width: 130px;">变量标签：</label>
+										网站名：#WEBNAME# 帐号：#LOGINNAME# 预订时间：#ORDERTIME#  酒店名称：#HOTELNAME# 客房名称：#ROOMNAME# 入住时间：#STARTTIME# 结束时间：#ENDTIME# 预订数量：#ORDERNUMS# 订单总额：#ORDERTOTAL#
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="" class="control-label x85" style="width: 130px;">预订是否发送：</label>
+										<input type="radio" name="hotelOrderSend" id="order_type1" data-toggle="icheck" {if $sms[ 'hotelOrderSend'] eq 0 }checked{/if} value="0" data-label="不发送&nbsp;&nbsp;">
+										<input type="radio" name="hotelOrderSend" id="order_type2" data-toggle="icheck" {if $sms[ 'hotelOrderSend'] eq 1 }checked{/if} value="1" data-label="发送&nbsp;&nbsp;">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										<label for="order_content" class="control-label x85" style="width: 130px;">
+											预订短信内容：
+										</label>
+										<textarea name="hotelOrderSms" id="order_content" data-toggle="autoheight" cols="55" rows="1">{$sms['hotelOrderSms']}</textarea>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="" class="control-label x85" style="width: 130px;">确认是否发送：</label>
+										<input type="radio" name="hotelConfirmSend" id="confirm_type1" data-toggle="icheck" {if $sms[ 'hotelConfirmSend'] eq 0 }checked{/if} value="0" data-label="不发送&nbsp;&nbsp;">
+										<input type="radio" name="hotelConfirmSend" id="confirm_type2" data-toggle="icheck" {if $sms[ 'hotelConfirmSend'] eq 1 }checked{/if} value="1" data-label="发送&nbsp;&nbsp;">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										<label for="confirm_content" class="control-label x85" style="width: 130px;">
+											确认短信内容：
+										</label>
+										<textarea name="hotelConfirmSms" id="confirm_content" data-toggle="autoheight" cols="55" rows="1">{$sms['hotelConfirmSms']}</textarea>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="" class="control-label x85" style="width: 130px;">支付是否发送：</label>
+										<input type="radio" name="hotelPaySend" id="pay_type1" data-toggle="icheck" {if $sms[ 'hotelPaySend'] eq 0 }checked{/if} value="0" data-label="不发送&nbsp;&nbsp;">
+										<input type="radio" name="hotelPaySend" id="pay_type2" data-toggle="icheck" {if $sms[ 'hotelPaySend'] eq 1 }checked{/if} value="1" data-label="发送&nbsp;&nbsp;">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										<label for="order_content" class="control-label x85" style="width: 130px;">
+											支付短信内容：
+										</label>
+										<textarea name="hotelPaySms" id="order_content" data-toggle="autoheight" cols="55" rows="1">{$sms['hotelPaySms']}</textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+                    <div class="page_but" style="margin-left:135px; margin-top:5px">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+				</div>
+		</div>
+</div>
+</form>

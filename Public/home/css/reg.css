@@ -1,0 +1,671 @@
+
+
+
+
+@charset "gb18030";
+
+/*created by Cutsin*/
+
+
+
+table {border-collapse:collapse;
+
+	border-spacing:0}
+
+img,fieldset,hr {border:none}
+
+img {vertical-align:middle}
+
+hr {height:1px}
+
+a,del,ins {text-decoration:none}
+
+li {list-style:none}
+
+q:before,q:after {content:''}
+
+sup,sub {vertical-align:baseline}
+
+body,input,button,textarea,select {font:normal 12px/1.67 Tahoma,"\5b8b\4f53",sans-serif;
+
+	color:#333}
+
+h1,h2,h3,h4,h5,h6,b {font-size:1em;
+
+	font-weight:normal}
+
+textarea {line-height:1.5;
+
+	resize:vertical}
+
+i,cite,em,var,dfn,address {font-style:normal}
+
+
+a:hover {text-decoration:underline}
+
+a,button,label {cursor:pointer;
+
+	cursor:hand}
+
+embed,object {display:block}
+
+
+
+
+
+.btn,.btn b,.i,.ii,.frm_tip {display:inline-block;
+
+	*display:inline;
+
+	*zoom:1}
+
+
+
+/*E layout*/
+
+/*S DPL*/
+
+	/*status*/
+
+.nodis {display:none!important}
+
+.novis {visibility:hidden!important}
+
+.blur,.blur textarea,.blur input {color:#666;
+
+	resize:none}
+
+.ishade {position:absolute;
+
+	width:100%;
+
+	height:100%;
+
+	border:none}
+
+	/*single*/
+
+.txt {display:inline-block;
+
+	*display:inline}
+
+.txt input {width:174px;
+
+	height:16px;
+
+	line-height:16px!important;
+
+	margin:0 0 0.2em;
+
+	padding:3px 3px 1px;
+
+	border:1px solid #ababab;
+
+	vertical-align:middle}
+
+.frm_qq .txt input {width:6em}
+
+.frm_url .txt input {width:230px}
+
+
+
+
+
+
+
+.i,
+
+.ii {width:16px;
+
+	height:16px;
+
+	margin-bottom:0.2em;
+
+	font-size:0;
+
+	background:url(../regimg/ico10.png) no-repeat;
+
+	vertical-align:middle}
+
+.ii {background:none}
+
+
+
+.fuc,.fuc1,.fuc2,.del,.shut {white-space:nowrap}
+
+.fuc:hover b,
+
+.fuc b {text-decoration:underline}
+
+.or {margin:0 4px;
+
+	color:#999}
+
+
+
+.b1 b,.b2 b {position:relative;
+
+	display:block;
+
+	width:5px;
+
+	margin:0 0 -5px -5px;
+
+	background-repeat:no-repeat}
+
+.b1 .bc,.b2 .bc {position:static;
+
+	width:auto!important;
+
+	margin:0!important;
+
+	background-repeat:repeat-x!important}
+
+.b1,.b2,.b1 b,.b2 b {overflow:hidden;
+
+	height:5px;
+
+	font-size:0;
+
+	line-height:0}
+
+.b1 .ba,.b2 .ba {left:5px;
+
+	margin:0 0 -5px -5px;
+
+	background:#c30}
+
+.b1 .bb,.b2 .bb {left:100%;
+
+	background:#c30}
+
+.b1 .bb {background-position:-5px 0}
+
+.b2 .ba {background-position:0 -5px}
+
+.b2 .bb {background-position:-5px -5px}
+
+.b1 .bc {background-position:0 -10px}
+
+.b2 .bc {background-position:0 -15px}
+
+
+
+	/*multi*/
+
+.form,.form2 {overflow:hidden;
+
+	*zoom:1}
+
+.frm {margin:6px 0 0}
+
+.frmt {display:block}
+
+fieldset {margin:-6px 0 0}
+
+.form2 .frm {padding:0 0 0 100px}
+
+.form2 .frm,.form2 .frmt,.form2 .frmc {min-height:24px;
+
+	_height:24px}
+
+.form2 .frmt {position:relative;
+
+	width:80px;
+
+	height:23px;
+
+	margin:0 0 -23px -100px;
+
+	padding-right:20px;
+
+	text-align:right;}
+
+.frm_sub {padding-top:6px}
+
+.frm_tip { position:relative;
+
+	visibility:hidden;
+
+	width:272px;
+
+	margin:1px 0 -50px 5px;
+
+	vertical-align:top}
+
+.frm_tip,
+
+.frm_tip b {background:url(../regimg/006.png) no-repeat -272px bottom}
+
+.frm_tip b {display:block;
+
+	min-height:14px;
+
+	_height:14px;
+
+	line-height:20px;
+
+	padding:7px 12px 7px 20px;
+
+	color:#666;
+
+	background-position:0 0}
+
+.frm_tip .i {position:relative;
+
+	top:2px;
+
+	display:none;
+
+	margin:0 0 -16px -20px}
+
+.frm_tip2 {margin:3px 0 0;
+
+	color:#999}
+
+.frm_tip2 .i {margin-right:3px}
+
+
+
+.frm_focus .frm_tip,
+
+.frm_err .frm_tip,
+
+.frm_ok .frm_tip {visibility:visible}
+
+.frm_err .frm_tip b,
+
+.frm_ok .frm_tip b {padding-left:40px}
+
+.frm_ok .frm_tip,.frm_ok .frm_tip b {background:none}
+
+.frm_ok .frm_tip b {padding-top:10px;
+
+	padding-bottom:0}
+
+.frm_ok .frm_tip em {display:none}
+
+.frm_ok .frm_tip .i {background-image:url(../regimg/0156.gif)}
+
+.frm_ok .frm_tip .i,
+
+.frm_err .frm_tip .i {display:block}
+
+.frm_err .frm_tip .i {background-image:url(../regimg/0155.gif)}
+
+.frm_err .frm_tip {background-position:-816px bottom}
+
+.frm_err .frm_tip b {background-position:-544px 0;
+
+	color:#f70000}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.apst,.hint {*zoom:1}
+
+.apst:after,.hint:after {clear:both;
+
+	display:block;
+
+	height:0;
+
+	content:"\20"}
+
+.vcflush {display:inline-block;
+
+	*display:inline;
+
+	*zoom:1}
+
+
+
+.hint_t .t1,
+
+.frm_tip2 .i {width:18px;
+
+	height:18px;
+
+	background-image:url(../regimg/0154.gif)}
+
+.result_t .t1 {background:url(../regimg/0156.gif) no-repeat}
+
+
+
+
+
+.hint {margin:8px auto!important;
+
+	padding:12px 40px 7px;
+
+	border:1px solid #e3e3e3;
+
+	background:#fff8d8}
+
+.hint a {margin:0 3px}
+
+.hint_t .t1 {position:relative;
+
+	left:-8px;
+
+	top:1px;
+
+	display:block;
+
+	margin:0 0 -18px -18px}
+
+.hint_t a:hover {text-decoration:underline}
+
+.hint_t em {word-wrap:break-word}
+
+
+
+.result {width:540px;
+
+	margin:8px auto;
+
+	padding:12px 0 7px 90px}
+
+.result a {margin:0 3px}
+
+.result_t .t1 {position:relative;
+
+	left:-8px;
+
+	top:9px;
+
+	display:block;
+
+	margin:0 0 -16px -16px}
+
+.result_t a:hover {text-decoration:underline}
+
+.result_t em {word-wrap:break-word;
+
+	font-size:18px;
+
+	font-family:"\5fae\8f6f\96c5\9ed1","\9ed1\4f53";
+
+	color:#000}
+
+.result .c {margin:1em 0 0;
+
+	color:#666}
+
+.result .c .t1 {margin:0 0 1.5em}
+
+.result .c .t1 a {margin:0;
+
+	text-decoration:underline}
+
+.result .btns {margin:1em 0 0}
+
+.result_h {width:400px;
+
+	margin:22px 4px 0;
+
+	padding:12px 0 0;
+
+	border-top:1px solid #e3e3e3}
+
+.result_h dt {margin:6px 0;
+
+	font-weight:bold}
+
+.result .c strong {font-family:Arial}
+
+.result_ok2 {margin-top:4em}
+
+.result_ok2 .btns {margin-top:2em}
+
+.result_ok3 {width:350px;
+
+	padding-left:125px}
+
+.result_ok3 {margin-top:4em}
+
+.result_ok3 .result_t .t1 {left:-25px;
+
+	top:-3px;
+
+	width:100px;
+
+	height:80px;
+
+	margin:0 0 -80px -100px;
+
+	background-image:url(../regimg/0159.png)}
+
+.result_ok3 .c {margin:10px 0 0;
+
+	line-height:24px;
+
+	color:#999}
+
+
+
+
+
+.form_reg {margin:15px 0 0 0px}
+
+.form_reg .frm {margin-top:12px;
+
+	padding:0 0 0 125px}
+
+.form_reg .frm,
+
+.form_reg .frmc,
+
+.form_reg .frmt {min-height:40px;
+
+	_height:40px;
+
+	line-height:40px}
+
+.form_reg .frmc div,
+
+.form_reg .frmc p,
+
+.form_reg .frmc b,
+
+.form_reg .frmc i {line-height:1.67}
+
+.form_reg .frm_tip b {line-height:18px}
+
+.form_reg .txt input {font-size:14px;
+
+	width:254px;
+
+	height:20px;
+
+	line-height:20px;
+
+	margin:0 0 0.2em;
+
+	padding:3px 3px 3px}
+
+.form_reg .frmt {width:100px;
+
+	margin:0 0 -40px -125px;
+
+	font-size:14px;
+
+	background-position:right 14px}
+
+.form_reg .fuc {margin:0 0 0 6px}
+
+.form_reg .fuc:link,.form_reg .fuc:visited {color:#f75000}
+
+.form_reg .frm_suffix {margin:0 0 0 8px;
+
+	font-size:14px}
+
+.frm_vc .txt,
+
+.vcflush {vertical-align:top}
+
+.frm_vc .txt input {width:94px}
+
+.vcflush {margin:0 0 0 4px;
+
+	*margin:0 0 0 8px}
+
+.vcflush img {display:block;
+
+	border:1px solid #a7a7a7;
+
+	border-top-color:#444;
+
+	border-left-color:#424242;
+
+	border-right-color:#bababa}
+
+.vcflush .fuc {margin:0}
+
+.agreement {margin:5px 0 0;
+
+	font-family:Arial}
+
+.pwlv {overflow:hidden;
+
+	width:149px;
+
+	height:12px;
+
+	margin:5px 0 0;
+
+	background:url(../regimg/005.png) no-repeat}
+
+.pwlv2 {background-position:0 -12px}
+
+.pwlv3 {background-position:0 -24px}
+
+.pwlv4 {background-position:0 -36px}
+
+
+
+.form_reg .frm_sp .frmt {position:relative;
+
+	top:4px;
+
+	right:-8px;
+
+	background:none;
+
+	text-align:left}
+
+.form_reg .frm_sp .btns {margin-top:5px}
+
+.frm_spli,.frm_spli b {background:url(../regimg/012.png) repeat-y -99px 0}
+
+.frm_spli {position:absolute;
+
+	top:0;
+
+	width:99px;
+
+	padding:26px 0 7px;
+
+	background-repeat:no-repeat;
+
+	background-position:0 bottom}
+
+.frm_spli b,.frm_spli a {display:block;
+
+	clear:both;
+
+	overflow:hidden}
+
+.frm_spli a {overflow:hidden;
+
+	height:23px;
+
+	margin:1px 3px 0 2px;
+
+	padding:0 0 0 14px;
+
+	font-size:12px;
+
+	line-height:25px}
+
+.frm_spli a:link,.frm_spli a:visited {color:#333}
+
+.frm_spli a:hover {color:#fff;
+
+	text-decoration:none;
+
+	background:#ff8000}
+
+
+
+.frm_sub_reg .frmc {padding:8px 0 0}
+
+.frm_sub_reg .inp_sub {width:180px;
+
+	height:39px;
+
+	border:0;
+
+	background:url(../regimg/015.png) no-repeat;
+
+	cursor:pointer;
+
+	cursor:hand}
+
+.frm_sub_reg .inp_subdis {background-position:0 -39px}
+
+
+
+.reg_b {overflow:hidden;
+
+	display:block;
+
+	width:83px;
+
+	height:31px;
+
+	padding:0 0 0 16px;
+
+	line-height:29px;
+
+	background:url(../regimg/btn_3.png) no-repeat;
+
+	outline:0}
+
+.reg_b:link,
+
+.reg_b:visited {color:#333}
+
+.reg_b:hover {text-decoration:none}
+
+.reg_b:hover,
+
+.frm_sp .active {background-position:0 -31px}
+
+
+

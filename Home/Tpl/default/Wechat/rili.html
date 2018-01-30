@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>日期选择</title>
+<link href="__PUBLIC__/wechat/css/index.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wechat/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/rili.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/rilistyle.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>日期选择<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+	<div class="WapCalendar">  
+		<div class="cons"><span id="start3">{substr($start,0,4)}年 周{date('w',$start)}</span><cite id="start2">入住 {$start}</cite></div>
+		<form action="__ROOT__/Wechat/rili/" id="mform" method="post">
+          <div class="selectDatys">
+		  <input type="hidden" name="from" value="{$from}"/>
+          <input type="hidden" name="id" value="{$id}"/>
+          <input type="hidden" name="start" id="start" value="{$start}"/>
+          <input type="hidden" name="end" id="end" value="{$end}"/>
+          <input type="hidden" name="city"  value="{$city}"/>
+          <span class="sp1">住几晚</span>
+		  <span class="sp2"><input type="submit" class="op1" value="-" name="changedate" {if $d< 2} disabled="disabled" {/if}><input type="text" class="input2" name="days" id="days" value="{$d}" readonly="true" /><input type="submit" name="changedate" class="op3" value="+"></span></div>
+		<script type="text/javascript">
+			var month= '{$month}';
+			eval('daydatas='+'{$daydatas}');
+		</script>
+		<script src="__PUBLIC__/wechat/js/rili.js"></script>
+		<div id="calendar">			
+			<input type="hidden" name="id" value="{$id}"/>
+				  <div class="cald">
+					<div class='select'>
+					<div class='time' id="time">
+						<a href="javascript:void(0);" class='btnPre' id="btnPre"> </a>
+                        <span class='current'><i id="yearNum">2014</i>年</span>
+						<select id="yearSelect" size="12" ></select>
+                        <span class='current'><i id="monthNum">6</i>月</span>
+							<select id="monthSelect" size="12"></select>
+						<a href="javascript:void(0);" class='btnNext' id="btnNext"> </a>
+					</div>
+				</div>
+				<table border="1" bordercolor="#f0f0f0" class='rows6'>
+					<thead>
+						<tr>
+							<th>星期一</th>
+							<th>星期二</th>
+							<th>星期三</th>
+							<th>星期四</th>
+							<th>星期五</th>
+							<th class='red'>星期六</th>
+							<th class='red'>星期日</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="ydselectOk"><input type="submit" name="ok" value="完成"></p>
+		</div>
+		</form>
+		</div>		
+</body>
+</html>

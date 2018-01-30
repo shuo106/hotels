@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>订单详细</title>
+<link href="__PUBLIC__/wechat/css/index.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wechat/css/style.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    .zhuangtai{ color:#FFFFFF;padding-left:10px;
+                  padding-right:10px;
+                  padding-top:5px;
+                  padding-bottom:5px; 
+                    }          
+  </style>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	function docancel(id,wid){
+		$.get('__ROOT__/Wechat/docancel',{ id: id } ,function(d){
+			eval('data='+d);
+			alert(data.msg);
+			if(data.status==1){
+				location.reload(); 
+			}
+		})
+	}
+</script>
+</head>
+<body>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>订单详情<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="orderxx">
+  <ul>
+    <li>订单编号：{$order['addtime']}{$order['id']}</li>   
+    <li>商品名称：{$order['name']}</li>
+    <li>联&nbsp;&nbsp;系&nbsp;&nbsp;人：{$order['linkman']}</li>
+    <li>联系电话：{$order['mobile']}</li>
+    <li>预订数量：{$order['nums']}份</li>
+    <li>应付积分：{$order['point']}</li>
+    <li>支付方式：积分兑换</li>
+    <li>收货地址：{$order['address']}</li>
+    <li>订单状态：  
+    <span style="background-color:{$GIFT['color'][$order['status']]};" class="zhuangtai">
+     {$GIFT['status'][$order['status']]}</span></li>
+    <li>订单备注：{$order['beizhu']}</li>
+  </ul>
+</div>
+<!--
+<div class="section_detail">
+  <ul>
+    <li><a href="__ROOT__/Wechat/detail/id/{$order['hotelid']}"><span><img src="__PUBLIC__/wechat/images/h_07.gif" style="top: 12px; width:20px;"></span><img src="__PUBLIC__/wechat/images/h_11.gif">{$order['hotelname']}</a></li>
+    <li><a href="tel:{$order['telephone']}"><span><img src="__PUBLIC__/wechat/images/h_07.gif" style="top: 12px; width:20px;"></span><img src="__PUBLIC__/wechat/images/h_05.gif">{$order['tel']}</a></li>
+  </ul>
+</div>
+<div class="nav_footer">
+{if $order['status'] eq 3}<a href="__APP__/Pay/index/id/{$order.addtime}{$order.id}">立即支付</a>{/if}
+{if $order['status'] eq 1 or $order['status'] eq 3}
+	<a class="nav_footer_a2" href="javascript:docancel({$order['orderid']} );">取消订单</a>
+{/if}	
+</div>-->
+</body>
+</html>

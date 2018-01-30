@@ -1,0 +1,123 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/order.css">
+<script type="text/javascript">
+function cancel(id) {
+    $.get('__APP__/Member/docancel', {
+        oid: id
+    }, function(data) {
+       var data =JSON.parse(data);
+        alert(data.msg);
+        if (data.status == 1) {
+            location.reload();
+        }
+    });
+}
+</script>
+<!--导航条-->
+<div class="hotels_step">
+    <h3>{$orderdata['hotelname']}</h3>
+    <ul style="background: url(__PUBLIC__/images/ydline1.png) no-repeat right;" class="am-g">
+        <li class="am-u-sm-6"><span></span><strong>填写信息</strong></li>
+        <li class="am-u-sm-6"><span></span>提交成功</li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<!--导航条结束！！！-->
+<div class="main">
+    <div class="sideleft">
+        <h3 class="title">酒店信息</h3>
+        <dl class="jdxx_dl">
+            {if $orderdata['src']}
+            <img src="__ROOT__{$orderdata['src']}" alt="" /> {else}
+            <img src="__PUBLIC__/images/jdimg.jpg" alt="" /> {/if}
+            <dt>{$orderdata['hotelname']}</dt>
+            <dd><img src="__PUBLIC__/images/stars{$orderdata.xingji}.png">
+            </dd>
+            <dd>{$orderdata['address']}</dd>
+        </dl>
+        <ul class="jdxx_li">
+            <li>房&nbsp;&nbsp;型：{$orderdata.roomtype}</li>
+            <li>床&nbsp;&nbsp;型：{$orderdata.fjchuang}</li>
+            <li>早&nbsp;&nbsp;餐：{$orderdata.zaocan}</li>
+            <li>宽&nbsp;&nbsp;带：{$orderdata.swang}</li>
+        </ul>
+        <div class="wxts">
+            <h4>温馨提示：</h4>
+            <p>您的手机号码需要提供给酒店
+                <br />酒店要求入住人持本人有效身份证件办理</p>
+        </div>
+        <div class="helpin">
+            <h4>需要帮助：</h4>
+            <ul>
+                <li><a href="__ROOT__/Article/category-6.html">预订帮助</a></li>
+                <li>在线客服</li>
+                <li class="dianhua">客服电话：0371-63611389</li>
+            </ul>
+        </div>
+    </div>
+    <div class="sideright">
+        <h3 id="title"><strong>订单信息</strong></h3>
+        <div class="siderightcon">
+            <h4 class="headding">入住人信息</h4>
+            <div class="ddok">
+                <ul class="clearfix">
+                    <li>入住客人：{$orderdata.kename}</li>
+                    <li>手机号码：{$orderdata.telephone}</li>
+                    {if !$smarty.session.id}
+                    <li>您好，会员同步注册成功!</li>
+                    <li>&nbsp;</li>
+                    <li>用户名：{$orderdata.username}</li>
+                    <li>密&nbsp;&nbsp;码：{$orderdata.username}</li>
+                    <li>请及时登录修改您密码，查看订单信息，入住点评返现金！</li>
+                    {/if}
+                </ul>
+            </div>
+            <h4 class="headding">订单详情</h4>
+            <div class="ddok">
+                <ul class="clearfix">
+                    <li>酒店名称：{$orderdata.hotelname}</li>
+                    <li>酒店地址：{$orderdata.address}</li>
+                    <li>酒店电话：{$orderdata.tel}</li>
+                    <li>预订房型：{$orderdata.roomtype}共<em class="ddred">  {$orderdata.nums} 间</em></li>
+                    <li>保留时间：{$orderdata.zuiwantime} 点</li>
+                    <li>应付金额：<em class="ddred">{$orderdata.shoufei}元</em></li>
+                </ul>
+            </div>
+            <div class="price_mx">
+                <div id="money">
+                    <ul>
+                        {foreach from=$m item=vo}
+                        <li>
+                            <h3>{$vo['date']}</h3>
+                            <p>{$vo['week']}</p>
+                            <p> RMB{$vo['money']} ×{$orderdata.nums}</p>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+            <div class="ddok">
+                <ul class="clearfix">
+                    <li><strong>订单编号：<em class="ddred">{$orderdata.addtime}{$orderdata.orderid}</em></strong></li>
+                    <li><strong>订单状态：<em class="ddred">
+{$order_config['status'][$orderdata.status]}
+</em></strong></li>
+                    <li><strong>支付方式：<em class="ddred">{if $orderdata.paytype eq 1}在线支付
+{if $orderdata.status eq 6}
+<a href="__APP__/Pay/index/id/{$orderdata['addtime']}{$orderdata['orderid']}">去支付</a>
+{/if}
+{else}前台支付{/if}</em></strong></li>
+                </ul>
+            </div>
+            <h4 class="headding">特别提示</h4>
+            <div class="ddok tips">
+                <p>1、根据国家相关规定，所有进入酒店的住客和访客均需持有效身份证件到前台登记，感谢您的配合！</p>
+                <p>2、通常酒店14:00办理入住，早到可能需要等待</p>
+            </div>
+            <div class="ddxxokbtn">{if $orderdata.status neq 2}<a href="javascript:cancel({$orderdata.orderid});">取消订单</a>{/if}<a href="__ROOT__/Member/index.html">返回个人中心</a>{if $orderdata.status eq 4 && $orderdata.paytype eq 1}<a href="__APP__/Pay/index/id/{$orderdata.addtime}{$orderdata.orderid}">在线支付</a>{/if}</div>
+            <!--订单完成-->
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+{include file="../Common/footer.html"}

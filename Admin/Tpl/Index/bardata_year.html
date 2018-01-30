@@ -1,0 +1,73 @@
+{
+  "tooltip": {
+    "trigger": "axis"
+  },
+  "grid": {
+      "width" : "85%"
+  },
+  "legend": {
+    "orient": "verticcal",
+    "x": "right",
+    "y": "5%",
+    "data": [
+      {$theme}
+    ],
+    "selected": {$themeSelected}
+  },
+  "toolbox": {
+    "show": true,
+    "orient": "horizontal",
+    "x": "center",
+    "y": "top",
+    "feature": {
+      "mark": {
+        "show": false
+      },
+      "dataView": {
+        "show": true,
+        "readOnly": false
+      },
+      "magicType": {
+        "show": false,
+        "type": [
+          "line"
+        ]
+      },
+      "restore": {
+        "show": false
+      },
+      "saveAsImage": {
+        "show": true
+      }
+    }
+  },
+  "calculable": true,
+  "xAxis": [
+    {
+      "type": "category",
+      "data": [
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月",
+        "9月",
+        "10月",
+        "11月",
+        "12月"
+      ]
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "splitArea": {
+        "show": true
+      }
+    }
+  ],
+  "series": {$yearDataArr}
+}

@@ -1,0 +1,310 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>全国酒店微网站首页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="__PUBLIC__/wap/new/css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+<link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.daymoney.css" />
+<link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+<link href="__PUBLIC__/wap/new/css/stylenew.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<style type="text/css">
+  .search li {
+    margin-top: 0;
+    position: relative;
+}
+.on1 {
+  height: 50px;
+    float: left;
+    text-align: center;
+    width: 49.5%;
+    line-height:50px; 
+}
+.on2 {
+  height: 50px;
+    float: left;
+    text-align: center;
+    width: 49.5%;
+    line-height:50px; 
+}
+.se-01 {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    height: 50px;
+}
+</style>
+<script type="text/javascript">
+function showMessageBox(){
+	$(".mesWindow").toggle();
+}
+//关闭窗口
+function closeWindow(){
+	var s2=$("#star2").val();
+	var p2=$("#price2").val();
+	var sval='';
+	if(p2!=0){
+		sval = p2;
+	}
+	if(s2!=0){
+		sval+=','+s2;
+	}
+	$("#pstar").text(sval);
+	$(".mesWindow").hide();
+	return false;
+}
+$(function(){
+	$('.price').click(function(){
+		var p= $(this).attr('data');
+		var ptext= $(this).attr('data-text');
+		$('#price').val(p);
+		$('#price2').val(ptext);
+		$('.price').removeClass('selected');
+		$(this).addClass('selected');
+	});	
+	$('.star').click(function(){
+		var star= $(this).attr('data');
+		var stext= $(this).attr('data-text');
+		var sval = $('#star').val();
+		var sval2 = $('#star2').val();
+		//获取到星级的值 未选择情况下为0
+		if(sval==0){
+			$('#star').val(star);
+			$('#star2').val(stext);
+		}else{
+			if(sval.indexOf(star) >= 0 ){
+				//判断是否包含当前值 包含不再加入
+			}else{
+				sval+=','+star;
+				$('#star').val(sval);
+				sval2+=','+stext;
+				$('#star2').val(sval2);
+			}
+		}
+		if(star == 0){
+			//如果点击不限 则清空
+			$('#star').val(0);
+			$('#star2').val(0);
+			$('.star').removeClass('selected');
+		}else{
+			$('#allstar').removeClass('selected');
+		}
+		$(this).addClass('selected');
+	});
+	$(".g_btn_s").click(function(){
+		var url= location.href.split('index');
+		var par= '';
+		var key =$("#key").val();
+		var star =$("#star").val();
+		var city =$("#city").val();
+    /*var price = document.getElementById('price');
+		if(price.value!=0){
+			par+='/price/'+price.value+'/';
+		}*/
+		/*if(star!=0){
+			par+='star/'+star+'/';
+		}*/
+		if(key!=0){
+			par+='/key/'+key+'/';
+		}
+    if(city =='0'){
+       alert('请选择城市');
+       return false;
+    }
+/*function GetQueryString(name){
+     var reg = new RegExp("(^|/)"+ name +"=([^/]*)(/|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+var myurl=GetQueryString("city");
+if(myurl ==null){
+   alert('请选择城市');
+   return false;
+}*/
+		window.location.href=url[0]+'hotels'+url[1]+par;
+	});
+});
+</script>
+<style type="text/css">
+  .g_btn_s{
+     background: #fe8a00 none repeat scroll 0 0;
+    height: 50px;
+    text-align: center;
+  }
+</style>
+</head>
+<body style="margin:0px;">
+<div class="header wrap" style="-moz-background-size:cover; -webkit-background-size:cover; -o-background-size:cover; background-size:cover;background: rgb(86, 197, 253) url('__PUBLIC__/wap/new/images/bnner.jpg') no-repeat scroll center top; background-size:100% auto; height: 470px;">
+           <!--  <div class="header-t">
+                 <ul>
+                     <li class="fl"><a href="__ROOT__/Wechat/center/"><i><img src="__PUBLIC__/wap/new/imges/sy-ico1.png"></i>个人中心</a></li>
+                     <li class="fr"><a href="__ROOT__/Wechat/myorder"><i><img src="__PUBLIC__/wap/new/imges/sy-ico2.png"></i>我的订单</a></li>
+                     <div style="clear:both"></div>
+                 </ul>
+           </div> -->
+            <div class="logo" style="">
+                  <!-- <img src="__PUBLIC__/wap/new/imges/sy-logo.png"> -->
+            </div>
+            <div class="search" style="margin-top: 0;">
+                 <!--  <h3 >全国100+城市，超过500家酒店恭候您的光临</h3> -->
+                  <div class="se-01">
+                       <h4><i><img src="__PUBLIC__/wap/new/imges/sy-ico3.png"></i><a  href="__ROOT__/Wechat/cityindex/{if $smarty.get.start}start/{$smarty.get.start}/end/{$smarty.get.end}{/if}">{if $city}{$city}{else}城市{/if}</a></h4>
+                       <input type="hidden" id="city" name="city" value="{if $city}{$city}{else}0{/if}"/>
+                  </div>
+                  <a  href="javascript:" id="date"><div class="se-01 s2">
+                       <h4><i><img src="__PUBLIC__/wap/new/imges/sy-ico4.png"></i></h4>
+                       <ul style="margin: 0;">
+                           <li> 入住</li>
+                           <li> {if $smarty.get.start}{$smarty.get.start}{else}{$smarty.now|date_format:'%Y-%m-%d'}{/if}</li>
+                       </ul>
+                        <h5 style="margin: 0;">共{if $smarty.get.start}{$days}{else}1{/if} 晚</h5>
+                       <ul style="margin: 0;">
+                           <li> 离店</li>
+                           <li> {if $smarty.get.end}{$smarty.get.end}{else}{$tomorrow|date_format:'%Y-%m-%d'}{/if}</li>
+                       </ul>
+                  </div></a>
+                  <div class="se-01">
+                      <input type="text" value=""  placeholder="酒店名称/地址/商圈" id="key" name="key"/>
+                  </div>
+                  <!-- <div class="se-01">
+                      <input type="text" value=""  placeholder="请选择价格" id="price" />
+                      <select  name="price" style="width:100%" id="price">
+                        <option value="0" >选择价格</option>
+                        <option value="0_200" >200元以下</option>
+                        <option value="200_300" >201元到300元</option>
+                        <option value="300_450" >301元到450元</option>
+                        <option value="450_600" >451元到600元</option>
+                        <option value="600_1000" >601元到1000元</option>
+                        <option value="1000_99999" >1001元以上</option>
+                      </select>
+                  </div> -->
+                  <p><a href="javascript: void(0)" class="g_btn_s"><i><img src="__PUBLIC__/wap/new/images/index_08.png"></i>查找酒店</a></p>
+                  <div class="se-01">
+                    <dd class="on1"><a href="__ROOT__/Wechat/center" style="color:#ff9e05;"><i><img src="__PUBLIC__/wap/new/images/index_13.png"></i>会员中心</a></dd>
+                     <dd class="on2"><a href="__ROOT__/Wechat/myorder" style="color:#53bfb2;"><i><img src="__PUBLIC__/wap/new/images/index_16.png"></i>我的订单</a></dd>
+                  </div>
+                  <div class="se-01">
+                       <dd class="on1" style="width:100%"><a href="__ROOT__/Wechat/myorder" style="color:#ff9e05;"><i><img src="__PUBLIC__/wap/new/images/ico7.png" width="25" height="25"></i>点评酒店，即可获得点评现金</a></dd>
+                  </div>
+            </div>
+      </div>
+      <div  style="margin: auto;width: 100%;height:100px;" class="hotel_ico">
+            <ul style="float: left;text-align:center;width: 25%;margin-top: 1.6rem;">
+                <li><a href="__ROOT__/Wechat/chains"><img src="__PUBLIC__/wap/new/images/index_30.png"></a></li> 
+                <li><a href="__ROOT__/Wechat/chains">连锁酒店</a></li>
+            </ul>
+            <ul style="float: left;text-align:center;width: 25%;">
+                <li><a href="__ROOT__/Wechat/cityindex/"><img src="__PUBLIC__/wap/new/images/index_25.png"></a></li> 
+                <li><a href="__ROOT__/Wechat/cityindex/">全国酒店</a></li>
+            </ul>
+            <ul style="float: left;text-align:center;width: 25%;">
+                <li><a href="__ROOT__/Wechat/comment/"><img src="__PUBLIC__/wap/new/images/index_27.png"></a></li> 
+                <li><a href="__ROOT__/Wechat/comment/">酒店点评</a></li>
+            </ul>
+            <ul style="float: left;text-align:center;width: 25%;">
+                <li><a href="__ROOT__/Wechat/notes/catid/6"><img src="__PUBLIC__/wap/new/images/index_33.png"></a></li> 
+                <li><a href="__ROOT__/Wechat/notes/catid/6">预订帮助</a></li>
+            </ul>
+      </div>
+      <div class="rmcs wrap">
+            <h3>热门酒店推荐</h3>
+            {foreach from=$tui item=v}
+            <div class="rmcs-main01">
+                  <div class="main01-l fl">
+                       <a href="__ROOT__/Wechat/detail/id/{$v.hotelid}"><img src="__ROOT__{$v.src}" height="129px" width="196px"></a>
+                  </div>
+                  <div class="main01-r fr">
+                       <ul>
+                           <li class="on"><a href="__ROOT__/Wechat/detail/id/{$v.hotelid}">{$v.hotelname}</a></li>
+                           <li class="on">
+                            {if $v['xingji']=='一星级'}
+                            <img src="__PUBLIC__/wap/new/imges/list-ico1.png">
+                            {else if $v['xingji'] == '二星级'}
+                            <img src="__PUBLIC__/wap/new/imges/list-ico2.png">
+                            {else if $v['xingji'] == '三星级'}
+                            <img src="__PUBLIC__/wap/new/imges/list-ico3.png">
+                            {else if $v['xingji'] == '四星级'}
+                            <img src="__PUBLIC__/wap/new/imges/list-ico4.png">
+                            {else if $v['xingji'] == '五星级'}
+                            <img src="__PUBLIC__/wap/new/imges/list-ico5.png">
+                            {else}
+                              {$v['xingji']}
+                            {/if}
+                           <span>{if $v.price}￥{$v.price}<i style="font-size:12px">起</i>{else}满房{/if}</span></li>
+                           <li>{$v.address}</li>
+                       </ul>
+                  </div>
+            </div>
+            {/foreach}      
+      </div>
+      <!-- <div class="foot wrap">
+            <ul style="width: 100%;margin:0px auto;">
+                <li><a href="#">APP下载</a></li>
+                <li><a href="__ROOT__/Wechat/ashow/id/5">关于我们</a></li>
+                <li><a href="__ROOT__/Wechat/notes/catid/5">酒店动态</a></li>
+                <li><a href="__ROOT__/Wechat/ashow/id/4">联系我们</a></li>
+            </ul>
+            <p>版权所有：鹏程连锁酒店集团</p>
+      </div> -->
+      {include file="./footer.html"}
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog" style="width:98%">
+    <div class="am-modal-hd">日期选择
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd" style="padding:0px;">
+      <div id="daymoney" class="am-daymoney">
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+<script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/assets/js/amazeui.daymoney.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#date").click(function(){
+		var click=0;
+		var start,end;
+		var daydata='{$daydatas}';
+        var daymoney=$("#daymoney").daymoney({ 
+        	daydata:daydata,
+        	style:{
+        		active:"am-disabled"
+        	},
+        	click:function(obj){
+        		if(new Date(obj.data('date'))<new Date()){
+        			alert('请选择今日之后的日期');
+        			return false;
+        		}        		
+        		if(click==0){
+        			obj.html('开始');
+        			start=obj.data('date');        			
+        		}else if(click==1){
+        			var date1=new Date(start);
+        			var date2=new Date(obj.data('date'));
+        			if(date1>=date2){
+        				$("#daymoney tr td").each(function(){
+        					var date=$(this).data('date');
+        					$(this).html((new Date(date).getDate()))
+        				});
+        				obj.html('开始');
+        				start=obj.data('date');
+        				return false;
+        			}else{
+	        			$("#doc-modal-1").modal('toggle');
+	        			window.location.href="__ROOT__/Wechat/index{if $smarty.get.city}/city/{$smarty.get.city}{/if}/start/"+start+"/end/"+obj.data('date');
+        			}
+        		}
+        		click++;
+        	}
+    	})
+        .init();
+        $("#doc-modal-1").modal('toggle');
+		});
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{include file="../Common/header.html"}
+<div class="clear"></div>
+<div class="con_z">
+	{include file="../Member/member_menu.html"} 
+	<div class="con_zru"><div class="dqwzb">当前位置>><a href="__ROOT__/">首页</a> >> <a href="__APP__/Member/index">我的会员中心</a> >> 团购订单详细页面</div>
+	<div class="jddd"><div class="jddd_t">团购订单详细页面</div>
+	  <div class="jddd_con">
+	    {if $details}
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"  class="jddd_xx">
+          <tr >
+            <td width="23%" detailsspan="8" valign="middle">{if empty($details['thumb'])}<img src="__PUBLIC__/images/zanwu.gif" width="160" height="120" />{else}<img src="__ROOT__{$details['thumb']}" width="160" height="120" />{/if}</td>
+            <td width="8%" class="clour1">团购名称：</td>
+            <td colspan="3" class="clour1">{$details['title']}</td>
+          </tr>
+          <tr>
+            <td width="23%">　团购价：</td>
+            <td class="clour1" width="27%">￥{$details['price']}</td>
+            <td width="23%">团购数量：</td>
+            <td>{$details['nums']} </td>
+          </tr>
+          <tr>
+            <td>团购时间：</td>
+            <td>{$details['addtime']|date_format:'%Y-%m-%d'}</td>
+            <td>联系电话：</td>
+            <td>{$details['mobile']}</td>
+          </tr>
+		<tr>
+            <td>　　总价：</td>
+            <td class="clour1">￥{$details['total']}</td>
+			<td>　订单号：</td>
+			<td class="clour1">{$details['addtime']}{$details['id']}</td>
+		<tr>
+		    <td >订单状态：</td>
+            <td align="left" colspan="34">
+				{if $details['status'] == 0}未支付
+				<!-- &nbsp;&nbsp;<a href="javascript:doTuanCancel({$details['id']});" style=" background-color:#CCCCCC; font-size:13px;">取消订单</a>  -->
+				&nbsp;&nbsp;<a href="__APP__/Pay/index/id/{$details['addtime']}{$details['id']}/other/1" style=" background-color:#CCCCCC; font-size:13px;">去支付</a>
+				{else if $details['status'] == 1}已支付
+				{else if $details['status'] == 2}已使用
+				{else if $details['status'] == 3}已取消
+				{else if $details['status'] == 4}已作废
+				{/if}
+				<!-- <a href="__APP__/member/member_order" style="text-decoration:none;"><input type="button" value="返回" style="cursor:pointer;text-decoration:none;"></a>-->
+            </td>
+          </tr>
+        </table>
+		{else}
+		 操作错误
+		{/if}
+	  </div>
+	</div>
+	</div>
+</div>
+<div class="clear"></div>
+<form  id="pay"  action="__ROOT__/alipay/alipayapi.php" method="post" >
+	<input type="hidden" name="WIDout_trade_no"  value="{$details['id']}" />
+	<input type="hidden" name="WIDsubject" value="购买团购 {$details['title']}" />
+	<input type="hidden" name="WIDtotal_fee" value="{$details['total']}">
+	<input type="hidden" name="WIDuserid"  value="{$smarty.session.name}"/>
+	<input type="hidden" name="WIDbody"  value="Tuan"/>    
+</form>
+<script>
+function doTuanCancel(id){
+	 if(confirm("确定取消该订单?")){ 
+		$.get('__APP__/Member/doTuanCancel',{ id: id },function(data){
+			eval('data='+data);
+			alert(data.msg);
+			if(data.status ==1 ){
+				location=location;
+			}
+		});
+	}
+}
+function doPay(){
+	$("#pay").submit();
+}
+function doPay2(id){
+	$.get("__APP__/Tuan/doPay",{ id: id },function(data){
+		eval('data='+data);
+		if(data.status ==1 ){
+			location=location;
+		}
+	})
+}
+</script>
+{include file="../Common/footer.html"}

@@ -1,0 +1,39 @@
+
+<include file="Tpl/public/header.html"/>
+<div id="container">
+   <include file="Tpl/public/menu.html" /> 
+  <div class="sideright" id="allmap">
+  </div>
+  <input type="hidden" id="x" value="{$x}">
+  <input type="hidden" id="y" value="{$y}">
+  <input type="hidden" id="hotelname" value="{$hotelname}">
+  <div class="clear"></div>
+</div>
+<script type="text/javascript">
+var x=document.getElementById("x").value;
+var y=document.getElementById("y").value;
+var map = new BMap.Map("allmap");            // 创建Map实例
+var point = new BMap.Point(x, y);    // 创建点坐标
+map.centerAndZoom(point,15);                     // 初始化地图,设置中心点坐标和地图级别。
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+var marker = new BMap.Marker(point);        // 创建标注  
+map.addOverlay(marker);
+var opts = {  
+		width : 180,     // 信息窗口宽度  
+		height: 90,     // 信息窗口高度  
+		title : ""  // 信息窗口标题  
+		}  
+		var hotelname=document.getElementById("hotelname").value;
+		var infoWindow = new BMap.InfoWindow(hotelname, opts);  // 创建信息窗口对象  
+		map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+		map.addControl(new BMap.NavigationControl()); //平移缩放控件
+		map.addControl(new BMap.OverviewMapControl());  //缩略地图控件
+		map.addControl(new BMap.ScaleControl());  //比例尺控件
+		map.addControl(new BMap.MapTypeControl());  //地图类型控件
+map.addEventListener("click", function(e){  
+	var a=e.point.lng;
+	var b=e.point.lat;alert("标注成功！");
+	 document.location.href="__APP__/Hotel/biaozhu/x/"+a+"/y/"+b;
+	}); 
+</script>
+<include file="Tpl/public/footer.html" />

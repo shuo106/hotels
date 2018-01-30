@@ -1,0 +1,63 @@
+<style type="text/css">
+	label.control-label {
+		width: 85px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Rbac/doaddrole" method="post" data-toggle="validate" data-alertmsg="false" callback="back">
+		<input type="hidden" name="id" value="{$roleinfo['id']}" />
+		<input type="hidden" name="btn_submit" value="true" />
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							职位名称：
+						</label>
+						<input type="text" name="name" id="role_name" value="{$roleinfo['name']}" size="30">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							所属部门：
+						</label>
+						<select name="depa"  	data-toggle="selectpicker">
+							<option value="0">不限</option>
+							{foreach from=$list item=vo}
+							<option value="{$vo.id}" {if $roleinfo['depa'] eq $vo.id}selected="selected"{/if}>{$vo.value}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>				
+				<tr>
+					<td>
+						<label for="role_remark" class="control-label x85">
+							职位描述：
+						</label>
+						<textarea name="remark" rows="1" cols="30" data-toggle="autoHeight" data-Height="20px">{$roleinfo['remark']}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85">
+							是否开启：
+						</label>
+						<input type="radio" name="status" value="1" id="status_type1"  {if $roleinfo.status}checked{/if} data-toggle="icheck" data-label="是&nbsp;&nbsp;">
+						<input type="radio" name="status" value="0" id="status_type2"  {if !$roleinfo.status}checked{/if} data-toggle="icheck" data-label="否">
+					</td>
+				</tr>
+                <tr>
+					<td>
+						<div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

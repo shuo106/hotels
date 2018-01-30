@@ -1,0 +1,31 @@
+<include file="Tpl/public/header.html"/>
+<div id="container">
+   <include file="Tpl/public/menu.html" /> 
+  <div class="sideright">
+    <h3 class="title">当前位置>>首页>>订单查询</h3>
+    <h4><strong>订单查询</strong></h4>
+    <form method="post" class="iform_Editor" action="__APP__/Order/search">
+      <table border="1" class="table_border">
+        <tr>
+          <td width="12%">预订人姓名：</td>
+          <td><input name="linkman" type="text" class="input_table"></td>
+          <td width="12%">预订人手机：</td>
+          <td><input name="telephone" type="text" class="input_table"></td>
+        </tr>
+        <tr>
+          <td width="12%">订单号：</td>
+          <td><input name="order_no" type="text" class="input_table"></td>
+          <td width="12%">房间类型：</td>
+          <td><input name="fangtype" type="text" class="input_table"></td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center">
+            <input type="submit" value=" 查询 " class="bton">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+<include file="Tpl/public/footer.html" />

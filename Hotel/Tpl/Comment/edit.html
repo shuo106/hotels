@@ -1,0 +1,95 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">点评详情</strong> /
+                    <small>Comment show</small>
+                </div>
+            </div>
+            <hr/>
+            <div class="am-g">
+                <form method="post"  action="__APP__/Comment/update/id/{$comment.id}">
+                    <table class="am-table am-margin-left">
+                      <!--  <thead>
+                            <tr>
+                                <th colspan="2">点评详细信息</th>
+                            </tr>
+                        </thead>-->
+                        <tbody>
+                           <tr>
+                                <td style="width:100px;">入住客房：</td>
+                                <td>
+                                   {$comment.title}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:100px;">点评客人：</td>
+                                <td>
+                                   {$comment.username}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>评价等级：</td>
+                                <td>
+                                {$comment.label}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>评价分数：</td>
+                                <td>
+                                {$comment.unit}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>客人点评：</td>
+                                <td>
+                                {$comment.content}
+                                </td>
+                            </tr>
+                            <notempty name="comment.thumb">
+                            <tr>
+                                <td>点评图片：</td>
+                                <td>
+                                    <ul class="am-list">
+                                    <volist name="comment.thumb" id="vo">
+                                        <li class="am-fl am-margin-left-xs">
+                                            <img src="__ROOT__{$vo}" width="140px" height="110px">
+                                        </li>
+                                    </volist>
+                                    </ul>
+                                </td>
+                            </tr> 
+                            </notempty> 
+                            <empty name="_GET['read']">
+                            <tr>
+                                <td>酒店回复：</td>
+                                <td>
+                                <textarea name="reply" rows="3" class="" style="width:600px; height:30px; line-height:30px;">{$comment.reply}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>
+                                <button type="submit" class="am-btn am-btn-primary">提交</button>
+                              </td>
+                            </tr>   
+                            <else/>
+                            <tr>
+                                <td>酒店回复：</td>
+                                <td>{$comment.reply}</td>
+                            </tr>                            
+                            </empty>                            
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<include file="Tpl/public/bottom.html" />

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<script src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+<h4 class="tit">您当前的位置：首页>><em>订单管理</em></h4>
+<form method="get" action="__APP__/Worder/index">
+<table  class="table_border" width="100%">
+<tr class="tb_title">
+<th colspan="8" align="center" class="table_border_title">订单管理</th>
+</tr>
+<tr>
+<td colspan="8">
+订单检索
+</td>
+</tr>
+<tr>
+<td align="center"  valign="middle">订单状态: <select name="status" id="status">
+													<option value="0">全部</option>
+													<option value="1"{if $smarty.get.status eq 1} selected {/if}>未确认</option>
+													<option value="2"{if $smarty.get.status eq 2} selected {/if}>已确认</option>
+													<option value="3"{if $smarty.get.status eq 3} selected {/if}>未付款</option>
+													<option value="4"{if $smarty.get.status eq 4} selected {/if}>已付款</option>
+													<option value="5"{if $smarty.get.status eq 5} selected {/if}>已入住</option>
+													<option value="6"{if $smarty.get.status eq 6} selected {/if}>已取消</option>
+												</select>
+</td>
+<td align="center"  valign="middle">预订时间: <input name="addtime" id="addtime" value="{$smarty.get.addtime }" type="text" onclick="WdatePicker()" style="width:70px;" > </td>
+<td align="center"  valign="middle">入住时间: <input name="starttime" id="starttime" value="{$smarty.get.starttime }" type="text" onclick="WdatePicker()" style="width:70px;"></td>
+<td align="center"  valign="middle">离店时间:　<input name="endtime" id="endtime" value="{$smarty.get.endtime }"  type="text" onclick="WdatePicker()" style="width:70px;"></td>
+<td align="center"  valign="middle">预订人: <input name="linkman" id="linkman" value="{$smarty.get.linkman }" type="text" style="width:70px;"></td>
+<td align="center" valign="middle">手机: <input name="mobile"  id="mobile" value="{$smarty.get.mobile }"  type="text" style="width:90px;"></td>
+<td align="center"  valign="middle">订单号: <input name="id" id="id" value="{$smarty.get.id }"  type="text" style="width:90px;"></td>
+<td align="center"  valign="middle"><input type="submit"  class="btn" value="查询"></td>
+</tr>
+{if $orderlist}
+<tr>
+	<td colspan="8">订单总数: {$nums} 个&nbsp;金额总数:{$total} 元 </td>
+</tr>
+{/if}
+</table>
+<input id="status" value="{$smarty.get.status}" type="hidden" >
+</form>
+<!--startprint-->
+<form method="get" id="two" class="iform_Editor" action="__APP__/Worder/delete">
+<div style="margin-top:15px;">
+{if $orderlist}
+<table border="1" class="table_border" width="100%" >
+<tr>
+<td width="5%" align="center" valign="middle"><input type="checkbox" name="checkbox" /></td>
+<td width="8%" align="center" valign="middle">订单号</td>
+<td width="10%" align="center" valign="middle">房型</td>
+<td width="5%" align="center" valign="middle">预订人</td>
+<td width="8%" align="center" valign="middle">电话</td>
+<td width="7%" align="center" valign="middle">下单时间</td>
+<td width="7%" align="center" valign="middle">入住时间</td>
+<td width="5%" align="center" valign="middle">总价</td>
+<td width="7%" align="center" valign="middle">订单状态</td>
+<td width="12%" align="center" valign="middle">操作</td>
+</tr>
+{foreach from=$orderlist item=v}
+<tr>
+<td align="center" valign="middle"><input type="checkbox" name="id[]" value="{$v['id']}" /></td>
+<td align="left" valign="middle">{$v['id']}</td>
+<td align="left" valign="middle">{$v['title']}</td>
+<td align="center" valign="middle">{$v['linkman']}</td>
+<td align="center" valign="middle">{$v['mobile']}</td>
+<td align="center" valign="middle">{date('Y-m-d',$v['addtime'])}</td>
+<td align="center" valign="middle">{date('Y-m-d',$v['starttime'])}</td>
+<td align="center" valign="middle"> 
+{$v['total']}
+</td>
+<td align="center" valign="middle">
+{if $v.status eq 6}<span style="background: #00F ; color:#FFF; padding:3px;">已取消</span>{elseif $v.status eq "5"}<span style="background:#F93; color:#FFF; padding:3px;">已入住</span>{elseif $v.status eq "4"}<span style="background:#F00; color:#FFF; padding:3px;">已付款</span>{elseif $v.status eq 1}<span style="background:#0F0; color:#FFF; padding:3px;">待确认</span>{elseif $v.status eq "2"}<span style="background:#09F; color:#FFF; padding:3px;">已确认</span>{elseif $v.status eq 3 }<span style="background:#C06; color:#FFF; padding:3px;">待支付</span>{/if}
+</td>
+<td align="center" valign="middle">
+<a href="__APP__/Worder/edit/id/{$v['id']}">查看</a> | 
+<a href="__APP__/Worder/delete/id/{$v.id}"  class="del">删除</a>
+</td>
+</tr>
+{/foreach}
+  <!--endprint-->
+<td colspan="11" align="center"><div class="pages">{$page}</div></td>
+</table>
+<table width="100%" align="center" style="margin-top:8px;">
+<tr>
+<td width="100"><input name="chkall" type="checkbox" id="chkall" value="check"> 全选/反选</td>
+<td>
+<input type="submit" name="btn_submit" value="删除 " class="bton" style="cursor:pointer;">
+<input type="submit" id="excel" value="导出Excel " class="bton">
+<input type="submit" onclick="return printpage();" value="打印订单 " class="bton">
+</td>
+</tr>
+</table>
+{else}
+没有订单
+{/if}
+</div>
+</form>
+</div>
+<script>
+	function printpage(){
+	    var bdhtml=window.document.body.innerHTML;
+		var sprnstr="<!--startprint-->";
+		var eprnstr="<!--endprint-->";
+		prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17,bdhtml.indexOf(eprnstr)); 
+		//prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+		window.document.body.innerHTML=prnhtml; 
+		window.print(); 
+		return false;
+	}
+$(function(){
+		$("#excel").click(function(){
+		var par = $("#addtime").val() ? '/addtime/'+$("#addtime").val()+'/' : '';
+			par = $("#starttime").val() ? '/starttime/'+$("#starttime").val()+'/' : '';
+			par = $("#endtime").val() ? '/endtime/'+$("#endtime").val()+'/' : '';
+			par = $("#linkman").val() ? '/linkman/'+$("#linkman").val()+'/' : '';
+			par = $("#mobile").val() ? '/mobile/'+$("#mobile").val()+'/' : '';
+			par = $("#id").val() ? '/id/'+$("#id").val()+'/' : '';
+			par = $("#status").val() ? '/status/'+$("#status").val()+'/' : '';
+		window.location.href="__APP__/Worder/outExcel"+par;
+		return false;
+	});
+	$('.del').click(function(){
+		if(confirm('你确定要删除吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	$('#two').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.reload();
+		}
+	});
+	$('#chkall').click(function(){
+		if($(this).attr('checked')=='checked'){
+		$("input[type=checkbox][name='id[]']").attr('checked','checked');
+		}else{
+		$("input[type=checkbox][name='id[]']").removeAttr('checked','checked');
+		}
+	})
+	return false;
+})
+</script>
+</body>
+</html>

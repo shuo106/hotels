@@ -1,0 +1,105 @@
+<include file="Tpl/public/header.html" />
+<script type="text/javascript" src="__PUBLIC__/assets/js/echarts.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/macarons.js"></script>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">数据分析</strong> / <small>Data</small></div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">订单来源统计</div>
+                        <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
+                            <div id="echarts" style="height: 250px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">订单状态统计</div>
+                        <div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3">
+                            <div id="echarts1" style="height: 250px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+    <script type="text/javascript">
+    function ready() {
+        var myChart = echarts.init(document.getElementById('echarts'), 'macarons');
+        var myChart1 = echarts.init(document.getElementById('echarts1'), 'macarons');
+        $.get('__APP__/Data/from', function(rs) {
+            var option = {
+                title: {
+                    text: '订单来源',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: rs.list
+                },
+                series: [{
+                    name: '订单来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: rs.order,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+            myChart.setOption(option);
+        }, 'json');
+        $.get('__APP__/Data/month', function(rs) {
+            var option = {
+                    "tooltip": {
+                        "trigger": "axis"
+                    },
+                    "grid": {
+                        "width": "85%"
+                    },
+                    "legend": {
+                        "orient": "verticcal",
+                        "x": "right",
+                        "y": "5%",
+                        "data":rs.list,
+                        "selected": rs.show
+                    },
+                    "calculable": true,
+                    "xAxis": [{
+                        "type": "category",
+                        "data": rs.month
+                    }],
+                    "yAxis": [{
+                        "type": "value",
+                        "splitArea": {
+                            "show": true
+                        }
+                    }],
+                    "series": rs.data
+            }
+            myChart1.setOption(option);
+        },'json')
+    }
+    </script>
+</div>
+<include file="Tpl/public/bottom.html" />

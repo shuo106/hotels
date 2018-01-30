@@ -1,0 +1,133 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>会员登录</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+    <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css">
+    <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.form.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('form').ajaxForm(function(data){
+        eval('data='+data);
+        alert(data.msg);
+        if(data.status==1){
+            window.location.href="__APP__/Wechat/center";
+        }
+    });
+    return false;
+})
+</script>
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background: url('__PUBLIC__/assets/i/loginbj1.jpg') no-repeat;
+        -webkit-background-size: 100% auto;
+        -moz-background-size: 100% auto;
+        background-size: 100% 100%;
+    }
+    .mui-content {
+        background: none;
+        padding: 0 10px;
+    }
+    .logo {
+    background: rgba(0, 0, 0, 0) url("__PUBLIC__/wap/new/images/index11_03.png") no-repeat scroll 0 0 / 120px 120px;
+    height: 120px;
+    margin: 50px auto 30px;
+    width: 120px;
+}
+    /*.logo img{ width: 100%; display: block; float: left;}*/
+    .am-tabs-d2 .am-tabs-nav {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+    .am-tabs-d2 .am-tabs-nav > .am-active {
+        background: none
+    }
+    .am-tabs-bd {
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    [data-am-widget='tabs'] {
+        margin: 0px;
+    }
+    </style>
+    <script type="text/javascript">
+    	var root="__ROOT__";
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:history.back();" class="">
+                <i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+            </a>
+        </div>
+        <h1 class="am-header-title">
+        会员登录
+      </h1>
+        <div class="am-header-right am-header-nav">
+            <a href="__ROOT__/Wechat/index/" class="">
+                <i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+            </a>
+        </div>
+    </header>
+    <!-- Slider -->
+    <form action="__ROOT__/Wechat/login" method="post" id="TourExForm" name="TourExForm" type="validate">
+        <div class="mui-content">
+            <div class="logo"></div>
+            <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+                <ul class="am-tabs-nav am-cf">
+                    <li class="am-active"><a href="[data-tab-panel-0]">会员帐号登陆</a></li>
+                    <!-- <li class=""><a href="[data-tab-panel-1]">手机动态登陆</a></li> -->
+                </ul>
+                <div class="am-tabs-bd">
+                    <div data-tab-panel-0 class="am-tab-panel am-active">
+                        <div class="am-input-group am-input-group-primary" style="margin-bottom:10px;">
+                            <span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
+                            <input id="U_Name" type="text" class="am-form-field" placeholder="会员帐号">
+                        </div>
+                        <div class="am-input-group am-input-group-danger">
+                            <span class="am-input-group-label"><i class="am-icon-unlock-alt am-icon-fw"></i></span>
+                            <input id="U_Pass" type="password" class="am-form-field" placeholder="会员密码">
+                        </div>
+                    </div>
+                    <div data-tab-panel-1 class="am-tab-panel ">
+                        <div class="am-input-group am-input-group-primary" style="margin-bottom:10px;">
+                            <span class="am-input-group-label"><i class="am-icon-mobile am-icon-fw am-icon-sm"></i></span>
+                            <input id="U_Mobile" type="text" class="am-form-field" placeholder="手机号">
+                            <span id="getCode" class="am-input-group-label" style="width:20%; font-size:12px">发送验证</span>
+                        </div>
+                        <div class="am-input-group am-input-group-danger">
+                            <span class="am-input-group-label"><i class="am-icon-unlock-alt am-icon-fw"></i></span>
+                            <input id="code" type="text" class="am-form-field" placeholder="动态密码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="login" class="am-btn am-btn-primary am-btn-block" style="margin-top:10px;">立即登录</button> 
+            <!-- <input type="submit" class="am-btn am-btn-primary am-btn-block"  style="margin-top:10px;"value="立即登录" /> -->
+        </div>
+    </form>
+<!-- 	<footer data-am-widget="footer" class="am-footer">
+    <div class="am-footer-switch">
+    	<a class="am-footer-desktop" href="__ROOT__/Wechat/register">立即注册</a>
+      <span class="am-footer-divider"> | </span>
+      <span class="am-footer-ysp" data-rel="mobile">
+          <a href="__ROOT__/Wechat/findpwd">找回密码</a>
+    </span>
+    </div>
+	</footer> -->
+    <script src="__PUBLIC__/assets/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/assets/js/amazeui.min.js"></script>
+    <script src="__PUBLIC__/wap/js/wechat2.js"></script>
+</body>
+</html>

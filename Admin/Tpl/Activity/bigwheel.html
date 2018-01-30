@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    function callback(){
+        $(this).navtab('refresh');
+    }
+</script>
+<div class="bjui-pageHeader">
+    <form id="pagerForm" data-toggle="ajaxform" action="__APP__/Activity/SaveBigWheel/click/true" method="post" style=" height:28px;">
+        <div class="bjui-searchBar">
+            <input type="hidden" name="id" value="1">
+            <div class="alert alert-info search-inline"><i class="fa fa-info-circle"></i> 提示：双击行可编辑文字</div>&nbsp;
+            次数设置：最多可玩<input type="text" name="click" id="click" value="{$click}" size="5"/>次
+            <button type="submit" class="btn-default" data-icon="save">保存</button>
+        </div>
+    </form>
+</div>
+<div class="bjui-pageContent tableContent">
+    <form action="__APP__/Activity/SaveBigWheel" id="j_custom_form" class="pageForm" data-toggle="validate" method="post">
+        <table id="tabledit1" class="table table-bordered table-hover table-striped table-top" data-toggle="tabledit" data-initnum="0" data-action="__APP__/Activity/SaveBigWheel" data-single-noindex="true" data-callback="callback">
+            <thead>
+                <tr style="height:36px;line-height:36px;">
+                    <th style="background:#1078C1;color:#fff;"  title="ID"><input type="text" name="id[]" readonly="readonly" size="5"></th>
+                    <!--<th style="background:#1078C1;color:#fff;"  title="排序"><input type="text" name="sort[]" size="5"></th>-->
+                    <th style="background:#1078C1;color:#fff;"  title="中奖等级"><input type="text" name="prize[]"></th>
+                    <th style="background:#1078C1;color:#fff;"  title="奖品名称"><input type="text" name="award[]"></th>
+                    <th style="background:#1078C1;color:#fff;"  title="奖品数量"><input type="text" name="nums[]"></th>
+                    <th style="background:#1078C1;color:#fff;"  title="中奖机率"><input type="text" name="v[]"></th>
+                    <th style="background:#1078C1;color:#fff;"  title="" width="120">
+                        <a  href="__APP__/Activity/add/id/1" class="btn btn-green" data-toggle="dialog" data-id="newdialog" data-title="新增">新增</a>
+                        <!-- <a href="ajaxDone2.html" class="btn btn-red row-del" data-confirm-msg="确定要删除该行信息吗？">删除</a> -->
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            	{foreach from=$bigdata item=v}
+                <tr>
+                    <td data-id-val="1">{$v.id}</td>
+                    <!--<td>{$v.sort|default:0}</td>-->
+                    <td>{$v.prize}</td>
+                    <td>{$v.award}</td>
+                    <td>{$v.nums}</td>
+                    <td>{$v.v}</td>
+                    <td data-noedit="true">
+                        <button type="button" class="btn-green" data-toggle="doedit">编辑</button>
+                        <a href="__APP__/Activity/delBigWheel/id/{$v.id}" class="btn btn-red row-del" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+                    </td>
+                </tr>
+               {/foreach}
+            </tbody>
+        </table>
+    </form>
+</div>
+<!--<div class="bjui-pageFooter">
+    <ul style="float: left;">
+        <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
+        <li><button type="submit" class="btn-default" data-icon="save">全部保存</button></li>
+    </ul>
+</div>-->

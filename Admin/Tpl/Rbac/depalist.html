@@ -1,0 +1,27 @@
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Article/sort" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height:36px;line-height:36px;">
+					<th style="background:#1078C1;color:#fff;">部门名称</th>
+					<th style="background:#1078C1;color:#fff;">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a data-url="__APP__/Rbac/adddepa/dialogId/newdialog" class="btn btn-green" data-toggle="dialog" data-id="newdialog" data-title="添加部门"  data-height="200">新增</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$list item=v}
+				<tr>
+					<td>{$v.value}</td>
+					<td>
+						<a data-url="__APP__/Rbac/adddepa/id/{$v.id}/dialogId/newdialog" class="btn btn-green" data-toggle="dialog" data-id="roleedit-{$v.id}" data-title="编辑部门"  data-height="200">编辑</a>	
+						<a href="__APP__/Rbac/deldepa/id/{$v.id}" class="btn btn-red"  data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>												
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+</div>

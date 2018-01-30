@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>积分商品订单</title>
+    <link href="__PUBLIC__/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+    <link href="__PUBLIC__/wap/new/css/index.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div class="top">
+        <a href="javascript:history.back();" style="float:left"><img src="__PUBLIC__/wechat/images/r.png" /></a>积分商品订单
+        <a href="__ROOT__/Wechat/index" style="float:right"><img src="__PUBLIC__/wechat/images/l.png" /></a>
+    </div>
+    {if $myorder} {foreach from=$myorder item=vo}
+    <div class="sucesOrder">
+        <dl>
+            <dt>{$vo['name']}</dt>
+            <dd class="deco2" ><span></span>{date('Y-m-d',$vo['addtime'])} </dd>
+            <dd class="deco3" ><span>{$vo['linkman']}</span>,兑换了<font style="color:red">{$vo['nums']}</font>份 共<span class="trad_price">
+            <b>{$vo['point']}</b></span></dd>
+        </dl>
+        <div class="deleOrder">
+        <p class="clearfix"><span class="trad">{$GIFT['status'][$vo.status]}</span>
+		</p>
+            <a class="ckmyorder" href="__ROOT__/Wechat/giftorderdetail/id/{$vo['id']}">查看订单</a>
+            </div>
+    </div>
+    {/foreach} {else}
+    <div class="sucesOrder" style="text-align:center; line-height:40px;">
+        您还没有订单！！！
+    </div>
+    {/if}
+    <div class="pages">{$page}</div>
+</body>
+</html>

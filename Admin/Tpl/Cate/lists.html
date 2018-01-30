@@ -1,0 +1,52 @@
+<div class="bjui-pageHeader" style="height:38px">
+  <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Cate/lists" method="get">
+    <div class="bjui-searchBar" style="margin-top:6px">
+      <a type="button" class="btn btn-red" href="__APP__/Cate/pi/type/3" data-toggle="doajaxchecked" data-icon="remove" data-group="ids" data-confirm-msg="确定要将选中项放到回收站吗？">删除选中</a>
+      <label>关键字：</label>
+      <input type="text" value="{$smarty.get.keywords}" name="keywords" class="form-control" size="8">&nbsp;
+      <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+      <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;      
+    </div>
+  </form>
+</div>
+<div class="bjui-pageContent tableContent">
+  <form id="sortform" data-toggle="ajaxform" action="__APP__/Cate/sort" method="post">
+    <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+      <thead>
+        <tr style="height:36px;line-height:36px;">
+          <th style="background:#1078C1;color:#fff;"  width="26">
+            <input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+          </th>
+          <th style="background:#1078C1;color:#fff;"  data-order-field="id">ID</th>
+          <th style="background:#1078C1;color:#fff;"  >栏目名称</th>
+          <th style="background:#1078C1;color:#fff;"  >分类属性</th>
+          <th style="background:#1078C1;color:#fff;"  >关键字</th>
+          <th style="background:#1078C1;color:#fff;"  width="300">描述</th>
+        <!--没有添加时间 <th style="background:#1078C1;color:#fff;"  data-order-field="addtime">添加时间</th>-->
+          <th style="background:#1078C1;color:#fff;"  width="190">操作
+          &nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Cate/index" class="btn btn-green" data-toggle="dialog" data-width="500" data-height="260">新增</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach from=$list item=v key=k}
+        <tr data-id="{$k}">
+          <td>
+            <input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+          </td>
+          <td>{$v.id}</td>
+          <td>{$v.name|indent:($v.lev-1):'——'}</td>
+          <td>{if $v['lev']==1}<span style='font-weight:bold;'>顶级分类</span>{else}{ch_to_num($v['lev'])}级分类{/if}</td>
+          <td>{$v['keywords']}</td>
+          <td>{$v['description']}</td>
+          <!--   <td>{$v.addtime|date_format:"%Y-%m-%d"}</td>-->
+          <td>
+            <a href="__APP__/Cate/index/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-id="Cate-index" data-title="分类修改-{$v.name}">修改</a>
+            <a href="__APP__/Cate/index/pid/{$v.id}" class="btn btn-blue" data-toggle="navtab" data-id="Cate-index">添加子栏目</a>
+            <a href="__APP__/Cate/recycle/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+          </td>
+        </tr>
+        {/foreach}
+      </tbody>
+    </table>
+  </form>
+</div>

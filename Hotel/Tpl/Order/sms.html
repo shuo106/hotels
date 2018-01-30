@@ -1,0 +1,50 @@
+<include file="Tpl/public/header.html" />
+<div id="container">
+  <include file="Tpl/public/menu.html" />
+  <div class="sideright">
+    <h3 class="title">当前位置>>首页>>订单详细信息</h3>
+    <h4><strong>订单详细信息</strong></h4>
+      <form method="post" class="iform_Editor" action="__APP__/Order/smsok">
+      <table border="1" class="table_border">
+        <tr>
+          <td width="15%">预订房型：</td>
+          <td>{$order.fangtype}</td>
+          <td width="15%">总房价：</td>
+          <td>￥{$order.shoufei}</td>
+        </tr>
+        <tr>
+          <td>最晚到店时间：</td>
+          <td>{$order.zuiwantime}</td>
+          <td>房数：</td>
+          <td>{$order.nums}</td>
+        </tr>
+        <tr>
+          <td>联系人：</td>
+          <td>{$order.linkman}</td>
+          <td>联系电话：</td>
+          <td><input type="text" maxlength="100" name="smsphohe"  id="smsphohe" value="{$order.telephone}"></td>
+        </tr>
+        <tr>
+          <td>入住时间：</td>
+          <td colspan="3">{$order.ruzhudate|date="Y-m-d",###}</td>
+        </tr>
+        <tr>
+          <td>离店时间：</td>
+          <td colspan="3">{$order.lidiandate|date="Y-m-d",###}</td>
+        </tr>
+        <tr>
+          <td>其他要求：</td>
+          <td colspan="3">{$order.beizhu}</td>
+        </tr>
+        <tr>
+          <td>发送短信内容：</td>
+          <td colspan="3">
+           <input type="text" maxlength="100" name="smscon" id="smscon" class="inputtxt" value="">  <input type="submit" value=" 发送 " name="btn_submit" class="saving"></br>如：{$order.linkman},您预订的{$order.hotelname}酒店，{$order.fangtype}房间，入住时间{$order.ruzhudate|date="Y-m-d",###}，已预订成功。（一条短信70字以内）
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+<include file="Tpl/public/footer.html"/>

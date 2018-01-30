@@ -1,0 +1,88 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	#酒店
+	RewriteRule ^hotellogin\.html$	index.php/login/hotel
+	RewriteRule ^hotelreg\.html$	index.php/Register/hotelreg
+	#地图
+	RewriteRule ^map\.html$ index.php/Map/index
+	RewriteRule ^map-score\.html$ index.php/Map/score
+	RewriteRule ^map-price\.html$ index.php/Map/price
+	RewriteRule ^map-grade\.html$ index.php/Map/grade
+
+	
+	#全国酒店
+
+	RewriteRule ^Hotels/index\.html$ index.php/Hotels/index/id/1
+	RewriteRule ^Hotels/show-(\d+)\.html$ index.php/Hotels/show/id/$1/aa/def
+	RewriteRule ^Hotels/show-(\d+)-photo\.html$ index.php/Hotels/show/id/$1/aa/tp
+	RewriteRule ^Hotels/show-(\d+)-map\.html$ index.php/Hotels/show/id/$1/aa/dt
+	RewriteRule ^Hotels/show-(\d+)-comments\.html$ index.php/Hotels/show/id/$1/aa/dp
+	RewriteRule ^Hotels/show-(\d+)-mark\.html$ index.php/Hotels/show/id/$1/aa/bz
+	RewriteRule ^Hotels/show-(\d+)/(.{8,10})-(.{8,10})\.html$ index.php/Hotels/show/id/$1/aa/def/kais/$2/jies/$3
+	RewriteRule ^Hotels/search-(\d+)-(.*)-(.*)-(.*)-(.*)-(.*)-(.*)-(.*)-(\d+)\.html$ index.php/Hotels/searchlist/from/$1/qu/$2/ruzhu/$3/likai/$4/hotelnear/$5/company/$6/jiage/$7/brand/$8/xing/$9
+	
+	RewriteRule ^Hotels/searchs-(\d+)-(.*)-(.*)-(.*)-(.*)-(.*)-(.*)-(.*)-(\d+)\.html$ index.php/Hotels/searchs/from/$1/qu/$2/ruzhu/$3/likai/$4/hotelnear/$5/company/$6/jiage/$7/brand/$8/xing/$9
+
+	RewriteRule ^Hotels/show-(\d+)-(\d+)-(\d+)\.html$ index.php/Hotels/show/id/$1/kais/$2/jies/$3/aa/def
+	
+	RewriteRule ^Hotels/search-(.*)-Air-(.*)\.html$ index.php/Hotels/search/from/$1/jc/$2
+	RewriteRule ^Hotels/search-(.*)-Train-(.*)\.html$ index.php/Hotels/search/from/$1/hc/$2
+	RewriteRule ^Hotels/search-(.*)-School-(.*)\.html$ index.php/Hotels/search/from/$1/dx/$2
+	RewriteRule ^Hotels/search-(.*)-Scenic-(.*)\.html$ index.php/Hotels/search/from/$1/jing/$2
+	RewriteRule ^Hotels/search-(.*)-Exhibition-(.*)\.html$ index.php/Hotels/search/from/$1/hz/$2
+	RewriteRule ^Hotels/search-(.*)-Subway-(.*)\.html$ index.php/Hotels/search/from/$1/dt/$2
+	RewriteRule ^Hotels/search-(.*)-Marks-(.*)\.html$ index.php/Hotels/search/from/$1/marks/$2
+	RewriteRule ^Hotels/search-(.*)-Store-(.*)\.html$ index.php/Hotels/search/from/$1/store/$2
+	
+	
+	RewriteRule ^Hotels/order-(\d+)\.html$ index.php/Hotels/order/id/$1
+	RewriteRule ^Hotels/ordersuccess-(\d+)\.html$ index.php/Hotels/ordersuccess/id/$1
+	RewriteRule ^Hotels/dopay-(\d+)\.html$ index.php/Hotels/dopay/id/$1
+	RewriteRule ^Hotels/jcfj\.html$ index.php/Hotels/jcfj
+	RewriteRule ^Hotels/tra\.html$ index.php/Hotels/tra
+	RewriteRule ^Hotels/dxfj\.html$ index.php/Hotels/dxfj
+	RewriteRule ^Hotels/jing\.html$ index.php/Hotels/jing
+	RewriteRule ^Hotels/hzfj\.html$ index.php/Hotels/hzfj
+	RewriteRule ^Hotels/dtfj\.html$ index.php/Hotels/dtfj
+	
+	#手机
+	RewriteRule ^Wap/login\.html index.php/Wap/login
+	RewriteRule ^Wap/find\.html index.php/Wap/find
+	RewriteRule ^Wap/register\.html index.php/Wap/register
+	RewriteRule ^wap(.*) index.php/Wap/$1
+	RewriteRule ^Wap(.*) index.php/Wap/$1
+	#微信
+	RewriteRule ^Wechat/login\.html index.php/Wechat/login
+	RewriteRule ^Wechat/find\.html index.php/Wechat/find
+	RewriteRule ^Wechat/register\.html index.php/Wechat/register
+	RewriteRule ^Wechat(.*) index.php/Wechat/$1
+	RewriteRule ^Wechat(.*) index.php/Wechat/$1
+	
+	
+	
+	RewriteRule ^Hotels/(.*) index.php/Hotels/$1 
+	
+	#连锁
+	RewriteRule ^Liansuo/index\.html$ index.php/Liansuo/index/id/2
+	
+	#点评
+	RewriteRule ^Comment/index\.html$ index.php/Comment/index/id/3
+	RewriteRule ^Comment/cate-(\d+)\.html$ index.php/Comment/index/id/3/cate/$1
+	#促销 攻略 帮助
+	RewriteRule ^Article/category-(\d+)\.html$ index.php/Article/category/id/$1
+	RewriteRule ^Article/show-(\d+)\.html$ index.php/Article/show/id/$1
+	#注册 登陆 
+	RewriteRule ^register\.html$ index.php/Register/index	
+	RewriteRule ^login\.html$ index.php/login/index	
+	#会员中心
+	#RewriteRule ^Member/index\.html$ index.php/Member/index
+	RewriteRule ^Member/(.+)\.html$ index.php/Member/$1
+	#RewriteRule ^Member/order_content\.html$ index.php/Member/member_order
+	RewriteRule ^member_findpwd\.html$ index.php/Findpwd/index
+	
+	#单页面
+	RewriteRule ^Single/show-(\d+)\.html$ index.php/Single/show/id/$1
+	
+	
+</IfModule>
+

@@ -1,0 +1,98 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">相册管理</strong> / <small>Photo</small>
+                </div>
+            </div>
+            <hr>
+            <form method="post" id="one" class="am-form ajaxform" action="__APP__/Photo/doUpload" enctype="multipart/form-data">
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td>
+                            <div class="pics">
+                                <div style="height:20px;margin-top: -7px;">
+                                    <ul style="list-style-type:none;padding-left: 0px;">
+                                        <li style="float:left; height: 20px;"><input type="file" id="uploadimg" data-for="#img" name="thumb1" style="border:0;width: 152px;"></li>
+                                        <li style="float:left; height: 20px;"><span style="color:red;font-size:12px; position: relative;top:-4px; margin-left:10px;">请上传不低于400*300像素,4:3比例的图片</span></li>
+                                    </ul> 
+                                </div>
+                                <div style="clear:both;"></div>
+                                <if condition="$thumb">
+                                    <div id="imgss"  style="display:block;">
+                                    <else /> 
+                                    <div id="imgss"  style="display:none;">
+                                </if>
+                                    <img class="am-img-circle am-img-thumbnail" id="img" src="__ROOT__/{$thumb}" alt=""  style='width:160px; height:120px;margin-top:7px;' onclick="ready();"/>  
+                                </div>
+                            </div>
+                            <!-- <input id="file_upload" name="file_upload" type="file" multiple="true"> -->
+                            <!-- <span style="margin-left:10px;color:red;">* 请上传不低于400*300像素,4:3比例的图片</span> -->
+                            <div id="queue"></div>
+                            <div class="edit">
+                                <ul class="am-list">
+                                    <volist name="photo" id="vo">
+                                        <li id="d{$vo['photoid']}" class="am-fl am-margin-left-xs" style="width:150px; text-align:center">
+                                            <img src="__ROOT__{$vo['src']}" width="140px" height="110px">
+                                            <br/>
+                                            <div class="am-input-group" style="margin:10px;">
+                                            <span class="am-fl">设为缩略图:</span>
+                                            <label class="am-radio am-fl am-margin-left-xs" style="margin-top:3px;">
+                                                <input type="radio" data-am-ucheck name="isdefault" onclick="setThumb({$vo['photoid']});" value="{$vo['photoid']}" <if condition="$vo.isdefault eq 1"> checked </if> />
+                                            </label>
+                                            <a href="javascript:delpid({$vo['photoid']});" class="am-badge am-badge-danger" style="padding: 0.25em 0.625em;"> 删除 </a>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="submit" name="btn_submit" value=" 确认 " class="am-btn am-btn-primary">
+                        </td>  
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/uploadify/uploadify.css">    
+    <script>
+        var data={
+            'hotelid': '{$Think.session.hotel_id}',  
+        }
+        function delpid(pid) {
+
+            $("#d" + pid).remove();
+            $.get('__APP__/Photo/delete', {
+                pid: pid
+            });
+        }
+        //设置缩略图
+        function setThumb(pid) {
+            $.get('__APP__/Photo/setThumb', {
+                pid: pid
+            }, function(data) {
+                eval('data=' + data);
+                alert(data.msg);
+            });
+        }
+        function callback(data) {
+            if (data.status == 1) {
+                alert(data.msg);
+                window.location.href = "__APP__/Photo/index";
+            } else if (data.status == 2) {
+                window.location.href = "__APP__/Hotel/step3/id/" + data.id;
+            } else {
+                alert(data.msg);
+                console.log(data);
+            }
+        }
+    </script>
+</div>
+<include file="Tpl/public/bottom.html" />

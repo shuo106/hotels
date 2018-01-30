@@ -1,0 +1,67 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+</style>
+<script type="text/javascript">
+function pic_upload_success(file, data) {
+    var json = $.parseJSON(data)
+    if (data.statusCode == 200)
+        $(this).alertmsg('ok', data.message)
+    if (data.status == 300)
+        $(this).alertmsg('error', data.message)
+    $(this).bjuiajax('ajaxDone', json)
+    if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {
+        $.CurrentDialog.find('#j_custom_yuantu').val(json.yuantu)
+        $.CurrentDialog.find('#j_custom_pic').html('<img src=__ROOT__' + json.thumb + ' />')
+    }
+}
+</script>
+<div class="bjui-pageContent">
+    <form action="__APP__/Hotels/themeadd" method="post" data-toggle="validate" data-alertmsg="false">
+        <input type="hidden" name="id" value="{$smarty.get.id}" />
+        <table class="table-bordered table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="site_name" class="control-label x85">
+                            主题名称：
+                        </label>
+                        <input type="text" name="name" id="site_name" value="{$info.name}" size="10">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label x85">
+                            缩略图：
+                        </label>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <div data-toggle="upload" data-uploader="__APP__/Upload/index/dir/Hotel" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg" data-multi="true" data-auto="true" data-on-upload-success="pic_upload_success" data-icon="cloud-upload">
+                            </div>
+                            <input type="hidden" name="thumb" value="{$info.thumb}" id="j_custom_yuantu">
+                            <span id="j_custom_pic">
+                            {if $info.thumb}
+                              <img src="__ROOT__{$info.thumb}" alt="" width="40" height="30"/>
+                            {/if}
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="page_but" style="margin-left:85px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</form>

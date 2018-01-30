@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>提现详情</title>
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/font-awesome.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<script src="__PUBLIC__/wap/js/custom.js"></script>
+</head>
+<body>
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">网页内容加载中...</p>
+        </div>
+    </div>
+    <div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>提现详情<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+    <div class="wrapBox">
+        <div class="main">
+            <div class="members">
+                <div class="hd">提现详情</div>
+                <ul class="nav infoShow clearfix" id="info">
+                <li>提现ID：{$info.txdate}{$info.id}</li>
+                <li>会员账号：{$info.username}</li>
+                <li>提现银行：{$info.txhang}</li>
+                <li>提现帐户：{$info.txhangnum}</li>
+                <li>开户姓名：{$info.txname}</li>
+                <li>身份证号：{$info.txshenfen}</li>
+                <li>会员手机：{$info.txmobile}</li>
+                <li>提现金额：{$info.txjine}</li>           
+                <li>帐户余额：{$info.point}</li> 
+                <li>申请日期：{$info.txdateday}</li>
+                <li>申请备注：{$info.txbeizhu}</li>
+                <li>审核日期：{$info.handleDateday}</li>
+                <li>审核备注：{$info.beizhu}</li>
+                <li>办理日期：{$info.banliDateday}</li>
+                <li>办理人员：{$info.banliren}</li>
+                <li>办理备注：{$info.blbeizhu}</li>
+                <li>办理状态：{if $info.status==0}待审核{elseif $info.status==1}待办理{elseif $info.status==2}已办理{/if}</li>
+                <!-- <li>申请备注：{$info.txbeizhu}</li>
+                {if $info.handleDateday}<li>审核日期：{$info.handleDateday}</li>{/if}
+                {if $info.beizhu}<li>审核备注：{$info.beizhu}</li>{/if}
+                {if $info.banliren}<li>办理人员：{$info.banliren}</li>{/if}
+                {if $info.banliDateday}<li>办理日期：{$info.banliDateday}</li>{/if}
+                {if $info.blbeizhu}<li>办理备注：{$info.blbeizhu}</li>{/if} -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

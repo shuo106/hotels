@@ -1,0 +1,42 @@
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,a,p,span,strong,cite,em,i,form,fieldset,input,textarea,select,option,section,button,th,td,hr{ 
+   margin:0;
+   padding:0; 
+   list-style:none;}
+body{ 
+	font-family:Arial,"宋体";
+	font-size:12px; }
+h1,h2,h4,h5,strong,b{ 
+    font-weight:normal;}
+input,button,select,textarea,a{ 
+   outline:none;}
+a{ text-decoration:none;color:#000;}
+a:focus{ -moz-outline-style: none; }/*去除图片链接时的虚线框 for: FF */
+img {border:0px;}
+
+.header{width:100%; height:60px; overflow:hidden; background:#f8f8f8; border-bottom:1px solid #ccc; line-height:60px; padding:21px 0}
+.logo{width:321px; height:66px;  float:left; margin:0 10px;}
+.logo a {width:321px; height:66px; display:block}
+.header input{width:88px; height:20px;position:relative; top:2px; -top:4px;}
+.header span a{color:#027ccf; margin-left:10px} 
+.right{width:450px; float:right;position:relative; -top:-23px}
+.right select{ width:88px; height:25px; margin:0 10px; position:relative; -top:4px}
+.map{width:100%; height:100%;}
+.main {width:20%;height:740px;text-align:left; position:absolute; top:102px;background:white;}
+.main_left {width:280px;background:white;}
+.picBox {width:20px; background:#ccc url(../images/right.png) no-repeat center center;}
+.main_left,.picBox {float:left; _margin-right:-3px; }
+/*选项卡1*/
+#Tab1{width:270px; margin:20px 0 0 5px}
+.Menubox {width:100%;height:35px;line-height:35px;}
+.Menubox li{float:left; display:block; cursor:pointer;width:65px;text-align:center; background-color: #EFEFEF; margin-left:2px}
+.Menubox li.hover{background-color: #edf6ff; width:65px;height:35px;line-height:35px; color:#005cb8}
+.Contentbox{ clear:both;padding:15px 3px; text-align:left; line-height:30px}
+.Contentbox dl{border-bottom:1px solid #CCC; padding:10px 0; overflow:hidden}
+.Contentbox dd h3 a{ color:#2577e3}
+.Contentbox dd span{font-weight:bold; font-size:16px; float:right; color:#F60}
+.Contentbox dt{width:20px; height:50px;color:#FFF; background:url(../images/dt.png) no-repeat; float:left; line-height:20px; text-align:center; font-weight:bold; position:relative; top:4px; margin-right:10px}
+.Contentbox p{ position:absolute; bottom:15px; text-align:center; width:270px; z-index:20px}
+.Contentbox p a{padding:5px 9px; background:#EDEDED; margin:0 5px}
+.Contentbox p a:hover{background:#09F; color:#FFF}

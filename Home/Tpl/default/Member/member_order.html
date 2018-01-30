@@ -1,0 +1,55 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="order-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>{if $_title}{$_title}{else}我的订单{/if}</h3>
+        </div>
+        <div class="order-info">
+            <table class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
+                <tr class="jddd_dd am-active">
+                    <td>订单编号</td>
+                    <td>酒店名称</td>
+                    <td>预订房间</td>
+                    <td>预订人</td>
+                    <td>订单金额</td>
+                    <td>入住时间</td>
+                    <td>订单状态</td>
+                    <td>订单操作</td>
+                </tr>
+                {if $row} {foreach from=$row item=v}
+                <tr>
+                    <td>{$v['addtime']}{$v['orderid']}</td>
+                    <td align="left" style="padding-left:10px">{$v['hotelname']}</td>
+                    <td align="left" style="padding-left:10px">{$v['roomtype']}</td>
+                    <td>{$v['linkman']}</td>
+                    <td class="red">{$v['shoufei']}元</td>
+                    <td>{$v.addtime|date_format:"Y-m-d"}</td>
+                    <td>
+                    <span class="order-status" style="background: {$LANG['color'][$v['status']]}">
+                        {$LANG['status'][$v['status']]}
+                    </span>
+                    </td>
+                    <td><a href="__APP__/Member/order_content/pid/{$v['orderid']}">详情</a> {if in_array($v.status,order_status_key(array('已入住','已付款','已离店')))}{if $v.is_comment} | 已点评{else}|
+                        <a href="__ROOT__/index.php/Member/member_comments/oid/{$v['orderid']}" style=" color: rgb(60, 117, 144);">去点评</a>{/if}{/if}
+                    </td>
+                </tr>
+                {/foreach} {else}
+                <tr>
+                    <td colspan="8"><center>
+                    {if $_title}
+                    <img src="__PUBLIC__/assets/images/nodianping.png" >
+                    {else}
+                    <img src="__PUBLIC__/assets/images/dingdan.png" >
+                    {/if}
+                    </center>
+                    </td>
+                </tr>
+                {/if}
+            </table>
+        </div>
+        <div class="informationListPage" style="margin-top:20px;">{$page}</div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

@@ -1,0 +1,130 @@
+<div class="bjui-pageContent">
+	<form action="__APP__/Comment/" method="post" data-toggle="validate">
+		<input type="hidden" name="id" value="{$detail['id']}">
+		<div>
+			<table class="table-bordered table-condensed table-hover" width="100%">
+				<tbody>
+                	<!-- 提现ID、会员账号、提现银行、提现帐户、开户姓名、身份证号、会员手机、提现金额、帐户余额、申请日期、申请备注、审核日期、审核备注、办理日期、办理人员、办理备注、办理状态。 -->
+					<!-- <tr>
+						<td>
+							<label class="control-label x85">提现编号：</label>
+							{$detail.txdate}{$detail.id}
+						</td>
+					</tr> -->
+					<tr>
+						<td>
+							<label  class="control-label x85">提现ID：</label>
+							{$detail.txdate}{$detail.id}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">会员账号：</label>
+							{$detail.username}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="control-label x85">提现银行：</label>
+							{$detail.txhang}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="control-label x85">提现帐户：</label>
+							{$detail.txhangnum}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">开户姓名：</label>
+							{$detail.txname}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">身份证号：</label>
+							{$detail.txshenfen}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">会员手机：</label>
+							{$detail.txmobile}
+						</td>
+					</tr>					
+					<tr>
+						<td>
+							<label  class="control-label x85">提现金额：</label>
+							{$detail.txjine}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">帐户余额：</label>
+							{$detail.remainAmount}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">申请日期：</label>
+							{$detail.txdate|date_format:"Y-m-d H:i:s"}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">申请备注：</label>
+							{$detail.txbeizhu}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">审核日期：</label>
+							{$detail.handleDate|date_format:"Y-m-d H:i:s"}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">审核备注：</label>
+							{$detail.beizhu}
+						</td>
+					</tr>
+					{if $smarty.get.status=='1,2'}
+					<tr>
+						<td>
+							<label  class="control-label x85">办理人员：</label>
+							{$detail.banliren}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">办理日期：</label>
+							{$detail.banliDate|date_format:"Y-m-d H:i:s"}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label  class="control-label x85">办理备注：</label>
+							{$detail.blbeizhu}
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<td>
+							<label  class="control-label x85">办理状态：</label>
+							{if $detail['status'] eq 0}待审核{elseif $detail['status'] eq 1}待办理{elseif $detail['status'] eq 2}已办理{/if}
+						</td>
+					</tr>
+				<!--	<tr>
+						<td>
+							<ul style="margin-left:100px;">
+								<button type="button" class="btn-close" data-icon="close">关闭</button>
+								<button type="submit" class="btn-default" data-icon="save">保存</button>
+								</ul>
+						</td>
+					</tr>
+-->				</tbody>
+			</table>
+		</div>
+	</form>
+</div>

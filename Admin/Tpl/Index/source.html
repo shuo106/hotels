@@ -1,0 +1,67 @@
+{
+  {literal}
+  "tooltip": {
+    "trigger": "item",
+    "formatter": "{a} <br/>{b} : {c} ({d}%)"
+  },
+  {/literal}
+  "legend": {
+    "orient": "vertical",
+    "x": "left",
+		"y": "20%",
+    "data": [
+    	"手机","微信","APP","网站"
+    ]
+  },
+  "toolbox": {
+    "show": true,
+		"orient": "horizontal",
+		"x": "left",
+    "y": "bottom",
+    "feature": {
+      "mark": {
+        "show": false
+      },
+      "dataView": {
+        "show": false,
+        "readOnly": false
+      },
+      "restore": {
+        "show": false
+      },
+      "saveAsImage": {
+        "show": true
+      }
+    }
+  },
+  "calculable": true,
+  "series": [
+    {
+      "name": "订单来源",
+      "type": "pie",
+      "radius": "70%",
+      "center": [
+        "60%",
+        "50%"
+      ],
+      "data": [
+        {
+          "value": {$count.wap},
+          "name": "{$order_form_arr.1}"
+        },
+        {
+          "value": {$count.wechat},
+          "name": "{$order_form_arr.2}"
+        },
+        {
+          "value": {$count.app},
+          "name": "{$order_form_arr.3}"
+        },
+        {
+          "value": {$count.pc},
+          "name": "{$order_form_arr.5}"
+        }
+      ]
+    }
+  ]
+}

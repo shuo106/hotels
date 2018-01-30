@@ -1,0 +1,129 @@
+<script type="text/javascript">
+function show(id){
+	var $son=$("[data-pid='"+id+"']");
+	if($son.is(":hidden")){
+		$son.show();
+	}else{
+		$("[data-top='"+id+"']").hide();
+		$son.hide();
+	}
+}
+function shows(id){
+	var $son=$("[data-sid='"+id+"']");
+	if($son.is(":hidden")){
+		$son.show();
+	}else{
+		$son.hide();
+	}	
+}
+</script>
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Area/upSort" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height:36px;line-height:36px;">			
+					<th style="background:#1078C1;color:#fff;"  width="40">排序</th>
+					<th style="background:#1078C1;color:#fff;" >区域名称</th>
+					<th style="background:#1078C1;color:#fff;"  width="100">序号</th>
+					<th style="background:#1078C1;color:#fff;" >拼音</th>
+					<th style="background:#1078C1;color:#fff;"  width="190">操作
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					{if $lists[0]['pid']==100020 or $lists[0]['pid']==100019 or $lists[0]['pid']==100085 or $lists[0]['pid']==100005}
+			        <a href="__APP__/Area/add/pid/{$lists[0]['pid']}" 
+					data-toggle="dialog" class="btn btn-green"
+					data-id="Area_add" data-mask="true"
+					data-reload="true" data-width="400"
+					data-height="200" 
+                    data-on-close="refresh">
+                    {else}
+                    <a href="__APP__/Area/add/pid/{$smarty.get.id}" 
+					data-toggle="dialog" class="btn btn-green"
+					data-id="Area_add" data-mask="true"
+					data-reload="true" data-width="400"
+					data-height="200" 
+                    data-on-close="refresh">
+                    {/if}新增</a>
+					&nbsp;&nbsp;
+                    <a  href="__APP__/Area/cityCacheDel" class="btn btn-green" data-toggle="doajax" >清除缓存</a>
+                    {if $smarty.get.id}
+                    &nbsp;&nbsp;
+                    {if $lists[0]['level']==3 and $lists[0]['pid']!=100020 and $lists[0]['pid']!=100019 and $lists[0]['pid']!=100085 and $lists[0]['pid']!=100005}
+                    <a href="__APP__/Area/index/id/{$lists[0]['ppid']}" class="btn btn-green" data-toggle="navtab" data-options="{ id:'Area-index', faicon:'caret-right,height:500'}" data-fresh="true" data-title="城市管理">
+                    {else}
+                    <a href="__APP__/Area/index/" class="btn btn-green" data-toggle="navtab" data-options="{ id:'Area-index', faicon:'caret-right,height:500'}" data-fresh="true" data-title="城市管理">
+                    {/if}返回</a>
+                    {/if}
+					</th>
+				</tr>
+			</thead>
+			<tbody> 
+				{foreach from=$lists item=v key=k}
+				<tr data-id="{$k}">			
+					<td>
+						<input type="text" class="ids" name="sort[{$v.id}]" value="{$v.sort}" style="width:100%" />
+					</td>					
+					<td>{$v['name']}<!-- {if $smarty.get.id} <a href="javascript:show({$v['id']})" data-id="{$v['id']}">{else} <a href="__APP__/Area/index/id/{$v.id}" data-toggle="navtab" data-options="{ id:'Area-index', faicon:'caret-right,height:500'}" data-fresh="true">{/if}{$v['name']}</a> --></td>
+					<td>
+						{$v.id}
+					</td>				
+					<td>{$v['Pinyin']}</td>
+					<td>
+						{if $v.level neq 3}<a href="__APP__/Area/index/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-options="{ id:'Area-index', faicon:'caret-right,height:500'}" data-fresh="true" data-title="城市管理">管理</a>{/if}
+						<!-- <a href="__APP__/Area/add/pid/{$v.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/pid/{$v.id}" data-title="添加下级区域-{$v.name}"  data-width="400" data-height="200">添加下级区域</a> -->
+						<a href="__APP__/Area/add/id/{$v.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/id/{$v.id}" data-title="编辑-{$v.name}" data-width="400" data-height="200">编辑</a>
+						<a href="__APP__/Area/areaDel/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+					</td>
+				</tr>
+					{if $v['son']}
+						{foreach from=$v['son'] item=vv key=k1}
+						<tr data-pid="{$vv.pid}" data-id="{$k1}" style="display: none;">
+							<td>
+								<input type="text" class="ids" name="sort[{$vv.id}]" value="{$vv.sort}" style="width:100%" />
+							</td>						
+							<td>----<a href="javascript:shows({$vv['id']})" data-id="{$v['id']}">{$vv['name']}</a></td>
+							<td>
+								{$vv.id}
+							</td>							
+							<td>{$vv['Pinyin']}</td>
+							<td>
+								<a href="__APP__/Area/add/pid/{$vv.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/pid/{$vv.id}" data-title="添加下级区域-{$vv.name}"  data-width="400" data-height="200">添加下级区域</a>
+								<a href="__APP__/Area/add/id/{$vv.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/id/{$vv.id}" data-title="编辑-{$vv.name}" data-width="400" data-height="200">编辑</a>
+								<a href="__APP__/Area/areaDel/id/{$vv.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+								{if $vv['ishot']==1}
+								<a href="__APP__/Area/hot/id/{$vv.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要取消热门城市吗？">取消热门</a>
+								{else}
+								<a href="__APP__/Area/hot/id/{$vv.id}/hot/1" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要设为热门城市吗？">设为热门</a>
+								{/if}								
+							</td>
+						</tr>
+						{if $vv['son']}
+						{foreach from=$vv['son'] item=vvv key=k2}
+							<tr data-top="{$vv.pid}" data-sid="{$vvv.pid}" data-id="{$k2}" style="display: none;">							
+								<td>
+									<input type="text" class="ids" name="sort[{$vvv.id}]" value="{$vvv.sort}" style="width:100%" />
+								</td>							
+								<td>--------{$vvv['name']}</td>
+								<td>
+									{$vvv.id}
+								</td>						
+								<td>{$vvv['Pinyin']}</td>
+								<td>
+									<a href="__APP__/Area/add/pid/{$vvv.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/pid/{$vvv.id}" data-title="添加下级区域-{$vvv.name}"  data-width="400" data-height="200">添加下级区域</a>
+									<a href="__APP__/Area/add/id/{$vvv.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Area/add/id/{$vvv.id}" data-title="编辑-{$vvv.name}" data-width="400" data-height="200">编辑</a>
+									<a href="__APP__/Area/areaDel/id/{$vvv.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+								</td>
+							</tr>
+							{/foreach}
+						{/if}
+						{/foreach}
+					{/if}
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+</div>

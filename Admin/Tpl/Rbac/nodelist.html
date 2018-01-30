@@ -1,0 +1,76 @@
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Rbac/sort" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height:36px;line-height:36px;">
+					<th style="background:#1078C1;color:#fff;" width="50">
+						排序
+					</th>
+					<th style="background:#1078C1;color:#fff;">菜单</th>
+					<th style="background:#1078C1;color:#fff;">地址</th>
+					<th style="background:#1078C1;color:#fff;">名称</th>
+					<th style="background:#1078C1;color:#fff;">模块</th>
+					<th style="background:#1078C1;color:#fff;">方法</th>
+					<th style="background:#1078C1;color:#fff;">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a class="btn btn-green" data-toggle="dialog" data-url="__APP__/Rbac/addnode">新增</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$list item=v}
+				<tr>
+					<td>
+						<input type="text" class="ids" name="sort[{$v.id}]" value="{$v.sort}" style="width:100%" />
+					</td>
+					<td>{$v.title}</td>
+					<td>{$v.url}</td>
+					<td>{$v.name}</td>
+					<td>{$v.model}</td>
+					<td>{$v.action}</td>
+					<td>
+						<a href="__APP__/Rbac/addnode/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-id="roleedit-{$v.id}" data-title="编辑权限">编辑</a>	
+						<a href="__APP__/Rbac/delnode/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>	
+					</td>
+				</tr>
+					{foreach from=$v.list item=vo}
+					<tr>
+						<td>
+							<input type="text" class="ids" name="sort[{$vo.id}]" value="{$vo.sort}" style="width:100%" />
+						</td>
+						<td>----{$vo.title}</td>
+						<td>{$vo.url}</td>
+						<td>{$vo.name}</td>
+						<td>{$vo.model}</td>
+						<td>{$vo.action}</td>
+						<td>
+							<a href="__APP__/Rbac/addnode/id/{$vo.id}" class="btn btn-green" data-toggle="navtab" data-id="roleedit-{$vo.id}" data-title="编辑权限">编辑</a>	
+							<a href="__APP__/Rbac/delnode/id/{$vo.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>													
+						</td>
+					</tr>
+						{foreach from=$action[$vo.url] item=val}
+						<tr>
+							<td>
+								<input type="text" class="ids" name="sort[{$val.id}]" value="{$val.sort}" style="width:100%" />
+							</td>
+							<td></td>
+							<td></td>
+							<td>{$val.name}</td>
+							<td>{$val.model}</td>
+							<td>{$val.action}</td>
+							<td>
+								<a href="__APP__/Rbac/addnode/id/{$val.id}" class="btn btn-green" data-toggle="navtab" data-id="roleedit-{$val.id}" data-title="编辑权限">编辑</a>	
+								<a href="__APP__/Rbac/delnode/id/{$val.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>														
+							</td>
+						</tr>				
+						{/foreach}					
+					{/foreach}
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+</div>

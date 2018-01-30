@@ -1,0 +1,26 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+      <div class="order">
+      {include file="./member_menu.html"}
+            <div class="wdsc fr">
+                <div class="myorder">
+                    <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我的收藏</h3>
+                </div>
+                          <div class="wdsc-main">
+                        {if $collection} {foreach from=$collection item=v}
+                        <dl>
+                            <dt><a href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank"><img src="__ROOT__{$v.src|default:'/Public/images/zanwu.gif'}"></a></dt>
+                            <dd><a href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank">{$v['hotelname']}</a></dd>
+                            <dd><a href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank">{$v['address']}</a></dd>
+                            <h3>￥<span>{$v.price}</span>起</h3>
+                        </dl>
+                       {/foreach} {else}
+                        <span>
+                            您还没有收藏过哦，赶快去看看吧！
+                        </span>
+                       {/if}
+                  </div>    
+            </div>
+            <div class="informationListPage" style="margin-top:20px;">{$page}</div>
+       </div>
+{include file="../Common/footer.html"}

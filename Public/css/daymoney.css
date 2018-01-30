@@ -1,0 +1,126 @@
+﻿	*{margin:0px;padding:0px;}
+			li{list-style:none;}
+			#calendar{
+				/*width:567px;*/
+				height:auto;
+				background:url(./images/bg1.jpg) no-repeat 0px 0px;
+				margin:20px auto;
+				overflow:hidden;
+				font-family:'微软雅黑';
+			}
+			#calendar .select{}
+			#calendar .select .time{
+			}
+			#calendar .select .time a{
+				display:block;
+				width:15px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+			}
+			#calendar .select .time .btnPre:hover{
+				background:url(./images/bg.jpg) no-repeat -14px -61px;
+			}
+			#calendar .select .time .btnNext:hover{
+				background:url(./images/bg.jpg) no-repeat -138px -61px;
+			}
+			#calendar .select .time .year{
+				width:64px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+				position:relative;
+				z-index:1;
+			}
+			#calendar .select .time .month{
+				width:39px;
+				height:27px;
+				float:left;
+				margin-left:2px;
+				position:relative;
+				z-index:1;
+			}
+			#calendar .select .time span{
+				display:block;
+				width:100%;
+				height:27px;
+				line-height:27px;
+				color:#503f25;
+				font-size:12px;
+				text-indent:3px;
+				cursor:pointer;
+			}
+			#calendar .select .time span i{
+				font-style:normal;
+			}
+			#calendar .select .time select{
+				position:absolute;
+				width:64px;
+				top:27px;
+				border:0px;
+				display:none;
+				z-index:1;
+			}
+			#calendar table{
+				width:460px;
+				height:294px;
+				margin:5px 5px;
+				position:relative;
+				border-collapse: collapse;
+				z-index:0;
+			}
+			#calendar table thead th{
+				width:90px;
+				height:20px;
+				background:#39F;
+				font-size:14px;
+				font-weight:100;
+				background-color: #154A9B;
+				color:#FFF;
+			}
+			#calendar table thead th.red{
+				color:#FFEB00;
+			}
+			#calendar table tbody td{
+				text-align:center;
+				width:90px;
+				height:52px;
+				cursor:pointer;
+				font-family:Arial;
+			}
+			#calendar table tbody td span{
+				color:#A0A0A0;
+			}
+			#calendar table tbody td.hover{
+				background-color:#EBEFF4;
+			}
+			#calendar table tbody td.active{
+				color:#000;
+				background-color: #EBEFF4;
+			}
+			.dhx_month_head{
+			background-color: #EBEFF4;
+			color: #2F3A48;
+			border-right: 1px dotted #586A7E;
+			height: 18px;
+			padding-right: 5px;
+			padding-top: 3px;
+			text-align: right;
+			}
+			
+			.dhx_month_body {
+			border-right: 1px dotted #586A7E;
+			border-bottom: 1px dotted #586A7E;
+			margin-top:10px;
+			
+			}
+			
+			#dhx_month_body{color:#00C;}
+		
+			
+			.clear{ clear:both;}
+			.cald{ float:left; width:470px;}
+			#other{ float:left; margin-left:20px; width:270px;}
+			.other_t{ font-size:14px; line-height:40px;}
+			#other ul { line-height:40px;}
+			#week{  display:inline; margin-left:10px;}

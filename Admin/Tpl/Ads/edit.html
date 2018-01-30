@@ -1,0 +1,64 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+</style>
+<form action="__APP__/Ads/adspadd" method="post" data-toggle="ajaxform">
+    <div class="bjui-pageContent">
+        <input type="hidden" name="placeid" value="{$id}" />
+        <input type="hidden" name="btn_submit" value="true">
+        <table class="table-bordered table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="j_custom_title" class="control-label x85">
+                            广告位名称：
+                        </label>
+                        <input type="text" name="placename" id="j_custom_title" value="{$place.placename}" size="15">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="j_custom_locktime" class="control-label x85">
+                            广告位介绍：
+                        </label>
+                        <input type="text" name="introduce" id="j_custom_locktime" value="{$place.introduce}" size="15">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label x85">
+                            广告位尺寸：
+                        </label>
+                        宽
+                        <input type="text" name="width" value="{$place.width}" size="5">&nbsp;&nbsp; 高
+                        <input type="text" name="height" value="{$place.height}" size="5">&nbsp;（像素）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label x85">
+                            是否启用：
+                        </label>
+                        <input type="radio" name="passed" value="1" size="5" data-toggle="icheck" data-label="是" {if $place.passed==1}checked{/if}>
+                        <input type="radio" name="passed" value="0" size="5" data-toggle="icheck" data-label="否" {if $place.passed==0}checked{/if}>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="page_but" style="margin-left:85px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

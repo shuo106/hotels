@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+	<meta name="renderer" content="webkit">
+    
+	{if $leibie}
+    <title>{$leibie}_{$title}</title>{elseif !$title}{if !$company}
+    <title>{$city}{$qu}{$jiage}{$xing}{$brand}{$db}{$jing}酒店预订_{$city}{$qu}{$jiage}{$xing}{$brand}{$db}{$jing}酒店查询|源中缘酒店预订</title>{else}
+    <title>{$company}预订_{$company}查询|源中缘酒店预订</title>{/if}{else}<title>{$title}</title>{/if}
+    
+    <meta name="keywords" {if !$keywords}{if !$company} content="{$city}{$qu}{$jiage}{$xing}{$brand}{$db}{$jing}酒店预订,{$city}{$qu}{$jiage}{$xing}{$brand}{$db}{$jing}酒店查询,订房网" {else} content="{$company}预订,{$company}查询,订房网" {/if}{else} content="{$keywords}" {/if}>    
+	<meta name="description" {if !$description} {if !$company} content="源中缘为您提供{$city}{$qu}{$jiage}{$xing}{$brand}{$db}{$jing}酒店预订查询服务,{$city}{$db}{$jing}酒店预订信息,{$city}{$db}{$jing}酒店电子地图,{$city}{$db}{$jing}酒店用户评论.商旅出差,旅游度假,免费预订查询{$city}{$db}{$jing}酒店宾馆。预订免费,前台付款.订房网,您身边的酒店预订专家." {else} content="订房网为您提供{$company}预订查询服务,{$company}预订信息,{$company}电子地图,{$company}用户评论.商旅出差,旅游度假,免费预订查询{$company}。预订免费,前台付款.订房网,您身边的酒店预订专家." {/if}{else} content="{$description}" {/if}>
+    <meta name="author" content="源中缘酒店预订"> 
+    <link href="__PUBLIC__/assets/css/amazeui.home.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/v4/css/style.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/v4/css/animate.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/assets/css/home.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/css/nynew.css" rel="stylesheet" type="text/css"/>
+    <link href="__PUBLIC__/home/css/news.css" rel="stylesheet" type="text/css"/>
+    <script src="__PUBLIC__/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/assets/js/amazeui.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/js/jquery.form.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/assets/js/home.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ldmcT69FcVp0aeOjaC7fOseIEdK7ftqU"></script>
+
+    <script type="text/javascript">
+        var root="__ROOT__";
+        var citydata=[{ name:"热门",data:"{$hot}"},{ name:"ABC",data:"{$ABC}"},{ name:"DEF",data:"{$DEF}"},{ name:"GHI",data:"{$GHI}"},{ name:"JKL",data:"{$JKL}"},{ name:"MNO",data:"{$MNO}"},{ name:"PQR",data:"{$PQR}"},{ name:"STU",data:"{$STU}"},{ name:"VWX",data:"{$VWX}"},{ name:"YZ",data:"{$YZ}"}];
+        $('#gotoshop').click(function(){
+        });
+        function gotoshop() {
+            $.ajax({
+                url: 'http://hotel.58yuanbao.com/app.php/Wechat/gettoken',
+                method: 'GET',
+                // async: false,
+                success: function(data) {
+                    // console.log(data);
+                    if (data.code == 200) {
+                        var token = data.data;
+                        // console.log(data)
+/*                         $.ajax({
+                            url: 'http://www.58yuanbao.com/api/member/auth/login.do',
+                            method: 'GET',
+                            data: {
+                                token: token
+                            },
+                            success: function(data) {
+                                window.open('http://www.58yuanbao.com');
+                            }
+                        }) */
+                        if (token !== undefined) {
+                            window.location.href = 'http://www.58yuanbao.com/index.html?token=' + token;
+                        } else {
+                            window.location.href = 'http://www.58yuanbao.com';
+                        }
+                    } else {
+                        window.location.href = 'http://www.58yuanbao.com';
+                    }
+                    // console.log(data);
+                },
+                error: function() {
+                    window.location.href = 'http://www.58yuanbao.com';
+                }
+            });
+            // window.location.href = 'http://www.58yuanbao.com';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="wrap">
+            <div class="logo fl">
+                <!-- <img src="__PUBLIC__/assets/i/examples/logokf.png" style="height: 70px;"> -->
+                <img src="{$logo}" style="height: 70px;">
+                <!-- <span style="font-size: 30px;line-height:100px;">源中缘酒店预订</span> -->
+            </div>
+            <div class="pho fr"><img src="__PUBLIC__/v4/images/pho.png"  http://www.58yuanbao.com ></div>
+            <ul class="fr">
+                <li><a href="javascript:gotoshop()" id="gotoshop">缘宝商城</a><i>|</i></li>
+                <!-- <li><a href="__ROOT__/Member/point.html">积分返现</a><i>|</i></li> -->
+                <li><a href="__ROOT__/Member/member_order.html">预订查询</a><i>|</i></li>
+                <li><a href="__ROOT__/Article/category-6.html">帮助中心</a><i></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="wrap">
+            <ul class="fl">
+                {foreach from=$daohang item=vo} {if $vo.type==1}
+                <li><a href="{$vo.url}">{$vo.name}</a></li>
+                {/if} {/foreach}
+            </ul>
+            <dl class="fr">
+                {if $smarty.session.name}
+                <dd class="on"><i><img src="__PUBLIC__/v4/images/ico1.png"></i><a href="__ROOT__/Member/index.html">{$smarty.session.name}</a></dd>
+                <dd><i><img src="__PUBLIC__/v4/images/ico2.png"></i><a href="__APP__/login/loginOut">退出</a></dd>
+                {else}
+                <dd class="on"><i><img src="__PUBLIC__/v4/images/ico1.png"></i><a href="__ROOT__/login.html">登录</a></dd>
+                <!-- <dd><i><img src="__PUBLIC__/v4/images/ico2.png"></i><a href="__ROOT__/index.php/Register/index">注册</a></dd> -->
+                {/if}
+            </dl>
+        </div>
+    </div>

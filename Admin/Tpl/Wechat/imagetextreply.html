@@ -1,0 +1,40 @@
+
+<div class="bjui-pageHeader">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Wechat/imagetextreply" method="get">
+		<div class="bjui-searchBar">
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px;line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  data-order-field="id">ID</th>
+				<th style="background:#1078C1;color:#fff;" >规则名称</th>
+				<th style="background:#1078C1;color:#fff;" >操作</th>
+				<th style="background:#1078C1;color:#fff;" >触发关键字</th>
+				<th style="background:#1078C1;color:#fff;" >操作
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Wechat/addimagetext/dialogId/newdialog"  class="btn btn-green" data-toggle="dialog" data-id="up" data-width="800" data-height="650" data-title="新建图文回复规则">新增</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$reply item=v key=k}
+			<tr data-id="{$k}">
+				<td>{$v.id}</td>
+				<td>{$v.name}</td>
+				<td>
+					<a href="__APP__/Wechat/addimagetext/id/{$v['id']}" class="btn btn-green" data-toggle="dialog" data-width="800" data-height="650" data-id="up" data-title="图文回复-{$v.name}">编辑</a>
+					<a href="__APP__/Wechat/delTextReply/id/{$v.id}/rid/{$v.rid}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+				</td>
+				<td>{$v.key}</td>
+				<td>{if $v.welcome}
+					<a href="__APP__/Wechat/setReplyWelcome/id/{$v.id}/v/0" class="btn btn-green" data-toggle="doajax">取消欢迎信息</a> {else}
+					<a href="__APP__/Wechat/setReplyWelcome/id/{$v.id}/v/1" class="btn btn-red" data-toggle="doajax">设为欢迎信息</a> {/if} {if $v.default}
+					<a href="__APP__/Wechat/setReplyDefault/id/{$v.id}/v/0" class="btn btn-green" data-toggle="doajax">取消默认回复</a> {else}
+					<a href="__APP__/Wechat/setReplyDefault/id/{$v.id}/v/1" class="btn btn-red" data-toggle="doajax">设为默认回复</a> {/if}
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>

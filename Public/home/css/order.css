@@ -1,0 +1,151 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+.con {background: #fff; padding-bottom:10px;}
+
+
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,a,p,span,strong,cite,em,i,form,fieldset,input,textarea,select,option,section,button,th,td,hr{ 
+
+   margin:0;
+
+   padding:0; 
+
+   list-style:none;}
+
+body{ 
+
+	font-family:Arial,"宋体";
+
+	font-size:12px;
+
+	color:#595959;}
+
+h1,h2,h3,h4,h5,strong,b{ 
+
+    font-weight:normal;}
+
+h1 { 
+
+    font-size:24px; font-family:"微软雅黑";}
+
+h2 { font-size:14px;}
+
+h3 { font-size:14px;}
+
+h4 { font-size:12px;}
+
+h5 { font-size:12px;}
+
+cite,em,i{ 
+
+   font-style:normal;}
+
+input,button,select,textarea,a{ 
+
+   border:0;
+
+   outline:none;}
+
+a{ text-decoration:none;color:#000;}
+
+a:focus{ outline:none; -moz-outline-style: none; }/*去除图片链接时的虚线框 for: FF */
+
+img {
+
+	border:0px;}
+
+font{
+
+	font-size:12px;}
+
+.clearfix:after{ content:"."; display:block; clear:both; font-size:0; height:0; line-height:0; visibility:hidden;}
+
+*html .clearfix{ zoom:1;}/*ie6*/
+
+*:first-child+html .clearfix{ zoom:1;} /*ie7*/
+
+.left{ float:left;}
+
+.right{ float:right;}
+
+
+
+
+
+
+/*房间价格明细*/
+.price_mx span{ float:left;}
+#money{ float:left; display:inline; width:630px; margin-left:6px; border-left:1px solid #2CA9EC;}
+.price_mx ul li{ padding-bottom:0; float:left;text-align:center;width:85px;line-height:2.6em; border-right:1px solid #2CA9EC; border-top:1px solid #2CA9EC;}
+.price_mx ul li h3{ font-size:14px;border-bottom: 1px solid #2CA9EC;background: #DFEDFB;}
+.price_mx ul li p{border-bottom:1px solid #2CA9EC;}
+/*房间价格明细结束！！！*/
+
+
+.ddok,.paystyle{ clear:both; width:710px; padding:0 10px; margin-bottom:10px;}
+
+.ddoktitle{ height:30px; line-height:30px; border-bottom:3px #7E0000 solid;color: #B68F14;font-family: "微软雅黑";font-size:16px;}
+
+.ddok img{ margin-left:20px; margin-top:10px;}
+
+.ddok ul li{ float:left; display:inline; width:330px; margin-top:10px;}
+
+.ddok ul li em.ddred{ color:#F00;}
+
+.ddok ul li strong{ font-weight:bold;}
+
+.ddok table td{ padding:5px 0;}
+
+.tips h3{ margin-bottom:10px;}
+
+.tips p{ width:640px; line-height:20px;}
+
+.ddxxokbtn{ clear:both; width:710px; padding:0 10px; text-align:center; margin-top:20px;}
+
+.ddxxokbtn a{ display:inline-block; padding:0 10px; height:24px; line-height:24px;border-radius:2px; border:1px #9A9A9A solid; margin-right:10px;
+
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#F6F6F6',endColorStr='#E1E1E1',gradientType='0');
+
+background:#E1E1E1;
+
+background:-webkit-gradient(linear,0 0,0 100%,from(#F6F6F6),to(#E1E1E1));
+
+background:-moz-linear-gradient(top,#F6F6F6,#E1E1E1);
+
+background:-o-linear-gradient(top,#F6F6F6,#E1E1E1);
+
+background:-ms-linear-gradient(#F6F6F6,#E1E1E1);
+
+background:linear-gradient(#F6F6F6,#E1E1E1);}
+
+.ddxxokbtn a:hover{ display:inline-block; padding:0 10px; height:24px; line-height:24px;border-radius:2px; border:1px #9A9A9A solid; margin-right:10px;
+
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#E1E1E1',endColorStr='#F6F6F6',gradientType='0');
+
+background:-webkit-gradient(linear,0 0,0 100%,from(#E1E1E1),to(#F6F6F6));
+
+background:-moz-linear-gradient(top,#E1E1E1,#F6F6F6);
+
+background:-o-linear-gradient(top,#E1E1E1,#F6F6F6);
+
+background:-ms-linear-gradient(#E1E1E1,#F6F6F6);
+
+background:linear-gradient(#E1E1E1,#F6F6F6);}
+
+
+
+.paystyle h3{ margin-bottom:20px;}
+
+.paystyle ul li{ height:38px;}
+
+.paystyle ul li input{ float:left; display:inline; margin-top:10px;}
+
+.paystyle ul li span{ float:left;}
+
+
+
+
+
+.price_mx { margin:10px;}

@@ -1,0 +1,15 @@
+/* CSS Document */
+body,h1,h2,h3,h4,h5,h6,p{margin:0;padding:0;font-size:12px;font-family:'宋体';}
+ul,ol,dl,li,dt,dd{list-style-type:none; margin:0; padding:0;}
+a{ text-decoration:none; color:#0c0c0c;}
+a:hover{ text-decoration:none; color:#d90000}
+.clear{ clear:both; height:1px; overflow:hidden;}
+img{ border:none;}
+body{ background:#FFF;}
+.box{width:1005px; height:573px; overflow:hidden; background:url(../images/1.jpg) no-repeat; margin:0 auto;}
+.logo{width:530px; height:97px; overflow:hidden; margin-left:110px; margin-top:30px;}
+.left{width:483px; overflow:hidden; line-height:40px; margin-top:300px; margin-left:120px; float:left; display:inline;}
+.right{width:238px; height:270px; overflow:hidden; border:#000 1px solid; background:#FFF; float:right; display:inline; margin-right:150px; margin-top:50px;}
+.right ul{padding-left:15px;}
+.right ul li{padding-top:20px;}
+.right ul li img{padding-left:10px;}

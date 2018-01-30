@@ -1,0 +1,308 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-form select {
+    max-width: 200px;
+    float: left;
+    margin-right: 5px;
+}
+.zhong {
+    line-height: 30px;
+}
+.hotel_sheshi ul li {
+    display: inline-block;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg"><empty name="info.id">房间发布<else/>房间编辑</empty></strong> / <small>Room</small>
+                </div>
+            </div>
+            <hr>
+            <form method="post" id="room-form" class="am-form ajaxform" action="__APP__/Hotel/add" enctype="multipart/form-data">
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td style="width: 10%">酒店名称：</td>
+                        <td>
+                            <input type="text" class="am-fl" size="20" name="hotelname" value="{$hotelname}" />
+                            <span class="am-fl" style=" margin:0px 5px;color: red;"> *</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否连锁：</td>
+                        <td>
+                            <select name="lspp" class="am-select">
+                                <option value="">若为连锁请选择</option>
+                                <volist name="ls" id="vo">
+                                    <option value="{$vo.name}" <if condition=" $lspp eq $vo.name "> selected="selected" </if>>{$vo.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>酒店类型：</td>
+                        <td>
+                            <select name="xingji" class="am-select">
+                                <volist name="xj" id="v">
+                                    <option value="{$v.id}" <if condition=" $xingji eq $v.id "> selected="selected" </if> >{$v.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>商业区：</td>
+                        <td>
+                            <input type="text" name="syq" value='{$syq}'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>酒店地址：</td>
+                        <td>
+                            {$Prov} <span id="city">{$City}</span> <span id="area">{$Area}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>详细地址：</td>
+                        <td>
+                            <input class="am-fl" type="text" name="cityfj" value="{$city2}" size="15" />
+                            <span class="am-fl" style=" margin:0px 5px"> 如：紫荆山路59号</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>附近地标：</td>
+                        <td>
+                            <div class="am-g">
+                                <input style="width: 11%" type="text" class="am-fl" size="12" name="fjdb1" value="{$fjdb1}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjdb2" value="{$fjdb2}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjdb3" value="{$fjdb3}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjdb4" value="{$fjdb4}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjdb5" value="{$fjdb5}" />
+                                <span class="am-fl" style=" margin:0px 5px"> 如：火车站,机场</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="am-g">
+                                <input style="width: 11%" type="text" class="am-fl" size="12" name="fjscenery1" value="{$fjscenery1}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjscenery2" value="{$fjscenery2}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjscenery3" value="{$fjscenery3}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjscenery4" value="{$fjscenery4}" />
+                                <input style="width: 11%;margin-left: 1.2rem;" type="text" class="am-fl" size="12" name="fjscenery5" value="{$fjscenery5}" />
+                            </div>
+                        </td>
+                    </tr>
+                    <if condition="$sheshis">
+                        <tr>
+                            <td>服务设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul>
+                                        <volist name="sheshis" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input type="checkbox" name="sheshi[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($sheshi)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" name="sheshi[]"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$canyins">
+                        <tr>
+                            <td>餐饮设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul>
+                                        <li>
+                                            <volist name="canyins" id="v">
+                                                <li>
+                                                    <li>
+                                                        <label class="am-checkbox">
+                                                            <input type="checkbox" name="canyin[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($canyin)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" name="sheshi[]"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$kfsheshis">
+                        <tr>
+                            <td>客房设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul>
+                                        <volist name="kfsheshis" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input type="checkbox" name="kfsheshi[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($kfsheshi)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" name="sheshi[]"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$yules">
+                        <tr>
+                            <td>娱乐设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul>
+                                        <volist name="yules" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input type="checkbox" name="yule[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($yule)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" name="sheshi[]"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$creditcards">
+                        <tr>
+                            <td>信用卡：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul>
+                                        <volist name="creditcards" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input type="checkbox" name="creditcard[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($creditcard)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" name="sheshi[]"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <tr>
+                        <td>其他服务：</td>
+                        <td>
+                            <textarea class="Other_services" name="fuwu">{$fuwu}</textarea>
+                        </td>
+                    </tr>
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/kindeditor-min.js"></script>
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/lang/zh_CN.js"></script>
+                    <script>
+                    var editor;
+                    KindEditor.ready(function(K) {
+                        editor = K.create('textarea[name="introduce"]', {
+                            allowFileManager: true,
+                            afterBlur: function() {
+                                this.sync();
+                            },
+                        });
+                    });
+                    function checkall(c) {
+                        for (var i = 0; i < $("." + c).length; i++) {
+                            $("." + c).eq(i).attr({
+                                checked: 'checked'
+                            });
+                        }
+                    }
+                    </script>
+                    <tr>
+                        <td>温馨提示：</td>
+                        <td>
+                            <textarea class="Other_services" name="tip">{$tip}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>酒店介绍：</td>
+                        <td>
+                            <textarea class="bj_container" style="height:200%;" name="introduce">{$introduce}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" width="100%" height="40">
+                    <tr>
+                        <td width="40%"></td>
+                        <td>
+                            <input class="am-btn am-btn-primary" type="submit" value=" 保存 " class="buton">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+</div>
+<script type="text/javascript">
+var loadcity, loadarea;
+function ready() {
+    loadcity = function(p) {
+        $("#city").text('');
+        $("#area").text('');
+        $.get('__APP__/Area/getCity', {
+            p: p
+        }, function(e) {
+            if (e) {
+                $("#city").html(e.split('_')[0]);
+                $("#area").html(e.split('_')[1]);
+                $('.am-select').mySelected();
+            }
+        });
+    }
+    loadarea = function(c) {
+        p = $("#prov").val();
+        if (p != '北京' && p != '上海' && p != '重庆' && p != '天津') {
+            $("#area").text('');
+            $.get('__APP__/Area/getArea', {
+                c: c
+            }, function(e) {
+                if (e) {
+                    $("#area").html(e);
+                    $('.am-select').mySelected();
+                }
+            });
+        }
+    }
+}
+function callback(data){
+    alert(data.info);
+    if(data.status==1){
+        window.location.href="__APP__/";
+    }
+}
+</script>
+<include file="Tpl/public/bottom.html" />

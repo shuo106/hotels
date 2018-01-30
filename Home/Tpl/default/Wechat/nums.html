@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link href="__PUBLIC__/wechat/css/book.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<script type="text/javascript">
+	var api = frameElement.api, W = api.opener;
+	function setnums(nums){
+		W.setnums(nums);
+		window.close();
+	}
+</script>
+</head>
+<body>
+	<div class="selectRooms">
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 1} checked {/if} value="1"/>1间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 2} checked {/if} value="2"/>2间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 3} checked {/if} value="3"/>3间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 4} checked {/if} value="4"/>4间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 5} checked {/if} value="5"/>5间</p> 
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 6} checked {/if} value="6"/>6间</p> 
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 7} checked {/if} value="7"/>7间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 8} checked {/if} value="8"/>8间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 9} checked {/if} value="9"/>9间</p>
+        <p><input type="radio" name="linetype" onclick="setnums(this.value);" {if $nums eq 10} checked {/if} value="10"/>10间</p>
+    </div>
+</body>
+</html>

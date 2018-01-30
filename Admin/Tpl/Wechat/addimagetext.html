@@ -1,0 +1,103 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+</style>
+<script type="text/javascript">
+	//$(this).navtab('closeAllTab');
+	function pic_upload_success(file, data) {
+		var json = $.parseJSON(data)
+		if (data.statusCode == 200)
+			$(this).alertmsg('ok', data.message)
+		if (data.status == 300)
+			$(this).alertmsg('error', data.message)
+		$(this).bjuiajax('ajaxDone', json)
+		if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {
+			$.CurrentDialog.find('#thumb').val(json.yuantu)
+			$.CurrentDialog.find('#album_cover').html('<img class="qg-thumb" src=__ROOT__' + json.yuantu + ' width="450" height="300"/>')
+		}
+	}
+</script>
+<div class="bjui-pageContent">
+	<form action="__APP__/Wechat/addimagetext" method="post" id="j_custom_form" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$reply['id']}" />
+		<input type="hidden" name="edit" value="1" />
+		<table class="table table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							规则名称：
+						</label>
+						<input type="text" name="name" id="name" value="{$reply.name}" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="url" class="control-label x85">
+							URL：
+						</label>
+						<input type="text" name="url" id="url" value="{$reply.url}" size="35" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="key" class="control-label x85">
+							触发关键字:
+						</label>
+						<input type="text" name="key" id="key" value="{$reply.key}" size="35">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="description" class="control-label x85">
+							描述:
+						</label>
+						<input type="text" name="description" id="description" value="{$reply.description}" size="35">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85">
+							上传图片：
+						</label>
+						<div style="display: inline-block; vertical-align: middle;">
+							<div data-toggle="upload" data-uploader="__APP__/Upload/index/dir/wechat" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg" data-multi="1" data-auto="true" data-on-upload-success="pic_upload_success" data-icon="cloud-upload">
+							</div>
+							<input type="hidden" name="thumb" value="" id="thumb">
+							<span id="album_cover">
+							{if $reply.thumb}
+                        	<img  class="qg-thumb" src="__ROOT__{$reply.thumb}" alt="" width="450" height="300"/>
+                        	{/if}
+                        </span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="content" class="control-label x85">
+							回复内容:
+						</label>
+						<div style="display: inline-block; vertical-align: middle;">
+						<textarea name="content" rows="3" cols="35" class="j-content" data-toggle="kindeditor" data-minheight="200">{$reply.content}</textarea>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 100px;float:left">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" id="btn_submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>

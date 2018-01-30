@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=CF7b68d7d995d3349885b93780fce064"></script>
+</head>
+<body>
+<div id="setmap" style="height:550px;width:820px"> 
+</div>
+<script type="text/javascript">
+	var map = new BMap.Map("setmap"); 
+		map.enableScrollWheelZoom(); 
+	var maplng= '{$map[0]}';
+	var maplat= '{$map[1]}';
+	var hid  = '{$hid}';
+	map.centerAndZoom(new BMap.Point(maplng, maplat), 15);
+	point= new BMap.Point(maplng, maplat); 
+	var marker = new BMap.Marker(point);
+		map.addOverlay(marker);
+	 function addmarker (e){
+		map.clearOverlays(marker);
+		var point = new BMap.Point(e.point.lng,e.point.lat);
+		var marker = new BMap.Marker(point);
+		map.addOverlay(marker);
+		//window.opener.document.getElementById("maplng").value = e.point.lng;
+		//window.opener.document.getElementById("maplat").value = e.point.lat;
+		$.get('__APP__/Hotels/savemap',{ hid: hid, lng : e.point.lng , lat: e.point.lat },function(e){
+			if(e==1){
+				alert('标注成功');
+			}
+		});
+	}
+	map.addEventListener('click',addmarker);
+	marker.enableDragging();  //标注拖放
+	 marker.addEventListener('dragend',function(e){
+		$.get('__APP__/Hotels/savemap',{ hid: hid, lng : e.point.lng , lat: e.point.lat },function(e){
+			if(e==1){
+				alert('标注成功');
+			}
+		});
+	 });
+</script>
+</body>
+</html>

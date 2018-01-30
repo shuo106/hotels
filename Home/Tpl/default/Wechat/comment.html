@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>{if $smarty.get.uid}我的点评{else}酒店点评{/if}</title>
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wap/css/indexwechat.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wap/new/css/stylenew.css" rel="stylesheet" type="text/css">
+</head>
+<style type="text/css">
+.list {  font-size:13px;}
+/*点评*/
+.commentpic { width:100%}
+.commentpic img{ width:31%; height:90px; margin-right:1%; margin-bottom:0.5%}
+</style>
+<body>
+<div class="header" style="background: #0e90d2 none repeat scroll 0 0;height: 50px;"><a class="hdleft" href="javascript:history.go(-1);"></a>{if $smarty.get.uid}我的点评{else}酒店点评{/if}<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="list">
+ {if $comments}
+  <ul>
+ {foreach from=$comments item=vo}   
+  <li class="hotel-dpage-list dp-mod mt10 js_comment_list_box">
+  <p>{$vo['uname']}<time style="margin-left:10px;">{date('Y-m-d',$vo['addtime'])}</time> 点评&nbsp;&nbsp;<span style="background:#0C3; color:#FFF; padding:1px 10px;;font-size:12px; line-height:20px; text-align:center">{$vo.label}</span>{if $smarty.get.uid}&nbsp;&nbsp;<span style="background:#f37b1d; color:#FFF; padding:1px 10px;;font-size:12px; line-height:20px; text-align:center">{if $vo.status=="1"}未审核{else}已审核{/if}</span>{/if}</p>
+  <p>点评酒店：{$vo['hotelname']}</p>    
+    <p>入住客房：{$vo['title']}</p>
+  <p>评价等级：<span class="cui-rate" style=" margin-left:0px">
+        <span class="cui-rate-r1"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="cui-rate-r2" style="width:{$vo['unit']*20}%"><i></i><i></i><i></i><i></i><i></i></span>
+    </span><em style="color: #e86b0f;">{round($vo['unit'])}分</em>
+  </p>
+  <p>客人点评：{$vo['content']}</p>
+  {if $vo['thumb']}
+    <p>点评图片：<br/>
+    <div class="commentpic">
+        {foreach  from=$vo['thumb'] item=vv}
+        <img src="__ROOT__{$vv}">
+        {/foreach}
+    </div>
+    </p>
+    {/if}
+  <p style="color:#099fde; font-weight:bold">酒店回复：{$vo['reply']}</p>
+ </li>
+ {/foreach}   
+  </ul>
+    <div class="pages" style="clear: both;height: 42px;text-align: center;color: #585858;padding-bottom: 10px;margin-top: 15px;"><p style="float:right;color:#099fde; font-weight:bold; margin-right:15px; font-size:14px; line-height:30px;">共<span style="color:#F60">{$nums}</span>条点评</p>{$page}</div>
+{else}
+  <div style="width:100%;text-align: center;">
+    暂无点评
+  </div>
+{/if}
+</div>
+</body>
+</html>

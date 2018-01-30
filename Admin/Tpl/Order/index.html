@@ -1,0 +1,150 @@
+<script type="text/javascript">
+//查询收起
+$.CurrentNavtab.find('#chaxun').on('click',function () {
+  if($.CurrentNavtab.find(".bjui-moreSearch").css('display')=='block')
+  $.CurrentNavtab.find(".showMoreSearch").trigger('click');
+})
+//$.CurrentNavtab.find('#isMobile').on('change',function () {
+//  if($(this).val()==2)
+//  $(this).navtab({ id:'Worder-index',url:'__APP__/Worder/index',title:'微信订单'});
+//})
+</script>
+<div class="bjui-pageHeader" style="height:38px">
+  <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Order/index" method="get">
+    <div class="bjui-searchBar" style="margin-top:6px">
+      <div style="margin-left: 0;display: inline-block;">
+        <div class="btn-group">
+          <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+          <ul class="dropdown-menu right" role="menu">
+            <li><a class="btn" href="__APP__/Order/pl" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要删除选中项吗？">删除选中</a></li>
+            <li style="display: none;"><a class="btn" href="__APP__/Order/empty" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="按扭未做">打印选中</a></li>
+          </ul>
+        </div>
+      </div>
+      <label for="order_no">订单编号：</label>
+      <input type="text" id="order_no" value="{$order_no}" name="order_no" class="form-control" size="12">&nbsp;
+      <label>状态：</label>
+      <select name="status" data-toggle="selectpicker" id="status">
+        <option value="0">不限</option>
+        {foreach from=C('order.status') item=vv key=kk}
+        <option value="{$kk}" {if $kk==$smarty.get.status}selected{/if}>{$vv}</option>
+        {/foreach}
+      </select>&nbsp;
+      <label>来源：</label>
+      <select name="from" id="isMobile" data-toggle="selectpicker">
+        <option value="0">不限</option>
+   <!--    {foreach from=C('order.from') item=v key=k}
+        <option value="{$k}" {if $smarty.get.from==$k}selected{/if}>{$v}</option>
+        {/foreach}-->
+          <option value="5"  {if  $smarty.get.from==5} selected {/if} >网站</option>
+				 <option value="2"  {if  $smarty.get.from==2} selected {/if}>微信</option>
+				 <option value="1"  {if  $smarty.get.from==1} selected {/if}>手机</option>
+				 <option value="3"  {if  $smarty.get.from==3} selected {/if}>APP</option>		
+      </select>&nbsp;
+      <button type="button" class="showMoreSearch" data-toggle="moresearch" data-name="custom2"><i class="fa fa-angle-double-down"></i></button>
+      <button type="submit" class="btn-default" data-icon="search" id="chaxun">查询</button>&nbsp;
+      <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+      <a class="btn btn-green" href="javascript:void()" onclick="mode()">导出excel</a>
+      {if $orderlist} 订单数量：{$total}个 &nbsp;&nbsp;订单总额:{$sum} 元 {/if}
+      <div class="bjui-moreSearch">
+        <table class="table table-condensed table-hover" width="100%">
+          <tbody>
+            <tr>
+              <td>
+                <label for="order_date" class="control-label x85">预订时间：</label>
+                <input type="text" name="addtime" id="order_date" value="{$smarty.get.addtime}" data-toggle="datepicker" data-rule="date" size="12">
+              </td>
+              <td>
+                <label for="ruzhu_date" class="control-label x85">入住时间：</label>
+                <input type="text" name="start" id="ruzhu_date" value="{$smarty.get.start}" data-toggle="datepicker" data-rule="date" size="12">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="linkman" class="control-label x85">预订姓名：</label>
+                <input type="text" id="linkman" value="{$smarty.get.linkman}" name="linkman" class="form-control" size="12">&nbsp;
+              </td>
+              <td>
+                <label for="telephone" class="control-label x85">预订电话：</label>
+                <input type="text" id="telephone" value="{$smarty.get.telephone}" name="telephone" class="form-control" size="12">&nbsp;
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="bjui-pageContent tableContent">
+  <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+    <thead>
+      <tr style="height:36px;line-height:36px;">
+        <th style="background:#1078C1;color:#fff;" width="26">
+          <input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+        </th>
+				<th style="background:#1078C1;color:#fff;" data-order-field="id">
+					{$ORDERC.ordernumber}</th>
+				<th style="background:#1078C1;color:#fff;width:100px;">{$ORDERC.title}</th>
+				<th style="background:#1078C1;color:#fff;">{$ORDERC.linkman}</th>
+				<th style="background:#1078C1;color:#fff;" data-order-field="telephone">{$ORDERC.telephone}</th>
+				<th style="background:#1078C1;color:#fff;" data-order-field="addtime">{$ORDERC.addtime}</th>
+				<th style="background:#1078C1;color:#fff;" data-order-field="start">{$ORDERC.start}</th>
+				<th style="background:#1078C1;color:#fff;" data-order-field="total">{$ORDERC.total}</th>
+				<th style="background:#1078C1;color:#fff;">{$ORDERC.status}</th>
+				<th style="background:#1078C1;color:#fff;">{$ORDERC.from}</th>
+				<th style="background:#1078C1;color:#fff;" width="180">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {foreach from=$orderlist item=v key=k}
+      <tr data-id="{$k}">
+        <td>
+          <input type="checkbox" name="ids" data-toggle="icheck" value="{$v.orderid}">
+        </td>
+        <td>{$v.addtime}{$v.orderid}</td>
+        <td>{$v.roomtype}</td>
+        <td>{$v.linkman}</td>
+        <td>{$v.telephone}</td>
+        <td>{date('Y-m-d',$v.addtime)}</td>
+        <td>{date('Y-m-d',$v.ruzhudate)}</td>
+        <td>{$v.shoufei}</td>
+        <td style="color:#fff;text-align: center;background: {foreach from=C('order.color') item=vv key=kk}{if $v.status==$kk}{$vv}{/if}{/foreach}">{foreach from=C('order.status') item=vv key=kk}{if $v.status==$kk}{$vv}{/if}{/foreach}</td>
+        <td>
+          {foreach from=C('order.from') item=vv key=kk}{if $v.from==$kk}{$vv}{/if}{/foreach}
+        </td>
+        <td>
+          <a href="__APP__/Order/sms/id/{$v.orderid}" class="btn btn-blue" data-toggle="navtab" data-id="Order-sms">发送短信</a>
+          <a href="__APP__/Order/edit/id/{$v.orderid}" class="btn btn-green" data-toggle="navtab" data-id="form" data-title="查看-{$v.roomtype}">管理</a>
+          <a href="__APP__/Order/delete/id/{$v.orderid}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+        </td>
+      </tr>
+      {/foreach}
+    </tbody>
+  </table>
+</div>
+<div class="bjui-pageFooter">
+  <div class="pages">
+    <span>每页&nbsp;</span>
+    <div class="selectPagesize">
+      <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+        {foreach from=$pagesizes item=v}
+        <option value="{$v}">{$v}</option>
+        {/foreach}
+      </select>
+    </div>
+    <span>&nbsp;条，共 {$total} 条</span>
+  </div>
+  <div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+  </div>
+</div>
+<script>
+    function mode(){
+      var fang = $('#order_no').val();//选中的值
+      var status = $('#status option:selected').val();//选中的值
+      var form = $('#isMobile option:selected').val();//选中的值
+      if(fang==''){
+        fang=1;
+      }
+     window.location.href="__APP__/Order/outExcel/order_no/"+fang+"/status/"+status+"/form/"+form;
+    }
+</script>

@@ -1,0 +1,38 @@
+{include file="../Common/header.html"}
+<div class="box">
+  {include file="../Common/left.html"}
+    <div class="ny_right">
+      <div class="dqwz">当前位置&gt;&gt;<a href="__APP__">首页</a>>><a href="__APP__/Hotels/index/id/1">全国酒店</a>>><a href="__APP__/Hotels/dxfj">全国大学附近酒店</a></div>
+      <div class="qgdx">
+<!--大学会近酒店内容开始-->
+<div id="tab1">
+<ul>
+<li onclick="setTab(1,0)" class="now">北京</li>
+{foreach key=key item=p from=$pro}
+	<li onclick="setTab(1,{$key}+1)" class="">{$p['province']}</li>
+{/foreach}
+</ul>
+</div>
+<div id="tablist1">
+<div class="tablist block" style="display: block; ">
+<span><ul>
+{section loop=$bj name=items}
+<li><a href="__ROOT__/Hotels/search-北京-School-{$bj[items].college}.html" target="_self">{$bj[items].college}</a></li>
+{/section}
+ </ul>
+ </span>
+</div>
+{foreach from=$newdx item=s}
+<div class="tablist" style="display: none; ">
+<span><ul>
+{foreach from=$s item=items}
+<li><a href="__ROOT__/Hotels/search-{$items['cityname']}-School-{$items['college']}.html" target="_self">{$items['college']}</a></li>
+ {/foreach}
+ </ul></span>
+</div>
+{/foreach}
+</div>
+<!--大学会近酒店内容结束--></div>
+	</div>
+</div>
+  {include file="../Common/footer.html"}

@@ -1,0 +1,121 @@
+<!-- sidebar start -->
+
+<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+
+        <ul class="am-list admin-sidebar-list">
+
+            <li class="admin-parent">
+
+                <a class="am-cf" data-am-collapse="{target: '#hotel-info'}"><span class="am-icon-building am-text-primary"></span> 酒店管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+                <ul class="am-list am-collapse admin-sidebar-sub <eq name="_menu_acvion" value="hotel-info">am-in</eq>" id="hotel-info">
+
+                    <li><a href="__APP__/Member/hotel"><span class="am-icon-th am-text-primary"></span> 酒店维护</a></li>
+
+                    <li><a href="__APP__/Member/dibiao"><span class="am-icon-th am-text-primary"></span> 附近地标</a></li> 
+
+                    <li><a href="__APP__/Member/map"><span class="am-icon-th am-text-primary"></span> 地图标注</a></li>
+
+                    <li><a href="__APP__/Photo/index"><span class="am-icon-th am-text-primary"></span> 相册管理</a></li>                    
+
+                </ul>
+
+            </li>        
+
+            <li class="admin-parent">
+
+                <a class="am-cf" data-am-collapse="{target: '#room-list'}"><span class="am-icon-building am-text-primary"></span> 房间管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+                <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Hotel">am-in</eq>" id="room-list">
+
+                    <li><a href="__APP__/Hotel/room"><span class="am-icon-th am-text-primary"></span> 发布房间</a></li>                
+
+                    <li><a href="__APP__/Hotel/roomlist"><span class="am-icon-th am-text-primary"></span> 房间管理<span class="am-badge am-badge-secondary am-margin-right am-fr">{$roomnums}</span></a></li>
+
+                    <li><a href="__APP__/Hotel/huishou"><span class="am-icon-th am-text-primary"></span> 房间回收站<span class="am-badge am-badge-secondary am-margin-right am-fr">{$roomnums1}</span></a></li>
+
+                </ul>
+
+            </li>
+
+            <li><a class="am-cf" data-am-collapse="{target: '#order-list'}"><span class="am-icon-calculator am-text-success"></span> 订单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+            <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Order">am-in</eq>" id="order-list">
+
+                    <li><a href="__APP__/Order/index/"><span class="am-icon-th am-text-success"></span> 全部订单<span class="am-badge am-badge-secondary am-margin-right am-fr">{$ordernums[0]}</span></a></li>                
+
+                    <volist name="lang.status" id="vo">
+
+                    <li><a href="__APP__/Order/index/status/{$key}"><span class="am-icon-th am-text-success"></span> {$vo}<span class="am-badge am-badge-secondary am-margin-right am-fr">{$ordernums[$key]}</span></a></li>
+
+                    </volist>
+
+                </ul>            
+
+            </li> 
+
+            <li><a class="am-cf" data-am-collapse="{target: '#comment-list'}"><span class="am-icon-pencil-square-o am-text-comment"></span> 点评管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+            <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Comment">am-in</eq>" id="comment-list">
+
+                    <li><a href="__APP__/Comment/index/"><span class="am-icon-th am-text-comment"></span> 点评管理<span class="am-badge am-badge-secondary am-margin-right am-fr">{$commentnums}</span></a></li>
+
+                </ul>      
+
+            </li>
+
+            <li><a class="am-cf" data-am-collapse="{target: '#accounts-list'}"><span class="am-icon-pencil-square-o am-text-accounts"></span> 账单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+            <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Accounts">am-in</eq>" id="accounts-list">
+
+                    <li><a href="__APP__/Accounts/index/"><span class="am-icon-th am-text-accounts"></span> 账单列表<span class="am-badge am-badge-secondary am-margin-right am-fr">{$count}</span></a></li>
+                    <!-- <li><a href="__APP__/Accounts/tixian/"><span class="am-icon-th am-text-accounts"></span> 提现账号<span class="am-badge am-badge-secondary am-margin-right am-fr"></span></a></li> -->
+
+                </ul>      
+
+            </li>
+
+            <li><a class="am-cf" data-am-collapse="{target: '#data-list'}"><span class="am-icon-bar-chart am-text-warning"></span> 数据分析 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+             <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Data">am-in</eq>" id="data-list">
+
+                    <li><a href="__APP__/Data/index/"><span class="am-icon-th am-text-warning"></span> 数据分析</a></li>
+
+                </ul> 
+
+            </li>
+
+            <li class="admin-parent">
+
+                <a class="am-cf" data-am-collapse="{target: '#Notic-lists'}"><span class="am-icon-bookmark am-text-primary"></span> 网站公告 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+                <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Notic">am-in</eq>" id="Notic-lists">
+
+                    <li><a href="__APP__/Notic/lists"><span class="am-icon-th am-text-secondary"></span> 网站公告</a></li>
+
+                </ul>
+
+            </li>
+
+            <li class="admin-parent">
+
+                <a class="am-cf" data-am-collapse="{target: '#basic-info'}"><span class="am-icon-file am-text-secondary"></span> 基本信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+
+                <ul class="am-list am-collapse admin-sidebar-sub <eq name="Think.const.MODULE_NAME" value="Member"><eq name="_action" value="member">am-in</eq></eq>" id="basic-info">
+
+                    <li><a href="__APP__/Member/change"><span class="am-icon-th am-text-secondary"></span> 修改资料</a></li>
+
+                    <li><a href="__APP__/Member/change_password"><span class="am-icon-th am-text-secondary"></span> 修改密码</a></li>
+
+                </ul>
+
+            </li>
+
+            <li><a href="__APP__/Index/loginout"><span class="am-icon-sign-out am-text-danger"></span> 安全退出</a></li>
+
+        </ul>
+
+</div>
+
+<!-- sidebar end -->
+

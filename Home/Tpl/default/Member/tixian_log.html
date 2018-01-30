@@ -1,0 +1,48 @@
+{$leibie='提现记录'}
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="jflc-r fr">
+        <div class="jflc-c">
+            <div class="myorder">
+                <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我的提现记录<a href="__ROOT__/index.php/Member/tixian" class="am-btn am-btn-warning am-fr" style="padding: 0.4em 1em;font-size: 14px; color:#FFF">我要提现</a></h3>
+            </div>
+            <div class="cjsj order-info">
+                <table class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
+                    <tr class="jddd_dd">
+                        <td width="12%" align="center">提现ID(详情)</td>
+                        <td width="10%" align="center">提现金额</td>
+                        <td width="10%" align="center">积分变化</td>
+                        <td width="10%" align="center">申请日期</td>
+                        <td width="10%" align="center">审核日期</td>
+                        <td width="10%" align="center">提现日期</td>
+                        <td width="10%" align="center">状态</td>
+                    </tr>
+                    {if $list} {foreach from=$list item=v}
+                    <tr class="jddd_dd">
+                        <td align="center">
+                            <a href="__APP__/Member/tixian_detail/tid/{$v.tixian_id}">{$v.tid}</a>
+                        </td>
+                        <td align="center">{$v.txjine}</td>
+                        <td align="center">{$v.point}</td>
+                        <td align="center">{$v.txdate|date_format:'Y-m-d'}</td>
+                        <td align="center">{$v.handleDate|date_format:'Y-m-d'}</td>
+                        <td align="center">{$v.banliDate|date_format:'Y-m-d'}</td>
+                        <td class="red" align="center">{$v.status}</td>
+                    </tr>
+                    {/foreach} {else}
+                    <tr class="jddd_dd">
+                        <td colspan="7" style="background-color:#FFFFFF "><center>
+                        <img src="__PUBLIC__/assets/images/tx.png">
+                        </center>
+                        </td>
+                    </tr>
+                    {/if}
+                </table>
+            </div>
+            <div class="informationListPage" style="margin-top:20px;">{$pages}</div>
+        </div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

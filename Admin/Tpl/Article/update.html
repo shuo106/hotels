@@ -1,0 +1,165 @@
+<style type="text/css">
+  label.control-label{ width:85px;}
+</style>
+<script type="text/javascript">
+  $(function() {
+    $.CurrentNavtab.find('#btn_submit').click(function() {
+      $.CurrentNavtab.find('#j_custom_form').bjuiajax('ajaxForm', {
+//        confirmMsg: '确认提交吗?',
+        callback: function(data) {
+          if (data.statusCode == 200){
+            $(this).alertmsg('ok', data.message)
+            $(this).navtab('refresh','Article-lists');
+            $(this).navtab('closeCurrentTab');
+          }
+          if (data.statusCode == 300)
+            $(this).alertmsg('error', data.message)
+        }
+      })
+    })
+  })
+  function pic_upload_success(file, data) {
+    var json = $.parseJSON(data)
+    if (data.statusCode == 200)
+      $(this).alertmsg('ok', data.message)
+    if (data.status == 300)
+      $(this).alertmsg('error', data.message)
+    $(this).bjuiajax('ajaxDone', json)
+    if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {
+      $.CurrentNavtab.find('#j_custom_thumb').val(json.thumb)
+      $.CurrentNavtab.find('#j_custom_yuantu').val(json.yuantu)
+      $.CurrentNavtab.find('#j_custom_pic').html('<img style="width: 100px;height: 66px;" src=__ROOT__' + json.thumb + ' />')
+    }
+  }
+</script>
+<div class="bjui-pageContent">
+  <form action="__APP__/Article/add" method="post" id="j_custom_form">
+    <input type="hidden" name="id" value="{$arcinfo['articleid']}">
+    <input type="hidden" name="btn_submit" value="true">
+    <table class="table table-condensed table-hover" width="100%">
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <label for="j_custom_title" class="control-label x85">
+              标题：
+            </label>
+            <input type="text" name="title" id="j_custom_title" value="{$arcinfo.title}" size="35">
+            *
+          </td>
+          <td colspan="2">
+            <label for="j_custom_color" class="control-label x85">
+              标题颜色：
+            </label>
+            <input type="text" name="color" id="j_custom_color" value="{if $arcinfo.color}{$arcinfo.color}{/if}" style="background-color:{$arcinfo.color}" data-toggle="colorpicker" data-bgcolor="true" size="8" readonly>
+            <a href="javascript:;" title="清除颜色" data-toggle="clearcolor" data-target="#j_custom_color">
+                        清除颜色
+                    </a>
+            <input type="checkbox" class="checkboxCtrl" data-toggle="icheck" id="j_custom_bold" {if $arcinfo.strong}checked{/if}/>
+            <label for="j_custom_bold">
+              加粗
+            </label>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_sale" class="control-label x85">
+              所属栏目：
+            </label>
+            <select name="catid" id="j_custom_sale" data-toggle="selectpicker">
+              <option value="">
+                选择分类
+              </option>
+              {foreach from=$catelist item=v}
+              <option value="{$v['id']}" {if $v.id==$arcinfo.catid}selected='selected' {/if}>
+                {$v.html|indent:($v.lev-1):'&nbsp;'}{$v.name}
+              </option>
+              {/foreach}
+            </select>
+            *
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label class="control-label x85">
+              缩略图：
+            </label>
+            <div style="display: inline-block; vertical-align: middle;">
+              <div data-toggle='upload' data-uploader="__APP__/Upload/index/dir/news" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg"
+                data-auto="true" data-on-upload-success="pic_upload_success">
+              </div>
+              <input type="hidden" name="thumb" value="{$arcinfo.thumb}" id="j_custom_thumb">
+              <input type="hidden" name="yuantu" value="{$arcinfo.yuantu}" id="j_custom_yuantu">
+              <span id="j_custom_pic">
+                {if $arcinfo.thumb}
+                  <img style="width: 100px;height: 66px;" src="__ROOT__{$arcinfo.thumb}" alt=""/>
+                {/if}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_keywords" class="control-label x85">
+              关键字：
+            </label>
+            <input type="text" name="keywords" id="j_custom_keywords" value="{$arcinfo.keywords}" size="80">多个关键词以,(英文逗号)分割
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_birthplace" class="control-label x85">
+              内容摘要：
+            </label>
+            <textarea name="description" id="j_custom_note" data-toggle="autoheight" cols="35" rows="1" size="80">{$arcinfo.description}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_fname" class="control-label x85">
+              来源：
+            </label>
+            <input type="text" name="copyfrom" id="j_custom_copyfrom" value="{$arcinfo.copyfrom}" size="35">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_content" class="control-label x85">内容编辑：</label>
+            <div style="display: inline-block; vertical-align: middle;">
+              <textarea name="content" id="j_form_content" class="j-content" style="width:800px;" data-toggle="kindeditor" data-minheight="200">
+                {$arcinfo.content}
+              </textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="" class="control-label x85">
+              推荐：
+            </label>
+            <input type="radio" name="status" id="j_custom_status1" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $arcinfo.status}checked{/if}>
+            <input type="radio" name="status" id="j_custom_status2" data-toggle="icheck" value="0" data-label="否" {if !$arcinfo.status}checked{/if}>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <label for="j_custom_fname" class="control-label x85">
+              转向链接：
+            </label>
+            <input type="text" name="url" id="j_custom_url" value="{$arcinfo.url}" size="35">
+          </td>
+        </tr>
+      <tr>
+            <td colspan="4">
+                        <div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="button" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                        </td>
+                    </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

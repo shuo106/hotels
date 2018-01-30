@@ -1,0 +1,469 @@
+{include file="../Common/header.html"}
+<link href="__PUBLIC__/v4/css/flo.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="__PUBLIC__/gallery/images/css/style.min.css" />
+<!-- js_error begin -->
+<SCRIPT language=javascript>
+
+<!--
+window.onerror = function() {
+        return true;
+    }
+    // -->
+</SCRIPT>
+<!-- js_error end -->
+<!-- 去掉这3行，则点击直接显示原图，如果移动至下面则IE浏览器报错 begin -->
+<script type='text/javascript' src='__PUBLIC__/gallery/images/js/jquery.js'></script>
+<script type='text/javascript' src='__PUBLIC__/gallery/images/js/jquery.scripts.js'></script>
+<script type='text/javascript' src='__PUBLIC__/gallery/images/js/jquery.custom.js'></script>
+<!-- 去掉这3行，则点击直接显示原图，如果移动至下面则IE浏览报错 end -->
+<div class="places">
+    <div class="wrap">
+        <ul>
+            <li>
+                <em>您所在的位置：</em>
+                <em>首页</em> >
+                <em><a href="__ROOT__/Hotels/search-{$city['id']}-0-0-0-0-0-0-0-0.html">{$city['name']}酒店</a></em> > {$hotelinfo.hotelname}
+            </li>
+        </ul>
+    </div>
+</div>
+<!--顶部幻灯片开始-->
+<div class="hightlight">
+    <div class="wrap">
+        <div class="top">
+            <h3>{$hotelinfo.hotelname}
+            {if $hotelinfo['info']<6}
+			&nbsp;&nbsp;<img src="__PUBLIC__/images/stars{$hotelinfo['xingji']}.png" style="display: inline-block; position: relative; top: -2px;">
+            {else}
+                <span class="am-badge am-badge-warning">
+                    {$hotelinfo['xj']}
+                </span>
+            {/if}
+            </h3>
+            <div class="address">
+                地址：<a href="#map">{$hotelinfo.address}</a>
+                <span class="map"><i><img src="__PUBLIC__/v4/images/order_19.png"></i><a href="#map">地图</a></span>
+            </div>
+        </div>
+        <div class="bottom">
+            <!--左幻灯片-->
+            <div class="bottom-l fl">
+                <div id="slideshow-wrapper">
+                    <div id="slideshow-pattern" class="subheader-pattern-dot"></div>
+                    <div id="slideshow-border-top">
+                        <div id="gallery-slider-wrapper">
+                            <div id="gallery-slider">
+                                <div id="slider-images-wrapper">
+                                    <ul id="slider-main-ul">
+                                        {foreach from=$fu item=v}
+                                        <li class="type-1">
+                                            <a class="image-icon" rel="gallery[modal]" title="{$v.title}" href="__ROOT__{$v.src}"><img src="__ROOT__{$v.src}" alt="{$v.title}"></a>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of slideshow border top -->
+                    </div>
+                    <!-- end of slideshow wrapper -->
+                </div>
+            </div>
+            <div class="bottom-r fr">
+                <dl>
+                    <dt>
+                        <a href="">
+                            <div class="circle_percent" data-grade="{$fen}">
+                                <div class="percent">
+                                    <span>{round($fen)}</span> 分
+                                </div>
+                                <div class="circle" percent="{$unit}" style="display: block;">
+                                    <div style="visibility: visible; transform: rotate(-{$fen*36}deg);"></div>
+                                    <div style="transform: rotate(-180deg);"></div>
+                                </div>
+                            </div>
+                            <div class="satiinfo fr">
+                                <h3>已有<em>{$comment_total}</em>人点评</h3>
+                                <h4><span>{round($unit)}%</span>用户满意度</h4>
+                            </div>
+                        </a>
+                    </dt>
+                    <dd class="review">
+                        <ul>
+                            {if $comments}
+                            <li>来自{$comments[0]['userinfo']['username']}的最新评论：</li>
+                            <li>
+                                <p>{$comments[0]['content']}</p>
+                            </li>
+                            {else}
+                            <li>
+                                暂无评论
+                            </li>
+                            {/if}
+                        </ul>
+                        <dd class="icon">
+                            <ul>
+                                <li><a href="javascript:" id="shoucang" data-id="{$smarty.get.id}" class="xq_{if $collection}y{/if}sc">
+                                <span class="text">{if $collection}已{/if}收藏</span></a>
+                                </li>
+                                <li><a style="poorfish:expression(this.onclick=function kill(){ return false })" class="xq_zx"><span class="text">{date('Y',$hotelinfo.renovation)}年装修</span></a></li>
+<!--                                 <li class="wapshow" onmouseover="this.className = 'wapshow on';" onmouseout="this.className = 'wapshow';"><a href="" class="xq_sj"><span class="text">手机查看</span>
+                                            </a>
+                                    <div class="weixin_nr">
+                                        <div class="arrow"></div>
+                                        <img src="__PUBLIC__/v4/images/index2_32.png" width="100" height="100" /> 扫描关注我们
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </dd>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="blank20"></div>
+    </div>
+</div>
+<!--顶部幻灯片结束-->
+<!--酒店详情信息开始-->
+<div class="jdxq-main wrap">
+    <div class="jdxq-main-l fl">
+        <div class="menu">
+            <div class="menu-tit">
+                <nav class="menu-tit-nav" data-am-scrollspynav="{ menu-tit-nav: { offsetTop: 50,active: 'on'}}" data-am-sticky>
+                    <ul>
+                        <li class="on"><a href="#price">房型</a></li>
+                        <li><a href="#about">酒店信息</a></li>
+                        <li><a href="#map">电子地图</a></li>
+                        <li><a href="#comment">客人点评</a></li>
+                        <div class="am-fr" style=" margin-top:8px;">
+                            <div class="am-g">
+                                <input type="text" id="start" value="{$start}" style="height:28.4px;" />
+                                <input type="text" id="end" value="{$end}" style="height:28.4px;" />
+                                <button class="am-btn am-btn-warning am-btn-xs" id="search">搜索</button>
+                            </div>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+            {section loop=$roomtype name=type}
+            <div class="htype_list">
+                <div class="htype_item on" data-handle="roomType" data-roomid="{$roomtype[type].id}">
+                    <div class="htype_info clearfix" method="togRoom">
+                        <div class="htype_info_pic fl">
+                            {if $roomtype[type].thumb}
+                            <img src="__ROOT__/{$roomtype[type].thumb}" width="80px" height="60px;"> {else}
+                            <img src="__PUBLIC__/v4/images/noroompic.jpg" width="80px" height="60px;"> {/if}
+                        </div>
+                        <div class="htype_info_pb fr">
+                            <p class="cf55">
+                                <span class="t14 c555">¥</span>
+                                <span class="htype_info_num">{$roomtype[type].yudingjia}</span>
+                                <span class="t12">起</span>
+                            </p>
+                        </div>
+                        <div class="htype_info_nt">
+                            <p class="htype_info_name"><span class="l37d">{$roomtype[type].roomtype}</span></p>
+                            <p class="htype_info_ty">
+                               {if $roomtype[type].content}注：<span>{$roomtype[type].content|strip_tags}</span>{/if}
+                            </p>
+                        </div>
+                    </div>
+                    <!--房型详细信息start-->
+                    <div data-handle="roomTable" style="display:block;" class="htype_info_list btddd">
+                        <table cellpadding="0" cellspacing="0" class="htype-table">
+                            <thead>
+                                <tr>
+                                    <th class="ht_empty">&nbsp;</th>
+                                    <th class="ht_name">客房名称</th>
+                                    <th class="ht_supply">床型</th>
+                                    <th class="ht_brak">早餐</th>
+                                    <th class="ht_brak">上网</th>
+                                    <th class="ht_rule">支付方式</th>
+                                    <th class="ht_pri"><span class="night">日均价</span></th>
+                                    <th class="ht_book">&nbsp;</th>
+                                    <th class="ht_last">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-handle="rp" data-sroomid="0037" data-rpid="4792525" data-shotelid="90985748" data-rptype="2" data-mark="1" style="">
+                                    <td class="ht_empty">&nbsp;</td>
+                                    <td class="ht_name">
+                                        <span>{$roomtype[type].roomtype}</span>
+                                    </td>
+                                    <td class="ht_supply">
+                                        {$roomtype[type].fjchuang}
+                                    </td>
+                                    <td class="ht_brak">{$roomtype[type].zaocan}</td>
+                                    <td class="ht_brak">{$roomtype[type].swang}</td>
+                                    <td class="ht_rule">
+                                        <span class="ht_rule_free" method="cancelTip" canceltype="1">{if $roomtype[type].paytype}在线支付{else}前台支付{/if}</span>
+                                    </td>
+                                    <td class="ht_pri">
+                                        <span method="AvgPrice" class="ht_pri_h cur">¥<span class="ht_pri_num">{$roomtype[type].yudingjia}</span></span>
+                                    </td>
+                                    <td class="ht_book">
+                                        {if $roomtype[type].statuss == 1}
+                                        <a href="__ROOT__/Hotels/order-{$roomtype[type].id}.html" class="btn_com_w1">
+                                            <span class="yd">预订</span>
+                                        </a>
+                                        {else}
+                                        <a href="#" class="btn_com_w2">
+                                            <span class="yd">满房</span>
+                                        </a>
+                                        {/if}
+                                    </td>
+                                    <td class="ht_last">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--房型详细信息 end-->
+            </div>
+            {/section}
+        </div>
+        <div class="jdxx" id="about">
+            <h3><i></i>酒店信息</h3>
+            {if $peitao|| $canyin || $yule}
+            <div class="wx">
+                {if in_array('无线上网区域',$peitao)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_56.png"></li>
+                    <li>无线</li>
+                </ul>
+                {/if}
+                {if in_array('停车场',$peitao)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_46.png"></li>
+                    <li>停车场</li>
+                </ul>
+                {/if}
+                {if $canyin}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_48.png"></li>
+                    <li>餐厅</li>
+                </ul>
+                {/if}
+                {if in_array('室内游泳池',$yule)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_50.png"></li>
+                    <li>游泳池</li>
+                </ul>
+                {/if}
+                {if  in_array('健身房',$yule)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_56.png"></li>
+                    <li>健身房</li>
+                </ul>
+                {/if}
+                {if  in_array('接机服务',$peitao)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_67.png"></li>
+                    <li>接机服务</li>
+                </ul>
+                {/if}
+                {if  in_array('会议服务',$peitao)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_59.png"></li>
+                    <li>会议服务</li>
+                </ul>
+                {/if}
+                {if  in_array('商务中心',$peitao)}
+                <ul>
+                    <li><img src="__PUBLIC__/v4/images/xq_61.png"></li>
+                    <li>商务中心</li>
+                </ul>
+                {/if}
+            </div>
+            {/if}
+            <div class="jdxx-b">
+                <ul>
+                    <li><i><img src="__PUBLIC__/v4/images/xq_80.png"></i><span>酒店电话：</span>{$hotelinfo['telephone']}</li>
+                    <li><i><img src="__PUBLIC__/v4/images/xq_85.png"></i><span>停车场：</span>酒店提供收费停车位</li>
+                    <li><i><img src="__PUBLIC__/v4/images/xq_89.png"></i><span>酒店设施：</span> {foreach from=$peitao item=vo} {$vo} {/foreach}
+                    </li>
+                    <li><i><img src="__PUBLIC__/v4/images/xq_96.png"></i><span>可接受的信用卡：</span> {foreach from=$xinyongka item=vo} {$vo} {/foreach}
+                    </li>
+                    <li><i><img src="__PUBLIC__/v4/images/xq_91.png"></i><span>酒店简介：</span><br>
+                        {$hotelinfo['introduce']}</li>
+                </ul>
+            </div>
+            <div class="zbjt jdxx" id="map">
+                <h3><i></i>电子地图</h3>
+<!--                 <div data-am-widget="map" class="am-map am-map-default"
+                    data-name="{$hotelinfo['hotelname']}" data-address="{$prov['name']}{$city['name']}{$city1['name']}{$hotelinfo['city2']}{$hotelinfo['city3']}" data-longitude="{$hotelinfo['map'][0]}" data-latitude="{$hotelinfo['map'][1]}" data-scaleControl="" data-zoomControl="true" data-setZoom="14" data-icon="http://amuituku.qiniudn.com/mapicon.png">
+                    <div id="bd-map"></div>
+                </div> -->
+                <div id="show-map" style="height:400px;"></div>
+            </div>
+            <div class="khdp jdxx" id="comment">
+                <h3><i></i>客户点评</h3> {if $comments}
+                <div class="hpl">
+                    <div class="hpl-l fl">
+                        <ul>
+                            <li><span>{round($unit)}%</span></li>
+                            <li>好评率</li>
+                        </ul>
+                        <p>共{$comment_total}人点评</p>
+                    </div>
+                    <div class="dp-true fl">
+                        <img src="__PUBLIC__/v4/images/dp.png">
+                    </div>
+                    <h4><a href="__ROOT__/Member/member_order.html?comment=1">我来点评</a></h4>
+                </div>
+                {foreach from=$comments item=vo}
+                <div class="khdp-main">
+                    <div class="khdp-main-l fl">
+                        <ul>
+                            <li><i><img src="__ROOT__{$vo['userinfo']['icon']|default:'/Public/home/images/notx.png'}"></i></li>
+                            <li>{$vo['userinfo']['username']}</li>
+                        </ul>
+                    </div>
+                    <div class="khdp-main-r fr">
+                        <h4>{date('Y-m-d',$vo.addtime)} </h4>
+                        <h5>{$vo.content}</h5> {if $vo.thumb}
+                        <ul>
+                             {foreach from=$vo.photo item=v}
+                            <li><img src="__ROOT__{$v}"></li>
+                            {/foreach}
+                        </ul>
+                        {/if}
+                        <div class="swbj">
+                            <h6 class="fl">{$vo.title}</h6>
+                            <p class="fr"><i><img src="__PUBLIC__/v4/images/dptx2.png"></i>{$vo.reply}</p>
+                        </div>
+                    </div>
+                </div>
+                {/foreach} {else}
+                <div class="nmore_dp">
+                    <center><img src="__PUBLIC__/assets/images/nodp.png"></center>
+                </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+    <div class="jdxq-main-r fr">
+        <h3><a href="">附近酒店</a></h3> {if $nearby} {foreach from=$nearby item=vo}
+        <div class="fjjd-main01">
+            <div class="fjjd-l fl">
+                <img src="__ROOT__{$vo.thumb}" style="width: 90px;height: 67.5px;">
+            </div>
+            <div class="fjjd-r fr">
+                <h4 class="am-g">
+                    <a class="am-fl" href="__ROOT__/Hotels/show-{$vo.hotelid}.html">{$vo.hotelname}</a>
+                    <span class="am-fr am-text-warning">{$vo.xingji}</span>
+                </h4>
+                <p>距离该酒店<i>{$vo.juli}</i>米<span>￥{$vo.price}起</span></p>
+            </div>
+        </div>
+        {/foreach} {/if}
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+
+    var x="{$hotelinfo['map'][0]}";
+    var y="{$hotelinfo['map'][1]}";
+    console.log(x,y);
+    var map = new BMap.Map("show-map");          // 创建地图实例   
+    var point = new BMap.Point(x, y);  // 创建点坐标   
+    map.centerAndZoom(point, 13);               // 初始化地图，设置中心点坐标和地图级别
+
+
+    var myIcon = new BMap.Icon('http://amuituku.qiniudn.com/mapicon.png', new BMap.Size(23, 25), {    
+        // 指定定位位置。  markers.png 
+        // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+        // 图标中央下端的尖角位置。    
+        anchor: new BMap.Size(10, 25),    
+        // 设置图片偏移。  "http://amuituku.qiniudn.com/mapicon.png 
+        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+        // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+        imageOffset: new BMap.Size(0, -10)   // 设置图片偏移    
+    }); 
+
+    var marker = new BMap.Marker(point);        // 创建标注
+    marker.setIcon(myIcon);
+    map.addOverlay(marker);
+    var opts = {  
+            width : 180,     // 信息窗口宽度  
+            height: 50,     // 信息窗口高度  
+            title : "{$hotelinfo['hotelname']}"  // 信息窗口标题  
+        }  
+    var hoteladd="{$hotelinfo['address']}";
+    var infoWindow = new BMap.InfoWindow(hoteladd, opts);  // 创建信息窗口对象  
+    // map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+    map.openInfoWindow(infoWindow, point);      // 打开信息窗口
+    map.addControl(new BMap.NavigationControl()); //平移缩放控件
+		//map.addControl(new BMap.OverviewMapControl());  //缩略地图控件
+		//map.addControl(new BMap.ScaleControl());  //比例尺控件
+        //map.addControl(new BMap.MapTypeControl());  //地图类型控件
+        
+
+        $("#search").click(function(){
+            var start=$('#start').val();
+            var end=$("#end").val();
+            if(!start||!end){
+                alert('请选择入住时间和离店时间');
+                return false;
+            }
+            window.location.href="__ROOT__/Hotels/show-{$smarty.get.id}.html?start="+start+"&end="+end;
+        });
+        //日期选择
+        var nowTemp = new Date();
+        var nowDay = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0).valueOf();
+        var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), 1, 0, 0, 0, 0).valueOf();
+        var nowYear = new Date(nowTemp.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+        var $myStart2 = $('#start');
+        var checkin = $myStart2.datepicker({
+            onRender: function(date, viewMode) {
+                // 默认 days 视图，与当前日期比较
+                var viewDate = nowDay;
+                switch (viewMode) {
+                    // moths 视图，与当前月份比较
+                    case 1:
+                        viewDate = nowMoth;
+                        break;
+                        // years 视图，与当前年份比较
+                    case 2:
+                        viewDate = nowYear;
+                        break;
+                }
+                return date.valueOf() < viewDate ? 'am-disabled' : '';
+            }
+        }).on('changeDate.datepicker.amui', function(ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.close();
+            $('#end')[0].focus();
+        }).data('amui.datepicker');
+        var checkout = $('#end').datepicker({
+            onRender: function(date, viewMode) {
+                var inTime = checkin.date;
+                var inDay = inTime.valueOf();
+                var inMoth = new Date(inTime.getFullYear(), inTime.getMonth(), 1, 0, 0, 0, 0).valueOf();
+                var inYear = new Date(inTime.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+                // 默认 days 视图，与当前日期比较
+                var viewDate = inDay;
+                switch (viewMode) {
+                    // moths 视图，与当前月份比较
+                    case 1:
+                        viewDate = inMoth;
+                        break;
+                        // years 视图，与当前年份比较
+                    case 2:
+                        viewDate = inYear;
+                        break;
+                }
+                return date.valueOf() <= viewDate ? 'am-disabled' : '';
+            }
+        }).on('changeDate.datepicker.amui', function(ev) {
+            checkout.close();
+        }).data('amui.datepicker');        
+    })
+</script>
+<!--酒店详情信息结束-->
+{include file="../Common/footer.html"}

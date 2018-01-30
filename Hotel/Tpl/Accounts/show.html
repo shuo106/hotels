@@ -1,0 +1,71 @@
+<include file="Tpl/public/header.html" />
+<style type="text/css">
+.am-btn-default{
+    border-color:#ccc;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单管理</strong> / <small>Accounts</small></div>
+            </div>
+            
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-id" style="width:120px">订单编号</th>
+                                    <th class="table-title am-hide-sm-only">预订房间</th>
+                                    <th class="table-type am-hide-sm-only">预订姓名</th>
+                                    <th class="table-date am-hide-sm-only">入住时间</th>
+                                    <th class="table-date am-hide-sm-only">离店时间</th>
+                                    <th class="table-date am-hide-sm-only">应付金额</th>
+                                    <th class="table-date am-hide-sm-only">订单来源</th>
+                                    <th class="table-date am-hide-sm-only">订单状态</th>       
+                                    <!-- <th class="table-set">订单操作</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="list" id="vo">
+                                    <tr>
+                                    <td><a href="__APP__/Order/edit/id/{$vo.oid}">{$vo.yd_addtime}{$vo.oid}</a></td>
+                                        <td class=" am-hide-sm-only">{$vo.roomname}</td>
+                                        <td class=" am-hide-sm-only">{$vo.yd_name}</td>
+                                        <td class="am-hide-sm-only"><php>echo date('Y-m-d',$vo['yd_start']);</php></td>
+                                        <td class="am-hide-sm-only"><php>echo date('Y-m-d',$vo['yd_end']);</php></td>
+                                        <td class="am-hide-sm-only">{$vo.total}</td>
+                                        <td class="am-hide-sm-only">{$lang['from'][$vo['yd_from']]}</td>
+                                        <td class=" am-hide-sm-only">
+                                        <span style="background-color: {$lang['color'][$vo['status']]};color:#FFF;padding: 5px;">{$lang['status'][$vo['status']]}</span></td>
+                                       <!--  <td>
+                                            <div class="am-btn-toolbar">
+                                                <div class="am-btn-group am-btn-group-xs">
+                                                    <a class="am-btn am-btn-default am-btn-xs" href="__APP__/Accounts/show_edit/id/{$vo.id}"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                                    <a class="am-btn am-btn-default am-btn-xs" href="__APP__/Accounts/show_del/id/{$vo.id}"><span class="am-icon-pencil-square-o"></span> 删除</a>
+                                                </div>
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+                            共 {$total} 条记录
+                            <div class="am-fr">
+                            {$page}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<include file="Tpl/public/bottom.html" />

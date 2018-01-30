@@ -1,0 +1,190 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/uploadify/uploadify.css"> 
+<script src="__PUBLIC__/uploadify/jquery.uploadify.js"></script>
+<style>
+.uploadify{ padding-top:6px; padding-left:14px;}
+</style>
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="order-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我要点评</h3>
+        </div>
+        <div class="order-info">
+            <form action="__URL__/member_comments" class="am-form" method="post" name="myform" id="myform" enctype="multipart/form-data">
+                <table class="am-table">
+                    <input type="hidden" name="oid" value="{$row.orderid}" />
+                    <input type="hidden" name="rid" value="{$row.roomid}" />
+                    <input type="hidden" name="title" value="{$row.roomtype}" />
+                    <input type="hidden" name="itemid" value="{$row.hotelid}" />
+                    <tr>
+                        <td width="12%" align="right">入住酒店：</td>
+                        <td width="88%" ><strong class="red">{$row.hotelname}</strong></td>
+                    </tr>
+                    <tr>
+                        <td align="right">评价等级：</td>
+                        <td class="m-radio">
+                            <label class="am-radio am-fl am-margin-left-xs" style="margin-top:0px; margin-bottom:0px;margin-left: 0rem;"><INPUT data-am-ucheck id="label" type="radio" CHECKED value="好评" name="label">好评</label>
+                            <label class="am-radio am-fl am-margin-left-xs" style="margin-top:0px; margin-bottom:0px"><INPUT data-am-ucheck id="label" type="radio" value="中评" name="label">中评</label>
+                            <label class="am-radio am-fl am-margin-left-xs" style="margin-top:0px; margin-bottom:0px"><INPUT data-am-ucheck id="label" type="radio" value="差评" name="label">差评</label>
+                            <label class="am-radio am-fl am-margin-left-xs" style="margin-top:0px; margin-bottom:0px"><INPUT data-am-ucheck id="label" type="radio" value="投诉" name="label">投诉</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">满意程度：</td>
+                        <td>
+                            <SELECT id="unit" name="unit" style="width: 80px;padding: 0;">
+                                <OPTION value="100%">100%</OPTION>
+                                <OPTION value="90%">90%</OPTION>
+                                <OPTION value="80%" selected>80%</OPTION>
+                                <OPTION value="70%">70%</OPTION>
+                                <OPTION value="60%">60%</OPTION>
+                                <OPTION value="50%">50%</OPTION>
+                                <OPTION value="40%">40%</OPTION>
+                                <OPTION value="30%">30%</OPTION>
+                                <OPTION value="20%">20%</OPTION>
+                                <OPTION value="10%">10%</OPTION>
+                            </SELECT>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">详细评价：</td>
+                        <td>
+                            <div class="am-form-group" style="margin-bottom: 0rem;">
+                            <textarea name="content" id="content" cols="35" rows="3" style="border: 1px #ddd solid; height:auto;width: 300px;"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">点评图片：</td>
+                        <td style="padding:0px">
+                            <input name="thumb" id="thumb" type="hidden" value=""/>
+                            <input id="file_upload" name="file_upload" type="file" multiple="true" style="padding-top: 5px;">
+                            <ul class="m-pics" style="margin-top: 10px;">
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                          <button type="button" ajaxform data-form="#myform" class="am-btn am-btn-primary">提交</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="informationListPage" style="margin-top:20px;">{$page}</div>
+    </div>
+    <script type="text/javascript">
+
+        //获取图片流
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) { // basic
+                url = window.createObjectURL(file);
+            } else if (window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+        //图片即时展现
+        $("#file_upload").change(function() {
+            // var $img = $(this).data('for');
+            // console.log($("#file_upload")[0].files[0]);
+            // console.log(form);
+            let reader = new FileReader();
+            var arr = [];
+            for (var i = 0; i < this.files.length; i++) {
+                let file = this.files[i];
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    let data = {
+                        file: this.result,
+                        length: file['size'],
+                        name: file['name']
+                    }
+                    $.ajax({
+                        url: '/app.php/Wechat/doupload',
+                        method: 'POST',
+                        data: data,
+
+                        success: function(res) {
+    // console.log(res);
+                            if(res.code == 200) {
+                                // let data = JSON.parse(res);
+                                var html="<li>";
+                                    html += "<img src=" + res.data.thumb + " />";
+                                    html += "</li>";
+                                $(".m-pics").append(html);
+                                if ($('#thumb').val()) {
+                                    $('#thumb').val($('#thumb').val() + ',' + res.data.thumb);
+                                } else {
+                                    $('#thumb').val(res.data.thumb);
+                                }
+                                console.log($('#thumb').val());
+                            }
+                        },
+                        error: function(err) {
+// console.log(err);
+                        }
+                    });
+                }
+/*                 var objUrl = (window.URL || window.webkitURL).createObjectURL(file);
+                if (objUrl) {
+                    // $($img).attr("src", objUrl);
+                    var html="<li>";
+                    html += "<img src="+objUrl+" />";
+                    html += "</li>";
+                    $(".m-pics").append(html);
+                }; */
+
+
+            }
+
+            // console.log(arr);
+        });
+
+/*         $(function(){
+            //图片上传
+            $('#file_upload').uploadify({
+                'formData': (typeof data)!="undefined"?data:{},
+                'swf': '__PUBLIC__/uploadify/uploadify.swf',
+                //'uploader' : '__PUBLIC__/uploadify/uploadify.php',
+                'uploader': '__APP__/index.php/Uploadify/index',
+                'buttonText': "浏览上传",
+                'auto': true,
+                //设置为true将允许多文件上传
+                'multi': true,
+                // 队列大小
+                'queueSizeLimit' : 5,
+                'onInit': function() {
+                    document.cookie = "pids =; expires=Fri, 31 Dec 1999 23:59:59 GMT;";
+                },
+                'onUploadSuccess': function(file, data) {
+                    console.log(data);
+                    //判断上传数量
+                    console.log($(".m-pics li").length);
+                    if($(".m-pics li").length>4){
+                        alert('评论最多上传五张图片');
+                        return false;
+                    }
+                    var html="<li>";
+                    html += "<img src=__ROOT__"+data+" />";
+                    html += "</li>";
+                    $("#thumb").val($("#thumb").val()+data+",");
+                   $(".m-pics").append(html);
+                }
+            });            
+        }); */
+        function callback(rs){
+            alert(rs.msg);
+            if(rs.status==1){
+                location.href='__ROOT__/Member/member_order.html';
+            }
+        }
+    </script>
+</div>
+{include file="../Common/footer.html"}

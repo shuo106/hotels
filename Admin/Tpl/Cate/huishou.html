@@ -1,0 +1,76 @@
+<script type="text/javascript">
+	$(function() {
+		//排序
+		$.CurrentNavtab.find('#sortbtn').click(function() {
+			$('#sortform').bjuiajax('ajaxForm', {
+				callback: function(data) {
+					if (data.status == 1) {
+						$(this).alertmsg('ok', data.msg)
+						$(this).navtab('refresh')
+					}
+					if (data.status == 0)
+						$(this).alertmsg('error', data.msg)
+				},
+			})
+		});
+	})
+</script>
+<div class="bjui-pageHeader" style="height:38px">
+			<div style="float:left;margin-top:4px;">
+				<div class="btn-group">
+					<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+					<ul class="dropdown-menu right" role="menu">
+						<li><a class="btn" href="__APP__/Cate/pi/type/2" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要还原选中项吗？">还原选中</a></li>
+						<li><a class="btn" href="__APP__/Cate/pi/type/1" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要彻底删除选中项吗？">删除选中</a></li>
+					</ul>
+				</div>
+			</div>
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Cate/huishou" method="get">
+		<div class="bjui-searchBar" style="margin-top:5px">
+		<!--	<a class="btn btn-blue" id="sortbtn" href="javascript:;" data-icon="refresh">更新排序</a>-->
+			<label>&nbsp;&nbsp;&nbsp;关键字：</label>
+			<input type="text" value="{$smarty.get.keywords}" name="keywords" class="form-control" size="8">&nbsp;
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<form id="sortform" data-toggle="doajax" action="__APP__/Cate/sort" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height:36px;line-height:36px;">
+					<th style="background:#1078C1;color:#fff;"  width="26">
+						<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+					</th>
+					<th style="background:#1078C1;color:#fff;"  data-order-field="id">ID</th>
+					<th style="background:#1078C1;color:#fff;"  >栏目名称</th>
+					<th style="background:#1078C1;color:#fff;"  >分类属性</th>
+					<th style="background:#1078C1;color:#fff;"  >关键字</th>
+					<th style="background:#1078C1;color:#fff;"  width="300">描述</th>
+					<!--<th style="background:#1078C1;color:#fff;"  data-order-field="addtime">添加时间</th>-->
+					<th style="background:#1078C1;color:#fff;"  width="190">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$list item=v key=k}
+				<tr data-id="{$k}">
+					<td>
+						<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+					</td>
+					<td>{$v.id}</td>
+					<td>{$v.name|indent:($v.lev-1):'-'}</td>
+					<td>{if $v['lev']==1}<span style='font-weight:bold;'>顶级分类</span>{else}{ch_to_num($v['lev'])}级分类{/if}</td>
+					<td>{$v['keywords']}</td>
+					<td>{$v['description']}</td>
+				<!--	<td>{$v.addtime|date_format:"%Y-%m-%d"}</td>-->
+					<td>
+						<a href="__APP__/Cate/reduction/id/{$v.id}" class="btn btn-orange" data-toggle="doajax" data-confirm-msg="确定要还原该行信息吗？">还原</a>
+						<a href="__APP__/Cate/del/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>

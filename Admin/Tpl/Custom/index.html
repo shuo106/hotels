@@ -1,0 +1,58 @@
+<script type="text/javascript">
+</script>
+<!--<div class="bjui-pageHeader" style="height:38px">
+    <div class="bjui-searchBar" style="margin-top:6px">
+    </div>
+</div>  -->
+<div class="bjui-pageContent tableContent">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Custom/index" method="get">
+        <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+            <thead>
+                <tr style="height:36px;line-height:36px;">
+                    <th style="background:#1078C1;color:#fff;">ID</th>
+                    <th style="background:#1078C1;color:#fff;">名称</th>
+                    <th style="background:#1078C1;color:#fff;">类别</th>
+                    <th style="background:#1078C1;color:#fff;" width="100">操作 &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="__APP__/Custom/add/tid/{$smarty.get.tid}" data-toggle="dialog" class="btn btn-green" data-id="custom_edit" data-mask="true" data-reload="true" data-width="400" data-height="200" data-on-close="refresh">新增</a>
+                    </th>
+                </tr>
+            </thead>
+    </form>
+    <tbody>
+        {foreach from=$list item=v key=k}
+        <tr data-id="{$k}">
+            <td>{$v.id}</td>
+            <td>{$v.name}</td>
+            <td>
+              {if $v.tid==1}
+                床型
+              {elseif $v.tid==2}
+                早餐
+              {elseif $v.tid==3}
+                上网
+              {/if}
+            </td>
+            <td>
+                <a href="__APP__/Custom/add/id/{$v.id}" class="btn btn-green" data-toggle="dialog" data-height="200" data-id="custom_edit" data-on-close="doc_dialog_onClose">编辑</a>
+                <a href="__APP__/Custom/delcustom/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除吗">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </tbody>
+    </table>
+</div>
+<div class="bjui-pageFooter">
+    <div class="pages">
+        <span>每页&nbsp;</span>
+        <div class="selectPagesize">
+            <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+                {foreach from=$pagesizes item=v}
+                <option value="{$v}">{$v}</option>
+                {/foreach}
+            </select>
+        </div>
+        <span>&nbsp;条，共 {$total} 条</span>
+    </div>
+    <div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<style type="text/css">
+  label.control-label{ width:85px;}
+</style>
+<script type="text/javascript">
+  $(function(){
+    $.CurrentNavtab.find('#btn_submit').click(function (){
+       $('#j_custom_form').bjuiajax('ajaxForm', {
+      confirmMsg:'确认提交吗？',
+      callback: function(data){
+        if(data.statusCode==200){
+          $(this).alertmsg('ok', data.message);
+          $(this).navtab({
+            id:'Cate-lists',
+            url:data.forward,
+            'title':'分类列表'
+          });
+        }
+        if(data.statusCode==300){
+            $(this).alertmsg('error', data.message)
+        }
+      },
+      reloadNavtab:true,
+       })
+    })
+  })
+    //护照有效日期  = 签发日期 + 10年
+    $('#j_custom_issuedate').on('afterchange.bjui.datepicker', function(e, data) {
+            var pattern = 'yyyy-MM-dd'
+            var start   = end = data.value
+            end.setFullYear(start.getFullYear() + 10)
+            end.setDate(start.getDate() - 1)
+            $('#j_custom_indate').val(end.formatDate(pattern))
+        })
+</script>
+<div class="bjui-pageContent">
+    <form action="__APP__/Cate/add" method="post" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
+    <input type="hidden" name="id" value="{$cateinfo.id}">
+    <input type="hidden" name="btn_submit" value="true">
+    <table class="table table-condensed table-hover" width="100%">
+        <tbody>
+            <tr>
+                <td>
+                    <label for="j_custom_name" class="control-label x85">
+                        栏目名称：
+                    </label>
+                    <input type="text" name="name" id="j_custom_title" value="{$cateinfo.name}" data-rule="required" size="35">
+                </td>
+             </tr>
+             <tr>
+                <td>
+                    <label for="j_custom_cate" class="control-label x85">
+                        父级栏目：
+                    </label>
+                    <select name="pid" id="j_custom_cate" data-toggle="selectpicker">
+                        <option value="">
+                            选择栏目
+                        </option>
+                        {foreach from=$list item=v}
+                        <option
+                            value="{$v['id']}" {if $v.id==$cateinfo.pid}selected='selected'{/if}>
+                            {$v.name|indent:($v.lev):'-'}
+                        </option>
+                        {/foreach}
+                    </select>
+                </td>
+              </tr>
+              <tr>
+                 <td colspan="2">
+                    <label for="j_custom_keywords" class="control-label x85">
+                        栏目关键字：
+                    </label>
+                    <input type="text" name="keywords" id="j_custom_keywords" value="{$cateinfo.keywords}" data-rule="required" size="35">
+                </td>
+            </tr>
+      <tr>
+        <td colspan="4">
+                    <label for="j_custom_note" class="control-label x85">
+                        栏目描述：
+                    </label>
+          <textarea name="description" id="j_custom_note" data-toggle="autoheight" cols="84.5" rows="1" size="35">{$cateinfo.description}</textarea>
+                </td>
+      </tr>
+            <tr>
+        <td>
+                 <div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="button" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                </td>
+      </tr>
+        </tbody>
+    </table>
+</div>
+</form>

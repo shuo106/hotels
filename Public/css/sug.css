@@ -1,0 +1,22 @@
+.sug {
+position:absolute;
+width:150px;
+height:200px;
+background:#FFFFFF;
+border:solid 1px #000;
+overflow:auto;
+	 z-index:100;
+	 text-align:left;
+}
+.sug ul, .sug li {
+	list-style:none;
+padding:0;
+margin:0;
+cursor:default;
+}
+.sug li.hover {
+background:#ff0;
+}
+.sug li {
+height:20px;
+}

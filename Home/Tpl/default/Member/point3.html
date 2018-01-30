@@ -1,0 +1,54 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="jfls-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我的积分流水（<font style="color:#ffa500">当前积分：{$point}分</font>）</h3>
+        </div>
+            <div class="cjsj order-info">
+                <table class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
+                    <tr class="jddd_dd">
+                        <td width="12%" align="center">积分流水ID</td>
+                        <td width="10%" align="center">订单编号</td>
+                        <td width="10%" align="center">提现编号</td>
+                        <td width="10%" align="center">积分变化</td>
+                        <td width="10%" align="center">时间</td>
+                        <td width="10%" align="center">类型</td>
+                    </tr>
+                    {if $list} {foreach from=$list item=v}
+                    <tr class="jddd_dd">
+                        <td align="center">{$v.ctime}{$v.id}</td>
+                        <td align="center">
+                        {if !$v.type}
+                        <a style="color:#0055aa" href="__APP__/Member/order_content/pid/{$v.order_id}">{$v.id}</a> {/if}                          
+                        </td>
+                        {if !$v.type}
+                        <a style="color:#0055aa" href="__APP__/Member/order_content/pid/{$v.order_id}">{$v.oid}</a> {elseif $v.type=1}
+                        <a style="color:#0055aa" href="__APP__/Member/tixian_detail/tid/{$v.tixian_id}">{$v.tid}</a> {/if}                          
+                        <td align="center">
+                        {if $v.type}
+                        <a style="color:#0055aa" href="__APP__/Member/tixian_detail/tid/{$v.tixian_id}">{$v.tid}</a> {/if}                          
+                        </td>
+                        <td class="red" align="center">
+                     {if !$v.type}
+                      <span style="color:green">+</span>{/if}{$v.total}</td>
+                        <td align="center">{$v.ctime|date_format:'Y-m-d'}</td>
+                       <td align="center">
+                          {if !$v.type}消费兑换{else}兑换{/if}</td>
+                    </tr>
+                    {/foreach} {else}
+                    <tr class="jddd_dd">
+                        <td colspan="7" >
+                            <center>
+                                <img  src="__PUBLIC__/assets/images/dingdan.png"/>
+                            </center>
+                        </td>
+                    </tr>
+                    {/if}
+                </table>
+            </div>        
+        <div class="informationListPage" style="margin-top:20px;">{$pages}</div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>酒店信息编辑</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Hotels/add" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$hotelid|default:''}" />
+	<table border="1" class="table_border">
+      <tr>
+        <th colspan="2" align="center" class="table_border_title">酒店信息编辑</th>
+      </tr>
+      <tr>
+        <td width="15%">酒店名称：</td>
+        <td><input type="text" class="input_table" name="hotelname" class="input_table" size="25" value="{$hotelname}" /> <font color="red">*</font></td>
+      </tr>
+       <tr>
+        <td>Title(标题):</td>
+        <td><input type="text" maxlength="100" style="width:633px;"  name="title" value="{$title}" class="inputtxt" />
+        </td>
+      </tr>
+	  <tr>
+        <td>Keywords(关键字):</td>
+        <td><input type="text" maxlength="100"  style="width:633px;" name="keywords" value="{$keywords}" class="inputtxt" title="提示:多个关键字请用半角逗号"/>
+        </td>
+      </tr>
+	   <tr>
+        <td>Description(描述):</td>
+        <td><textarea class="zhaiyao" style="width:630px; height:36px;" name="description">{$description}</textarea></td>
+      </tr>
+      <tr>
+       <td>连锁品牌：</td><td><select  name="lspp">
+				<option value="">-连锁品牌-</option>
+				{section loop=$ls name=item}
+				<option value="{$ls[item].name}">{$ls[item].name}</option>
+				{/section}
+			</select></td>
+	</tr>
+	 <tr>
+        <td>酒店类型：</td><td><select  name="xingji">
+				{section loop=$xingji name=item}		
+				<option value="{$xingji[item].id}">{$xingji[item].name}</option>
+				{/section}
+			</select></td>
+        </tr>
+      <tr>
+        <td>酒店所在城市{$cityRow1}：</td>
+        <td>
+			<select id="city" name="city2">
+				<option value="">请选择</option>
+				{foreach from=$res item=v}
+				<option value="{$v['province']}">{$v['province']}</option>
+				{/foreach}
+			</select>
+			<select id="sub_city" style="display:none;" name="city3"></select>
+			<select id="sub_county" style="display:none;" name="city4"></select>
+			<input type="text" name="cityfj" value="{$city2}" size="15" /><font color="red">* 如：大学路</font>
+			<input type="text" name="cityfj2" value="{$city3}" size="15" /><font color="red">* 如：10号</font>
+		</td>
+      </tr>
+      <!--  <tr>
+        <td>联系地址：</td>
+        <td><input type="text" class="input_table" name="address" size="40" value="{$address}"> <font color="red">*</font></td>
+      </tr>-->
+      <tr>
+        <td>附近地标：</td>
+        <td>
+			<input type="text" class="input_table" size="15" name="fjdb1" value="{$fjdb1}" />
+			<input type="text" class="input_table" size="15" name="fjdb2" value="{$fjdb2}" /> 
+			<input type="text" class="input_table" size="15" name="fjdb3" value="{$fjdb3}" /> 
+			<input type="text" class="input_table" size="15" name="fjdb4" value="{$fjdb4}" /> 
+			<input type="text" class="input_table" size="15" name="fjdb5" value="{$fjdb5}" /> <font color="red">*如：火车站,地铁,机场</font></td>
+      </tr>
+      <tr>
+        <td>附近信息：</td>
+        <td>
+			<input type="text" class="input_table" size="15" name="fjscenery1" value="{$fjscenery1}" /> 
+			<input type="text" class="input_table" size="15" name="fjscenery2" value="{$fjscenery2}" /> 
+			<input type="text" class="input_table" size="15" name="fjscenery3" value="{$fjscenery3}" /> 
+			<input type="text" class="input_table" size="15" name="fjscenery4" value="{$fjscenery4}" /> 
+			<input type="text" class="input_table" size="15" name="fjscenery5" value="{$fjscenery5}" /> <font color="red">*如：火车站,地铁,机场</font></td>
+      </tr>
+     <tr>
+        <td>附近酒店：</td>
+        <td><input type="text" class="input_table" size="15" name="fjhotel1" value="{$fjhotel1}" /> 
+			<input type="text" class="input_table" size="15" name="fjhotel2" value="{$fjhotel2}" /> 
+			<input type="text" class="input_table" size="15" name="fjhotel3" value="{$fjhotel3}" /> 
+			<input type="text" class="input_table" size="15" name="fjhotel4" value="{$fjhotel4}" /> 
+			<input type="text" class="input_table" size="15" name="fjhotel5" value="{$fjhotel5}" /> <font color="red">*如：郑州如家快捷酒店</font></td>
+      </tr>
+      <tr> 
+        <td>附近景点：</td>
+        <td>
+			<input type="text" class="input_table" size="15" name="fjlv1" value="{$fjlv1}" /> 
+			<input type="text" class="input_table" size="15" name="fjlv2" value="{$fjlv2}" /> 
+			<input type="text" class="input_table" size="15" name="fjlv3" value="{$fjlv3}" /> 
+			<input type="text" class="input_table" size="15" name="fjlv4" value="{$fjlv4}" /> 
+			<input type="text" class="input_table" size="15" name="fjlv5" value="{$fjlv5}" />
+			<font color="red">*如：郑州嵩山少林寺</font></td>
+      </tr> 
+	  <tr>
+        <td>附近美食：</td>
+        <td><input type="text" class="input_table" size="15" name="fjms1" value="{$fjms1}" /> 
+			<input type="text" class="input_table" size="15" name="fjms2" value="{$fjms2}" /> 
+			<input type="text" class="input_table" size="15" name="fjms3" value="{$fjms3}" /> 
+			<input type="text" class="input_table" size="15" name="fjms4" value="{$fjms4}" /> 
+			<input type="text" class="input_table" size="15" name="fjms5" value="{$fjms5}" />
+			</td>
+      </tr>
+      <tr> 
+        <td>附近商家：</td>
+        <td>
+			<input type="text" class="input_table" size="15" name="fjsj1" value="{$fjsj1}" /> 
+			<input type="text" class="input_table" size="15" name="fjsj2" value="{$fjsj2}" /> 
+			<input type="text" class="input_table" size="15" name="fjsj3" value="{$fjsj3}" /> 
+			<input type="text" class="input_table" size="15" name="fjsj4" value="{$fjsj4}" /> 
+			<input type="text" class="input_table" size="15" name="fjsj5" value="{$fjsj5}" />
+      </tr>
+	  <tr>
+        <td>附近大厦小区：</td>
+        <td>
+			<input type="text" class="input_table" size="15" name="fjdsxq1" value="{$fjdsxq1}" /> 
+			<input type="text" class="input_table" size="15" name="fjdsxq2" value="{$fjdsxq2}" /> 
+			<input type="text" class="input_table" size="15" name="fjdsxq3" value="{$fjdsxq3}" /> 
+			<input type="text" class="input_table" size="15" name="fjdsxq4" value="{$fjdsxq4}" /> 
+			<input type="text" class="input_table" size="15" name="fjdsxq5" value="{$fjdsxq5}" /> <font color="red">*如：郑州南阳路海棠园</font></td>
+      </tr>
+      <!--  
+      <tr>
+        <td>外观图片：</td>
+        <td><input type="file" name="thumb1" />{if $thumb1}&nbsp;&nbsp;<a href="javascript:" 
+		onClick='javascript:window.open("__APP__/Hotels/preview/thumb/thumb1/id/{$hotelid}","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes");return false;'>预览</a>{/if}</td>
+      </tr>
+      <tr>
+        <td>酒店大堂：</td>
+        <td><input type="file" name="thumb2" />{if $thumb2}&nbsp;&nbsp;<a href="javascript:" 
+		onClick='javascript:window.open("__APP__/Hotels/preview/thumb/thumb2/id/{$hotelid}","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes");return false;'>预览</a>{/if}</td>
+      </tr>
+      <tr>
+        <td>房间图片：</td>
+        <td><input type="file" name="thumb3" />{if $thumb3}&nbsp;&nbsp;<a href="javascript:" 
+		onClick='javascript:window.open("__APP__/Hotels/preview/thumb/thumb3/id/{$hotelid}","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes");return false;'>预览</a>{/if}</td>
+      </tr>
+      <tr>
+        <td>设施服务：</td>
+        <td><input type="file" name="thumb4" />{if $thumb4}&nbsp;&nbsp;<a href="javascript:" 
+		onClick='javascript:window.open("__APP__/Hotels/preview/thumb/thumb4/id/{$hotelid}","","width=600,height=450,left=350, top=100,toolbar=no, status=no, menubar=no, resizable=yes, scrollbars=yes");return false;'>预览</a>{/if}</td>
+      </tr>
+      -->
+      <tr>
+        <td>交　　通：</td>
+        <td><input type="text" class="input_table" style="width:630px;"  name="traffic" value="{$traffic}"> <font color="red">*</font></td>
+      </tr>
+      <tr>
+        <td>其他服务：</td>
+        <td><textarea class="Other_services" style="width:627px;" name="fuwu">{$fuwu}</textarea></td>
+      </tr>
+	  <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/kindeditor-min.js"></script>
+		<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/lang/zh_CN.js"></script>
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="tip"],textarea[name="introduce"]', {
+					allowFileManager : true,afterBlur: function(){ this.sync();},
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script>
+      <tr>
+        <td>酒店特别提示：</td>
+        <td><textarea class="Prompt" name="tip" style="width:700px;height:100%;">{$tip}</textarea></td>
+      </tr>
+      <tr>
+        <td>酒店介绍：</td>
+        <td><textarea class="bj_container" style="width:700px;height:100%;" name="introduce">{$introduce}</textarea></td>
+      </tr>
+    </table>
+    <table border="0" width="100%" height="40">
+      <tr>
+        <td width="40%"></td>
+        <td>
+          <input type="submit" name="btn_submit" value=" 确认 " class="buton">
+        </td>
+      </tr>
+    </table>
+  </form>
+ <script>
+$(function(){
+	$("#city").change(function(){
+		str = $(this).val();
+		$('#sub_county').hide();
+		if(str != ''){
+			$.post("__APP__/Hotels/load_sub_city",{
+				city:str
+			},function(data){
+				var arr_data = $.parseJSON(data);
+				var mydata = arr_data.msg;
+				var  rs = '<option value="">请选择</option>';
+				$.each(mydata, function(i,value){
+					rs += "<option value="+value['cityname']+">"+value['cityname']+"</option>";
+				});
+				$('#sub_city').show();
+				$('#sub_city').html(rs);
+			});
+		}else{
+			$('#sub_city').hide();
+			$('#sub_county').hide();
+		}
+	});
+	$("#sub_city").change(function(){
+		str = $(this).val();
+		$('#sub_county').hide();
+		if(str != ''){
+			$.post("__APP__/Hotels/load_sub_county",{
+				city:str
+			},function(data){
+				var arr_data = $.parseJSON(data);
+				if(arr_data['status']==1){
+					var mydata = arr_data.msg;
+					var  rs = '<option value="">请选择</option>';
+					$.each(mydata, function(i,value){
+						rs += "<option value="+value['area']+">"+value['area']+"</option>";
+					});
+					$('#sub_county').show();
+					$('#sub_county').html(rs);
+				}
+			});
+		}else{
+			$('#sub_county').hide();
+		}
+	});
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__APP__/Hotels/lists";
+		}
+	});
+	return false;
+})
+</script> 
+</div>
+</body>
+</html>

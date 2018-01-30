@@ -1,0 +1,164 @@
+<style type="text/css">
+#city .bootstrap-select{
+    width: 70px;
+}
+#area .bootstrap-select{
+    width: 90px;
+}
+label.control-label {
+    width: 85px;
+}
+</style>
+<script type="text/javascript">
+  $(function() {
+    $.CurrentNavtab.find('#btn_submit').click(function() {
+      $.CurrentNavtab.find('#j_custom_form').bjuiajax('ajaxForm', {
+//        confirmMsg: '确认提交吗?',
+        callback: function(data) {
+          if (data.statusCode == 200){
+            $(this).alertmsg('ok', data.message)
+            $(this).navtab('refresh','Article-lists');
+            $(this).navtab('closeCurrentTab');
+          }
+          if (data.statusCode == 300)
+            $(this).alertmsg('error', data.message)
+        }
+      })
+    })
+  })
+  function pic_upload_success(file, data) {
+    var json = $.parseJSON(data)
+    if (data.statusCode == 200)
+      $(this).alertmsg('ok', data.message)
+    if (data.status == 300)
+      $(this).alertmsg('error', data.message)
+    $(this).bjuiajax('ajaxDone', json)
+    if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {
+      $.CurrentNavtab.find('#j_custom_thumb').val(json.thumb)
+      $.CurrentNavtab.find('#j_custom_yuantu').val(json.yuantu)
+      $.CurrentNavtab.find('#j_custom_pic').html('<img style="width: 100px;height: 66px;" src=__ROOT__' + json.thumb + ' />')
+    }
+  }
+</script>
+<div class="bjui-pageContent">
+    <form action="__APP__/Hotels/roomadd" method="post" data-toggle="ajaxform">
+        <input type="hidden" name="id" value="{$info.id}">
+        <table class="table table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <label for="hotel_title" class="control-label x85" title="如标准间,双人间">
+                            酒店名称：
+                        </label>
+                        {$info.hotelname}
+                    </td>
+                </tr>            
+                <tr>
+                    <td colspan="4">
+                        <label for="hotel_title" class="control-label x85" title="如标准间,双人间">
+                            客房名称：
+                        </label>
+                        <input type="text" name="roomtype" id="hotel_title" value="{$info.roomtype}" size="25">（如：标准间，双人间）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="fjchuang" class="control-label x85">
+                            床型：
+                        </label>
+                            {foreach from=$custom item=v} {if $v.tid==1}
+                            <input name="fjchuang" value="{$v.name}" type="radio" data-toggle="icheck" data-label="{$v.name}" {if $info.fjchuang==$v.name}checked{/if}>
+                            {/if} {/foreach}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="zaocan" class="control-label x85">
+                            早餐：
+                        </label>
+                            {foreach from=$custom item=v} {if $v.tid==2}
+                            <input name="zaocan" value="{$v.name}" type="radio" data-toggle="icheck" data-label="{$v.name}" {if $info.zaocan==$v.name}checked{/if}>
+                            {/if} {/foreach}
+                    </td>
+                </tr>  
+                <tr>
+                    <td colspan="4">
+                        <label for="zaocan" class="control-label x85">
+                            上网：
+                        </label>
+                            {foreach from=$custom item=v} {if $v.tid==3}
+                            <input name="swang" value="{$v.name}" type="radio" data-toggle="icheck" data-label="{$v.name}" {if $info.swang==$v.name}checked{/if}>
+                            {/if} {/foreach}
+                    </td>
+                </tr> 
+                <tr>
+                    <td colspan="4">
+                        <label for="zaocan" class="control-label x85">
+                            支付方式：
+                        </label>
+                            <input name="paytype" value="1" type="radio" data-toggle="icheck" data-label="在线支付" {if $info.paytype==1}checked{/if}>
+                            <input name="paytype" value="0" type="radio" data-toggle="icheck" data-label="前台支付" {if $info.paytype==0}checked{/if}>                            
+                    </td>
+                </tr>                                               
+                <tr>
+                    <td colspan="3">
+                        <label for="returnmoney" class="control-label x85">
+                            门市价格：
+                        </label>
+                        <input name="menshijia" value="{$info.menshijia}" type="text" size="5"> 元
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label for="returnmoney" class="control-label x85">
+                            积分：
+                        </label>
+                        <input name="returnmoney" value="{$info.returnmoney}" type="text" size="5">
+                    </td>
+                </tr>
+                <tr>
+          <td colspan="4">
+            <label class="control-label x85">
+              客房图片：
+            </label>
+            <div style="display: inline-block; vertical-align: middle;">
+              <div data-toggle='upload' data-uploader="__APP__/Upload/index/dir/news" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg"
+                data-auto="true" data-on-upload-success="pic_upload_success" style="float:left">
+              </div> <span style="color:red; float:left;margin-top: 7px; margin-left:10px;">请上传不低于400*300像素,4:3比例的图片</span>
+              <input type="hidden" name="thumb" value="{$info.thumb}" id="j_custom_thumb">
+              <input type="hidden" name="yuantu" value="{$info.yuantu}" id="j_custom_yuantu">
+              <div style="clear:both"></div>
+                {if $info.thumb}
+                  <span id="j_custom_pic">
+                      <img style="width: 160px;height: 120px; margin-top:7px;" src="__ROOT__/{$info.thumb}" alt=""/>
+                  </span>
+                {/if}
+            </div>
+          </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label for="j_custom_content" class="control-label x85">详细说明：</label>
+                        <div style="display: inline-block;vertical-align: middle;">
+                        <textarea name="content" id="j_form_content" class="j-content" style="width:800px;" data-toggle="kindeditor" data-min-height="100">{$info.content}</textarea> 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="page_but" style="margin-left:85px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    </div>

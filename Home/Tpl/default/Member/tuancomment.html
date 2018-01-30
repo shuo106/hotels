@@ -1,0 +1,77 @@
+{include file="../Common/header.html"}
+<div class="clear"></div>
+<div class="con_z">
+	{include file="../Member/member_menu.html"} 
+	<div class="con_zru"><div class="dqwzb"><span>您好，{$smarty.session.name}，欢迎光临</span>当前位置>><a href="__ROOT__">首页</a> >> <a href="__APP__/member/index">我的会员中心</a> >> 我要点评 </div>
+	  <div class="jddd"><div class="jddd_t">我要点评</div>
+	    <div class="jddd_cona">
+		 <form action="__APP__/Member/doComments2" method="post" name="myform" id="myform">
+	      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <input type="hidden" name="oid" value="{$details['id']}" />
+		  <input type="hidden" name="tid" value="2" />
+		  <input type="hidden" name="itemid" value="{$details['tid']}" />
+		    <tr>
+              <td width="17%" align="right">团购名称：</td>
+              <td width="83%"><strong class="red">{$details['title']}</strong></td>
+            </tr>
+            <tr>
+              <td width="17%" align="right">您的姓名：</td>
+              <td width="83%"><INPUT name="username" id="username" type="text" size="20" > <span class="red">*</span></td>
+            </tr>
+            <tr>
+              <td align="right">评价等级：</td>
+              <td>
+				<INPUT id=label type=radio CHECKED value=好 name=label>好评 
+				<INPUT id=label type=radio value=中 name=label>中评 
+				<INPUT id=label type=radio value=差 name=label>差评 
+				<INPUT id=label type=radio value=投诉 name=label>投诉</td>
+            </tr>
+            <tr>
+              <td align="right">团购印象：</td>
+              <td><INPUT name="title" type="text" /></td>
+            </tr>
+			<tr>
+              <td align="right">满意程度：</td>
+              <td><SELECT id=unit name=unit> 
+				<OPTION value=100%>100%</OPTION> 
+				<OPTION value=90%>90%</OPTION> 
+				<OPTION value=80% selected>80%</OPTION> 
+				<OPTION value=70%>70%</OPTION> 
+				<OPTION value=60%>60%</OPTION>
+				<OPTION value=50%>50%</OPTION>
+				<OPTION value=40%>40%</OPTION> 
+				<OPTION value=30%>30%</OPTION> 
+				<OPTION value=20%>20%</OPTION> 
+				<OPTION value=10%>10%</OPTION>
+			 </SELECT></td>
+            </tr>
+            <tr>
+              <td align="right">详细评价：</td>
+              <td ><textarea name="content" id="content" cols="35" rows="3"></textarea></td>
+            </tr>
+			<tr>
+            	<td align="right"></td>
+              <td>	
+				<input name="dosubmit" type="submit" value=" 提交 " style="margin-top:10px;"/>
+			  </td>
+            </tr>
+          </table>
+		  </form>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div class="clear"></div>
+<script>
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__APP__/Member/member_comments_manage";
+		}
+	});
+	return false;
+})
+</script>
+{include file="../Common/footer.html"}

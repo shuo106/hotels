@@ -1,0 +1,39 @@
+<style type="text/css">
+	label.control-label{ width:85px;}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Member/groupsave" method="post" id="j_custom_form" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$ginfo.id}" />
+		<input type="hidden" name="btn_submit" value="true">
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="groupname" class="control-label x85">
+							会员组名称：
+						</label>
+						<input type="text" name="gname" id="groupname" value="{$ginfo.gname}" size="15">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="discount" class="control-label x85">
+							折扣：
+						</label>
+						<input type="text" name="discount" id="discount" value="{$ginfo.discount}" size="5">%
+					</td>
+				</tr>
+                <tr>
+					<td>
+					<div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>积分商城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="__PUBLIC__/amazeui/css/amazeui.min.css">
+<link href="__PUBLIC__/webgift/index.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/webgift/index2.css" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/amazeui/js/jquery.min.js"></script>
+<script src="__PUBLIC__/amazeui/js/amazeui.min.js"></script>
+<script src="__PUBLIC__/webgift/app.js"></script>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+    <style type="text/css">
+       .w-search li{  height:40px;}
+       .wesearch li a{  line-height:40px}
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+    var search_obj = {
+        point: "{$smarty.get.point}",
+        cate: "{$smarty.get.cate}",
+        location:'{$smarty.get.location}'
+    }
+    //不知道为什么多出一个小圆点 果断隐藏了
+    $(function(){
+       $(".pages a").eq(0).hide(); 
+    });
+    </script>
+      <header data-am-widget="header" class="am-header am-header-default">
+        <div class="am-header-left am-header-nav">
+            <a href="javascript:history.back();" class="">
+                <i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+            </a>
+        </div>
+      <h1 class="am-header-title">
+      <div class="am-searchi">
+      <input type="text" id="keywords" name="keywords" class="heard-search am-fl" value="{$smarty.get.key}" placeholder="商品名称"><i data-url="__APP__/wap/gift/key/" id="w-search" class="am-icon-search am-fr heard-search-but"></i>
+      </div>
+      </h1>
+        <div class="am-header-right am-header-nav">
+            <a href="__ROOT__/Wechat/index/" class="">
+                <i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+            </a>
+        </div>
+      </header>
+    <div class="pro" style="height:40px">
+        <ul class="w-search" data-url="__ROOT__/Wechat/gift"  style="height:40px" >
+            <li class="am-dropdown" data-am-dropdown   >
+                <a href="javascript:" class="am-dropdown-toggle" data-am-dropdown-toggle>排序<i><img src="__PUBLIC__/webgift/jdlb-ico2.jpg"></i></a>
+                <ul class="am-dropdown-content">
+                    <li {if !$smarty.get.location==2}class="am-active"{/if}><a href="javascript:" data-type="location" data-value="2">推荐倒序</a></li>
+                    <li {if $smarty.get.location==1}class="am-active"{/if}><a href="javascript:" data-type="location" data-value="1">推荐正序</a></li>
+                </ul>
+            </li>
+            <li class="am-dropdown" data-am-dropdown>
+                <a href="javascript:" class="am-dropdown-toggle" data-am-dropdown-toggle>类型<i><img src="__PUBLIC__/webgift/jdlb-ico2.jpg"></i></a>
+                <ul class="am-dropdown-content">
+                    <li {if !$smarty.get.star}class="am-active" {/if}><a href="javascript:" data-type="cate" data-value="0">不限</a></li>
+                    {foreach from=$giftcate item=vo}
+                    <li {if $smarty.get.star==$vo.id}class="am-active" {/if}><a href="javascript:" data-type="cate" data-value="{$vo.id}">{$vo.name}</a></li>
+                    {/foreach}
+                </ul>
+            </li>
+            <li style="border-right:1px solid #fff;" class="am-dropdown" data-am-dropdown>
+                <a href="javascript:" class="am-dropdown-toggle" data-am-dropdown-toggle>价格<i><img src="__PUBLIC__/webgift/jdlb-ico2.jpg"></i></a>
+                <ul class="am-dropdown-content">
+                    <li {if !$smarty.get.price}class="am-active" {/if}><a href="javascript:" data-type="point" data-value="0">不限</a></li>
+                    <li {if $smarty.get.price=='0_1000' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="0_1000">1000积分以下</a></li>
+                    <li {if $smarty.get.price=='1001_2000' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="1001_2000">1001积分到2000积分</a></li>
+                    <li {if $smarty.get.price=='2001_3000' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="2001_3000">2001积分到3000积分</a></li>
+                    <li {if $smarty.get.price=='3001_6000' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="3001_6000">3001积分到6000积分</a></li>
+                    <li {if $smarty.get.price=='6001_10000' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="6001_10000">6001积分到10000积分</a></li>
+                    <li {if $smarty.get.price=='10000_999999' }class="am-active" {/if}><a href="javascript:" data-type="point" data-value="10000_999999">10001积分以上</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!--开始-->
+    <div class="yzsj">
+        <div class="wrap">
+            {if $giftlist} {foreach from=$giftlist item=vo}
+            <div class="yzsj-main">
+                <div class="yzsj-l fl">
+                    {if $vo['src']}
+                    <a href="__ROOT__/Wechat/giftdetail/id/{$vo['id']}">
+                        <img src="__ROOT__{$vo['src']}" style="border:1px solid #ccc;" />
+                    </a>
+                    {else}
+                   <a href="__ROOT__/Wechat/giftdetail/id/{$vo['id']}">
+                        <img src="__PUBLIC__/wap/images/nopic.jpg" width="120" height="92" style="border:1px solid #ccc;" />
+                        </a>
+                    {/if}
+                </div>
+                <div class="yzsj-r fr">
+                    <ul>
+                        <li><a href="__ROOT__/Wechat/giftdetail/id/{$vo['id']}">{$vo['name']}<span style="float:right;">{$vo['star']}</span></a></li>
+                     <li><a ><span style="color:#999; font-size:12px;">兑换价格：￥{$vo['point']}</span>
+                   <!--  <span style="color:#ff2c2b; float:right;">￥{$vo['price']}起</span></a></li>-->
+                    </ul>
+                </div>
+            </div>
+            {/foreach} {/if}
+        </div>
+        <div class="pages">{$page}</div>
+    </div>
+    <!--结束-->
+{include file="./footer.html"}
+</body>
+</html>

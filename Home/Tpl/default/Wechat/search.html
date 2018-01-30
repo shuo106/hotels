@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>酒店查询</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/public.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/style.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/index.css">
+<style>
+html,body{ font-size:12px;margin:0px;height:100%; }
+</style>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+function showMessageBox(){
+	$(".mesWindow").toggle();
+}
+//关闭窗口
+function closeWindow(){
+	var s2=$("#star2").val();
+	var p2=$("#price2").val();
+	var sval='';
+	if(p2!=0){
+		sval = p2;
+	}
+	if(s2!=0){
+		sval+=','+s2;
+	}
+	$("#pstar").text(sval);
+	$(".mesWindow").hide();
+	return false;
+}
+$(function(){
+	$('.price').click(function(){
+		var p= $(this).attr('data');
+		var ptext= $(this).attr('data-text');
+		$('#price').val(p);
+		$('#price2').val(ptext);
+		$('.price').removeClass('selected');
+		$(this).addClass('selected');
+	});	
+	$('.star').click(function(){
+		var star= $(this).attr('data');
+		var stext= $(this).attr('data-text');
+		var sval = $('#star').val();
+		var sval2 = $('#star2').val();
+		//获取到星级的值 未选择情况下为0
+		if(sval==0){
+			$('#star').val(star);
+			$('#star2').val(stext);
+		}else{
+			if(sval.indexOf(star) >= 0 ){
+				//判断是否包含当前值 包含不再加入
+			}else{
+				sval+=','+star;
+				$('#star').val(sval);
+				sval2+=','+stext;
+				$('#star2').val(sval2);
+			}
+		}
+		if(star == 0){
+			//如果点击不限 则清空
+			$('#star').val(0);
+			$('#star2').val(0);
+			$('.star').removeClass('selected');
+		}else{
+			$('#allstar').removeClass('selected');
+		}
+		$(this).addClass('selected');
+	});
+	$(".g_btn_s").click(function(){
+		var url= location.href.split('search');
+		var par= '/';
+		var key =$("#key").val();
+		var star =$("#star").val();
+		var price =$("#price").val();
+		if(price!=0){
+			par+='price/'+price+'/';
+		}
+		if(star!=0){
+			par+='star/'+star+'/';
+		}
+		if(key!=0){
+			par+='key/'+key+'/';
+		}
+		window.location.href=url[0]+'hotels'+url[1]+par;
+	});
+});
+</script>
+</head>
+<body>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>酒店预订<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="main_viewport">
+  <div class="sub_ciewport">
+    <ul>
+      <li>
+        <div class="hotel-mysite"><i class="hotel-mysite-icon"></i><a href="__ROOT__/Wechat/city/{if $smarty.get.start}start/{$smarty.get.start}/end/{$smarty.get.end}{/if}">选择城市</a></div>
+        <div class="hotel-l"><i class="hotel-icon-bed"></i>区域</div>
+        <div class="hotel-arr"><span class="hotel-m-cont"><a href="__ROOT__/Wechat/city/{if $smarty.get.start}start/{$smarty.get.start}/end/{$smarty.get.end}{/if}">{if $smarty.get.city}{$city}{else}全国{/if}</a></span></div>
+      </li>
+      <li class=" hotel-arr">
+        <div class="hotel-mydate"><a href="__ROOT__/Wechat/rili/from/search/start/{if $smarty.get.start}{$smarty.get.start}{else}{date('Y-m-d',$smarty.now)}{/if}/end/{if $smarty.get.end}{$smarty.get.end}{else}{date('Y-m-d',$smarty.now+86400)}{/if}{if $smarty.get.city}/city/{$smarty.get.city}{/if}">共：{if $smarty.get.start}{$days}{else}1{/if} 晚</a></div>
+        <div class="hotel-l"><i class="hotel-icon-date"></i>日期</div>
+        <div class="hotel-m"><span class="hotel-m-cont">{if $smarty.get.start}{$smarty.get.start}到{$smarty.get.end}{else}今天{/if}</span></div>
+      </li>
+    </ul>
+    <ul class="mt10">
+      <li class="hotel-arr"><div class="hotel-l"><i class="hotel-icon-keywords"></i>关键字</div><div class="hotel-m"><span class="hotel-m-cont hotel-plm"><input type="text" value="" id="key"  class="keywords"/></span></div></li>
+      <li class="hotel-arr"  onclick="showMessageBox();" ><div class="hotel-l"><i class="hotel-icon-price"></i>价格/星级</div><div class="hotel-m"><span class="hotel-m-cont hotel-pls"><div id="pstar"></div></span></div></li>
+    </ul>
+    <p class="mt20"><button class="g_btn_s">查询</button></p>
+  </div>
+  <div id="sprice" class="mesWindow" style="display:none;">
+<div class="spriceCon">
+<div class='mesWindowTop'>
+	<table width='100%' height='100%'>
+		<tr>
+			<td>价格（单选）</td>
+		</tr>
+	</table>
+</div>
+<div class='mesWindowContent' id='mesWindowContent'>
+	<table width='100%' height='100%'>
+		<tr>
+			<td><div class='price' data='0-150' data-text='150元以下'>150元以下</div></td>
+			<td><div class='price' data='150-300' data-text='150元-300元'>150元-300元</div></td>
+			<td><div class='price' data='301-450' data-text='301元-450元'>301元-450元</div></td>
+		</tr>	
+		<tr>
+			<td><div class='price' data='451-600' data-text='451元-600元'>451元-600元</div></td>
+			<td><div class='price' data='601-1000' data-text='601元-1000元'>601元-1000元</div></td>
+			<td><div class='price' data='1000-9999999' data-text='1000元以上'>1000元以上</div></td>
+			<td>
+			<input type='hidden' id='price' name='price' value='0' />
+			<input type='hidden' id='star' name='star' value='0' />
+			<input type='hidden' id='price2' value='' />
+			<input type='hidden' id='star2' value='' />
+			</td>
+		</tr>
+	</table>
+</div>
+<div class='mesWindowTop'>
+	<table width='100%' height='100%'>
+		<tr>
+			<td>星级（复选）</td>
+		</tr>
+	</table>
+</div>
+<div class='mesWindowContent' id='mesWindowContent2'>
+	<table width='100%' height='100%'>
+		<tr>
+			<td><div class='star' data='0' id='allstar'>不限</div></td>
+			<td><div class='star' data='1' data-text='快捷连锁'>快捷连锁</div></td>
+			<td><div class='star' data='2' data-text='经济型酒店'>经济型酒店</div></td>
+		</tr>	
+		<tr>
+			<td><div class='star' data='3' data-text='三星级/舒适'>三星级/舒适</div></td>
+			<td><div class='star' data='4' data-text='四星级/高档'>四星级/高档</div></td>
+			<td><div class='star' data='5' data-text='五星级/豪华'>五星级/豪华</div></td>
+		</tr>
+		<tr>
+		<td colspan='3' align="center">
+		<input type='button' onclick='closeWindow();' class='close' value='确定' />
+		</td>
+		</tr>
+	</table>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+
+.header{ height:50px; line-height:50px;background:#007BCB; text-align:center; color:#FFF; font-size:24px;}
+.header .hdleft{position: relative;float:left;content: "";top:35%; left:15px;width:12px;height:12px;border-top:4px #FFF solid;border-left:4px #FFF solid;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-ms-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);}
+.header a.hdright{ float:right; display:inline; margin:15px 15px 0 0;}
+.header a span{ display:inline-block; width:37px; height:32px; background:url(../images/home.png) no-repeat;background-size:27px 22px;}
+
+.card{ height:200px; position:relative; background:url(../images/huiyuank.jpg) no-repeat center bottom;}
+.cardbom{ position:absolute; width:100%; bottom:0px; height:50px; line-height:50px;}
+.cardbom span{ display:inline-block; float:left; width:70%; height:50px; line-height:50px; background:#000; opacity:.6; color:#FFF; padding-left:25px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+.cardbom span b{ font-size:18px;}
+.cardbom a{ display:inline-block; float:right; width:30%; background:#59C5D2; color:#FFF; text-align:center;}
+
+.vip{ clear:both; margin:0 auto 30px}
+.vip li{line-height:50px; height:50px; background:#e7e8e3; border-bottom: #CCC 1px solid; /*width:800px;*/ overflow:hidden; clear:both; padding:0 10px;}
+.vip li img{ float:left; padding-top:5px;}
+.vip li a{ display:block; position:relative;}
+.vip li span{ float:right;content: '';position: absolute;width:15px;height:15px;right: 10px;top: 50%;margin-top: -5px;border-top: 2px solid #FFF;border-right: 2px solid #FFF;
+-webkit-transform: rotate(45deg);
+-moz-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+-o-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+
+/*填写会员资料*/
+.editData{ margin:10px;}
+.editData h3{ height:80px; line-height:80px; background:#F3F9F9 url(../images/tx.png) no-repeat 46% center;background-size:32px 32px; text-align:center; color:#44b1b6; font-size:14px;}
+.editData ul{ background:#FFF; padding:10px; color:#565759;}
+.editData ul li{ margin-bottom:15px;}
+.editData ul li label{ display:block; margin-bottom:5px;}
+.editData ul li input{ width:100%;background-color: white;height: 20px;padding: 4px 6px;font-size: 12px;line-height: 20px;color: #555;border: 1px solid #CCC;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+transition: border linear 0.2s, box-shadow linear 0.2s;}
+.Submit{ height:50px; line-height:50px; font-size:18px; text-align:center; background:#4BBFCE;}
+.Submit a{ color:#FFF;}
+
+.card2{ height:200px; position:relative; background:url(../images/huiyuank.jpg) no-repeat center center;}
+
+
+.meminfo{ clear:both;}
+.meminfo ul{ background:#e7e8e3; padding-bottom:10px; border-bottom:3px #55c3d0 solid;}
+.meminfo li{line-height:50px; height:50px; border-bottom: #CCC 1px solid; /*width:800px;*/ overflow:hidden; clear:both; padding:0 10px;}
+.meminfo li img{ float:left; width:24px; height:24px; padding-top:12px; padding-right:5px;}
+.meminfo li a{ display:block; position:relative;}
+.meminfo li span{ float:right;content: '';position: absolute;width:15px;height:15px;right: 10px;top: 50%;margin-top: -5px;border-top: 2px solid #7e8386;border-right: 2px solid #7e8386;
+-webkit-transform: rotate(45deg);
+-moz-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+-o-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+
+.bominfo{ position:fixed; width:100%; height:80px; bottom:0px; border-top:2px #55c3d0 solid;}
+.bominfo ul{ float:left; width:85%;}
+.bominfo ul li{ float:left; width:21.25%; height:80px; text-align:center;}
+.bominfo ul li a{ display:inline-block;}
+.bominfo ul li .a1{ width:100%; height:80px; background:url(../images/bom1.png) no-repeat center 10px; background-size:40px 27px; padding-top:45px;}
+.bominfo ul li .a2{ position:relative; width:100%; height:80px; background:url(../images/bom2.png) no-repeat center 10px; background-size:40px 27px;}
+.bominfo ul li .a2 span{ display:inline-block; padding-top:45px;}
+.bominfo ul li .a2 num{ position:absolute; color:#FFF; width:20px; height:20px; line-height:20px; text-align:center;border-radius: 50%; background:#F00;}
+.bominfo ul li .a3{ width:100%; height:80px; background:url(../images/bom3.png) no-repeat center 10px; background-size:40px 27px; padding-top:45px;}
+.bominfo ul li .a4{ width:100%; height:80px; background:url(../images/bom4.png) no-repeat center 10px; background-size:40px 27px; padding-top:45px;}
+.bominfo span.myinfo{ display:inline-block; width:15%;}
+.bominfo span.myinfo{ position:absolute; width:100px; height:100px;border-radius: 50%; border:1px #CCC solid; top:-25px;}
+.bominfo span.myinfo a{ display:inline-block; width:100%; height:80px; background:url(../images/bom5.png) no-repeat center 10px; text-align:center; background-size:50px 50px; padding-top:70px;}
+
+.memxx{ position:relative; height:200px;}
+.memxx dl{ width:100%; height:140px; background:url(../images/ry.png) no-repeat 10% center; background-size:60px 60px;}
+.memxx dl dt{ font-size:18px; padding-left:13.5%; padding-top:45px; font-weight:bold;}
+.memxx dl dd{ padding-left:13.5%; padding-top:5px;}
+
+.memxx .persinfo{ position:absolute; z-index:1; width:100%; height:30px; background:#000; opacity:.4; padding:15px 0;}
+.memxx .persinfo ul li{ position:relative; z-index:100; float:left; width:25%; border-right:1px #FFF solid;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+.memxx .persinfo ul li a{ display:block; z-index:100; width:100%; text-align:center; color:#FFF;}
+.memxx .persinfo ul li a span{ display:block; padding-bottom:5px;}
+
+.okxx{}
+.okxx ul{ background:#e6e5e0; padding-bottom:10px;}
+.okxx li{line-height:50px; height:50px; border-bottom: #CCC 1px solid; /*width:800px;*/ overflow:hidden; clear:both; padding:0 10px;}
+.okxx li img{ float:left; width:24px; height:24px; padding-top:12px; padding-right:5px;}
+.okxx li a{ display:block; position:relative;}
+.okxx li span{ float:right;position: absolute;width:100px;height:40px; line-height:40px; text-align:center; background:#4BBFCE;right:5px;top:10%; color:#FFF;}

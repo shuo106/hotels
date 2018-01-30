@@ -1,0 +1,209 @@
+<style type="text/css">
+  label.control-label {
+    width: 140px;
+  }
+</style>
+<div class="bjui-pageContent">
+  <form action="__APP__/Basic/pay" id="j_form_form" class="pageForm" data-toggle="ajaxform" method="post">
+    <div>
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#alipay" role="tab" data-toggle="tab">支付宝</a></li>
+          <li><a href="#tenpay" role="tab" data-toggle="tab">财付通</a></li>
+          <li><a href="#ebank" role="tab" data-toggle="tab">网银在线</a></li>
+          <li><a href="#fastpay" role="tab" data-toggle="tab">快钱</a></li>
+          <li><a href="#yeepay" role="tab" data-toggle="tab">易宝</a></li>
+          <li><a href="#huanxun" role="tab" data-toggle="tab">环迅</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="alipay">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="" class="control-label x85" >支付宝接口类型：</label>
+                    <input type="hidden" name="interface[]" value="1" />
+                    <input type="radio" name="isUse[0]" id="alipay_type1" data-toggle="icheck" value="0" {if $pay[0][ 'isUse'] eq 0 }checked{/if} data-label="无&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[0]" id="alipay_type2" data-toggle="icheck" value="1" {if $pay[0][ 'isUse'] eq 1 }checked{/if} data-label="即时到账&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[0]" id="alipay_type3" data-toggle="icheck" value="2" {if $pay[0][ 'isUse'] eq 2 }checked{/if} data-label="担保交易&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[0]" id="alipay_type4" data-toggle="icheck" value="3" {if $pay[0][ 'isUse'] eq 3 }checked{/if} data-label="即时担保双功能&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[0]" id="alipay_type5" data-toggle="icheck" value="4" {if $pay[0][ 'isUse'] eq 4 }checked{/if} data-label="支付宝网银支付">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="alipay_account" class="control-label x85" >支付宝签约账户：</label>
+                    <input type="text" name="Account[]" id="alipay_account" value="{if $pay[0]['Account']}{$pay[0]['Account']}{else}{/if}"  size="45">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="alipay_accountid" class="control-label x85" >合作身份者ID：</label>
+                    <input type="text" name="AccountId[]" id="alipay_accountid" value="{if $pay[0]['AccountId']}{$pay[0]['AccountId']}{/if}" size="45" >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="alipay_key" class="control-label x85" >安全检验码：</label>
+                    <input type="text" name="Key[]" id="alipay_key" value="{if $pay[0]['Key']}{$pay[0]['Key']}{/if}" size="45" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="tenpay">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="tenpay_type1" class="control-label x85" >财付通接口类型：</label>
+                    <input type="hidden" name="interface[]" value="2" />
+                    <input type="checkbox" name="isUse[1]" id="tenpay_type1" {if $pay[1][ 'isUse']}checked{/if} data-toggle="icheck" value="1" data-label="即时到帐中介担保双接口">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="tenpay_accountid" class="control-label x85" >财付通商户号：</label>
+                    <input type="text" name="AccountId[]" id="tenpay_accountid" value="{if $pay[1]['AccountId']}{$pay[1]['AccountId']}{/if}"  size="45">
+                    <input type="hidden" name="Account[]" value="0" />
+                    <a class="btn btn-green" href="http://mch.tenpay.com/market/index.shtml" target="_blank">商户号申请</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="tenpay_key" class="control-label x85" >财付通密钥：</label>
+                    <input type="text" name="Key[]" id="tenpay_key" value="{if $pay[1]['Key']}{$pay[1]['Key']}{/if}" size="45" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="ebank">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="ebank_type1" class="control-label x85" >网银接口类型：</label>
+                    <input type="hidden" name="interface[]" value="3" />
+                    <input type="checkbox" name="isUse[2]" id="ebank_type1" {if $pay[2][ 'isUse']}checked {/if} data-toggle="icheck" value="1" data-label="网银在线支付">
+                    <a class="btn btn-green" href="http://www.chinabank.com.cn/" target="_blank">在线申请</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="ebank_accountid" class="control-label x85" >网银商户号：</label>
+                    <input type="hidden" name="Account[]" value="0" />
+                    <input type="hidden" name="Key[]" value="0" />
+                    <input type="text" name="AccountId[]" id="ebank_accountid" value="{if $pay[2]['AccountId']}{$pay[2]['AccountId']}{/if}"  size="45">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="fastpay">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="" class="control-label x85" >快捷支付接口类型：</label>
+                    <input type="hidden" name="interface[]" value="4" />
+                    <input type="radio" name="isUse[3]" id="fast_type1" data-toggle="icheck" value="0" {if $pay[3].isUse==0}checked{/if} data-label=" 即时到帐交易接口&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[3]" id="fast_type2" data-toggle="icheck" value="1" {if $pay[3].isUse==1}checked{/if} data-label="标准双接口&nbsp;&nbsp;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="fast_account" class="control-label x85" >快捷支付签约账户：</label>
+                    <input type="text" name="Account[]" id="fast_account" value="{if $pay[3]['Account']}{$pay[3]['Account']}{/if}"  size="45">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="fast_accountid" class="control-label x85" >快捷支付账户ID：</label>
+                    <input type="text" name="AccountId[]" id="fast_accountid" value="{if $pay[3]['AccountId']}{$pay[3]['AccountId']}{/if}" size="45" >
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="fast_key" class="control-label x85" >快捷支付安全校验码：</label>
+                    <input type="text" name="Key[]" id="fast_key" value="{if $pay[3]['Key']}{$pay[3]['Key']}{/if}" size="45" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="yeepay">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="" class="control-label x85" >易宝接口类型：</label>
+                    <input type="hidden" name="interface[]" value="5" />
+                    <input type="radio" name="isUse[4]" id="yeepay_type1" data-toggle="icheck" value="0" {if $pay[4].isUse==0}checked{/if} data-label="即时到帐交易接口&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[4]" id="yeepay_type2" data-toggle="icheck" value="1" {if $pay[4].isUse==1}checked{/if} data-label="标准双接口&nbsp;&nbsp;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="yeepay_account" class="control-label x85" >易宝签约账户：</label>
+                    <input type="text" name="Account[]" id="yeepay_account" value="{if $pay[4]['Account']}{$pay[4]['Account']}{/if}"  size="45">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="yeepay_accountid" class="control-label x85" >易宝账户ID：</label>
+                    <input type="text" name="AccountId[]" id="yeepay_accountid" value="{if $pay[4]['AccountId']}{$pay[4]['AccountId']}{/if}" size="45" >采用易宝"即时到帐"类型
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="yeepay_key" class="control-label x85" >易宝安全校验码：</label>
+                    <input type="text" name="Key[]" id="yeepay_key" value="{if $pay[4]['Key']}{$pay[4]['Key']}{/if}" size="45" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="huanxun">
+            <table class="table-bordered table-condensed table-hover" width="100%">
+              <tbody>
+                <tr>
+                  <td colspan="4">
+                    <label for="" class="control-label x85" >环迅接口类型：</label>
+                    <input type="hidden" name="interface[]" value="6" />
+                    <input type="radio" name="isUse[5]" id="huanxun_type1" data-toggle="icheck" value="0" {if $pay[5].isUse==0}checked{/if} data-label="即时到帐交易接口&nbsp;&nbsp;">
+                    <input type="radio" name="isUse[5]" id="huanxun_type2" data-toggle="icheck" value="1" {if $pay[5].isUse==1}checked{/if} data-label="标准双接口&nbsp;&nbsp;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="huanxun_account" class="control-label x85" >环迅签约账户：</label>
+                    <input type="text" name="Account[]" id="huanxun_account" value="{if $pay[5]['Account']}{$pay[5]['Account']}{/if}"  size="45">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="huanxun_accountid" class="control-label x85" >环迅账户ID：</label>
+                    <input type="text" name="AccountId[]" id="huanxun_accountid" value="{if $pay[5]['AccountId']}{$pay[5]['AccountId']}{/if}" size="45" >采用环迅"即时到帐"类型
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="huanxun_key" class="control-label x85" >环迅安全校验码：</label>
+                    <input type="text" name="Key[]" id="huanxun_key" value="{if $pay[5]['Key']}{$pay[5]['Key']}{/if}" size="45" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+                    <div class="page_but" style="margin-left:145px; margin-top:10px">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+        </div>
+    </div>
+</div>
+</form>

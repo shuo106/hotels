@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>客房管理</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Hotels/roompl2">
+    <table border="0" class="table_border">
+      <tr>
+        <th colspan="8" align="center" class="table_border_title">客房回收站管理</th>
+      </tr>
+      <tr onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td width="5%" align="center" class="world_Bold">选中</td>
+        <td width="5%" align="center" class="world_Bold">ID</td>
+		<td width="20%" align="center" class="world_Bold">房间名称</td>
+        <td width="5%" align="center" class="world_Bold">价格</td>
+        <td width="15%" align="center" class="world_Bold">房型</td>
+		<td width="10%" align="center" class="world_Bold">今日房态</td>
+        <td width="32%" align="center" class="world_Bold">酒店名称</td>
+        <td align="center" class="world_Bold">管理操作</td>
+      </tr>
+	  {if $row}
+	  {foreach from=$row item=v}
+      <tr class="a_hover" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td><input type="checkbox" name="id[]" value="{$v['id']}" /></td>
+        <td>{$v['id']}</td>
+		<td width="20%">{$v['title']}</td>
+        <td>￥{$v['yudingjia']}</td>
+        <td>{$v['roomtype']}</td>
+		<td>{if $v['status'] == 1}有房{else if $v['status'] == 2}满房{else}有房{/if}</td>
+        <td><a href="#">{$v['hotelname']}</a></td>
+        <td><a href="__APP__/Hotels/roomhy/id/{$v['id']}" class="huanyuan">还原</a> | <a href="__APP__/Hotels/roomdel2/id/{$v['id']}" class="del">删除</a></td>
+      </tr>
+	  {/foreach}
+	  {else}
+	  <tr class="a_hover" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+		<td align="center" colspan="7">暂无删除房间</td>
+	  </tr>
+	  {/if}
+    </table>
+    <table width="100%" align="center" style="margin-top:8px;">
+       <tr>
+        <td width="100"><input name="chkall" type="checkbox" id="chkall" value="check"> 全选/反选</td>
+        <td>
+		  <input type="submit" name="btn_submit" value="客房还原" class="bton">
+          <input type="submit" name="btn_submit" value="删除产品" class="bton">
+        </td>
+      </tr>
+    </table>
+	 </form>
+	<table width="100%" border="0" style="margin-top:8px;">
+	  <tr>
+	    <td align="right" width="50%"><input type="text" maxlength="100" class="inputtxt" id="content" /></td>
+		<td><input type="button" value="搜 索" class="bton" id="search"></td>
+	  </tr>
+	</table>
+	 <script>
+	  $('#search').click(function(){
+		var con = $('#content').val();
+		if(con == ''){
+			alert('请输入房间名称');
+			return false;
+		}
+		window.location.href="__APP__/Hotels/roomhuishou/text/"+con+"";
+	  })
+	  </script>
+    <table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center"><div class="pages">{$page}</div></td>
+      </tr>
+    </table>
+</div>
+<script>
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.reload();
+		}
+	});
+	$('#chkall').click(function(){
+		if($(this).attr('checked')=='checked'){
+			$("input[type=checkbox][name='id[]']").attr('checked','checked');
+		}else{
+			$("input[type=checkbox][name='id[]']").removeAttr('checked','checked');
+		}
+	})
+	$('.del').click(function(){
+		if(confirm('此操作不可复原，你确定删除吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	$('.huanyuan').click(function(){
+		if(confirm('你确定还原该客房吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	return false;
+})
+</script>
+</body>
+</html>

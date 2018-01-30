@@ -1,0 +1,77 @@
+<div class="bjui-pageHeader" style="height:38px">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Point/lists" method="get">
+		<div class="bjui-searchBar">
+			<div style="margin-left: 0;display: inline-block;margin-top:6px">
+				<div class="btn-group">
+					<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+					<ul class="dropdown-menu right" role="menu">
+						<li><a class="btn" href="__APP__/Point/pi/type/0" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要删除选中项吗？">删除选中</a></li>
+					</ul>
+				</div>
+			</div>
+			<label>用户名关键字：</label>
+			<input type="text" value="{$smarty.get.text}" name="text" class="form-control" size="8">&nbsp;
+			<label>类型：</label>
+			<select name="status" data-toggle="selectpicker">
+				<option value="">全部</option>
+				<option value="1">赠送</option>
+				<option value="2">兑换</option>
+			</select>&nbsp;
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px;line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  width="26">
+					<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+				</th>
+				<th style="background:#1078C1;color:#fff;" width="50" data-order-field="id">ID</th>
+				<th style="background:#1078C1;color:#fff;" >会员名</th>
+				<th style="background:#1078C1;color:#fff;" >订单编号</th>
+				<th style="background:#1078C1;color:#fff;" >提现编号</th>
+				<th style="background:#1078C1;color:#fff;" >积分变化</th>
+				<th style="background:#1078C1;color:#fff;"  data-order-field="ctime">时间</th>
+				<th style="background:#1078C1;color:#fff;" >类型</th>
+				<th style="background:#1078C1;color:#fff;"  width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$lists item=v key=k}
+			<tr data-id="{$k}">
+				<td>
+					<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+				</td>
+				<td>{$v.id}</td>
+				<td>{$v.username}</td>
+				<td>{if $v.type==0}<a href="__APP__/Order/edit/id/{$v.foreign_key}/read/1" data-toggle="navtab" data-title='订单详情' data-id="Order-edit">{$v.order_no}</a>{/if}</td>
+				<td>{if $v.type==1}<a href="__APP__/Hotel/tixian_detail/id/{$v.foreign_key}"  data-toggle="navtab" data-title='提现详情' data-id="Hotels-tixian_detail">{$v.ctime}{$v.foreign_key}</a>{/if}</td>
+				<td>{if $v.status==1}+{else}-{/if}{$v['total']}</td>
+				<td>{date('Y-m-d H:i:s',$v['ctime'])}</td>
+				<td>{if $v['status'] eq 1}消费赠送{else if $v['status'] eq 2}积分提现{/if}</td>
+				<td>
+					<a href="__APP__/Point/del/id/{$v['id']}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bjui-pageFooter">
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

@@ -1,0 +1,770 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-form select {
+    max-width: 100px;
+    float: left;
+    margin-right: 5px;
+}
+.am-margin-right{
+	margin-bottom:0px}
+.am-form label {
+    float: left;
+    margin-right: 5px;
+	margin-bottom: 0px  !important;
+}
+.input_table { width:50px  !important; text-align:center ; float: left; margin-right: 5px;}
+.zhong {
+    line-height: 30px;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg"><empty name="info.id">附近地标<else/>房间编辑</empty></strong> / <small>Landmarks nearby</small>
+                </div>
+            </div>
+            <form method="post" class="am-form ajaxform" action="__APP__/Hotel/edit" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{$id}">
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="42%"><label>大学名称：</label>
+                            <select class="dx" name="dx_1_1">
+                                <option value="">请选择</option>
+                                <volist name="dx" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select class="dx2" name="dx_1_2" style="display:none;"></select>
+                            <select name="dx_1_3" class="dx3" style="display:none;"></select>
+                            <notempty name="dx1">{$dx1}</notempty>
+                        </td>
+                        <td width="15%"><label>距离：</label><input type="text" class="input_table" size="2" name="dxjl1" value="{$dxjl1}" />公里
+                        </td>
+                        <td width="50%"><label>乘车路线：</label><textarea style="width:380px;height:30px;" name="dxdesc1">{$dxdesc1}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>大学名称：</label>
+                            <select name="dx_2_1" class="dx_2_1">
+                                <option value="">请选择</option>
+                                <volist name="dx" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select class="dx_2_2" name="dx_2_2" style="display:none;"></select>
+                            <select class="dx_2_3" name="dx_2_3" style="display:none;"></select>
+                            <notempty name="dx2">{$dx2}</notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="dxjl2" value="{$dxjl2}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="dxdesc2">{$dxdesc2}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>大学名称：</label>
+                            <select name="dx_3_1" class="dx_3_1">
+                                <option value="">请选择</option>
+                                <volist name="dx" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select class="dx_3_2" name="dx_3_2" style="display:none;"></select>
+                            <select class="dx_3_3" name="dx_3_3" style="display:none;"></select>
+                            <notempty name="dx3">{$dx3}</notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="dxjl3" value="{$dxjl3}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="dxdesc3">{$dxdesc3}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="42%"><label>地铁名称：</label>
+                            <select name="dt_1_1" class="dt_1_1">
+                                <option value="">请选择</option>
+                                <volist name="dt" id="v">
+                                    <option value="{$v['city']}">{$v['city']}</option>
+                                </volist>
+                            </select>
+                            <select class="dt_1_2" name="dt_1_2" style="display:none;"></select>
+                            <select class="dt_1_3" name="dt_1_3" style="display:none;"></select>
+                            <notempty name="dt1">{$dt1}</notempty>
+                        </td>
+                        <td width="15%"><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="dtjl1" value="{$dtjl1}" />公里
+                        </td>
+                        <td width="50%"><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="dtdesc1">{$dtdesc1}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>地铁名称：</label>
+                            <select name="dt_2_1" class="dt_2_1">
+                                <option value="">请选择</option>
+                                <volist name="dt" id="v">
+                                    <option value="{$v['city']}">{$v['city']}</option>
+                                </volist>
+                            </select>
+                            <select class="dt_2_2" name="dt_2_2" style="display:none;"></select>
+                            <select class="dt_2_3" name="dt_2_3" style="display:none;"></select>
+                            <notempty name="dt2">{$dt2}</notempty>
+                        </td>
+                        <td><label>距离：</label><input type="text" class="input_table" size="2" name="dtjl2" value="{$dtjl2}" />公里
+                        </td>
+                        <td><label>乘车路线：</label><textarea style="width:380px;height:30px;" name="dtdesc2">{$dtdesc2}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>地铁名称：</label>
+                            <select name="dt_3_1" class="dt_3_1">
+                                <option value="">请选择</option>
+                                <volist name="dt" id="v">
+                                    <option value="{$v['city']}">{$v['city']}</option>
+                                </volist>
+                            </select>
+                            <select class="dt_3_2" name="dt_3_2" style="display:none;"></select>
+                            <select class="dt_3_3" name="dt_3_3" style="display:none;"></select>
+                            <notempty name="dt3">{$dt3} </notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="dtjl3" value="{$dtjl3}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="dtdesc3">{$dtdesc3}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="42%"><label>机场名称：</label>
+                            <select name="jc_1_1" class="jc_1_1">
+                                <option value="">请选择</option>
+                                <volist name="jc" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="jc_1_2" class="jc_1_2" style="display:none;"></select>
+                            <notempty name="jc1">{$jc1}</notempty>
+                        </td>
+                        <td width="15%"><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="jcjl1" value="{$jcjl1}" />公里
+                        </td>
+                        <td width="50%"><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="jcdesc1">{$jcdesc1}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>机场名称：</label>
+                            <select name="jc_2_1" class="jc_2_1">
+                                <option value="">请选择</option>
+                                <volist name="jc" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="jc_2_2" class="jc_2_2" style="display:none;"></select>
+                            <notempty name="jc2">{$jc2}</notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="jcjl2" value="{$jcjl2}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="jcdesc2">{$jcdesc2}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="42%"><label>火车站名：</label>
+                            <select name="hc_1_1" class="hc_1_1">
+                                <option value="">请选择</option>
+                                <volist name="hc" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="hc_1_2" class="hc_1_2" style="display:none;"></select>
+                            <select name="hc_1_3" class="hc_1_3" style="display:none;"></select>
+                            <notempty name="hc1">{$hc1}</notempty>
+                        </td>
+                        <td width="15%"><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="hcjl1" value="{$hcjl1}" />公里
+                        </td>
+                        <td width="50%"><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="hcdesc1">{$hcdesc1}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>火车站名：</label>
+                            <select name="hc_2_1" class="hc_2_1">
+                                <option value="">请选择</option>
+                                <volist name="hc" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="hc_2_2" class="hc_2_2" style="display:none;"></select>
+                            <select name="hc_2_3" class="hc_2_3" style="display:none;"></select>
+                            <notempty name="hc2">{$hc2}</notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="hcjl2" value="{$hcjl2}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="hcdesc2">{$hcdesc2}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="42%"><label>会展中心：</label>
+                            <select name="hz_1_1" class="hz_1_1">
+                                <option value="">请选择</option>
+                                <volist name="hz" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="hz_1_2" class="hz_1_2" style="display:none;">
+                            </select>
+                            <select name="hz_1_3" class="hz_1_3" style="display:none;">
+                            </select>
+                            <notempty name="hz1">{$hz1}</notempty>
+                        </td>
+                        <td width="15%"><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="hzjl1" value="{$hzjl1}" />公里
+                        </td>
+                        <td width="50%"><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="hzdesc1">{$hzdesc1}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="42%"><label>会展中心：</label>
+                            <select name="hz_2_1" class="hz_2_1">
+                                <option value="">请选择</option>
+                                <volist name="hz" id="v">
+                                    <option value="{$v['province']}">{$v['province']}</option>
+                                </volist>
+                            </select>
+                            <select name="hz_2_2" class="hz_2_2" style="display:none;">
+                            </select>
+                            <select name="hz_2_3" class="hz_2_3" style="display:none;">
+                            </select>
+                            <notempty name="hz2">{$hz2}</notempty>
+                        </td>
+                        <td><label>距离：</label>
+                            <input type="text" class="input_table" size="2" name="hzjl2" value="{$hzjl2}" />公里
+                        </td>
+                        <td><label>乘车路线：</label>
+                            <textarea style="width:380px;height:30px;" name="hzdesc2">{$hzdesc2}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value=" 确认修改 " class="am-btn am-btn-primary" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+</div>
+<script type="text/javascript">
+function ready(){
+    $('.dx').change(function() {
+        $('.dx2').hide();
+        $('.dx3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getprov", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['cityname'] + ">" + value['cityname'] + "</option>";
+                    });
+                    $('.dx2').show();
+                    $('.dx2').html(rs);
+                }
+            });
+        } else {
+            $('.dx2').hide();
+            $('.dx3').hide();
+        }
+    });
+    $('.dx2').change(function() {
+        $('.dx3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getcity", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.college + ">" + value.college + "</option>";
+                    });
+                    $('.dx3').show();
+                    $('.dx3').html(rs);
+                }
+            });
+        } else {
+            $('.dx3').hide();
+        }
+    });
+    $('.dx_2_1').change(function() {
+        $('.dx_2_2').hide();
+        $('.dx_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getprov", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['cityname'] + ">" + value['cityname'] + "</option>";
+                    });
+                    $('.dx_2_2').show();
+                    $('.dx_2_2').html(rs);
+                }
+            });
+        } else {
+            $('.dx_2_2').hide();
+            $('.dx_2_3').hide();
+        }
+    });
+    $('.dx_2_2').change(function() {
+        $('.dx_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getcity", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.college + ">" + value.college + "</option>";
+                    });
+                    $('.dx_2_3').show();
+                    $('.dx_2_3').html(rs);
+                }
+            });
+        } else {
+            $('.dx_2_3').hide();
+        }
+    });
+    $('.dx_3_1').change(function() {
+        $('.dx_3_2').hide();
+        $('.dx_3_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getprov", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['cityname'] + ">" + value['cityname'] + "</option>";
+                    });
+                    $('.dx_3_2').show();
+                    $('.dx_3_2').html(rs);
+                }
+            });
+        } else {
+            $('.dx_3_2').hide();
+            $('.dx_3_3').hide();
+        }
+    });
+    $('.dx_3_2').change(function() {
+        $('.dx_3_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/getcity", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.college + ">" + value.college + "</option>";
+                    });
+                    $('.dx_3_3').show();
+                    $('.dx_3_3').html(rs);
+                }
+            });
+        } else {
+            $('.dx_3_3').hide();
+        }
+    });
+    $('.dt_1_1').change(function() {
+        $('.dt_1_2').hide();
+        $('.dt_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dt", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['ditie'] + ">" + value['ditie'] + "</option>";
+                    });
+                    $('.dt_1_2').show();
+                    $('.dt_1_2').html(rs);
+                }
+            });
+        } else {
+            $('.dt_1_2').hide();
+            $('.dt_1_3').hide();
+        }
+    });
+    $('.dt_1_2').change(function() {
+        $('.dt_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dtzhanpai", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.zhanpai + ">" + value.zhanpai + "</option>";
+                    });
+                    $('.dt_1_3').show();
+                    $('.dt_1_3').html(rs);
+                }
+            });
+        } else {
+            $('.dt_1_3').hide();
+        }
+    });
+    $('.dt_2_1').change(function() {
+        $('.dt_2_2').hide();
+        $('.dt_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dt", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['ditie'] + ">" + value['ditie'] + "</option>";
+                    });
+                    $('.dt_2_2').show();
+                    $('.dt_2_2').html(rs);
+                }
+            });
+        } else {
+            $('.dt_2_2').hide();
+            $('.dt_2_3').hide();
+        }
+    });
+    $('.dt_2_2').change(function() {
+        $('.dt_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dtzhanpai", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.zhanpai + ">" + value.zhanpai + "</option>";
+                    });
+                    $('.dt_2_3').show();
+                    $('.dt_2_3').html(rs);
+                }
+            });
+        } else {
+            $('.dt_2_3').hide();
+        }
+    });
+    $('.dt_3_1').change(function() {
+        $('.dt_3_2').hide();
+        $('.dt_3_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dt", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value['ditie'] + ">" + value['ditie'] + "</option>";
+                    });
+                    $('.dt_3_2').show();
+                    $('.dt_3_2').html(rs);
+                }
+            });
+        } else {
+            $('.dt_3_2').hide();
+            $('.dt_3_3').hide();
+        }
+    });
+    $('.dt_3_2').change(function() {
+        $('.dt_3_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/dtzhanpai", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.zhanpai + ">" + value.zhanpai + "</option>";
+                    });
+                    $('.dt_3_3').show();
+                    $('.dt_3_3').html(rs);
+                }
+            });
+        } else {
+            $('.dt_3_3').hide();
+        }
+    });
+    $('.jc_1_1').change(function() {
+        $('.jc_1_2').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/jc", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.airport + ">" + value.airport + "</option>";
+                    });
+                    $('.jc_1_2').show();
+                    $('.jc_1_2').html(rs);
+                }
+            });
+        } else {
+            $('.jc_1_2').hide();
+        }
+    });
+    $('.jc_2_1').change(function() {
+        $('.jc_2_2').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/jc", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.airport + ">" + value.airport + "</option>";
+                    });
+                    $('.jc_2_2').show();
+                    $('.jc_2_2').html(rs);
+                }
+            });
+        } else {
+            $('.jc_2_2').hide();
+        }
+    });
+    $('.hc_1_1').change(function() {
+        $('.hc_1_2').hide();
+        $('.hc_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hccity", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.cityname + ">" + value.cityname + "</option>";
+                    });
+                    $('.hc_1_2').show();
+                    $('.hc_1_2').html(rs);
+                }
+            });
+        } else {
+            $('.hc_1_2').hide();
+            $('.hc_1_3').hide();
+        }
+    });
+    $('.hc_1_2').change(function() {
+        $('.hc_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/gethc", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.train + ">" + value.train + "</option>";
+                    });
+                    $('.hc_1_3').show();
+                    $('.hc_1_3').html(rs);
+                }
+            });
+        } else {
+            $('.hc_1_3').hide();
+        }
+    });
+    $('.hc_2_1').change(function() {
+        $('.hc_2_2').hide();
+        $('.hc_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hccity", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.cityname + ">" + value.cityname + "</option>";
+                    });
+                    $('.hc_2_2').show();
+                    $('.hc_2_2').html(rs);
+                }
+            });
+        } else {
+            $('.hc_2_2').hide();
+            $('.hc_2_3').hide();
+        }
+    });
+    $('.hc_2_2').change(function() {
+        $('.hc_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/gethc", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.train + ">" + value.train + "</option>";
+                    });
+                    $('.hc_2_3').show();
+                    $('.hc_2_3').html(rs);
+                }
+            });
+        } else {
+            $('.hc_2_3').hide();
+        }
+    });
+    $('.hz_1_1').change(function() {
+        $('.hz_1_2').hide();
+        $('.hz_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hz", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.cityname + ">" + value.cityname + "</option>";
+                    });
+                    $('.hz_1_2').show();
+                    $('.hz_1_2').html(rs);
+                }
+            });
+        } else {
+            $('.hz_1_2').hide();
+            $('.hz_1_3').hide();
+        }
+    });
+    $('.hz_1_2').change(function() {
+        $('.hz_1_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hzexhibit", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.exhibit + ">" + value.exhibit + "</option>";
+                    });
+                    $('.hz_1_3').show();
+                    $('.hz_1_3').html(rs);
+                }
+            });
+        } else {
+            $('.hz_1_3').hide();
+        }
+    });
+    $('.hz_2_1').change(function() {
+        $('.hz_2_2').hide();
+        $('.hz_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hz", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.cityname + ">" + value.cityname + "</option>";
+                    });
+                    $('.hz_2_2').show();
+                    $('.hz_2_2').html(rs);
+                }
+            });
+        } else {
+            $('.hz_2_2').hide();
+            $('.hz_2_3').hide();
+        }
+    });
+    $('.hz_2_2').change(function() {
+        $('.hz_2_3').hide();
+        var con = $(this).val();
+        if (con != '') {
+            $.post("__APP__/Hotel/hzexhibit", {
+                city: con
+            }, function(data) {
+                var arr_data = $.parseJSON(data);
+                if (arr_data.status == 1) {
+                    var rs = '<option value="">请选择</option>';
+                    $.each(arr_data.msg, function(i, value) {
+                        rs += "<option value=" + value.exhibit + ">" + value.exhibit + "</option>";
+                    });
+                    $('.hz_2_3').show();
+                    $('.hz_2_3').html(rs);
+                }
+            });
+        } else {
+            $('.hz_2_3').hide();
+        }
+    });
+}
+function callback(rs){
+    alert(rs.info);
+    if(rs.status==1){
+        window.location.reload();
+    }
+}
+</script>
+<include file="Tpl/public/bottom.html" />

@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$city}酒店预订_{$city}酒店查询|订房网</title>
+<meta name="keywords" content="{$city}酒店预订,{$city}酒店查询,订房网">
+<meta name="description" content="订房网为您提供{$city}酒店预订查询服务,{$city}酒店预订信息,{$city}酒店电子地图,{$city}酒店用户评论.商旅出差,旅游度假,免费预订查询{$city}酒店宾馆。预订免费,前台付款.订房网,您身边的酒店预订专家.">
+<meta name="author" content="广州澄季四海计算机技术有限公司">
+<link href="__PUBLIC__/home/css/map.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<!-- 日历控件 -->
+<script type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=CF7b68d7d995d3349885b93780fce064"></script> -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ldmcT69FcVp0aeOjaC7fOseIEdK7ftqU"></script>
+<script type="text/javascript"> 
+ var city ='{$city}';
+  eval('markerArr='+'{$points}');
+  var  root='__ROOT__';
+  var hot="{$hot}";
+  var allPY="{$allPY}";
+  var ABC="{$ABC}";
+  var DEF="{$DEF}";
+  var GHI="{$GHI}";
+  var JKL="{$JKL}";
+  var MNO="{$MNO}";
+  var PQR="{$PQR}";
+  var STU="{$STU}";
+  var VWX="{$VWX}";
+  var YZ="{$YZ}";
+  function doSearch(){
+	var cid = $("#cityid").val();
+	var begin = $("#begin").val();
+	var end = $("#end").val();
+	var keyword = $("#keyword").val();
+	var par='/map.html?city='+cid;
+	if(begin){
+		par+="&begin="+begin;
+	}	
+	if(end){
+		par+="&end="+end;
+	}	
+	if(keyword){
+		par+="&keyword="+keyword;
+	}
+	 window.location.href=root+par; 
+  }
+</script>
+
+</head>
+<body>
+<div class="header">
+  <div class="logo"><a href="__ROOT__/"><img src="{$logo}"/></a></div>
+  目的地：
+  <input type="text" id="homecity_name" name="homecity_name" mod="address|notice" mod_address_source="hotel" mod_address_suggest="{$hot2}" mod_address_reference="cityid" mod_notice_tip="中文/拼音" value="{$city}" />
+  <input id="cityid" name="cityid" type="hidden" value="{$smarty.get.city}" />
+  入住日期：
+  <input type="text" id="begin"class="Wdate" type="text" onFocus="WdatePicker({ minDate:'%y-%M-%d'})" value='{$smarty.now|date_format:"%Y-%m-%d"}'/>
+  退房日期：
+  <input type="text" id="end" class="Wdate" type="text" onFocus="WdatePicker({ minDate:'#F{ $dp.$D(\'begin\') }',maxDate:'#F{ $dp.$D(\'begin\',{ d:+10 }); }' })" value='{($smarty.now+86400)|date_format:"%Y-%m-%d"}' />
+  关键词：
+  <input type="text" id="keyword" value="{$smarty.get.keyword}" />
+  <a href="javascript:doSearch();" style="position:relative; top:10px"><img src="__PUBLIC__/home/images/search.jpg" /></a> <span><a href="__ROOT__/Hotels/search-{if $smarty.get.city}{$smarty.get.city}{else}0{/if}-0-0-0-0-0-0-0-0.html">去列表页找酒店></a></span>
+<!--   <div class="right">
+    省份:<select> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option></select>
+    城市:<select> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option></select>
+    地区:<select> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option> <option>河南</option></select>
+  </div> -->
+  <div id="jsContainer" class="jsContainer" style="height:0">
+    <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
+    <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>
+</div>
+   </div>
+<div class="map">
+<div  style="width:100%;height:740px;" id="setmap"></div>
+  <div class="main">
+    <div class="main_left" id="frmTitle" name="fmTitle" >
+      <div id="Tab1">
+        <div class="Menubox">
+          <ul>
+            <li id="five1" class="hover">受欢迎</li>
+            <li id="five2"><a href="__ROOT__/map-score.html?city={$smarty.get.city}&begin={$smarty.get.begin}&end={$smarty.get.end}">评分</a></li>
+            <li id="five3"><a href="__ROOT__/map-price.html?city={$smarty.get.city}&begin={$smarty.get.begin}&end={$smarty.get.end}">价格</a></li>
+            <li id="five4"><a href="__ROOT__/map-grade.html?city={$smarty.get.city}&begin={$smarty.get.begin}&end={$smarty.get.end}">等级</a></li>
+          </ul>
+        </div>
+        <div class="Contentbox">
+          <div id="con_five_1" class="hover">
+			{foreach from=$hotels key=k item=vo}
+            <dl>
+              <dt>{$k+1}</dt>
+              <dd><h3><a href="__ROOT__/Hotels/show-{$vo['hotelid']}.html">{$vo['hotelname']}</a> </h3></dd>
+              <dd><span>￥{$vo['price']}元起</span><a href="__ROOT__/Hotels/show-{$vo['hotelid']}.html">
+               {if $vo['comment'] eq '' }
+               暂无人评分
+               {else}
+               {$vo['comment']}分{$vo['comCount']}人评分
+               {/if}
+               </a>
+              </dd>
+            </dl>
+			{/foreach}
+           <p>{$page}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="picBox" onclick="switchSysBar()" id="switchPoint" ></div>
+  </div>
+</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/home/js/map.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/fixdiv.js"></script>
+<script type="text/javascript" src="__PUBLIC__/home/js/address.js"></script>
+
+</body>
+</html>

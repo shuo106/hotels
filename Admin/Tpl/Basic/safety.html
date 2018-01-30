@@ -1,0 +1,54 @@
+<style type="text/css">
+label.control-label {
+    width: 130px;
+}
+</style>
+<form action="__APP__/Basic/safety" method="post" id="j_custom_form" data-toggle="ajaxform">
+    <input type="hidden" name="id" value="{$id}" />
+    <input type="hidden" name="btn_submit" value="true">
+    <div class="bjui-pageContent">
+        <table class="table-bordered table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_ip" class="control-label x85" title="只有当管理员处于本列表中的 IP 地址时才可以访问网站后台，列表以外的地址访问将无法访问，但仍可访问网站前台界面，请务必慎重使用本功能。每个 IP 一行
+留空则所有 IP 均可访问网站后台">
+                            后台禁止访问IP列表：
+                        </label>
+                        <textarea name="ip" id="j_custom_ip" data-toggle="autoheight" cols="15" rows="1">{$ip}</textarea>（每个IP单独占一行）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_number" class="control-label x85" title="登陆失败次数超过后，系统将自动锁定该IP，0表示不限制次数">
+                            登录失败次数上限：
+                        </label>
+                        <input type="text" name="number" id="j_custom_title" value="{$number}" size="5">　次　（0：不限次数）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_locktime" class="control-label x85" title="登录失败次数超过上限后的IP锁定时间，0表示不限时长，此时间内不能再登录">
+                            IP锁定时间：
+                        </label>
+                        <input type="text" name="locktime" id="j_custom_locktime" value="{$locktime}" size="5">　小时（0：不限时长）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="page_but" style="margin-left:130px">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

@@ -1,0 +1,563 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>拾取坐标系统</title>
+<style>
+body,div,ul,li,p,form,input{margin:0;padding:0;}
+html,body{overflow:hidden;}
+body {font:12px arial,sans-serif;line-height:160%;}
+li {list-style:none;}
+img, fieldset,iframe {border:0;}
+input, button, textarea, select {font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%;}
+input, select,img{vertical-align:middle}
+em{font-style:normal;}
+a{color:#000;text-decoration:none;}
+a:hover{color:#f00;text-decoration:underline}
+.clear:after{content:".";display:block;height:0;clear:both;}
+.clear_{clear:both;height:0;overflow:hidden}
+.left{float:left;}
+.center{float:left;}
+.right{float:right}
+.pos_rel{position:relative}
+.content{width:100%;height:auto;margin:auto;}
+.LogoCon{margin:17px 20px;}
+.LogoCon .logo{width:160px;float:left;}
+.LogoCon .search{padding-top:30px;float:left}
+.LogoCon .map_search {position:relative;height:35px;font:16px arial,sans-serif;margin-top:20px;padding-top:0;background:url("../Images/tabimg.gif") no-repeat scroll 0 -65px transparent;}
+.LogoCon .map_search .text{width:350px;border:1px solid #CFD3D2;height:19px;*height:17px;margin:3px 0 0 3px;padding:3px;color:#8C8C8C}
+.LogoCon .map_search .button{font-size:14px;height:26px;margin:3px 0 0 7px;width:76px;}
+.dt_nav{color:#333;height:23px;line-height:23px;padding-left:8px;background:#E5ECF9;padding-right:10px;overflow:hidden}
+.dt_nav .result{float:right;color:#7797d3}
+.dt_nav .nav li{height:20px;float:left;background:url(../Images/map_bj1.gif) no-repeat left top #fff;margin:3px 10px 0 0;padding-left:6px;}
+.dt_nav .nav li .l{float:left;}
+.dt_nav .nav li .r{display:block;width:6px;height:20px;float:left;background:url(../Images/map_bj1.gif) no-repeat right -20px;}
+.dt_nav .nav li b{font-size:14px;}
+.dt_nav .nav li a{text-decoration:underline;color:#00C;cursor:pointer;}
+.dt_nav .nav li a:hover{text-decoration:underline;color:#00C}
+#wrapper{position:relative;overflow:hidden;width:100%}
+#MapInfo{color:#333;width:265px;position:absolute;top:0;right:0;background:#fff;overflow-y:auto;overflow-x:hidden;z-index:10;padding:10px 7px 10px 8px;}
+#MapHolder{background:#ccc;left:0;position:relative;margin-right:280px;margin-top:2px;z-index:0}
+#MapInfo .city_list{line-height:18px}
+#MapInfo .city_list li{width:24%;float:left}
+#shad div{position:absolute;}
+#shad_v{width:5px;right:280px;top:2px;background:url(../Images/shad_v.png) repeat-y 0 0;-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod="scale",src="Images/shad_v.png");font-size:0;-background:none;}#shad_h{width:100%;height:5px;left:0;top:2px;background:url(../Images/shad_h.png) repeat-x 0 0;-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod="scale",src="Images/shad_h.png");font-size:0;-background:none;}/*map 涓撶敤 end*/#copyButton{position:relative;}#copyButton input{position:absolute;cursor:pointer;width:50px;height:25px;left:3px;top:6px;}/*鍙充晶缁撴灉鍒楄〃 begin*/
+.local_s{}
+.local_s li{min-height:30px;-height:30px;position:relative;padding-left:22px;margin-bottom:3px;-zoom:1}.local_s li span{cursor:pointer;display:block;width:19px;height:25px;background:url(../Images/markers.png) no-repeat 0 0;position:absolute;top:3px;left:0;}.local_s li div{padding:2px 10px 2px 3px;}.local_s li div em{overflow:visible;width:100%;word-wrap:break-word;white-space:-moz-pre-wrap;}.local_s li a{color:#00C;text-decoration:underline;outline:none}.local_s li#no0 span{ background-position:-23px 0;}.local_s li#no1 span{ background-position:-23px -25px;}.local_s li#no2 span{ background-position:-23px -50px;}.local_s li#no3 span{ background-position:-23px -75px;}.local_s li#no4 span{ background-position:-23px -100px;}.local_s li#no5 span{ background-position:-23px -125px;}.local_s li#no6 span{ background-position:-23px -150px;}.local_s li#no7 span{ background-position:-23px -175px;}.local_s li#no8 span{ background-position:-23px -200px;}.local_s li#no9 span{ background-position:-23px -225px;}.local_s .hover{background:#F0F0F0;cursor:pointer;}/*鍙充晶缁撴灉鍒楄〃 end*//*鍙充晶 缈婚〉 begin*/.page{text-align:center;margin:30px auto;}.page a,.page span{margin:0 3px}.page a{color:#0000CC;text-decoration:underline;outline:medium none;}.page .text{width:20px;margin-right:5px;text-align:center}.page .button{cursor:pointer}/*鍙充晶 缈婚〉 end*//*Search Results list*/.SearchList{margin:5px 0 8px 8px;clear:both;overflow:hidden;}.SearchList li{width:33%;float:left;}.SearchList li a{color:#0000CC;text-decoration:underline;outline:none;}#moreCityPop{position:relative;margin-top:5px;padding-left:8px;}#moreCityPop .resultMore{background:url(../Images/list_more.gif) no-repeat right 6px ;padding-right:11px;margin-top:8px;}#moreCityPop a{color:#0000CC;text-decoration:underline;outline:none;cursor:pointer;}/*Search Results list*//*infoWindow 姘旀场 begin*/.iwTitle{color:#CC5522;font-size:14px;font-weight:bold;white-space:nowrap;}.iwContent{}.iwContent p{position:absolute;padding-left:50px;}.iwContent em{position:relative;top:0;left:0;}/*infoWindow 姘旀场 end*//**map娴姩灞�**/.map_popup{ position:absolute;z-index:200000;left:0;}.map_popup .popup_main{border:1px solid #8ba4d8; z-index:2; position:absolute;width:100%; height:100%; background:#FFF; overflow:hidden}.map_popup .poput_shadow{width:100%; height:100%; background:#505050;border:1px solid #505050; position:absolute;left:2px; top:3px;z-index:1;opacity:0.4;filter:alpha(opacity=40)}.map_popup .title{ background:url(../Images/popup_title.gif); height:24px; line-height:25px; font-size:12px; font-weight:bold; color:#6688cc; padding-left:7px}.map_popup button{ position:absolute; top:6px; right:4px; width:12px; height:12px; background:url(../Images/popup_close.gif) no-repeat; border:0;cursor:pointer}/*鍩庡競鍒楄〃*/.sel_city a{margin-right:8px;text-decoration:underline;color:#00C;cursor:pointer;}.sel_city a:hover{text-decoration:underline;color:#00C}.sel_city a.black{color:#000;}.sel_city a.black:hover{color:#000;}.selCityInput{padding:10px;}.selCityInput input{margin-right:5px;}.selCityInputT{color:#8C8C8C}/*澶撮儴鍧愭爣鍙嶆煡*/.pointLabel{font-size:12px;margin:5px 0 0 5px;*margin-left:0;cursor:pointer;}.pointLabel input{margin-right:3px;*margin-right:0;}.searchTip{position:absolute;left:10px;bottom:-18px;font-size:12px;color:#f00;}#txtPanel h3{font-size:12px;font-weight:700;margin:0;padding:10px 0}#txtPanel .tip_info{padding-left:20px;}#txtPanel .tip_info_em{padding-left:20px;display:block;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2&services=true" ></script>
+<script type="text/javascript">
+if(typeof(console)=="undefined"){console={};console.log=function(){}}window.onerror=function(){};(function(){var i=window.DomReady={};var h=navigator.userAgent.toLowerCase();var c={version:(h.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)||[])[1],safari:/webkit/.test(h),opera:/opera/.test(h),msie:(/msie/.test(h))&&(!/opera/.test(h)),mozilla:(/mozilla/.test(h))&&(!/(compatible|webkit)/.test(h))};var d=false;var e=false;var g=[];function a(){if(!e){e=true;if(g){for(var j=0;j<g.length;j++){g[j].call(window,[])}g=[]}}}function f(j){var k=window.onload;if(typeof window.onload!="function"){window.onload=j}else{window.onload=function(){if(k){k()}j()}}}function b(){if(d){return}d=true;if(document.addEventListener&&!c.opera){document.addEventListener("DOMContentLoaded",a,false)}if(c.msie&&window==top){(function(){if(e){return}try{document.documentElement.doScroll("left")}catch(k){setTimeout(arguments.callee,0);return}a()})()}if(c.opera){document.addEventListener("DOMContentLoaded",function(){if(e){return}for(var k=0;k<document.styleSheets.length;k++){if(document.styleSheets[k].disabled){setTimeout(arguments.callee,0);return}}a()},false)}if(c.safari){var j;(function(){if(e){return}if(document.readyState!="loaded"&&document.readyState!="complete"){setTimeout(arguments.callee,0);return}if(j===undefined){var k=document.getElementsByTagName("link");for(var l=0;l<k.length;l++){if(k[l].getAttribute("rel")=="stylesheet"){j++}}var m=document.getElementsByTagName("style");j+=m.length}if(document.styleSheets.length!=j){setTimeout(arguments.callee,0);return}a()})()}f(a)}i.ready=function(k,j){b();if(e){k.call(window,[])}else{g.push(function(){return k.call(window,[])})}};b()})();var Fe=Fe||{version:"20080809",emptyFn:function(){}};Fe._log=[];var counter=0;var instances={};Fe.BaseClass=function(a){instances[(this.hashCode=(a||Fe.BaseClass.guid()))]=this};Fe.BaseClass.guid=function(){return"mz_"+(counter++).toString(36)};Fe.BaseClass.create=function(){var a=new Fe.BaseClass();a.decontrol();return a};window.Instance=Fe.instance=Fe.I=function(a){return instances[a]};Fe.BaseClass.prototype.dispose=function(){if(this.hashCode){delete instances[this.hashCode]}for(var a in this){if(typeof this[a]!="function"){delete this[a]}}};Fe.BaseClass.prototype.getHashCode=function(){if(!this.hashCode){instances[(this.hashCode=Fe.BaseClass.guid())]=this}return this.hashCode};Fe.BaseClass.prototype.decontrol=function(){delete instances[this.hashCode]};Fe.BaseClass.prototype.toString=function(){return"[object "+(this._className||"Object")+"]"};Fe.BaseClass.prototype._wlog=function(c,d){var b=Fe._log;if(b.length>100){b.reverse().length=50;b.reverse()}b[b.length]="["+c+"]["+(this._className||"Object")+" "+this.hashCode+"] "+d};Fe.extend=function(f,d){if(f&&d&&typeof(d)=="object"){for(var e in d){f[e]=d[e]}var c=["constructor","hasOwnProperty","isPrototypeOf","propertyIsEnumerable","toLocaleString","toString","valueOf"];for(var a=0,b;a<c.length;a++){b=c[a];if(Object.prototype.hasOwnProperty.call(d,b)){f[b]=d[b]}}}return f};Fe.on=function(c,b,a){if(!(c=Fe.G(c))){return c}b=b.replace(/^on/,"").toLowerCase();if(c.attachEvent){c[b+a]=function(){a.call(c,window.event)};c.attachEvent("on"+b,c[b+a])}else{c.addEventListener(b,a,false)}return c};Fe.un=function(c,b,a){if(!(c=Fe.G(c))){return c}b=b.replace(/^on/,"").toLowerCase();if(c.attachEvent){c.detachEvent("on"+b,c[b+a]);c[b+a]=null}else{c.removeEventListener(b,a,false)}return c};Fe.G=function(){for(var b=[],c=arguments.length-1;c>-1;c--){var d=arguments[c];b[c]=null;if(typeof d=="object"&&d&&d.dom){b[c]=d.dom}else{if((typeof d=="object"&&d&&d.tagName)||d==window||d==document){b[c]=d}else{if(typeof d=="string"&&(d=document.getElementById(d))){b[c]=d}}}}return b.length<2?b[0]:b};Fe.copy=function(b){var a=Fe.copy._node;if(!a){a=Fe.copy._node=document.createElement("DIV");a.style.position="absolute";a.style.top="-1000px";a.style.left="-1000px";document.body.appendChild(a)}a.innerHTML=["<embed ",'src="Images/clipboard.swf" ','FlashVars="clipboard=',encodeURIComponent(String(b)),'" ','width="0" ','height="0" ','type="application/x-shockwave-flash"></embed>'].join("")};function beforeEndHTML(b,a){b.insertAdjacentHTML("beforeEnd",a);return b.lastChild}function getClientSize(){if(window.innerHeight){return{width:window.innerWidth,height:window.innerHeight}}else{if(document.documentElement&&document.documentElement.clientHeight){return{width:document.documentElement.clientWidth,height:document.documentElement.clientHeight}}else{return{width:document.body.clientWidth,height:document.body.clientHeight}}}}function foucs_(c,a,b){if(!b){b=""}c.style.color="#000";(c.value!=a)?null:c.value=b}function blur_(c,a,b){c.style.color="#8c8c8c";(c.value==b||c.value.length<=0)?c.value=a:null}function loadBody(){initMapSize();initMap();addMapControls();setTimeout(function(){mapResize()},200);createCopyBt()}function initMapSize(){var c=Fe.G("MapHolder");var d=getClientSize().height-140;d=d<0?0:d;c.style.height=d+"px";var a=Fe.G("MapInfo");var f=d+2;f=f<0?0:f;a.style.height=f+"px";var e=Fe.G("shad_v");var b=d;b=b<0?0:b;e.style.height=b+"px"}function initMap(){window.map=new BMap.Map("MapHolder");window.projection=new BMap.MercatorProjection();var a=new BMap.Point(116.395645,39.929986);map.addEventListener("load",function(b){getCurrentCityName()});map.addEventListener("moveend",function(b){getCurrentCityName()});map.addEventListener("dragend",function(b){getCurrentCityName()});map.addEventListener("zoomend",function(b){getCurrentCityName()});map.addEventListener("click",function(c){var b=c.point;if(c.overlay&&c.overlay instanceof BMap.Marker){b=c.overlay.point}setInputPoint(b)});map.addEventListener("mousemove",function(j){if(!temp.mouseLabel){createMouseMoveLabel(j.point)}if(!temp.mouseLabel.isVisible()){temp.mouseLabel.show()}var d=temp.mouseLabel;var n=map.getContainer();var m=n.clientWidth;var l=n.clientHeight;var c=132;var b=19;var h=map.pointToPixel(j.point).x+13;var f=map.pointToPixel(j.point).y+20;var g=map.pixelToPoint(new BMap.Pixel(m-c-13,l-b-20));var i=map.pixelToPoint(new BMap.Pixel(h-c-33,l-b-20));var k=j.point;if(m-h<c){k=new BMap.Point(g.lng,k.lat)}if(l-f<b){k=new BMap.Point(k.lng,g.lat)}if(m-h-16<c&&l-f<b){k=i}d.setPosition(k);d.setContent(j.point.lng+","+j.point.lat)});Fe.on(document.body,"mousemove",function(c){var c=window.event||c;var b=c.srcElement||c.target;if(b.className!="BMap_mask"&&temp.mouseLabel&&temp.mouseLabel.isVisible()){temp.mouseLabel.hide()}});Fe.on(document.body,"mouseout",function(c){var c=window.event||c;var b=c.srcElement||c.target;if(b.className=="BMap_mask"&&temp.mouseLabel&&temp.mouseLabel.isVisible()){temp.mouseLabel.hide()}});mapInfo.centerPoint=a;map.centerAndZoom(a,12);map.enableScrollWheelZoom();map.setDefaultCursor("default");map.setDraggingCursor("default")}function setInputPoint(a){Fe.G("pointInput").value=a.lng+","+a.lat;
+var result =confirm("您确定提交吗？");
+if(result==true){
+}
+else{
+	return false;
+}
+var companyid=document.getElementById("companyid").value;
+document.location.href="web/mapadd.php?x="+a.lng+"&y="+a.lat+"&companyid="+companyid;
+}function createMouseMoveLabel(a){var c=map.pixelToPoint(new BMap.Pixel(0,0));var d=a.lng+","+a.lat;var b=new BMap.Label(d,{point:c,offset:new BMap.Size(13,20),enableMassClear:false});b.setStyle({background:"#fff",border:"#999 solid 1px",zIndex:10000000});map.addOverlay(b);temp.mouseLabel=b}function addMapControls(){window.stdMapCtrl=new BMap.NavigationControl();map.addControl(window.stdMapCtrl);window.scaleCtrl=new BMap.ScaleControl();map.addControl(window.scaleCtrl);window.overviewCtrl=new BMap.OverviewMapControl();map.addControl(window.overviewCtrl);var a=new BMap.CopyrightControl();map.addControl(a)}function mapResize(){var a=Fe.G("MapHolder");var b=Fe.G("shad_v");if(window._resizeTimer){return}window._resizeTimer=setTimeout(function(){var d=getClientSize().height-140;var e=d-20;d=d<0?0:d;e=e<0?0:e;a.style.height=d+"px";Fe.G("MapInfo").style.height=e+"px";if(overviewCtrl.getDom()==null){var c=parseInt(a.style.height)}else{var c=parseInt(a.style.height)-parseInt(overviewCtrl.getDom().style.height)}c=c<0?0:c;b.style.height=c+"px";window._resizeTimer=null},100)}var mapInfo={cityName:"",cityCode:"",centerPoint:null};var temp={pt:[],mk:[],iw:[],iwOpenIndex:null,mouseLabel:null,poiSearchMark:null,geoCoder:null};var eventTemp={};function clearLastResult(){Fe.G("txtPanel").innerHTML="";temp.pt=[];temp.mk=[];temp.iw=[];temp.iwOpenInde=null;map.clearOverlays();if(temp.poiSearchMark){temp.poiSearchMark.hide()}}function localsearch(){var c=[];var a=Fe.G("localvalue").value;var b={onSearchComplete:function(v){clearLastResult();if(d.getStatus()==BMAP_STATUS_SUCCESS){var l=v.getCurrentNumPois();var k=v.getCurrentNumPois();var e=v.getNumPois();var t="";if(l==1&&typeof v.getPoi(0).city=="undefined"){var f=4;if(d&&d._json&&d._json.content&&d._json.content.length==2){f=d._json.content[1];t='<b style="font-size:14px;">'+v.keyword+"</b>"}else{if(d&&d._json&&d._json.current_city&&d._json.current_city.name&&typeof d._json.current_city.level!="undefined"){f=d._json.current_city.level;if(d._json.current_city.name==""){f=4}t='<span style="color:#00c">'+d._json.current_city.name+"</span>";Fe.G("resultNum").innerHTML=""}}map.centerAndZoom(v.getPoi(0).point,f);Fe.G("txtPanel").innerHTML=t}else{var o=_res_sta_i=d._json.content.length-k;t='<ul class="local_s">';for(var y=0;y<l;y++){var h=v.getPoi(y);var p=h.title;var u=h.address;var n=h.phoneNumber;var q=h.point;var z=q.lng+","+q.lat;var w=p;var j=h.type;var A="";if(w.length>20){w=w.substring(0,17)+"..."}if(j==1){A=""}if(j==3){A=""}t+='<li id="no'+y+'">';t+='<span id="mk_'+y+'"></span>';t+='	<div id="no_'+y+'">';t+='		<a href="javascript:void(0)" title="'+p+'">'+w+"</a>";t+="		<p>"+A+""+u;n?t+="		<br/>"+n:null;t+="		<br/>"+z;t+="		</p>";t+="	</div>";t+="</li>";c.push(q);temp.pt.push(q);addMarker(y);createIw({tit:p,add:u,tel:n,poi:q,type:j})}t+="</ul>";t+='<div id="result_page_c"></div>';map.setViewport(c);c=[];Fe.G("txtPanel").innerHTML=t;Fe.G("resultNum").innerHTML=""+e+"";var m=new Page("result_page_c",function(i){Fe.G("MapInfo").scrollTop=0;d.gotoPage(i-1)},{page:v.getPageIndex()+1,totalCount:e,pageCount:Math.ceil(e/10)});if(m.pageCount<=1){Fe.G("result_page_c").innerHTML=""}bindEvent()}}else{var x="";Fe.G("resultNum").innerHTML="";if(v.city!=""){x="<b>"+v.city+"</b>"}else{x=""}if(v.getCityList().length>0){if(v.city!=""){x="<b>"+v.city+"</b>"}else{x="<br />"}var g=v.getCityList();if(g.length>0){x+='<p style="margin-top:10px;"></p><ul class="SearchList" id="cityList" style="height:40px;overflow:hidden;">';for(var y=0;y<g.length;y++){x+="<li><a onclick=\"searchInthisCity('"+g[y].city+'\')" href="javascript:void(0)">'+g[y].city+"</a>(";x+=g[y].numResults+")</li>"}x+="</ul>";if(g.length>6){x+='<div id="moreCityPop"><a onclick="showMoreCity()" class="resultMore"></a></div>'}}}Fe.G("txtPanel").innerHTML=x}}};var d=new BMap.LocalSearch(map,b);window.l_local=d;Fe.G("localsearch").onclick=function(){beginsearch(d)}}function setCurrentMapInfo(a,b){var c=mapInfo;var d=map.getZoom();c.cityName=a;c.cityCode=b;c.centerPoint=map.getCenter();Fe.G("curCity").innerHTML=a;Fe.G("ZoomNum").innerHTML=d}function getCurrentCityName(){var a=map.getZoom();var c;var h=10000;if(a<=7){c=a;setCurrentMapInfo("");return}var i=function(){var k=map.getBounds();var l=projection.lngLatToPoint(k.getSouthWest());var j=projection.lngLatToPoint(k.getNorthEast());var m=function(n){return parseInt(n/1000)*1000};return m(l.x)+","+m(l.y)+";"+m(j.x)+","+m(j.y)};var e=mapInfo.centerPoint;var d=map.getCenter();var f=Math.sqrt((e.lng-d.lng)*(e.lng-d.lng)+(e.lat-d.lat)*(e.lat-d.lat));if(f>h||a!=c){c=a;var b="http://map.baidu.com/?newmap=1&qt=cen&b="+i()+"&l="+a;scriptRequest(b,g,"_MAP_CENTER_","gbk")}function g(){if(typeof _mapCenter=="undefined"){return}var j=_mapCenter;var k=j.content;if(!k){return}setCurrentMapInfo(_mapCenter.content.name,_mapCenter.content.uid)}}function bindEvent(){var f=temp.mk;var c=temp.iw;var d=function(g){if(temp.iwOpenIndex==g){return}temp.iwOpenIndex=g;f[g].openInfoWindow(c[g]);setInputPoint(f[g].point)};var e=function(h){if(temp.iwOpenIndex==h){return}var g=f[h];var j=g.getIcon();j.setImageOffset(new BMap.Size(0,-250-h*25));g.setIcon(j);g.setTop(true,1000100);Fe.G("no_"+h)?Fe.G("no_"+h).className="hover":null};var a=function(h){var g=f[h];if(temp.iwOpenIndex==h){g.setTop(true);return}var j=g.getIcon();j.setImageOffset(new BMap.Size(0,-h*25));g.setIcon(j);g.setTop(false);Fe.G("no_"+h)?Fe.G("no_"+h).className="":null};for(var b=0;b<f.length;b++){(function(){var i=b;var g=f[i];var h=c[i];f[i].addEventListener("click",function(){d(i)});f[i].addEventListener("mouseover",function(){e(i)});f[i].addEventListener("mouseout",function(){a(i)});h.addEventListener("open",function(){temp.iwOpenIndex=i});h.addEventListener("close",function(){temp.iwOpenIndex=null;a(i)});Fe.on(Fe.G("no_"+i),"click",function(){d(i)});Fe.on(Fe.G("no_"+i),"mouseover",function(){e(i)});Fe.on(Fe.G("no_"+i),"mouseout",function(){a(i)});Fe.on(Fe.G("mk_"+i),"click",function(){d(i)});Fe.on(Fe.G("mk_"+i),"mouseover",function(){e(i)});Fe.on(Fe.G("mk_"+i),"mouseout",function(){a(i)})})()}}function addMarker(c){var d=temp.pt[c];var b=new BMap.Icon("Images/markers.png",new BMap.Size(23,25),{offset:new BMap.Size(10,25),imageOffset:new BMap.Size(0,0-c*25),infoWindowAnchor:new BMap.Size(12,0)});var a=new BMap.Marker(d,{icon:b});map.addOverlay(a);temp.mk.push(a);return a}function createIw(c){var g=c.tit;var j=c.add;var f=c.tel;var a=c.poi.lng+","+c.poi.lat;var b='<p class="iwContent">';var h=c.type;var e="";if(h==1){e=""}if(h==3){e=""}b+="<em>"+e+"</em>"+j+"<br/>";f?b+="<em></em>"+f+"<br/>":null;b+="<em></em>"+a+"";b+="</p>";var i=g;if(i.length>15){i=i.substring(0,12)+"..."}var d=new BMap.InfoWindow(b,{title:'<span class="iwTitle" title="'+g+'">'+i+"</span>",width:250});temp.iw.push(d);return d}function showMoreCity(){Fe.G("cityList").style.height="auto";Fe.G("moreCityPop").style.display="none"}function goCity(b){var a=b.tagName.toLowerCase()=="input"?"value":"innerHTML";var c=b[a];getCityPoint(c)}function getCityPoint(b){b=encodeURIComponent(b);var a="http://map.baidu.com/?newmap=1&qt=cur&callback=setCurrentCity&ie=utf-8&wd="+b+"&oue=1&res=jc";scriptRequest(a,"null")}function setCurrentCity(b){if(!b.content||b.content.error==0){setTimeout(function(){Fe.G("selCityMessage").style.display="block";Fe.G("selCityMessage").innerHTML=""},0)}else{hidePop();var d=(((b.content.geo).split("|")[2]).split(";")[0]).split(",")[0];var c=(((b.content.geo).split("|")[2]).split(";")[0]).split(",")[1];var a=projection.pointToLngLat(new BMap.Pixel(d,c));if(b.content.cname==""){map.centerAndZoom(new BMap.Point(a.lng,a.lat),5)}else{map.centerAndZoom(new BMap.Point(a.lng,a.lat),b.content.level)}clearLastResult();Fe.G("resultNum").innerHTML="";Fe.G("txtPanel").innerHTML='<span style="color:#00c">'+b.content.cname+"</span>"}}function hidePop(){if(Fe.G("selCityInput")){Fe.G("selCityInput").value="";Fe.G("selCityMessage").style.display="none";Fe.G("map_popup").style.display="none"}if(eventTemp.cityPop.length>0){var a=eventTemp.cityPop;for(var b=0;b<a.length;b++){Fe.un(a[b].dom,a[b].type,a[b].fun)}eventTemp.cityPop=[]}}function showPop(){if(Fe.G("map_popup").style.display=="block"){return}Fe.G("map_popup").style.display="block";var a=function(c){var b=c.srcElement||c.target;while(b){if(b==Fe.G("map_popup")||b==Fe.G("curCityText")){return}if(b==Fe.G("selCity")){Fe.G("selCityMessage").style.display="none";return}if(b==document.body){hidePop();return}b=b.parentNode}};Fe.on(document.body,"mousedown",a);eventTemp.cityPop=[];eventTemp.cityPop.push({dom:document.body,type:"mousedown",fun:a})}var TimerSM;function showMessage(b){var a=Fe.G("searchTip");if(TimerSM){clearTimeout(TimerSM)}a.innerHTML=b;TimerSM=setTimeout(function(){a.innerHTML=""},1000)}function createCopyBt(){if(!document.all){var a=CreateFlash("flashClipBoard","Images/clipboard.swf",42,21,"method=ieCopy");Fe.G("copyButton").style.top="-9px";Fe.G("copyButton").style.left="5px";Fe.G("copyButton").innerHTML="<span>"+a+"</span>"}}function CreateFlash(c,a,b,d,f){var e='<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="'+b+'" height="'+d+'" id="'+c+'" align="middle">';e+='<param name="allowScriptAccess" value="always">';e+='<param name="quality" value="high">';e+='<param name="movie" value="'+a+'">';e+='<param name="flashvars" value="'+f+'">';e+='<embed src="'+a+'" flashvars="'+f+'" quality="high" width="'+b+'" height="'+d+'" name="'+c+'" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">';e+="</object>";return e}function ieCopy(){var c=Fe.G("pointInput");var b=c.value;if(!b){return}if(window.clipboardData){window.clipboardData.clearData();window.clipboardData.setData("Text",b);if(Fe.G("copyMessage")){Fe.G("copyMessage").style.display=""}setTimeout(function(){if(Fe.G("copyMessage")){Fe.G("copyMessage").style.display="none"}},1000)}else{try{Fe.copy(b);if(Fe.G("copyMessage")){Fe.G("copyMessage").style.display=""}setTimeout(function(){if(Fe.G("copyMessage")){Fe.G("copyMessage").style.display="none"}},1000);return b}catch(a){}}}function filtQuery(a){a=a||"";return a.replace(/[\uac00-\ud7a3]/g,"").replace(/\u2022|\u2027|\u30FB/g,String.fromCharCode(183)).replace(/^\s*|\s*$/g,"")}function beginsearch(a,c){var b=filtQuery(Fe.G("localvalue").value);if(!b||b==""){return}if(Fe.G("pointLabel").checked){searchByPoint(b)}else{if(!c){a.setLocation(map)}a.search(b)}}function searchByPoint(f){var g=f.split(",");var e;var c="";var a=temp.poiSearchMark;var d=temp.geoCoder;if(g[0]&&g[0].split(".")[0].length>5&&g[1]&&g[1].split(".")[0].length>5){var b=projection.pointToLngLat(new BMap.Pixel(g[0],g[1]));g=[b.lng,b.lat]}if(g[0]&&g[1]){clearLastResult();e=new BMap.Point(g[0],g[1]);if(!d){d=new BMap.Geocoder();temp.geoCoder=d}d.getLocation(e,function(h){if(h.address){Fe.G("txtPanel").innerHTML="<b></b>"+h.address}});if(a){a.show();a.setPosition(e)}else{a=new BMap.Marker(e,{enableMassClear:false});map.addOverlay(a);temp.poiSearchMark=a}map.centerAndZoom(e,15)}else{showMessage("")}}function searchInthisCity(a){l_local.setLocation(a);beginsearch(l_local,"cityList")}document.onkeydown=function(evt){var evt=window.event?window.event:evt;target=evt.target?evt.target:evt.srcElement;fun=target.getAttribute("callback");if(fun&&evt.keyCode==13){eval(fun)}};function scriptRequest(url,echo,id,charset){var isIe=/msie/i.test(window.navigator.userAgent);if(isIe&&Fe.G("_script_"+id)){var script=Fe.G("_script_"+id)}else{if(Fe.G("_script_"+id)){Fe.G("_script_"+id).parentNode.removeChild(Fe.G("_script_"+id))}var script=document.createElement("script");if(charset!=null){script.charset=charset}if(id!=null&&id!=""){script.setAttribute("id","_script_"+id)}script.setAttribute("type","text/javascript");document.body.appendChild(script)}var t=new Date();if(url.indexOf("?")>-1){url+="&t="+t.getTime()}else{url+="?t="+t.getTime()}var _complete=function(){if(!script.readyState||script.readyState=="loaded"||script.readyState=="complete"){if(echo=="null"){return}else{if(typeof(echo)=="function"){try{echo()}catch(e){}}else{eval(echo)}}}};if(isIe){script.onreadystatechange=_complete}else{script.onload=_complete}script.setAttribute("src",url)}function Page(a,e,b){Fe.BaseClass.call(this);if(!a){return}this.container=(typeof(a)=="object")?a:Fe.G(a);this.page=1;this.pageCount=100;this.argName="pg";this.pagecap=4;this.callback=e;this.update=true;var c={page:1,totalCount:100,pageCount:100,pagecap:4,argName:"pg",update:true};if(!b){b=c}for(var d in b){if(typeof(b[d])!="undefined"){this[d]=b[d]}}this.render()}Fe.extend(Page.prototype,{render:function(){this.initialize()},initialize:function(){this.checkPages();this.container.innerHTML=this.createHtml()},checkPages:function(){if(isNaN(parseInt(this.page))){this.page=1}if(isNaN(parseInt(this.pageCount))){this.pageCount=1}if(this.page<1){this.page=1}if(this.pageCount<1){this.pageCount=1}if(this.page>this.pageCount){this.page=this.pageCount}this.page=parseInt(this.page);this.pageCount=parseInt(this.pageCount)},getPage:function(){var b=location.search;var c=new RegExp("[?&]?"+this.argName+"=([^&]*)[&$]?","gi");var a=b.match(c);this.page=RegExp.$1},createHtml:function(){var g=[],c=this.page-1,b=this.page+1;g.push('<p class="page">');if(c<1){}else{if(this.page>=this.pagecap){g.push('<span><a href="javascript:void(0)" onclick="Instance(\''+this.hashCode+"').toPage(1);\"></a></span>")}g.push('<span><a href="javascript:void(0)" onclick="Instance(\''+this.hashCode+"').toPage("+c+');"></a></span>')}if(this.page<this.pagecap){if(this.page%this.pagecap==0){var f=this.page-this.pagecap-1}else{var f=this.page-this.page%this.pagecap+1}var a=f+this.pagecap-1}else{var h=Math.floor(this.pagecap/2);var e=this.pagecap%2-1;if(this.pageCount>this.page+h){var a=this.page+h;var f=this.page-h-e}else{var a=this.pageCount;var f=this.page-h-e}}if(this.page>this.pageCount-this.pagecap&&this.page>=this.pagecap){var f=this.pageCount-this.pagecap+1;var a=this.pageCount}for(var d=f;d<=a;d++){if(d>0){if(d==this.page){g.push("<span>"+d+"</span>")}else{if(d>=1&&d<=this.pageCount){g.push('<span><a href="javascript:void(0)" onclick="Instance(\''+this.hashCode+"').toPage("+d+');">['+d+"]</a></span>")}}}}if(b>this.pageCount){}else{g.push('<span><a href="javascript:void(0)" onclick="Instance(\''+this.hashCode+"').toPage("+b+');"></a></span>')}g.push("</p>");return g.join("")},toPage:function(b){var a=b?b:1;if(typeof(this.callback)=="function"){this.callback(a);this.page=a}if(this.update){this.render()}}});function Popup(a){Fe.BaseClass.call(this);this.visible=false;this.config=a;if(!this.config){return}this.config.addDom=this.config.addDom?Fe.G(this.config.addDom):document.body;if(a.clickClose!=null&&a.clickClose==false){this.config.clickClose=false}else{this.config.clickClose=true}this.connectDom=new Array()}Fe.extend(Popup.prototype,{render:function(){var b=this.config;this.main=beforeEndHTML(b.addDom,'<div class="map_popup" style="width:390px;display:none"></div>');var a=this.popBox=beforeEndHTML(this.main,'<div class="popup_main"></div>');if(b.isTitle!=false){this.title=beforeEndHTML(a,'<div class="title"></div>')}this.content=beforeEndHTML(a,'<div class="content"></div>');if(!!this.config.closeButton){this.button=beforeEndHTML(a,this.config.closeButton)}else{this.button=beforeEndHTML(a,'<button id="popup_close"></button>')}this.shadow=beforeEndHTML(this.main,'<div class="poput_shadow"></div>');this.addConnectDom(this.main);this.initialize()},initialize:function(){var b=this.config;this.setTitle(b.title);this.setContent(b.content);this.setWidth(b.width);this.setHeight(b.height);this.show();var c=this;var a=function(g){var d=g.srcElement||g.target;while(d){var h=c.connectDom;for(var f=0;f<h.length;f++){if(d==h[f]){return}}if(d==document.body){c.close();return}d=d.parentNode}};if(this.config.clickClose){Fe.on(document.body,"mousedown",a)}Fe.on(this.button,"click",function(d){if(c.config.clickClose){Fe.un(document.body,"mousedown",a)}if(c.config.closeEffect&&typeof(c.config.closeEffect)=="function"){c.config.closeEffect()}else{c.main.parentNode.removeChild(c.main)}c.visible=false;if(c.config.close&&typeof(c.config.close)=="function"){c.config.close()}if(this.resizeTimer){window.clearInterval(this.resizeTimer);this.resizeTimer=null}if(Fe.G("imgLogo")){Fe.G("imgLogo").style.display="";Fe.G("imgLogo").style.display="inline"}});if(b.open&&typeof(b.open)=="function"){b.open()}},setTitle:function(a){if(a&&this.title){this.title.innerHTML=a;this.config.title=a}},setContent:function(a){if(a){if(typeof(a)=="string"){this.content.innerHTML=a}else{this.content.innerHTML="";this.content.appendChild(a)}this.config.content=a}},setWidth:function(a){if(a){this.main.style.width=(a-8)+"px";this.config.width=a}},setHeight:function(a){if(this.resizeTimer){window.clearInterval(this.resizeTimer);this.resizeTimer=null}if(a){this.main.style.height=this.shadow.style.height=(a-9)+"px";this.config.height=a;if(this.config.isTitle==false){this.content.style.height=(a-2)+"px"}else{this.content.style.height=(a-24-9)+"px"}this.content.style.overflowY="auto"}else{this.content.style.height="auto";this.resize()}},hide:function(){this.main.style.display="none";this.visible=false},show:function(){this.main.style.display="block";this.popBox.scrollTop=0;this.visible=true},getDom:function(){return this.main},resize:function(){var a=this;var b=function(){if(a.config.isAddBottomHeight==false){var c=a.content.offsetHeight}else{var c=a.content.offsetHeight+24}if(a.mainHeight){if(a.mainHeight!=c){a.mainHeight=c}}a.popBox.style.height=a.shadow.style.height=a.main.style.height=c+"px";a.popBox.scrollTop=0};if(this.resizeTimer){window.clearInterval(this.resizeTimer);this.resizeTimer=null}this.resizeTimer=window.setInterval(b,50)},close:function(){this.button.click()},addConnectDom:function(a){this.connectDom.push(a)}});function stopBubble(a){var a=window.event||a;a.stopPropagation?a.stopPropagation():a.cancelBubble=true}function preventDefault(a){var a=window.event||a;a.preventDefault?a.preventDefault():a.returnValue=false;return false};
+</script><script type="text/javascript">DomReady.ready(localsearch);</script></head>
+<body onresize="mapResize()">
+<div class="content"><div class="LogoCon clear"><div class="logo"></div><div class="search map_search"><input type="text" class="text" id="localvalue" value="请输入关键字进行搜索" onfocus="foucs_(this,'请输入关键字进行搜索','')" onblur="blur_(this,'请输入关键字进行搜索','')" callback="beginsearch(l_local)"/><input class="button" type="button" value="搜索" id="localsearch" /><label class="pointLabel" for="pointLabel"><input type="checkbox" onfocus="this.blur()" id="pointLabel" />坐标反查</label><span class="searchTip" id="searchTip"></span></div><div style="width:400px;position:relative;float:right;"><div style="color:#666;line-height:25px;">当前坐标点如下：</div><input type="text" readonly id="pointInput" style="background:#EBEBE4;border:#7F9DB9 solid 1px;color:#555;width:160px;height:30px;line-height:30px;font-size:14px;font-weight:700" /><span id="copyButton"><input type="button" value="复制" onclick="ieCopy()" style="margin-left:8px;" /></span><span id="copyMessage" style="position:absolute;top:0;right:185px;*right:180px;color:#f00;display:none">复制成功</span><div style="color:#777;margin-top:5px;display:none">(默认显示地图中心点坐标,鼠标左键单击后显示单击点的坐标)</div></div></div><div class="dt_nav"><span class="result" id="resultNum"></span><ul class="nav"><li><div class="l"><b id="curCity"></b><span>[<a id="curCityText" onclick="showPop()">更换城市</a>]</span></div><span class="r"></span></li><li><div class="l"><b>当前层级：<span id="ZoomNum"></span>级</b></div><span class="r"></span></li></ul></div><div id="wrapper"><div id="MapHolder" style="overflow:hidden;"></div><!--右侧地图Info begin--><div id="MapInfo"><div id="txtPanel"><h3>功能简介：</h3><p class="tip_info">1、支持地址 精确/模糊 查询；<br/>2、支持POI点坐标显示、复制；<br/>3、坐标鼠标跟随显示；<br/>4、<font color="red">支持坐标查询(需要将坐标反查框勾选)；</font><br/></p><h3>使用说明：</h3><p class="tip_info">1、获取坐标并复制：<br/><span class="tip_info_em">1)、在搜索框中搜索关键词后，左侧列表中会有该点的坐标，点击该条信息或地图上该点，都会将坐标显示在地图右上角的Input框中,然后点击复制按钮，该点坐标就复制成功了;<br />2)、在地图上用鼠标左键单击地图，就能将该点坐标显示在地图右上角的Input框中,然后点击复制按钮，该点坐标就复制成功了;</span>2、坐标反查：<br/><span class="tip_info_em">1)、先勾选住 搜索框后面的 <font color="red">坐标反查框</font><br />2)、输入一个正确的坐标(比如：116.307629,40.058359)，点击按钮 <b>百度一下</b>，就能将该点显示在地图上、切换地图，<font color="red">如果解析成功，还能返回一个地址</font></span></p></div></div><!--右侧地图Info end--><!--地图上边右边透明立体边框 begin--><div id="shad"><div id="shad_v"></div><div id="shad_h"></div></div><!--地图上边右边透明立体边框 end--></div></div><!--更换城市 begin--><div style="width: 382px; display: none; left: 5px; top: 139px; height: 344px;" class="map_popup" id="map_popup"><div class="popup_main"><div class="title">城市列表</div><div class="sel_city" style="height: 320px; overflow-y: auto;overflow-x:hidden;margin:0;padding-left:5px">
+<table style="width:345px;margin-bottom:20px;overflow:hidden;" id="selCity">
+  <tr>
+	<td colspan="2" class="selCityInput"><input id="selCityInput" type="text" value="请输入城市名" onfocus="foucs_(this,'请输入城市名','')" onblur="blur_(this,'请输入城市名','')" class="selCityInputT" callback="goCity(Fe.G('selCityInput'))" style="color:#8C8C8C"/><input id="selCityButton" value="确定" type="button" onclick="goCity(Fe.G('selCityInput'))"><span style="color:#f00;display:none" id="selCityMessage">请输入正确的城市名</span></td>
+  </tr>
+  <tr>
+    <td width="57">直辖市：</td>
+    <td width="287">
+        <nobr><a onclick="goCity(this)" name="北京市">北京</a></nobr>
+        <nobr><a onclick="goCity(this)" name="上海市">上海</a></nobr>
+        <nobr><a onclick="goCity(this)" name="天津市">天津</a></nobr>
+        <nobr><a onclick="goCity(this)" name="重庆市">重庆</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">安徽</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)" name="合肥市">合肥</a></nobr>
+        <nobr><a onclick="goCity(this)" name="安庆市">安庆</a></nobr>
+        <nobr><a onclick="goCity(this)" name="蚌埠市">蚌埠</a></nobr>
+        <nobr><a onclick="goCity(this)" name="亳州市">亳州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="巢湖市">巢湖</a></nobr>
+        <nobr><a onclick="goCity(this)" name="池州市">池州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="滁州市">滁州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="阜阳市">阜阳</a></nobr>
+        <nobr><a onclick="goCity(this)" name="淮北市">淮北</a></nobr>
+        <nobr><a onclick="goCity(this)" name="淮南市">淮南</a></nobr>
+        <nobr><a onclick="goCity(this)" name="黄山市">黄山</a></nobr>
+        <nobr><a onclick="goCity(this)" name="六安市">六安</a></nobr>
+        <nobr><a onclick="goCity(this)" name="马鞍山市">马鞍山</a></nobr>
+        <nobr><a onclick="goCity(this)" name="宿州市">宿州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="铜陵市">铜陵</a></nobr>
+        <nobr><a onclick="goCity(this)" name="芜湖市">芜湖</a></nobr>
+        <nobr><a onclick="goCity(this)" name="宣城市">宣城</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">福建</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">福州</a></nobr>
+        <nobr><a onclick="goCity(this)">龙岩</a></nobr>
+        <nobr><a onclick="goCity(this)">南平</a></nobr>
+        <nobr><a onclick="goCity(this)">宁德</a></nobr>
+        <nobr><a onclick="goCity(this)">莆田</a></nobr>
+        <nobr><a onclick="goCity(this)">泉州</a></nobr>
+        <nobr><a onclick="goCity(this)">三明</a></nobr>
+        <nobr><a onclick="goCity(this)">厦门</a></nobr>
+        <nobr><a onclick="goCity(this)">漳州</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">甘肃</a></nobr>：</td>
+    <td>
+		<nobr><a onclick="goCity(this)">兰州</a></nobr>
+		<nobr><a onclick="goCity(this)">白银</a></nobr>
+		<nobr><a onclick="goCity(this)">定西</a></nobr>
+		<nobr><a name="甘南藏族自治州" onclick="goCity(this)">甘南州</a></nobr>
+		<nobr><a onclick="goCity(this)">嘉峪关</a></nobr>
+		<nobr><a onclick="goCity(this)">金昌</a></nobr>
+		<nobr><a onclick="goCity(this)">酒泉</a></nobr>
+		<nobr><a name="临夏回族自治州" onclick="goCity(this)">临夏州</a></nobr>
+		<nobr><a onclick="goCity(this)">平凉</a></nobr>
+		<nobr><a onclick="goCity(this)">庆阳</a></nobr>
+		<nobr><a onclick="goCity(this)">天水</a></nobr>
+		<nobr><a onclick="goCity(this)">武威</a></nobr>
+		<nobr><a onclick="goCity(this)">张掖</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">广东</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">广州</a></nobr>
+        <nobr><a onclick="goCity(this)">潮州</a></nobr>
+        <nobr><a onclick="goCity(this)">东莞</a></nobr>
+        <nobr><a onclick="goCity(this)">佛山</a></nobr>
+        <nobr><a onclick="goCity(this)">河源</a></nobr>
+        <nobr><a onclick="goCity(this)">惠州</a></nobr>
+        <nobr><a onclick="goCity(this)">江门</a></nobr>
+        <nobr><a onclick="goCity(this)">揭阳</a></nobr>
+        <nobr><a onclick="goCity(this)">茂名</a></nobr>
+        <nobr><a onclick="goCity(this)">梅州</a></nobr>
+        <nobr><a onclick="goCity(this)">清远</a></nobr>
+        <nobr><a onclick="goCity(this)">汕头</a></nobr>
+        <nobr><a onclick="goCity(this)">汕尾</a></nobr>
+        <nobr><a onclick="goCity(this)">韶关</a></nobr>
+        <nobr><a onclick="goCity(this)">深圳</a></nobr>
+        <nobr><a onclick="goCity(this)">阳江</a></nobr>
+        <nobr><a onclick="goCity(this)">云浮</a></nobr>
+        <nobr><a onclick="goCity(this)">湛江</a></nobr>
+        <nobr><a onclick="goCity(this)">肇庆</a></nobr>
+        <nobr><a onclick="goCity(this)">中山</a></nobr>
+        <nobr><a onclick="goCity(this)">珠海</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">广西</a></nobr>：</td>
+    <td>
+		<nobr><a onclick="goCity(this)">南宁</a></nobr>
+        <nobr><a onclick="goCity(this)">百色</a></nobr>
+        <nobr><a onclick="goCity(this)">北海</a></nobr>
+        <nobr><a onclick="goCity(this)">崇左</a></nobr>
+        <nobr><a onclick="goCity(this)">防城港</a></nobr>
+        <nobr><a onclick="goCity(this)">桂林</a></nobr>
+        <nobr><a onclick="goCity(this)">贵港</a></nobr>
+        <nobr><a onclick="goCity(this)">河池</a></nobr>
+        <nobr><a onclick="goCity(this)">贺州</a></nobr>
+        <nobr><a onclick="goCity(this)">来宾</a></nobr>
+        <nobr><a onclick="goCity(this)">柳州</a></nobr>
+        <nobr><a onclick="goCity(this)">钦州</a></nobr>
+        <nobr><a onclick="goCity(this)">梧州</a></nobr>
+        <nobr><a onclick="goCity(this)">玉林</a></nobr>	
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">贵州</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">贵阳</a></nobr>
+		<nobr><a onclick="goCity(this)">安顺</a></nobr>
+		<nobr><a onclick="goCity(this)">毕节地区</a></nobr>
+		<nobr><a onclick="goCity(this)">六盘水</a></nobr>
+		<nobr><a onclick="goCity(this)">铜仁地区</a></nobr>
+		<nobr><a onclick="goCity(this)">遵义</a></nobr>
+		<nobr><a name="黔西南布依族苗族自治州" onclick="goCity(this)">黔西南州</a></nobr>
+   	</td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">海南</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">海口</a></nobr>
+        <nobr><a name="白沙黎族自治县" onclick="goCity(this)">白沙</a></nobr>
+        <nobr><a name="保亭黎族苗族自治县" onclick="goCity(this)">保亭</a></nobr>
+        <nobr><a name="昌江黎族自治县" onclick="goCity(this)">昌江</a></nobr>
+        <nobr><a onclick="goCity(this)">儋州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="澄迈县">澄迈</a></nobr>
+        <nobr><a onclick="goCity(this)">东方</a></nobr>
+        <nobr><a onclick="goCity(this)" name="定安县">定安</a></nobr>
+        <nobr><a onclick="goCity(this)">琼海</a></nobr>
+        <nobr><a name="琼中黎族苗族自治县" onclick="goCity(this)">琼中</a></nobr>
+        <nobr><a name="乐东黎族自治县" onclick="goCity(this)">乐东</a></nobr>
+        <nobr><a onclick="goCity(this)" name="临高县">临高</a></nobr>
+        <nobr><a name="陵水黎族自治县" onclick="goCity(this)">陵水</a></nobr>
+        <nobr><a onclick="goCity(this)">三亚</a></nobr>
+        <nobr><a onclick="goCity(this)" name="屯昌县">屯昌</a></nobr>
+        <nobr><a onclick="goCity(this)">万宁</a></nobr>
+        <nobr><a onclick="goCity(this)">文昌</a></nobr>
+        <nobr><a onclick="goCity(this)">五指山</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">河北</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">石家庄</a></nobr>
+        <nobr><a onclick="goCity(this)">保定</a></nobr>
+        <nobr><a onclick="goCity(this)">沧州</a></nobr>
+        <nobr><a onclick="goCity(this)">承德</a></nobr>
+        <nobr><a onclick="goCity(this)">邯郸</a></nobr>
+        <nobr><a onclick="goCity(this)">衡水</a></nobr>
+        <nobr><a onclick="goCity(this)">廊坊</a></nobr>
+        <nobr><a onclick="goCity(this)">秦皇岛</a></nobr>
+        <nobr><a onclick="goCity(this)">唐山</a></nobr>
+        <nobr><a onclick="goCity(this)">邢台</a></nobr>
+        <nobr><a onclick="goCity(this)">张家口</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">河南</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">郑州</a></nobr>
+        <nobr><a onclick="goCity(this)">安阳</a></nobr>
+        <nobr><a onclick="goCity(this)">鹤壁</a></nobr>
+        <nobr><a onclick="goCity(this)">焦作</a></nobr>
+        <nobr><a onclick="goCity(this)">开封</a></nobr>
+        <nobr><a onclick="goCity(this)">洛阳</a></nobr>
+        <nobr><a onclick="goCity(this)">漯河</a></nobr>
+        <nobr><a onclick="goCity(this)">南阳</a></nobr>
+        <nobr><a onclick="goCity(this)">平顶山</a></nobr>
+        <nobr><a onclick="goCity(this)">濮阳</a></nobr>
+        <nobr><a onclick="goCity(this)">三门峡</a></nobr>
+        <nobr><a onclick="goCity(this)">商丘</a></nobr>
+        <nobr><a onclick="goCity(this)">新乡</a></nobr>
+        <nobr><a onclick="goCity(this)">信阳</a></nobr>
+        <nobr><a onclick="goCity(this)">许昌</a></nobr>
+        <nobr><a onclick="goCity(this)">周口</a></nobr>
+        <nobr><a onclick="goCity(this)">驻马店</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">黑龙江</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">哈尔滨</a></nobr>
+        <nobr><a onclick="goCity(this)">大庆</a></nobr>
+        <nobr><a onclick="goCity(this)" name="大兴安岭地区">大兴安岭地区</a></nobr>
+        <nobr><a onclick="goCity(this)">鹤岗</a></nobr>
+        <nobr><a onclick="goCity(this)">黑河</a></nobr>
+        <nobr><a onclick="goCity(this)">鸡西</a></nobr>
+        <nobr><a onclick="goCity(this)">佳木斯</a></nobr>
+        <nobr><a onclick="goCity(this)">牡丹江</a></nobr>
+        <nobr><a onclick="goCity(this)">七台河</a></nobr>
+        <nobr><a onclick="goCity(this)">齐齐哈尔</a></nobr>
+        <nobr><a onclick="goCity(this)">双鸭山</a></nobr>
+        <nobr><a onclick="goCity(this)">绥化</a></nobr>
+        <nobr><a onclick="goCity(this)">伊春</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">湖北</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">武汉</a></nobr>
+        <nobr><a onclick="goCity(this)">鄂州</a></nobr>
+        <nobr><a name="恩施土家族苗族自治州" onclick="goCity(this)">恩施</a></nobr>
+        <nobr><a onclick="goCity(this)">黄冈</a></nobr>
+        <nobr><a onclick="goCity(this)">黄石</a></nobr>
+        <nobr><a onclick="goCity(this)">荆门</a></nobr>
+        <nobr><a onclick="goCity(this)">荆州</a></nobr>
+        <nobr><a onclick="goCity(this)">潜江</a></nobr>
+        <nobr><a onclick="goCity(this)">神农架林区</a></nobr>
+        <nobr><a onclick="goCity(this)">十堰</a></nobr>
+        <nobr><a onclick="goCity(this)">随州</a></nobr>
+        <nobr><a onclick="goCity(this)">天门</a></nobr>
+        <nobr><a onclick="goCity(this)">仙桃</a></nobr>
+        <nobr><a onclick="goCity(this)">咸宁</a></nobr>
+        <nobr><a onclick="goCity(this)">襄樊</a></nobr>
+        <nobr><a onclick="goCity(this)">孝感</a></nobr>
+        <nobr><a onclick="goCity(this)">宜昌</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">湖南</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">长沙</a></nobr>
+        <nobr><a onclick="goCity(this)">常德</a></nobr>
+        <nobr><a onclick="goCity(this)">郴州</a></nobr>
+        <nobr><a onclick="goCity(this)">衡阳</a></nobr>
+        <nobr><a onclick="goCity(this)">怀化</a></nobr>
+        <nobr><a onclick="goCity(this)">娄底</a></nobr>
+        <nobr><a onclick="goCity(this)">邵阳</a></nobr>
+        <nobr><a onclick="goCity(this)">湘潭</a></nobr>
+        <nobr><a onclick="goCity(this)">益阳</a></nobr>
+        <nobr><a onclick="goCity(this)">永州</a></nobr>
+        <nobr><a onclick="goCity(this)">岳阳</a></nobr>
+        <nobr><a onclick="goCity(this)">张家界</a></nobr>
+        <nobr><a onclick="goCity(this)">株洲</a></nobr>	
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">江苏</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">南京</a></nobr>
+        <nobr><a onclick="goCity(this)">常州</a></nobr>
+        <nobr><a onclick="goCity(this)">淮安</a></nobr>
+        <nobr><a onclick="goCity(this)">连云港</a></nobr>
+        <nobr><a onclick="goCity(this)">南通</a></nobr>
+        <nobr><a onclick="goCity(this)">苏州</a></nobr>
+        <nobr><a onclick="goCity(this)">宿迁</a></nobr>
+        <nobr><a onclick="goCity(this)">泰州</a></nobr>
+        <nobr><a onclick="goCity(this)">无锡</a></nobr>
+        <nobr><a onclick="goCity(this)">徐州</a></nobr>
+        <nobr><a onclick="goCity(this)">盐城</a></nobr>
+        <nobr><a onclick="goCity(this)">扬州</a></nobr>
+        <nobr><a onclick="goCity(this)">镇江</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">江西</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">南昌</a></nobr>
+        <nobr><a onclick="goCity(this)">抚州</a></nobr>
+        <nobr><a onclick="goCity(this)">赣州</a></nobr>
+        <nobr><a onclick="goCity(this)">吉安</a></nobr>
+        <nobr><a onclick="goCity(this)">景德镇</a></nobr>
+        <nobr><a onclick="goCity(this)">九江</a></nobr>
+        <nobr><a onclick="goCity(this)">萍乡</a></nobr>
+        <nobr><a onclick="goCity(this)">上饶</a></nobr>
+        <nobr><a onclick="goCity(this)">新余</a></nobr>
+        <nobr><a onclick="goCity(this)">宜春</a></nobr>
+        <nobr><a onclick="goCity(this)">鹰潭</a></nobr>
+	</td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" name="吉林省" onclick="goCity(this)">吉林</a></nobr>：</td>
+    <td>
+		<nobr><a onclick="goCity(this)">长春</a></nobr>
+        <nobr><a onclick="goCity(this)">白城</a></nobr>
+        <nobr><a onclick="goCity(this)">白山</a></nobr>
+        <nobr><a onclick="goCity(this)">吉林市</a></nobr>
+        <nobr><a onclick="goCity(this)"/></nobr>
+        <nobr><a onclick="goCity(this)">辽源</a></nobr>
+        <nobr><a onclick="goCity(this)">四平</a></nobr>
+        <nobr><a onclick="goCity(this)">松原</a></nobr>
+        <nobr><a onclick="goCity(this)">通化</a></nobr>
+        <nobr><a name="延边朝鲜族自治州" onclick="goCity(this)">延边</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><a class="black" onclick="goCity(this)">辽宁</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">沈阳</a></nobr>
+        <nobr><a onclick="goCity(this)">鞍山</a></nobr>
+        <nobr><a onclick="goCity(this)">本溪</a></nobr>
+        <nobr><a onclick="goCity(this)">朝阳</a></nobr>
+        <nobr><a onclick="goCity(this)">大连</a></nobr>
+        <nobr><a onclick="goCity(this)">丹东</a></nobr>
+        <nobr><a onclick="goCity(this)">抚顺</a></nobr>
+        <nobr><a onclick="goCity(this)">阜新</a></nobr>
+        <nobr><a onclick="goCity(this)">葫芦岛</a></nobr>
+        <nobr><a onclick="goCity(this)">锦州</a></nobr>
+        <nobr><a onclick="goCity(this)">辽阳</a></nobr>
+        <nobr><a onclick="goCity(this)">盘锦</a></nobr>
+        <nobr><a onclick="goCity(this)">铁岭</a></nobr>
+        <nobr><a onclick="goCity(this)">营口</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">内蒙古</a></nobr>：</td>
+    <td>
+		<nobr><a onclick="goCity(this)">呼和浩特</a></nobr>
+		<nobr><a onclick="goCity(this)">包头</a></nobr>
+		<nobr><a onclick="goCity(this)">巴彦淖尔</a></nobr>
+		<nobr><a onclick="goCity(this)">赤峰</a></nobr>
+		<nobr><a onclick="goCity(this)">鄂尔多斯</a></nobr>
+		<nobr><a onclick="goCity(this)">呼伦贝尔</a></nobr>
+		<nobr><a onclick="goCity(this)">通辽</a></nobr>
+		<nobr><a onclick="goCity(this)">乌海</a></nobr>
+		<nobr><a onclick="goCity(this)">乌兰察布</a></nobr>
+		<nobr><a onclick="goCity(this)" name="兴安盟">兴安盟</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">宁夏</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">银川</a></nobr>
+        <nobr><a onclick="goCity(this)">固原</a></nobr>
+        <nobr><a onclick="goCity(this)">石嘴山</a></nobr>
+        <nobr><a onclick="goCity(this)">吴忠</a></nobr>
+        <nobr><a onclick="goCity(this)">中卫</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">青海</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">西宁</a></nobr>
+        <nobr><a name="果洛藏族自治州" onclick="goCity(this)">果洛州</a></nobr>
+        <nobr><a onclick="goCity(this)" name="海东地区">海东地区</a></nobr>
+        <nobr><a name="海北藏族自治州" onclick="goCity(this)">海北州</a></nobr>
+        <nobr><a name="海南藏族自治州" onclick="goCity(this)">海南州</a></nobr>
+        <nobr><a name="海西蒙古族藏族自治州" onclick="goCity(this)">海西州</a></nobr>
+        <nobr><a name="黄南藏族自治州" onclick="goCity(this)">黄南州</a></nobr>
+        <nobr><a name="玉树藏族自治州" onclick="goCity(this)">玉树州</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">山东</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">济南</a></nobr>
+        <nobr><a onclick="goCity(this)">滨州</a></nobr>
+        <nobr><a onclick="goCity(this)">东营</a></nobr>
+        <nobr><a onclick="goCity(this)">德州</a></nobr>
+        <nobr><a onclick="goCity(this)">菏泽</a></nobr>
+        <nobr><a onclick="goCity(this)">济宁</a></nobr>
+        <nobr><a onclick="goCity(this)">莱芜</a></nobr>
+        <nobr><a onclick="goCity(this)">聊城</a></nobr>
+        <nobr><a onclick="goCity(this)">临沂</a></nobr>
+        <nobr><a onclick="goCity(this)">青岛</a></nobr>
+        <nobr><a onclick="goCity(this)">日照</a></nobr>
+        <nobr><a onclick="goCity(this)">泰安</a></nobr>
+        <nobr><a onclick="goCity(this)">威海</a></nobr>
+        <nobr><a onclick="goCity(this)">潍坊</a></nobr>
+        <nobr><a onclick="goCity(this)">烟台</a></nobr>
+        <nobr><a onclick="goCity(this)">枣庄</a></nobr>
+        <nobr><a onclick="goCity(this)">淄博</a></nobr>
+        <nobr><a onclick="goCity(this)"/></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">山西</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">太原</a></nobr>
+        <nobr><a onclick="goCity(this)">长治</a></nobr>
+        <nobr><a onclick="goCity(this)">大同</a></nobr>
+        <nobr><a onclick="goCity(this)">晋城</a></nobr>
+        <nobr><a onclick="goCity(this)">晋中</a></nobr>
+        <nobr><a onclick="goCity(this)">临汾</a></nobr>
+        <nobr><a onclick="goCity(this)">吕梁</a></nobr>
+        <nobr><a onclick="goCity(this)">朔州</a></nobr>
+        <nobr><a onclick="goCity(this)">忻州</a></nobr>
+        <nobr><a onclick="goCity(this)">阳泉</a></nobr>
+        <nobr><a onclick="goCity(this)">运城</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">陕西</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">西安</a></nobr>
+        <nobr><a onclick="goCity(this)">安康</a></nobr>
+        <nobr><a onclick="goCity(this)">宝鸡</a></nobr>
+        <nobr><a onclick="goCity(this)">汉中</a></nobr>
+        <nobr><a onclick="goCity(this)">商洛</a></nobr>
+        <nobr><a onclick="goCity(this)">铜川</a></nobr>
+        <nobr><a onclick="goCity(this)">渭南</a></nobr>
+        <nobr><a onclick="goCity(this)">咸阳</a></nobr>
+        <nobr><a onclick="goCity(this)">延安</a></nobr>
+        <nobr><a onclick="goCity(this)">榆林</a></nobr>
+	</td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">四川</a></nobr>：</td>
+    <td>
+		<nobr><a onclick="goCity(this)">成都</a></nobr>
+		<nobr><a name="阿坝藏族羌族自治州" onclick="goCity(this)">阿坝州</a></nobr>
+		<nobr><a onclick="goCity(this)">巴中</a></nobr>
+		<nobr><a onclick="goCity(this)">达州</a></nobr>
+		<nobr><a onclick="goCity(this)">德阳</a></nobr>
+		<nobr><a name="甘孜藏族自治州" onclick="goCity(this)">甘孜州</a></nobr>
+		<nobr><a onclick="goCity(this)">广安</a></nobr>
+		<nobr><a onclick="goCity(this)">广元</a></nobr>
+		<nobr><a onclick="goCity(this)">乐山</a></nobr>
+		<nobr><a name="凉山彝族自治州" onclick="goCity(this)">凉山州</a></nobr>
+		<nobr><a onclick="goCity(this)">泸州</a></nobr>
+		<nobr><a onclick="goCity(this)">南充</a></nobr>
+		<nobr><a onclick="goCity(this)">眉山</a></nobr>
+		<nobr><a onclick="goCity(this)">绵阳</a></nobr>
+		<nobr><a onclick="goCity(this)">内江</a></nobr>
+		<nobr><a onclick="goCity(this)">攀枝花</a></nobr>
+		<nobr><a onclick="goCity(this)">遂宁</a></nobr>
+		<nobr><a onclick="goCity(this)">雅安</a></nobr>
+		<nobr><a onclick="goCity(this)">宜宾</a></nobr>
+		<nobr><a onclick="goCity(this)">资阳</a></nobr>
+		<nobr><a onclick="goCity(this)">自贡</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">西藏</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">拉萨</a></nobr>
+        <nobr><a onclick="goCity(this)" name="阿里地区">阿里地区</a></nobr>
+        <nobr><a onclick="goCity(this)" name="昌都地区">昌都地区</a></nobr>
+        <nobr><a onclick="goCity(this)" name="林芝地区">林芝地区</a></nobr>
+        <nobr><a onclick="goCity(this)" name="那曲地区">那曲地区</a></nobr>
+        <nobr><a onclick="goCity(this)" name="日喀则地区">日喀则地区</a></nobr>
+        <nobr><a onclick="goCity(this)" name="山南地区">山南地区</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">新疆</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">乌鲁木齐</a></nobr>
+        <nobr><a onclick="goCity(this)">阿拉尔</a></nobr>
+        <nobr><a onclick="goCity(this)" name="阿克苏地区">阿克苏地区</a></nobr>
+        <nobr><a onclick="goCity(this)">阿勒泰地区</a></nobr>
+        <nobr><a name="昌吉回族自治州" onclick="goCity(this)">昌吉州</a></nobr>
+        <nobr><a onclick="goCity(this)">哈密地区</a></nobr>
+        <nobr><a onclick="goCity(this)">和田地区</a></nobr>
+        <nobr><a onclick="goCity(this)">喀什地区</a></nobr>
+        <nobr><a onclick="goCity(this)">克拉玛依</a></nobr>
+        <nobr><a onclick="goCity(this)">石河子</a></nobr>
+        <nobr><a onclick="goCity(this)">塔城地区</a></nobr>
+        <nobr><a onclick="goCity(this)">吐鲁番地区</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">云南</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">昆明</a></nobr>
+        <nobr><a onclick="goCity(this)">保山</a></nobr>
+        <nobr><a name="楚雄彝族自治州" onclick="goCity(this)">楚雄州</a></nobr>
+        <nobr><a name="大理白族自治州" onclick="goCity(this)">大理州</a></nobr>
+        <nobr><a name="德宏傣族景颇族自治州" onclick="goCity(this)">德宏州</a></nobr>
+        <nobr><a name="迪庆藏族自治州" onclick="goCity(this)">迪庆州</a></nobr>
+        <nobr><a name="红河哈尼族彝族自治州" onclick="goCity(this)">红河州</a></nobr>
+        <nobr><a onclick="goCity(this)">丽江</a></nobr>
+        <nobr><a onclick="goCity(this)">临沧</a></nobr>
+        <nobr><a name="怒江傈僳族自治州" onclick="goCity(this)">怒江州</a></nobr>
+        <nobr><a onclick="goCity(this)">普洱</a></nobr>
+        <nobr><a onclick="goCity(this)">曲靖</a></nobr>
+        <nobr><a onclick="goCity(this)">昭通</a></nobr>
+        <nobr><a name="文山壮族苗族自治州" onclick="goCity(this)">文山</a></nobr>
+        <nobr><a name="西双版纳傣族自治州" onclick="goCity(this)">西双版纳</a></nobr>
+        <nobr><a onclick="goCity(this)">玉溪</a></nobr>
+    </td>
+  </tr>
+  <tr>
+    <td><nobr><a class="black" onclick="goCity(this)">浙江</a></nobr>：</td>
+    <td>
+        <nobr><a onclick="goCity(this)">杭州</a></nobr>
+        <nobr><a onclick="goCity(this)">湖州</a></nobr>
+        <nobr><a onclick="goCity(this)">嘉兴</a></nobr>
+        <nobr><a onclick="goCity(this)">金华</a></nobr>
+        <nobr><a onclick="goCity(this)">丽水</a></nobr>
+        <nobr><a onclick="goCity(this)">宁波</a></nobr>
+        <nobr><a onclick="goCity(this)">衢州</a></nobr>
+        <nobr><a onclick="goCity(this)">绍兴</a></nobr>
+        <nobr><a onclick="goCity(this)">台州</a></nobr>
+        <nobr><a onclick="goCity(this)">温州</a></nobr>
+        <nobr><a onclick="goCity(this)">舟山</a></nobr>
+    </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+        <nobr><a onclick="goCity(this)" name="香港特别行政区">香港</a></nobr>
+        <nobr><a onclick="goCity(this)" name="澳门特别行政区">澳门</a></nobr>
+        <nobr><a onclick="goCity(this)" name="台北县">台湾</a></nobr>
+	</td>
+  </tr>
+</table>
+<input type="hidden" name="companyid" id="companyid" value=""/>
+</div><button onclick="hidePop()"></button></div><div class="poput_shadow" style="height: 291px;width:100%"></div></div><!--更换城市 end--> </body><script>loadBody();</script></html>

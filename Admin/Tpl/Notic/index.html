@@ -1,0 +1,107 @@
+<script type="text/javascript">
+	$(function() {
+		$.CurrentNavtab.find('#btn_submit').click(function() {
+			$.CurrentNavtab.find('#j_custom_form').bjuiajax('ajaxForm', {
+//				confirmMsg: '确认提交吗?',
+				callback: function(data) {
+					if (data.statusCode == 200){
+						$(this).alertmsg('ok', data.message)
+						$(this).navtab('refresh','Article-lists');
+						$(this).navtab('closeCurrentTab');
+					}
+					if (data.statusCode == 300)
+						$(this).alertmsg('error', data.message)
+				}
+			})
+		})
+	})
+	function pic_upload_success(file, data) {
+		var json = $.parseJSON(data)
+		if (data.statusCode == 200)
+			$(this).alertmsg('ok', data.message)
+		if (data.status == 300)
+			$(this).alertmsg('error', data.message)
+		$(this).bjuiajax('ajaxDone', json)
+		if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {		
+			$('#j_custom_thumb').val(json.thumb);
+			$('#j_custom_yuantu').val(json.yuantu);
+			$('#j_custom_pic').html('<img src=__ROOT__' + json.thumb + ' />');
+		}
+	}
+</script>
+<form action="__APP__/Notic/index" method="post" data-toggle="validate" data-alertmsg="false">
+	<input type="hidden" name="id" value="{$daninfo['id']}" />
+	<input type="hidden" name="btn_submit" value="true">	
+	<div class="bjui-pageContent">
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="title" class="control-label x85">
+							标题：
+						</label>
+						<input type="text" name="title" id="title" value="{$daninfo.title}"  style="width:680px;">
+					</td>
+				</tr>
+				<tr style="display: none;">
+					<td colspan="4">
+						<label class="control-label x85">
+							缩略图：
+						</label>
+						<div style="display: inline-block; vertical-align: middle;">
+							<div style=" float:left" data-toggle="upload" data-uploader="__APP__/Article/ajax_img_upload" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg" data-multi="true" data-auto="true" data-on-upload-success="pic_upload_success" data-icon="cloud-upload">
+							</div>
+							<span id="j_custom_pic" style=" float:left">
+							{if $daninfo.thumb}
+                        	<img src="__ROOT__{$daninfo.thumb}" alt=""/>
+							{/if}
+							</span>
+							<input type="hidden" name="thumb" value="{$daninfo.thumb}" id="j_custom_thumb">
+							<input type="hidden" name="yuantu" value="{$daninfo.yuantu}" id="j_custom_yuantu">
+						</div>
+					</td>
+				</tr>				
+				<tr style="display: none;">
+					<td>
+						<label for="keywords" class="control-label x85" >
+							关键字：
+						</label>
+						<input type="text" name="keywords" id="keywords" value="{$daninfo.keywords}" size="60">
+					</td>
+				</tr>
+				<tr style="display: none;">
+					<td>
+						<label for="description" class="control-label x85" >
+							内容摘要：
+						</label>
+						<textarea name="description" id="description"  cols="35" data-height="auto">{$daninfo.description}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="j_custom_content" class="control-label x85">公告内容：</label>
+						<div style="display: inline-block; vertical-align: middle;">
+							<textarea name="content" id="j_form_content" class="j-content" data-toggle="kindeditor" data-minheight="200" style="width:680px;">
+								{$daninfo.content}
+							</textarea>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="bjui-pageFooter">
+		<ul>
+			<li  style="float: left;margin-left: 90px;">
+				<button type="submit" class="btn-default" data-icon="save">
+					保存
+				</button>
+			</li>
+			<li style="float: left;">
+				<button type="button" class="btn-close" data-icon="close">
+					取消
+				</button>
+			</li>
+		</ul>
+	</div>
+</form>

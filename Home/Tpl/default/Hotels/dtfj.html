@@ -1,0 +1,25 @@
+{include file="../Common/header.html"}
+<div class="box">
+  {include file="../Common/left.html"}
+    <div class="ny_right">
+      <div class="dqwz">当前位置&gt;&gt;<a href="__APP__">首页</a>>><a href="__APP__/Hotels/index/id/1">全国酒店</a>>><a href="__APP__/Hotels/dtfj">全国地铁附近酒店</a></div>
+      <div class="dtjdz">
+<div class="dtjdz_con">
+<div class="dtjdz_con1"><strong><a href="#" style="color:#FF0000;">选择城市：</a></strong>　<a href="__APP__/Hotels/dtfj/dtcity/北京">北京</a>　 <a href="__APP__/Hotels/dtfj/dtcity/上海"> 上海</a> 　<a href="__APP__/Hotels/dtfj/dtcity/广州">广州</a> 　<a href="__APP__/Hotels/dtfj/dtcity/深圳">深圳</a> 　<a href="__APP__/Hotels/dtfj/dtcity/天津">天津</a><a href="__APP__/Hotels/dtfj/dtcity/南京"> 　南京</a> 　<a href="__APP__/Hotels/dtfj/dtcity/成都">成都</a> </div>
+{foreach $newdt as $v}
+<div class="dtjdz_con2">
+<div class="dtjdz_con2t"><span></span>{$v@key}</div>
+<div class="dtjdz_con2c">
+<ul>
+	{foreach $v as $dt}
+		<li><a href="__ROOT__/Hotels/search-{$dt['city']}-Subway-{$dt['zhanpai']}.html">{$dt['zhanpai']}</a> </li>
+  	{/foreach}
+  </ul>
+  </div>
+</div>
+{/foreach}
+</div>
+</div>
+	</div>
+</div>
+ {include file="../Common/footer.html"}

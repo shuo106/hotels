@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>客房添加</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Hotels/roomadd" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$id}" />
+    <table border="1" class="table_border">
+      <tr>
+        <th colspan="2" align="center" class="table_border_title">客房添加</th>
+      </tr>
+      <tr>
+        <td width="15%">酒店：</td>
+        <td><input type="hidden" name="hotelid" value="{$hotelid}"/><input type="text" name="hotelname" value="{$hotelname}"  style="width:278px;"/>
+			<font color="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <td>房型信息标题：</td>
+        <td><input type="text" maxlength="100" name="roomtype" value="{$roomtype}" class="input_title"> <font color="red">*</font> 如标准间,双人间...</td>
+      </tr>
+      <tr>
+        <td>床型：</td>
+        <td>
+		 {foreach from=$custom item=vo}
+		 {if $vo['tid'] eq 6}
+          <input type="radio" name="fjchuang" value="{$vo['name']}" {if $fjchuang == "{$vo['name']}"}checked="checked"{/if} /> {$vo['name']}
+         {/if}
+		 {/foreach}
+		</td>
+      </tr>
+      <tr>
+        <td>早餐：</td>
+        <td>
+		{foreach from=$custom item=vo}
+		 {if $vo['tid'] eq 5}
+          <input type="radio" name="zaocan" value="{$vo['name']}" {if $zaocan == "{$vo['name']}"}checked="checked"{/if} /> {$vo['name']}
+         {/if}
+		 {/foreach}
+        </td>
+      </tr>
+      <tr>
+        <td>上网：</td>
+        <td colspan="3" class="tablerow">
+		{foreach from=$custom item=vo}
+		 {if $vo['tid'] eq 7}
+          <input type="radio" name="swang" value="{$vo['name']}" {if $swang == "{$vo['name']}"}checked="checked"{/if} /> {$vo['name']}
+         {/if}
+		 {/foreach}
+          </td>
+      </tr>
+<!-- 	  <tr>
+        <td>今日房态：</td>
+        <td colspan="3" class="tablerow">
+          <input type="radio" name="status" value="1" checked="checked">有房
+          <input type="radio" name="status" value="2">满房
+        </td>
+      </tr> -->
+      <tr>
+        <td>门市价格：</td>
+        <td><input type="text" name="menshijia" value="{$menshijia}" class="input_table" size="10"> 元/天</td>
+      </tr>
+       <tr>
+        <td>订金：</td>
+        <td><input type="text" name="dingjin" value="{$dingjin}" class="input_table" size="10"> 元/天</td>
+      </tr> 
+	   <tr>
+        <td>佣金：</td>
+        <td><input type="text" name="commission" value="{$commission}" class="input_table" size="10"> 元/天</td>
+      </tr>
+      <tr>
+        <td>返现：</td>
+        <td><input type="text" name="returnmoney" value="{$returnmoney}" class="input_table" size="10"> 元/天</td>
+      </tr>
+	  <tr>
+        <td>支付方式：</td>
+        <td>
+          <input type="radio" name="paytype" value="0" {if $paytype == 0}checked="checked"{/if} /> 到店支付
+          <input type="radio" name="paytype" value="1" {if $paytype == 1}checked="checked"{/if} /> 在线支付
+        </td>
+      </tr>
+	  <!--  <tr>
+        <td>房间图片：</td>
+        <td><input type="file" name="thumb" /></td>
+      </tr>-->
+      <tr>
+        <td>详细说明：</td>
+        <td><textarea class="bj_container" name="content">{$content}</textarea></td>
+      </tr>
+    </table>
+	<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/kindeditor-min.js"></script>
+		<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/lang/zh_CN.js"></script>
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true,afterBlur: function(){ this.sync();},
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script>
+    <table border="0" width="100%" height="40">
+      <tr>
+        <td width="40%"></td>
+        <td>
+          <input type="submit" name="btn_submit" value=" 立刻发布 " class="buton">
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+ <script>
+$(function(){
+	{if $status == 1}
+		$("input[type='radio'][name='status'][value=1]").attr('checked','checked');
+	{else if $status == 2}
+		$("input[type='radio'][name='status'][value=2]").attr('checked','checked');
+	{/if}
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__APP__/Hotels/room";
+		}
+	});
+	return false;
+})
+</script> 
+</body>
+</html>

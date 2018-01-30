@@ -1,0 +1,117 @@
+<div class="bjui-pageHeader"  style="height:38px">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Hotels/room" method="get">
+        <input name="isdel" value="{$smarty.get.isdel}" type="hidden" />
+        <div class="bjui-searchBar" style="margin-top:6px">
+            <div style="margin-left: 0;display: inline-block;">
+                <div class="btn-group">
+                    <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+                    <ul class="dropdown-menu right" role="menu">
+                        <li><a class="btn" href="__APP__/Hotels/roompl/type/1" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要删除选中项吗？">删除选中</a></li>
+                    </ul>
+                </div>
+            </div>
+            <label>标题关键字：</label>
+            <input type="text" value="{$smarty.get.text}" name="text" class="form-control" size="8">&nbsp;
+            <label> 房型：</label>
+            <select name="roomtype" data-toggle="selectpicker">
+                <option value="0">全部</option>
+                {foreach from=$custom item=vo}
+                {if $vo.tid==1}
+                <option value="{$vo.name}" {if $smarty.get.roomtype eq {$vo.name}}selected{/if}>{$vo.name}</option>
+                {/if}
+                {/foreach}
+            </select>&nbsp;
+            <button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+            {if $smarty.get.isdel!=1}
+            <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+            {/if}
+        </div>
+    </form>
+</div>
+<div class="bjui-pageContent tableContent">
+    <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+        <thead>
+            <tr style="height:36px;line-height:36px;">
+                <th style="background:#1078C1;color:#fff;"  width="26">
+                    <input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+                </th>
+                <th style="background:#1078C1;color:#fff;" >ID</th>
+                <th style="background:#1078C1;color:#fff;" >房间名称</th>
+                <th style="background:#1078C1;color:#fff;" width="50">门市价</th>
+                <th style="background:#1078C1;color:#fff;" width="40">预订价</th>
+                <th style="background:#1078C1;color:#fff;" >积分</th>
+                <th style="background:#1078C1;color:#fff;" >酒店名称</th>
+                <th style="background:#1078C1;color:#fff;" width="60" >床型</th>
+                <th style="background:#1078C1;color:#fff;" >早餐</th>
+                <th style="background:#1078C1;color:#fff;" >上网</th>
+                <th style="background:#1078C1;color:#fff;" >支付方式</th>
+                <th style="background:#1078C1;color:#fff;"  width="160">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach from=$list item=v key=k}
+            <tr data-id="{$k}">
+                <td>
+                    <input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+                </td>
+                <td>{$v.id}</td>
+                <td>{$v['roomtype']}</td>
+                <td>{$v.menshijia}</td>
+                <td>
+                    <a href="__APP__/Hotels/addmoney/id/{$v.id}" data-toggle="dialog" data-id="room_price_edit" data-mask="true" data-width="1000" data-height="600"  data-on-close="refresh">{if $v['tjarr']}编辑{else}添加{/if}</a>
+                </td>
+                <td>{$v['returnmoney']}</td>
+                <td>{$v['hotelname']}</td>
+                <td>{$v['fjchuang']}</td>
+                <td>{$v['zaocan']}</td>
+                <td>{$v['swang']}</td>
+                <td>
+                    {if $v['paytype'] eq 1}
+                        在线支付
+                    {else}
+                        前台支付
+                    {/if}
+                </td>
+                <td>
+                    {if $v['is_delete'] eq "0"}
+                    <a href="__APP__/Hotels/rguan/id/{$v['id']}/d/{$v['is_delete']}" data-toggle="doajax" class="btn btn-green" data-confirm-msg="确定要关闭该房间吗？">开启</a>
+                    {else}
+                    <a href="__APP__/Hotels/rguan/id/{$v['id']}/d/{$v['is_delete']}" data-toggle="doajax" class="btn btn-red" data-confirm-msg="确定要开启该房间吗？">关闭</a>
+                    {/if}			
+                    <a href="__APP__/Hotels/roomedit/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-id="upload"  data-title="客房编辑-{$v.roomtype}">编辑</a>
+                    <a href="__APP__/Hotels/roomdel/id/{$v['id']}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+                </td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+</div>
+<div class="bjui-pageFooter">
+    <div class="pages">
+        <span>每页&nbsp;</span>
+        <div class="selectPagesize">
+            <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+                {foreach from=$pagesizes item=v}
+                <option value="{$v}">{$v}</option>
+                {/foreach}
+            </select>
+        </div>
+        <span>&nbsp;条，共 {$total} 条</span>
+    </div>
+    <div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+    </div>
+</div>
+<script type="text/javascript">
+    function addmoney(id) {
+        var url = '__URL__/addmoney/id/';
+        $.dialog({
+            title: '特殊价格添加',
+            lock: true,
+            max: false,
+            min: false,
+            width: '800px',
+            height: 450,
+            content: 'url:' + url + id
+        });
+    }
+</script>

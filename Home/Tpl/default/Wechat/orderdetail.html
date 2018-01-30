@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>订单详细</title>
+<link href="__PUBLIC__/wap/css/indexwechat.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    .zhuangtai{ color:#FFFFFF;padding-left:10px;
+                  padding-right:10px;
+                  padding-top:5px;
+                  padding-bottom:5px; 
+                    }          
+  </style>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	function docancel(id,wid){
+		$.get('__ROOT__/Wechat/docancel',{ id: id } ,function(d){
+			eval('data='+d);
+			alert(data.msg);
+			if(data.status==1){
+				location.reload(); 
+			}
+		})
+	}
+</script>
+</head>
+<body>
+<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>订单详情<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="orderxx" style="margin-bottom: 0px;">
+  <ul>
+  <li>{$ORDERC['ordernumber']}：{$order.addtime}{$order['orderid']}</li> <!-- 订单编号 -->
+    <li>{$ORDERC['title']}：{$order['roomtype']}</li>    <!-- 预订房间 -->
+    <li>{$ORDERC['addtime']}：{date('Y-m-d',$order['addtime'])}</li><!-- 预订时间 -->
+    <li>{$ORDERC['start']}：{date('Y-m-d',$order['ruzhudate'])}</li><!-- 入住时间 -->
+    <li>{$ORDERC['end']}：{date('Y-m-d',$order['lidiandate'])}</li>  <!-- 离店时间 -->
+    <li>{$ORDERC['linkman']}：{$order['linkman']}</li><!-- 预订姓名 -->
+    <li>{$ORDERC['telephone']}：{$order['telephone']}</li><!-- 预订电话 -->
+    <li>{$ORDERC['kename']}：{$order['kename']}</li><!-- 入住姓名 -->
+    <li>{$ORDERC['nums']}：{$order['nums']}间</li><!-- 预订间数 -->
+    <li>{$ORDERC['rennums']}：{if $order['rennums'] eq 0 }1{else}{$order['rennums']}{/if}人</li><!-- 入住人数 -->
+    <li>{$ORDERC['total']}：<b class="orange">{$order['shoufei']}元</b></li><!-- 应付金额 -->
+    <!-- <li>赠送积分：{(($order['lidiandate']-$order['addtime'])/86400)* $order['point']*$order.nums}</li>赠送积分 -->
+    <li>订单来源：{$LANG['from'][$order['from']]}</li><!-- 赠送积分 -->
+    <!-- <li>支付方式：{if $order['paytype'] eq 1}在线支付{else}到店支付{/if}</li> -->
+    <li>{$ORDERC['status']}：
+      <a class="zhuangtai" style="background-color:{$LANG['color'][$order.status]};">
+     {$LANG['status'][$order.status]}</a>
+     {if $order['status'] eq 3}
+    <a href="__APP__/Pay/index/id/{$order.addtime}{$order.orderid}/from/wap" class="zhuangtai"
+     style="background-color:red;margin-left:10px">
+     立即支付</a>
+     {/if}
+      {if $order['status'] eq 1||$order['status'] eq 3||$order['status'] eq 2||$order['status'] eq 4}
+        <a class="zhuangtai"  style="background-color:red;margin-left:10px" href="javascript:docancel({$order['orderid']} );">取消订单</a>
+      {/if} </li><!-- 订单状态 -->
+    <li>{$ORDERC['remark']}：{$order['beizhu']}</li><!-- 其他要求 -->
+    </li>
+  </ul>
+</div>
+<div class="section_detail">
+  <ul>
+    <li style="background: rgba(0, 0, 0, 0) none repeat scroll 0 center;"><a href="__ROOT__/Wechat/map/id/{$order['hotelid']}"><span><img src="__PUBLIC__/wap/images/bl_10.gif" style="top: 12px; width:20px;"></span><img src="__PUBLIC__/wap/images/h_11.gif"style="float: left;margin: 0 10px;position: relative;top: 12px;width: 30px;">{$order['hotelname']}</a></li>
+   <li style="background: rgba(0, 0, 0, 0) none repeat scroll 0 center;"><a href="tel:{$order['telephone']}"><span><img src="__PUBLIC__/wap/images/bl_10.gif" style="top: 12px; width:20px;"></span><img src="__PUBLIC__/wap/images/h_05.gif" style="float: left;margin: 0 10px;position: relative;top: 12px;width: 30px;">{$order['tel']}</a></li> 
+  </ul>
+</div>
+</body>
+</html>

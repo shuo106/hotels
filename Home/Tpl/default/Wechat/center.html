@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>我的会员中心</title>
+<link href="__PUBLIC__/wap/css/font-awesome.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/new/css/center.css" rel="stylesheet">
+</head>
+<body>
+	<div id="preloader" style="display: none;">
+		<div id="status" style="display: none;">
+			<p class="center-text">网页内容加载中...</p>
+		</div>
+	</div>
+	<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>我的会员中心<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+      <div class="hyzh">
+            <ul>
+                 <li>{if $uinfo.icon}
+					<img src="__ROOT__{$uinfo.icon}" style="margin-left: 30px;" >
+					{else}
+					<img src="__PUBLIC__/wap/images/hytx.png" onerror="this.onerror='';this.src='#';" ;="" alt="" style="margin-left: 30px;">
+					{/if}</li>
+                 <li style="width:60%;margin-left:20px;"><a href="__ROOT__/Wechat/myhome"><span style=" font-weight">{$uinfo.username}</span> 欢迎您回来！</a></li>
+                 <li><a href="__ROOT__/Wechat/myhome"><span> > </span></a></li>
+            </ul>
+            <dl>
+                <dd><a href="__ROOT__/Wechat/myhome"><img src="__PUBLIC__/wap/new/images/ico3.png"><p>我的资料</p></a></dd>
+                <dd><a href="__ROOT__/Wechat/myorder"><img src="__PUBLIC__/wap/new/images/ico4.png"><p>我的订单</p></a></dd>
+                <dd><a href="__ROOT__/Wechat/comment/uid/{$smarty.session.id}"><img src="__PUBLIC__/wap/new/images/ico5.png"><p>我的点评</p></a></dd>
+            </dl>
+      </div>
+      <div class="list">
+           <div class="list-01">
+                  <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico6.png"></i>  <a href="__ROOT__/Wechat/myorder">我的订单</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/myorder"> <span> > </span></a><font class="iconum ">{$ordernums}</font></li>
+                  </ul>
+                  <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico8.png"></i>  <a href="__ROOT__/Wechat/comment/uid/{$smarty.session.id}">我的点评</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/comment/uid/{$smarty.session.id}"> <span> > </span></a><font class="iconum ">{$commentnums}</font></li>
+                  </ul>
+<!--                   <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico7.png"></i>  <a href="__ROOT__/Wechat/point/uid/{$smarty.session.id}">我的积分</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/point/uid/{$smarty.session.id}"> <span> > </span></a><font class="iconum ">{$uinfo.point}</font></li>
+                  </ul> -->
+<!--                 <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico20.png"></i>  <a href="__ROOT__/Wechat/tixians">积分提现</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/tixians"> <span> > </span></a><font class="iconum ">{$tnums}</font></li>
+                  </ul> -->
+<!--                   <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico9.png"></i>  <a href="__ROOT__/Wechat/mypass">修改密码</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/mypass"> <span> > </span></a></li>
+                  </ul> -->
+                  <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico10.png"></i>  <a href="__ROOT__/Wechat/myhome">账号设置</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/myhome"> <span> > </span></a></li>                 
+                  </ul>                  
+                  <ul>
+                      <li> <i><img src="__PUBLIC__/wap/new/images/ico11.png"></i>  <a href="__ROOT__/Wechat/ashow/id/5">关于我们</a></li>
+                      <li class="on"> <a href="__ROOT__/Wechat/ashow/id/5"> <span> > </span></a></li>
+                  </ul>
+           </div>
+           <div style="margin-top: 10px;padding: 5px;"><a href="__APP__/Wechat/loginOut" class="buttonWrap button button-red buttonLong">退出登录</a></div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+</style>
+<form action="__APP__/Wechat/index" method="post" id="j_custom_form" data-toggle="ajaxform">
+    <input type="hidden" name="issend" value="{$config['issend']}" />
+    <input type="hidden" name="smsname" value="{$config['smsname']}" />
+    <input type="hidden" name="smspwd" value="{$config['smspwd']}" />
+    <input type="hidden" name="mobile" value="{$config['mobile']}" />
+    <input type="hidden" name="smscon" value="{$config['smscon']}" />
+    <div class="bjui-pageContent">
+        <table class="table table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="Token" class="control-label x85">
+                            Token：
+                        </label>
+                        <input type="text" name="Token" id="Token" value="{$config.Token}" size="35" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Appid" class="control-label x85">
+                            Appid：
+                        </label>
+                        <input type="text" name="Appid" id="Appid" value="{$config.Appid}" size="35" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="AppSecret" class="control-label x85">
+                            AppSecret:
+                        </label>
+                        <input type="text" name="AppSecret" id="AppSecret" value="{$config.AppSecret}" size="35">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="page_but" style="margin-left:85px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

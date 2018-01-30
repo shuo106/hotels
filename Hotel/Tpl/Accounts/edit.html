@@ -1,0 +1,83 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">账单详情</strong> / <small>Order</small></div>
+            </div>
+            <hr>        
+        <form method="post"  action="__APP__/Accounts/update/" class="ajaxform">
+            <input type="hidden" name="id" value="{$info.acc_id}">
+            <table class="am-table am-margin-left  am-table-hover">
+                <tr>
+                            <td>
+                                账单编号：
+                            </td>
+                            <td>{$info.acc_addtime}{$info.acc_id}</td>
+                        </tr>
+                <tr>
+                    <td style="width:100px;">账单标题：</td>
+                    <td>{$info.acc_title}</td>
+                </tr>
+                <tr>
+                	<td>酒店名称：</td>
+                    <td>{$info['acc_hotelname']}</td>
+                </tr>
+                <tr>
+                    <td>开始时间：</td>
+                    <td>{$info.acc_start}</td>
+                </tr>
+                <tr>
+					<td>结束时间：</td>
+                    <td>{$info.acc_end} </td>
+                </tr>
+                <tr>
+                    <td>总&nbsp;金&nbsp;额：</td>
+                    <td>{$info['acc_total']} 元</td>
+                </tr>
+                <tr>
+                    <td>账单状态：</td>
+                    <td>
+                    	<if condition="$info['acc_status'] eq 4">
+                        <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                            <input data-am-ucheck name="status" value="4" type="radio" <php>if($info['acc_status'] ==4)echo 'checked="checked"'; </php> >已结算
+                        </label>
+                        <else/>
+                        <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                            <input data-am-ucheck name="status" value="1" type="radio" <php>if($info['acc_status'] ==1)echo 'checked="checked"'; </php> >未确认
+                        </label>
+                        <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                            <input data-am-ucheck name="status" value="2" type="radio" <php>if($info['acc_status'] ==2)echo 'checked="checked"'; </php> >已确认
+                        </label>
+                        <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                            <input data-am-ucheck name="status" value="3" type="radio" <php>if($info['acc_status'] ==3)echo 'checked="checked"'; </php> >质疑单
+                        </label>
+                        </if>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+                    <td><textarea name="beizhu" cols="50" rows="2">{$info.acc_beizhu}</textarea></td>
+                    <!-- <textarea name="reply" id="reply" data-toggle="autoHeight" cols="50" rows="3">{$comment['reply']}</textarea> -->
+                </tr>
+                <tr>
+                	<td></td>
+                	<td>
+                	<input name="submit" type="submit" class="am-btn am-btn-primary am-btn-xs" value="确认操作">
+                	</td>
+                </tr>
+            </table>
+        </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<script type="text/javascript">
+	function callback(rs){
+		alert(rs.msg);
+	}
+</script>
+<include file="Tpl/public/bottom.html" />

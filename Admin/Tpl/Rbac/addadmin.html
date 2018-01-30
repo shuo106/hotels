@@ -1,0 +1,164 @@
+<style type="text/css">
+
+	label.control-label {
+
+		width: 85px;
+
+	}
+
+</style>
+
+<div class="bjui-pageContent">
+
+	<form action="__APP__/Rbac/doaddadmin" method="post" data-toggle="validate" data-alertmsg="false">
+
+		<input type="hidden" name="id" value="{$userinfo.userid}"/>
+
+		<table class="table-bordered table-condensed table-hover" width="100%">
+
+			<tbody>
+
+				<tr>
+
+					<td>
+
+						<label for="admin_account" class="control-label x85">
+
+							管理账号：
+
+						</label>
+
+						{if $uid}
+						<input type="text" name="username" id="admin_account" value="{$userinfo.username}" data-rule="account" data-rule-account="[{C('FORM_VALIDATE.account')},'用户名为3-15位数字、字母、下划线的组合，或1-5个汉字']" data-tip="用户名为3-15位数字、字母、下划线的组合，或1-5个汉字" size="30" readonly="true"><font color="red">*</font>
+						{else}
+						<input type="text" name="username" id="admin_account" value="{$userinfo.username}" data-rule="account" data-rule-account="[{C('FORM_VALIDATE.account')},'用户名为3-15位数字、字母、下划线的组合，或1-5个汉字']" data-tip="用户名为3-15位数字、字母、下划线的组合，或1-5个汉字" size="30"><font color="red">*</font>
+						{/if}
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td>
+
+						<label for="admin_pwd" class="control-label x85">
+
+							管理密码：
+
+						</label>
+
+						<input type="password" name="pwd" id="admin_pwd" value="" size="30"><font color="red">*</font>
+
+					</td>
+
+				</tr>
+
+				{if $smarty.session.role_id eq 16}
+
+				<tr>
+
+					<td>
+
+						<label for="admin_permission" class="control-label x85">
+
+							管理权限：
+
+						</label>
+
+						<select name="grade" id="admin_permission" data-toggle="selectpicker">
+
+							{foreach from=$roles item=v}
+
+							<option value="{$v.id}" {if $userinfo.grade eq $v.id}selected="selected"{/if}>
+
+							{$v.name}
+
+							</option>
+
+							{/foreach}
+
+						</select>
+
+					</td>
+
+				</tr>
+
+				{/if}
+
+				<tr>
+
+					<td>
+
+						<label for="admin_email" class="control-label x85">
+
+							常用邮箱：
+
+						</label>
+
+						<input type="text" name="email" value="{$userinfo.email}" id="admin_email" data-rule="email" size="30">
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td>
+
+						<label for="admin_phone" class="control-label x85">
+
+							手机号码：
+
+						</label>
+
+						<input type="text" name="mobile" id="admin_phone" value="{$userinfo.mobile}" data-rule="mobile" size="30" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')">
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td>
+
+						<label for="admin_truename" class="control-label x85">
+
+							真实姓名：
+
+						</label>
+
+						<input type="text" name="truename" id="admin_truename" value="{$userinfo.truename}" data-rule="truename" data-rule-truename="[{C('FORM_VALIDATE.truename')},'姓名为2-6个汉字']" data-tip="姓名为2-6个汉字" size="30">
+
+					</td>
+
+				</tr>
+
+                <tr>
+
+					<td>
+
+						<div class="page_but" style="margin-left:85px;">
+
+                        <ul>
+
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+
+                        </ul>
+
+                        </div>
+
+					</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</form>
+
+</div>
+

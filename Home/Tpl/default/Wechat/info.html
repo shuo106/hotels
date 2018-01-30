@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>酒店信息</title>
+<link href="__PUBLIC__/wap/css/indexwechat.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="header" style="background: #0e90d2 none repeat scroll 0 0;"><a class="hdleft" href="javascript:history.go(-1);"></a>{$hotel.hotelname}<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+<div class="xinxi1">
+    <ul>
+    <li><a href="javascript:void(0);"><h4>酒店介绍</h4></a></li>
+     <li><a href="javascript:void(0);">{$hotel['introduce']}</a></li>
+  </ul>
+    <ul>
+    <li><a href="javascript:void(0);"><h3>酒店设施</h3></a></li>
+     <li><a href="javascript:void(0);">{$hotel['sheshi']}</a></li>
+  </ul>
+      <ul>
+    <li><a href="javascript:void(0);"><h4>交通信息</h4></a></li>
+	<li><a href="javascript:void(0);">{$hotel['traffic']}</a></li>
+	{if $db['szx']}	
+     <li><p><span>{$db['szxjl']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['szx']}</p></li>
+	{/if}	
+	{if $db['bxj']}	
+     <li><p><span>{$db['bxjjl']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['bxj']}</p></li>
+	{/if}
+	{if $db['qcz']}	
+     <li><p><span>{$db['qczjl']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['qcz']}</p></li>
+	{/if}	
+	{if $db['qcz2']}	
+     <li><p><span>{$db['qcz2jl']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['qcz2']}</p></li>
+	{/if}	
+	{if $db['dx1']}	
+     <li><p><span>{$db['dxjl1']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dx1']}</p></li>
+	{/if}	
+	{if $db['dx2']}	
+     <li><p><span>{$db['dxjl2']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dx2']}</p></li>
+	{/if}	
+	{if $db['dx3']}	
+     <li><p><span>{$db['dxjl3']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dx3']}</p></li>
+	{/if}	
+	{if $db['dt1']}	
+     <li><p><span>{$db['dtjl1']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dt1']}</p></li>
+	{/if}	
+	{if $db['dt2']}	
+     <li><p><span>{$db['dtjl2']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dt2']}</p></li>
+	{/if}	
+	{if $db['dt3']}	
+     <li><p><span>{$db['dtjl3']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['dt3']}</p></li>
+	{/if}	
+	{if $db['jc1']}	
+     <li><p><span>{$db['jcjl1']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['jc1']}</p></li>
+	{/if}	
+	{if $db['jc2']}	
+     <li><p><span>{$db['jcjl2']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['jc2']}</p></li>
+	{/if}	
+	{if $db['hc1']}	
+     <li><p><span>{$db['hcjl1']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['hc1']}</p></li>
+	{/if}	
+	{if $db['hc2']}	
+     <li><p><span>{$db['hcjl2']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['hc2']}</p></li>
+	{/if}	
+	{if $db['hz1']}	
+     <li><p><span>{$db['hzjl1']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['hz1']}</p></li>
+	{/if}	
+	{if $db['hz2']}	
+     <li><p><span>{$db['hzjl2']}公里<a href="javascript:void(0);"><img src="__PUBLIC__/wechat/images/x_03.jpg" /></a></span>{$db['hz2']}</p></li>
+	{/if}	
+	 </ul>
+</div>
+</body>
+</html>

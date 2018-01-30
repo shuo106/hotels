@@ -1,0 +1,106 @@
+{include file="../Common/header.html"}
+<style>
+.am-u-sm-2 { width: 19%; }
+.am-u-sm-10 { width:81%; }
+</style>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="wdzl-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我的资料</h3>
+        </div>
+        <div class="sub-main order-info">
+            <form id="form1" class="am-form am-form-horizontal ajaxform" action="__APP__/Member/member_change" method="post" enctype="multipart/form-data">
+                <div class="am-g">
+                    <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+                        <div class="am-panel am-panel-default">
+                            <div class="am-panel-bd">
+                                <div class="am-g">
+                                    <div class="am-u-md-4" style="padding-left:15px; padding-right:0px">
+                                        <img class="am-img-circle am-img-thumbnail" id="img" src="__ROOT__{$user.icon|default:'/Public/home/images/notx.png'}" alt=""  style="width:75px ; height:75px; border-radius:50%; " onclick="ready();"/>
+                                        <span style=" height:30px; line-height:30px; overflow:hidden; text-align:center">{$user['username']}</span>
+                                    </div>
+                                    <div class="am-u-md-8" style="padding-left: 0.8rem; ">
+                                        <div class="am-form-group">
+                                            <input type="file" id="uploadimg" data-for="#img" name="icon" style="border:0;width: 152px;">
+                                            <p class="am-form-help" style="margin-bottom: 0px;font-size: 12px;">请选择要上传的文件...</p>
+                                            <p class="am-form-help" style="margin-bottom: 0px;font-size: 12px;;">建议头像尺寸为：90*90</p>
+                                            <p class="am-form-help" style="margin-bottom: 0px;font-size: 12px;;">上传文件格式为：jpg、png</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4" style="padding-left: 0;">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-2 am-form-label">会员ID：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" class="input_table" value="{$user['id']}" style="width:300px;" disabled/>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-2 am-form-label">会员帐号：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" class="input_table" value="{$user['username']}" style="width:300px;" disabled/>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-QQ" class="am-u-sm-2 am-form-label">真实姓名：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" class="am-fl" name="truename" value="{$user['truename']}"  placeholder="输入你姓名"  style="width:300px;"><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-2 am-form-label">会员积分：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" class="input_table" value="{$user['point']}" style="width:300px;" disabled/>
+                            </div>
+                        </div>                        
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-2 am-form-label">会员QQ：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" name="qq" value="{$user['qq']}" placeholder="输入你的QQ号码" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:300px;">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label">会员手机：</label>
+                            <div class="am-u-sm-10">
+                                <!-- <input type="text" class="am-fl" name="mobile" maxlength="11" value="{$user['telephone']}"  placeholder="输入你的手机号码"  maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:300px;" required><span class="am-fl" style="color:#F00; margin:5px 5px">*</span> -->
+                                <input type="text" class="am-fl" name="mobile" value="{$user['telephone']}" style="width:300px;" disabled><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+                            </div>
+                        </div>                        
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label">会员邮箱：</label>
+                            <div class="am-u-sm-10">
+                                <input type="email" class="am-fl" name="email" value="{$user['email']}" placeholder="输入你的邮箱" style="width:300px;"><span class="am-fl" style="color:#F00; margin:5px 5px" required>*</span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-2 am-form-label">会员地址：</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" class="am-fl" name="address" value="{$user['address']}" placeholder="输入你的地址" style="width:300px;" required><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-2 am-form-label"></label>
+                            <div class="am-u-sm-10">
+                                <button type="button" ajaxform data-form='#form1' class="am-btn am-btn-primary">保存修改</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function ready(){
+          $("#uploadimg").trigger('click');
+      }
+    function callback(rs) {
+        alert(rs.msg);
+    }
+    </script>
+</div>
+{include file="../Common/footer.html"}

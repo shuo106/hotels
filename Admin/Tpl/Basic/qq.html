@@ -1,0 +1,41 @@
+<style type="text/css">
+	label.control-label {
+		width: 130px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Basic/qq" method="post" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
+			<input type="hidden" name="id" value="{$QQ.id}" />
+			<table class="table-bordered table-condensed table-hover" width="100%">
+				<tbody>
+					<tr>
+						<td colspan="4">
+							<label for="j_custom_copyright" class="control-label x85" style="width: 130px;">
+								QQ客服是否开启：
+							</label>
+							<input type="radio" name="isqq" id="qq_yes" data-toggle="icheck" {if $QQ[ 'isqq']=="1" }checked="checked" {/if} value="1" data-rule="checked" data-label="是&nbsp;&nbsp;">
+							<input type="radio" name="isqq" id="qq_no" data-toggle="icheck" {if !$QQ[ 'isqq']}checked="checked" {/if} value="0" data-label="否&nbsp;&nbsp;">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="qq_acount" class="control-label x85" style="width: 130px;">
+								QQ账号：
+							</label>
+							<textarea name="qq" rows="1" id="qq_acount" data-toggle="autoheight" cols="60" class="input3">{$QQ['qq']}</textarea>（多个QQ账号间用|分隔）
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+                        <div class="page_but" style="margin-left:130px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                        </td>
+                    </tr>					
+				</tbody>
+			</table>
+</div>
+</form>

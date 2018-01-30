@@ -1,0 +1,42 @@
+{include file="../Common/header.html"}
+<div class="box">
+  {include file="../Common/left.html"}
+    <div class="ny_right">
+      <div class="dqwz">当前位置&gt;&gt;<a href="__APP__">首页</a>>><a href="__APP__/Hotels/index/id/1">全国酒店</a>>><a href="__APP__/Hotels/jing">全国景点附近酒店</a></div>
+      <div class="qgdx">
+<!--大学会近酒店内容开始-->
+<script src="__PUBLIC__/js/hotcity.js"></script>
+<div id="tab1">
+<ul>
+<li onclick="setTab(1,0)" class="now">北京</li>
+{foreach key=key item=p from=$pro}
+	<li class=""><a href="javascript:setTab(1,{$key+1})">{$p['name']}</a></li>
+{/foreach}
+</ul>
+</div>
+<div id="tablist1">
+<div class="tablist block" style="display: block; ">
+<span>
+	<ul>
+	{section loop=$gd name=items}
+	<li><a href="__ROOT__/Hotels/search-100002-Scenic-{$gd[items].fjlv1}.html" target="_self">{$gd[items].fjlv1}</a></li>
+	{/section}
+	 </ul>
+ </span>
+</div>
+{foreach from=$newjd key=key item=s}
+<div class="tablist" style="display: none; ">
+<span>
+	<ul>
+	{foreach from=$s item=vo}
+	<li><a href="__ROOT__/Hotels/search-{$key}-Scenic-{$vo}.html" target="_self">{$vo}</a></li>
+    {/foreach}
+	 </ul>
+ </span>
+</div>
+{/foreach}
+</div>
+<!--大学会近酒店内容结束--></div>
+	</div>
+</div>
+  {include file="../Common/footer.html"}

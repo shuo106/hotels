@@ -1,0 +1,95 @@
+<style type="text/css">
+	label.control-label {
+		width: 85px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Rbac/doaddnode" method="post" data-toggle="validate" data-alertmsg="false" callback="back">
+		<input type="hidden" name="id" value="{$info.id}" />
+		<input type="hidden" name="btn_submit" value="true" />
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							权限名称：
+						</label>
+						<input type="text" name="title" value="{$info.title}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							图标名称：
+						</label>
+						<input type="text" name="icon" value="{$info.icon}">顶级栏目时有效，图标参照<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">点击查看</a>。填写对应名字即可。(注：部分图标因分辨率或别名问题无法使用)
+					</td>
+				</tr>				
+				<tr>
+					<td>
+						<label for="role_remark" class="control-label x85">
+						上级栏目:
+						</label>
+						<select name="pid" id="admin_permission" data-toggle="selectpicker">
+							<option value="0">&nbsp;&nbsp;顶级栏目&nbsp;&nbsp;</option>
+							{foreach from=$nodelist item=vo}
+							<option value="{$vo.id}" {if $info.pid eq $vo.id}selected = selected{/if}>&nbsp;&nbsp;{$vo.title}&nbsp;&nbsp;</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							地址：
+						</label>
+						<input type="text" name="url" value="{$info.url}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							操作：
+						</label>
+						<input type="text" name="cname" value="{$info.name}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							模块：
+						</label>
+						<input type="text" name="model"  value="{$info.model}">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							动作：
+						</label>
+						<input type="text" name="action"  value="{$info.action}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="role_name" class="control-label x85">
+							是否显示：
+						</label>
+						<input type="radio" name="is_show"  value="1" data-toggle="icheck" {if $info.is_show} checked{/if} data-label="是&nbsp;&nbsp;">
+						<input type="radio" name="is_show"  value="0" data-toggle="icheck" {if !$info.is_show} checked{/if} data-label="否">						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="page_but" style="margin-left:85px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>				
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

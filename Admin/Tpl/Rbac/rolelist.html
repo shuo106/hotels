@@ -1,0 +1,54 @@
+<div class="bjui-pageHeader" style="height:38px">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Rbac/rolelist" method="get">
+		<div class="bjui-searchBar" style="margin-top:6px">
+			<div style="display: inline-block;">
+				<div class="btn-group">
+					<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+					<ul class="dropdown-menu right" role="menu">
+						<li><a class="btn" href="__APP__/Rbac/pi/type/3" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="删除不可恢复，确定要删除选中项吗？">删除选中</a></li>
+					</ul>
+				</div>
+			</div>&nbsp;&nbsp;
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px;line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  width="26">
+					<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+				</th>
+				<th style="background:#1078C1;color:#fff;" >ID</th>
+				<th style="background:#1078C1;color:#fff;" >所属部门</th>
+				<th style="background:#1078C1;color:#fff;" >职位名称</th>
+				<th style="background:#1078C1;color:#fff;" >职位描述</th>
+				<th style="background:#1078C1;color:#fff;" >开启状态</th>
+				<th style="background:#1078C1;color:#fff;" >操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a data-url="__APP__/Rbac/addrole" class="btn btn-green" data-toggle="dialog" data-title="添加职位" data-height="240" data-width="500" data-id="Rbac-addrole">新增</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$rolelist item=v key=k}
+			<tr data-id="{$k}">
+				<td>
+					<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+				</td>
+				<td>{$v.id}</td>
+				<td>{$v.value}</td>
+				<td>{$v.name}</td>
+				<td>{$v.remark}</td>
+				<td>
+					{if $v['status']}开启{else}关闭{/if}
+				</td>
+				<td>
+					<a data-url="__APP__/Rbac/addrole/id/{$v['id']}" class="btn btn-green"  data-toggle="dialog" data-title="添加职位" data-height="380" data-width="720" data-id="Rbac-addrole">编辑</a>
+					<a href="__APP__/Rbac/access/rid/{$v['id']}" class="btn btn-blue" data-toggle="navtab" data-title="权限配置">配置权限</a>
+					<a href="__APP__/Rbac/delrole/id/{$v['id']}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>

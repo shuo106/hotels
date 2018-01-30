@@ -1,0 +1,108 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="order-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>订单详情</h3>
+        </div>
+        <div class="order-info">
+                <form action="__ROOT__/Member/order_content.html" method="post" name="myform">
+                    {if $info}
+                    <input type="hidden" name="orderid" value="{$info['orderid']}" />
+                    <table class="am-table">
+                        <tbody>
+                            <tr>
+                                <td width="10%">订单编号：</td>
+                                <td>{$info['addtime']}{$info.orderid}</td>
+                                <td width="10%" rowspan="3">酒店照片：</td>
+                                <td rowspan="4">
+                                    <img src="__ROOT__{$info.src|default:'/Public/images/zanwu.gif'}" width="160" height="120" />
+                                </td>
+                            </tr>
+                            <tr>
+                              <td>房间名称：</td>
+                              <td>{$info['roomtype']}</td>
+                            </tr>
+                            <tr>
+                              <td>{C('table.total')}：</td>
+                              <td>{$info['shoufei']}元</td>
+                            </tr>
+<!--                             <tr>
+                              <td>赠送积分：</td>
+                              <td>{$info.point}</td>
+                            </tr>   -->                  
+                            <tr>
+                                <td>{C('table.rennums')}：</td>
+                                <td>{$info['rennums']} 人</td>
+
+                            </tr>                    
+                            <tr>
+                                <td>{C('table.nums')}：</td>
+                                <td>{$info['nums']} 间</td>
+                            </tr>
+                            <tr>
+                                <td>预订时间：</td>
+                                <td>{$info['addtime']|date_format:"Y-m-d"}</td>
+                                <td>订单来源：</td>
+                                <td>
+                                    {foreach from=C('order.from') item=vv key=kk}{if $info.from==$kk}{$vv}{/if}{/foreach}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>入住时间：</td>
+                                <td>{$info['ruzhudate']|date_format:'%Y-%m-%d'}</td>
+                                <td>离店时间：</td>
+                                <td>{$info['lidiandate']|date_format:'%Y-%m-%d'}</td>
+                            </tr>
+                            <tr>
+                                <td>{C('table.linkman')}：</td>
+                                <td>{$info['linkman']}</td>
+                                <td>{C('table.telephone')}：</td>
+                                <td>{$info['telephone']}</td>
+                            </tr>
+                            <tr>
+                                <td>{C('table.kename')}：</td>
+                                <td colspan="3">{$info['kename']}</td>
+                            </tr>                            
+                            <tr>
+                                <td>其它要求：</td>
+                                <td colspan="3">{$info['beizhu']}</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid #ddd;">订单状态：</td>
+                                <td style="border-bottom: 1px solid #ddd;" colspan="3">
+                                    <span class="am-fl order-status" style="padding: 0.2em 1em;background: {$LANG['color'][$info['status']]}">
+                                    {$LANG['status'][$info['status']]}
+                                    </span>
+                                    {if $info['status'] lte 4 }
+                                        <a href="javascript:docancel({$info['orderid']});" ><span class="am-fl order-status" style="margin-left:10px;padding: 0.2em 1em;background-color:#f37b1d;">
+                                        取消订单
+                                    </span></a>
+                                    {/if}
+                                    {if $info['status']==3}
+                                    <a href="__ROOT__/index.php/Pay/index/id/{$info['addtime']}{$info.orderid}" class="am-btn am-btn-warning am-fl" style="margin-left:40px;padding: 0.2em 1em;"><i class="am-icon-shopping-cart" style="margin-right:5px;"></i>去支付</a>
+                                    {/if}
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    {else} 操作错误 {/if}
+                </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function docancel(id, wid) {
+        $.get('__APP__/Member/docancel/tid/1/', {
+            oid: id
+        }, function(d) {
+            eval('data=' + d);
+            alert(data.msg);
+            if (data.status == 1) {
+                location.reload();
+            }
+        })
+    }
+    </script>
+{include file="../Common/footer.html"}

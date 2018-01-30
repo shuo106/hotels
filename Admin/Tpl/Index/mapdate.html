@@ -1,0 +1,69 @@
+{
+  "tooltip": {
+    "trigger": "item"
+  },
+  "setTheme": {
+    "theme": "macarons"
+  },
+  "legend": {
+  	"show": false,
+    "orient": "vertical",
+    "x": "left",
+    "data": [
+      "客流数量"
+    ]
+  },
+  "dataRange": {
+    "min": 0,
+    "max": 10,
+    "x": "left",
+    "y": "top",
+    "text": [
+      "高",
+      "低"
+    ],
+    "calculable": true
+  },
+  "toolbox": {
+    "show": true,
+    "orient": "horizontal",
+    "x": "left",
+    "y": "bottom",
+    "feature": {
+      "mark": {
+        "show": false
+      },
+      "dataView": {
+        "show": true,
+        "readOnly": false
+      },
+      "restore": {
+        "show": false
+      },
+      "saveAsImage": {
+        "show": true
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "客流数量",
+      "type": "map",
+      "mapType": "china",
+      "roam": false,
+      "itemStyle": {
+        "normal": {
+          "label": {
+            "show": true
+          }
+        },
+        "emphasis": {
+          "label": {
+            "show": true
+          }
+        }
+      },
+      "data": {$data}
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<style type="text/css">
+	label.control-label {
+		width: 80px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Subway/edit" method="post" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$subway['id']}" />
+		<input type="hidden" name="city" value="{$smarty.get.city}" />
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="j_custom_number" class="control-label x85">
+								地铁线路：
+							</label>
+						<input type="text" name="ditie" id="j_custom_title" value="{$subway.ditie}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="j_custom_number" class="control-label x85">
+								地铁站名：
+						</label>
+						<input type="text" name="zhanpai" id="j_custom_title" value="{$subway.zhanpai}">
+					</td>
+				</tr>								
+			</tbody>
+		</table>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 80px;float: left;">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>
+</form>

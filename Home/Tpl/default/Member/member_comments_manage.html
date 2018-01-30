@@ -1,0 +1,52 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+      <div class="order">
+			{include file="./member_menu.html"}
+            <div class="wddpjl-r fr">
+                <div class="myorder">
+                <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>我的点评</h3>
+                </div>
+                <div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3">
+                            <ul class="am-comments-list admin-content-comment">
+                            {if $row} {foreach from=$row item=v}
+                                <li class="am-comment">
+                                    <img src="{if $v['head']}__ROOT__{$v['head']}{else}__PUBLIC__/assets/i/couple.jpg{/if}" alt="" class="am-comment-avatar" width="48" height="48">
+                                        <div class="am-comment-main">
+                                            <header class="am-comment-hd">
+                                                <div class="am-comment-meta">
+                                                     <span class="am-fl">{$v['username']}  评论 {$v['hotelname']} 
+                                                        <span class="am-badge am-badge-success" style="font-size:12px; line-height: 18px;">{$v['label']}</span>
+                                                        {if $v['status'] == 2}
+                                                      <span class="am-badge am-badge-success" style="font-size:12px; line-height: 18px;">已审核</span>
+                                                      {else}
+                                                      <span class="am-badge am-badge-warning" style="font-size:12px; line-height: 18px;">未审核</span>
+                                                      {/if}
+                                                    </span>
+                                                    <time class="am-fr">{$v['addtime']|date_format:'%Y-%m-%d %H:%M:%S'}</time>
+                                                </div>
+                                            </header>
+                                            <div class="am-comment-bd">
+                                            	<img src="__ROOT__{$v.src|default:'/Public/images/zanwu.gif'}" width="80" height="60" class="am-fr"/>
+                                                <p style="line-height:30px">点评内容：{$v['content']}</p>
+                                                <p style="line-height:30px">{if $v.thumb}
+                                                    <ul class="comment_pl" style="margin-left:62px">
+                                                    {foreach from=$v.thumb item=vo}
+                                                        <li style="width: 98px !important;">
+                                                            <img src="__ROOT__{$vo}" data-popup width="93px" height="70px">
+                                                        </li>
+                                                    {/foreach}
+                                    </ul>
+                                                    </p>{/if}
+                                                <p style="line-height:30px">
+                                                    <span style="color:#659a3e; font-weight:bold;">酒店回复：{$v['reply']}</span></p>
+                                            </div>
+                                        </div>
+                                    </li>
+                              {/foreach} {else} <center>
+                    <img src="__PUBLIC__/assets/images/dianping.png" ></center> {/if}
+							</ul>
+                        </div>
+            </div>
+            <div class="informationListPage" style="margin-top:20px;">{$page}</div>
+       </div>
+{include file="../Common/footer.html"}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>提现记录</title>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css"></head>
+  <style type="text/css">
+   .am-table{  font-size:12px;}
+   .pages{ font-size:12px; }
+  </style>
+<body>
+  <!-- Header -->
+  <header data-am-widget="header"
+          class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="javascript:history.back();" class=""> <i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+      </a>
+    </div>
+    <h1 class="am-header-title">提现记录</h1>
+    <div class="am-header-right am-header-nav">
+      <a href="__ROOT__/Wechat/index/wechatid/{$smarty.get.wechatid}" class=""> <i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+      </a>
+    </div>
+  </header>
+  <!-- Slider -->
+  {if $list}
+  <table class="am-table" style="margin-bottom: 0rem;">
+      
+    <thead>
+        <tr>
+            <th>提现ID&nbsp;&nbsp;&nbsp;(<a href="__ROOT__/Wechat/tixian">我要提现</a>)</th>
+            <th>积分变化</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach from=$list item=v}
+        <tr>
+        <td> <a href="__ROOT__/Wechat/tixiandetail/id/{$v.id}">{$v.txdate}{$v['id']}</a></td>
+            <td>       
+                <span style="color:red">{$v.txjine}</span>
+            </td>
+        </tr>
+        {/foreach}
+    </tbody>
+    
+</table>
+{else}
+<table class="am-table" style="margin-bottom: 0rem;">
+      
+    <thead>
+        <tr>
+            <th>提现ID&nbsp;&nbsp;&nbsp;(<a href="__ROOT__/Wechat/tixian">我要提现</a>)</th>
+            <th>积分变化</th>
+        </tr>
+    </thead>
+</table>
+    <div class="sucesOrder" style="text-align:center; line-height:40px;">暂无</div>
+    {/if}
+  <div class="pages"  style="margin-top: 5px;">{$page} </div>
+</body>
+</html>

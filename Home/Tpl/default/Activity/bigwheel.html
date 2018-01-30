@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>幸运大转盘</title>
+<!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/wechat/css/main.css" /> -->
+<style type="text/css">
+.demo{ width:417px; height:417px; position:relative; margin:50px auto }
+#disk{ width:417px; height:417px; background:url(__PUBLIC__/wechat/images/disk.jpg) no-repeat }
+#start{ width:163px; height:320px; position:absolute; top:46px; left:130px; }
+#start img{ cursor:pointer }
+</style>
+<script type="text/javascript" src="__PUBLIC__/wechat/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/wechat/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="__PUBLIC__/wechat/js/jquery.easing.min.js"></script>
+<script type="text/javascript">
+/*$(function(){
+	$("#startbtn").rotate({
+		bind:{
+			click:function(){
+				var a = Math.floor(Math.random() * 360);
+				 $(this).rotate({
+					 	duration:3000,
+					 	angle: 0, 
+            			animateTo:1440+a,
+						easing: $.easing.easeOutSine,
+						callback: function(){
+							alert('中奖了！');
+						}
+				 });
+			}
+		}
+	});
+});*/
+$(function(){ 
+     $("#startbtn").click(function(){ 
+        lottery(); 
+    }); 
+}); 
+function lottery(){ 
+    $.ajax({ 
+        type: 'POST', 
+        url: '__APP__/Activity/dobigwheel/wechatid/{$smarty.get.wechatid}', 
+        dataType: 'json', 
+        cache: false, 
+        error: function(){ 
+            alert('出错了！'); 
+            return false; 
+        }, 
+        success:function(json){ 
+            $("#startbtn").unbind('click').css("cursor","default"); 
+            var a = json.angle; //角度 
+            var p = json.prize; //奖项  
+            var i = json.id; //奖项
+			if(a!=0){
+				t=3000;
+			}else{
+				t=0;
+			}
+            $("#startbtn").rotate({ 
+                duration:t, //转动时间 
+                angle: 0, 
+                animateTo:1800+a, //转动角度 
+                easing: $.easing.easeOutSine, 
+                callback: function(){ 
+                   if(i< 7){
+						alert('恭喜你，中得'+p);
+					}else if(i==7){
+						alert('谢谢您的参与，下次再接再厉');
+					}else{
+						alert('您已经参加过当前活动');
+					}
+					window.location.reload();
+                } 
+            }); 
+        } 
+    }); 
+} 
+</script>
+</head>
+<body>
+<div id="main">
+	<div class="msg"></div>
+   <div class="demo">
+        <div id="disk"></div>
+        <div id="start"><img src="__PUBLIC__/wechat/images/start.png" id="startbtn"></div>
+   </div>
+</div>
+</body>
+</html>

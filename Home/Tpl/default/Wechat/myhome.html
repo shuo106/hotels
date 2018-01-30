@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>我的帐户</title>
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/font-awesome.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<script src="__PUBLIC__/wap/js/custom.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	dropDown();
+});
+function doEdit(){
+	var e='<a href="javascript:doCancel();" class="option">取消</a><a href="javascript:doSave();" class="option">保存</a>';
+	$("#edit").html(e);
+	$("#info").hide();
+	$("#editinfo").show();
+}
+function editMM(){
+	var e='<a href="javascript:doCancel2();" class="option">取消</a><a href="javascript:doSaveMM();" class="option">保存</a>';
+	$("#editmm").html(e);
+	$("#info3").show();
+}
+function doCancel(){
+	var e='<a href="javascript:doEdit();" class="option">编辑</a>';
+	$("#edit").html(e);
+	$("#info").show();
+	$("#editinfo").hide();
+}
+function doCancel2(){
+	var e='<a href="javascript:editMM();" class="option">修改密码</a>';
+	$("#editmm").html(e);
+	$("#info3").hide();
+}
+function doSave(){
+	$("#info2").submit();
+}
+function doSaveMM(){
+	$("#info3").submit();
+}
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__ROOT__/Wechat/myhome";
+		}
+	});
+	return false;
+})
+</script>
+</head>
+<body>
+	<div id="preloader">
+		<div id="status">
+			<p class="center-text">网页内容加载中...</p>
+		</div>
+	</div>
+	<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>我的资料<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+	<div class="wrapBox">
+		<div class="main">
+			<div class="members">
+				<div class="hd"> <span id="edit"><a href="javascript:doEdit();" class="option">编辑</a></span>个人信息</div>
+				<ul class="nav infoShow clearfix" id="info">
+					<li><label>{$MEMBERC['id']}</label>{$uinfo['id']}</li>
+					<li><label>{$MEMBERC['username']}</label>{$uinfo['username']}</li>
+					<li><label>{$MEMBERC['truename']}</label>{$uinfo['truename']}</li>
+                    <li><label>{$MEMBERC['point']}</label>{$uinfo['point']}</li>
+                    <li><label>{$MEMBERC['qq']}</label>{$uinfo['qq']}</li>
+					<li><label>{$MEMBERC['telephone']}</label>{$uinfo['telephone']}</li>
+					<li><label>{$MEMBERC['email']}</label>{$uinfo['email']}</li>					
+					<li><label>{$MEMBERC['address']}</label>{$uinfo['address']}</li>
+				</ul>
+				<ul class="nav infoShow clearfix" id="editinfo" style="display:none;">
+				<form action="__ROOT__/Wechat/upInfo" method="post" id="info2" >
+					<li><label>{$MEMBERC['id']}</label>{$uinfo['id']}</li>
+					<li><label>{$MEMBERC['username']}</label> {$uinfo['username']}</li>
+					<li><label>{$MEMBERC['truename']}</label> <input type="text" name="truename" value="{$uinfo['truename']}"/></li>
+                     <li><label>{$MEMBERC['qq']}</label> <input type="text" name="qq" value="{$uinfo['qq']}" onkeyup="value=value.replace(/[^\d]/g,'')"   maxlength=11/></li>
+					<li><label>{$MEMBERC['telephone']}</label> <input type="text" name="telephone" value="{$uinfo['telephone']}" onkeyup="value=value.replace(/[^\d]/g,'')"   maxlength=11/></li>
+					<li><label>{$MEMBERC['email']}</label> <input type="text" name="email" value="{$uinfo['email']}"/></li>
+				    <li><label>{$MEMBERC['address']}</label> <input type="text" name="address" value="{$uinfo['address']}"/></li>
+				</form>
+				</ul>
+                <!-- <div class="hd" style="margin-top:10px;"> <span id="editmm"><a href="javascript:editMM();" class="option">修改密码</a></span>密码管理</div>
+                <ul class="nav infoShow clearfix">           
+                				<form action="__APP__/Wap/upPassW" method="post" id="info3" style="display:none;">
+                					<li><label>旧&nbsp;密&nbsp;码</label> <input type="text" name="password" /></li>
+                					<li><label>新&nbsp;密&nbsp;码</label> <input type="text" name="password2" /></li>
+                					<li><label>再次输入</label> <input type="text" name="password3" /></li>
+                				</form>
+                </ul> -->
+                <div style="margin-top: 10px;"><a href="javascript:doSave();" class="buttonWrap button button-red buttonLong option">保存</a></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

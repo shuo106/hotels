@@ -1,0 +1,98 @@
+<style type="text/css">
+	label.control-label {
+		width: 130px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Basic/email" method="post" data-toggle="validate" data-alertmsg="false">
+			<input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="btn_submit" value="true">
+			<table class="table-bordered table-condensed table-hover" width="100%">
+				<tbody>
+					<tr>
+						<td colspan="4">
+							<label for="email_smtp" class="control-label x85" style="width: 130px;" title="SMTP服务器，只有正确设置才能使用发邮件功能">
+								邮箱SMTP：
+							</label>
+							<input type="text" name="smtp" id="email_smtp" value="{$smtp}" size="60">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="email_user" class="control-label x85" style="width: 130px;" title="SMTP服务器的用户帐号，只有正确设置才能使用发邮件功能">
+								邮箱帐号：
+							</label>
+							<input type="text" name="user" id="email_user" value="{$user}" data-rule="email" size="60">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="email_password" class="control-label x85" style="width: 130px;">
+								邮箱密码：
+							</label>
+							<input type="password" name="password" id="email_password" value="{$password}" data-rule="required" size="60">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="email_port" class="control-label x85" title="默认为25，一般不需要改" style="width: 130px;">
+								SMTP端口：
+							</label>
+							<input type="text" name="port" id="email_port" value="25" data-rule="required" size="60">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="j_custom_copyright" class="control-label x85" style="width: 130px;">
+								测试邮箱：
+							</label>
+							<input type="text" id="email" name="copyright" id="j_custom_keywords" value="" data-rule="email" size="60">
+							<button type="button" class="btn-default" onclick="testemail()">
+								发送测试邮件
+							</button>
+							<a href="__APP__/Email/email_log" class="btn btn-default" data-toggle="navtab">查看邮件发送记录</a>
+						</td>
+					</tr>
+					<script type="text/javascript">
+						function testemail() {
+							if ($('#email').isValid()) {
+								var email = $('#email').val();
+								$.post('__APP__/Email/sendTestEmail',{ email:email},function(data){
+									alert(data)
+								})
+							}else{
+								$(this).alertmsg('info','请先输入正确的邮箱地址')
+							}
+						}
+					</script>
+					<tr>
+						<td colspan="4">
+							<label for="j_custom_copyright" class="control-label x85" style="width: 130px;">
+								邮件内是否带签名：
+							</label>
+							<input type="radio" name="status" id="sign_yes" data-toggle="icheck" checked value="0" data-rule="checked" data-label="是&nbsp;&nbsp;">
+							<input type="radio" name="status" id="sign_no" data-toggle="icheck" value="1" data-rule="checked" data-label="否&nbsp;&nbsp;">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="email_sign" class="control-label x85" style="width: 130px;">
+								邮件签名：
+							</label>
+							<textarea name="content" data-toggle="autoheight" rows="3" cols="60">{$content}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+                        <div class="page_but" style="margin-left:130px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+</div>
+</form>

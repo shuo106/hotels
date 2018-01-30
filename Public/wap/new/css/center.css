@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+.hyzh{ height:210px; background:url(../images/bg1.jpg) repeat-x bottom center; border-bottom:5px solid #eeeff3;}
+.hyzh ul{ height:90px; border-bottom:1px solid #fff;  padding:0 10px; margin: 0 0 0rem 0; margin-top:0px; margin-left:0px; padding-left:0px; }
+.hyzh ul li:nth-child(1){ width:20%; float:left;text-align:center;}
+.hyzh ul li:nth-child(1) img{  width:65px; height:65px; border-radius:50%; margin-top:10px}
+.hyzh ul li:nth-child(2){ width:65% !important; float:left; text-align:center;}
+.hyzh ul li:nth-child(3){ width:5%; float: right;text-align:center;}
+.hyzh ul li {margin: 0 0 0rem 0; margin-top:0px; margin-left:0px; padding-left:0px;}
+.hyzh ul li a{line-height:90px; font-size:16px; color:#fff;text-align: left; padding-left: 9px; }
+.hyzh ul li a span{ font-family:"宋体"; font-weight:700;}
+.hyzh dl{ clear:both; padding:15px 10px; height:120px; margin: 0 0 0rem 0; margin-top:0px; margin-left:0px; padding-left:0px;}
+.hyzh dl dd {width:33.3333%; text-align:center; float:left; margin: 0 0 0rem 0; margin-top:0px; margin-left:0px; padding-left:0px;}
+.hyzh dl dd a{ color:#fff; line-height:25px; text-align: center; display: inline-block;}
+.hyzh dl dd a p {margin: 0 0 0rem 0; margin-top:0px;}
+.listc{ clear:both; }
+.list-01{ border-bottom:20px solid #eeeff3;}
+.list-01 ul  {  height:50px; padding:0 15px; border-bottom:1px solid #ddd;  margin: 0 0 0rem 0; margin-top:0px; margin-left:0px;}
+.list-01 ul li{ width:50%; height:50px; float:left;margin: 0 0 0rem 0;margin-top:0px; margin-left:0px; padding-left:0px;}
+.list-01 ul li a{ line-height:50px; font-size:14px; color:#333;}
+.list-01 ul li i{ position:relative; top:14px;float: left; padding-right:10px;}
+.list-01 ul li i img { width:24px; height:24px;}
+.list-01 ul .on a{ float:right;}
+.list-01 ul .on a h3{ float:left; height:25px;background:#00bbfe; border-radius:30px; padding:0 20px; color:#fff; line-height:30px; margin-top:12px; margin: 0 0 0rem 0; }
+.list-01 ul .on a span{ float:right; padding-left:20px; font-family:"宋体"; font-weight:700; }
+.list-01 ul .on a h4{ float:left; font-size:12px; color:#999;  margin: 0 0 0rem 0; margin-top:0px; margin-left:0px; padding-left:0px;}
+.list-01 .iconum { float:right; line-height:24px; padding:0px 5px; border-radius:5px; background-color: #0e90d2 ; color:#FFF; margin-top:12px;}

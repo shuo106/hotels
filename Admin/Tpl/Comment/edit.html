@@ -1,0 +1,92 @@
+<script type="text/javascript">
+        $.CurrentNavtab.find("[data-popup]").click(function(){
+            var html='<div><img style="width:100%;height:100%;" src="'+$(this).attr('src')+'"></div>';
+            $(html).popup({
+                width:800,
+                height:600
+            }).show();
+        }); 
+</script>
+<style type="text/css">
+  .dz-thumb {
+    height: 75px;
+    width: 100px;
+}
+</style>
+<div class="bjui-pageContent">
+  <form action="__APP__/Comment/update" method="post" data-toggle="validate">
+    <input type="hidden" name="id" value="{$comment['id']}">
+    <div>
+      <table class="table-bordered table-condensed table-hover" width="100%">
+        <tbody>
+          <tr>
+            <td>
+              <label class="control-label x85">点评客人：</label>
+              {$comment.username}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label  class="control-label x85">点评酒店：</label>
+              {$comment.hotelname}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label  class="control-label x85">入住客房：</label>
+              {$comment.title}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label  class="control-label x85">评价等级：</label>
+              {$comment.label}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label  class="control-label x85">满意程度：</label>
+              {$comment.unit}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label  class="control-label x85">客人点评：</label>
+              {$comment.content}
+            </td>
+          </tr>
+          {if $comment.thumb}
+          <tr>
+            <td>
+              <label  class="control-label x85">点评图片：</label>
+                          {foreach from=$comment.thumb item=vo}
+                          <img src="__ROOT__{$vo}" data-popup class="dz-thumb">
+                          {/foreach}
+            </td>
+          </tr>         
+          {/if}
+          <tr>
+            <td>
+              <label for="reply" class="control-label x85">酒店回复：</label>
+              {if $smarty.get.see}
+              {$comment['reply']}
+              {else}
+              <textarea name="reply" id="reply" data-toggle="autoHeight" cols="50" rows="3">{$comment['reply']}</textarea>
+              {/if}
+            </td>
+          </tr>
+          {if !$smarty.get.see}
+          <tr>
+            <td>
+              <ul style="margin-left:90px;">
+                <button type="submit" class="btn-default" data-icon="save">保存</button>
+                <button type="button" class="btn-close" data-icon="close">关闭</button>
+                </ul>
+            </td>
+          </tr>
+          {/if}
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>

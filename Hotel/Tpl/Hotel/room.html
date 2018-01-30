@@ -1,0 +1,144 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-form select {
+    max-width: 200px;
+    float: left;
+    margin-right: 5px;
+}
+.zhong {
+    line-height: 30px;
+}
+#room-form input[type="text"] {
+    width: 20%;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg"><empty name="info.id">房间发布<else/>房间编辑</empty></strong> / <small>Room</small>
+                </div>
+            </div>
+            <hr>
+            <form method="post"  id="room-form" class="am-form ajaxform" action="__APP__/Hotel/adds" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{$id}" />
+                <table  class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td width="10%">房型名称：</td>
+                        <td>
+                            <input type="text" maxlength="100" name="roomtype" value="{$roomtype}" class="am-fl">
+                            <font color="red">*</font> 如标准间</td>
+                    </tr>
+                    <tr>
+                        <td> 床&nbsp&nbsp&nbsp&nbsp 型 ：</td>
+                        <td>
+                            <volist name="custom" id="vo">
+                                <if condition="$vo.tid == 1">
+                                    <input type="radio" name="fjchuang" <if condition="$fjchuang == $vo['name']">checked="checked"</if> value="{$vo.name}" /> {$vo.name}
+                                </if>
+                            </volist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 早&nbsp&nbsp&nbsp&nbsp 餐 ：</td>
+                        <td>
+                            <volist name="custom" id="vo">
+                                <if condition="$vo.tid == 2">
+                                    <input type="radio" name="zaocan" <if condition="$zaocan == $vo['name']">checked="checked"</if> value="{$vo.name}" /> {$vo.name}
+                                </if>
+                            </volist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>上&nbsp&nbsp&nbsp&nbsp 网 ：</td>
+                        <td colspan="3" class="tablerow">
+                            <volist name="custom" id="vo">
+                                <if condition="$vo.tid == 3">
+                                    <input type="radio" name="swang" <if condition="$swang == $vo['name']">checked="checked"</if> value="{$vo.name}" /> {$vo.name}
+                                </if>
+                            </volist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>支付方式 ：</td>
+                        <td colspan="3" class="tablerow">
+                            <input type="radio" name="paytype" <if condition="$paytype == 1"> checked="checked" </if> value="1"> 在线支付
+                            <input type="radio" name="paytype" <if condition="$paytype == 0"> checked="checked" </if> value="0"> 前台支付
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>门市价格：</td>
+                        <td>
+                            <input type="text" name="menshijia" value="{$menshijia}" class="am-fl" size="10" style="width:140px"> 元</td>
+                    </tr>
+<!--                     <tr>
+                        <td>赠送积分：</td>
+                        <td>
+                            <input type="text" name="returnmoney" value="{$returnmoney}" class="input_table" size="10" style="width:140px"> </td>
+                    </tr> -->
+                    <tr>
+                        <td>房间图片:</td>
+                        <td>
+                            <div style="height:20px;margin-top: -7px;">
+                                <ul style="list-style-type:none;padding-left: 0px;">
+                                    <li style="float:left; height: 20px;"><input type="file" id="uploadimg" data-for="#img" name="thumb1" style="border:0;width: 152px;"></li>
+                                    <li style="float:left; height: 20px;"><span style="color:red;font-size:12px; position: relative;top:-4px; margin-left:10px;">请上传不低于400*300像素,4:3比例的图片</span></li>
+                                </ul> 
+                            </div>
+                            <div style="clear:both;"></div>
+                            <if condition="$thumb">
+                                <div id="imgss"  style="display:block;">
+                                <else /> 
+                                <div id="imgss"  style="display:none;">
+                            </if>
+                                <img class="am-img-circle am-img-thumbnail" id="img" src="__ROOT__/{$thumb}" alt=""  style='width:160px; height:120px;margin-top:7px;' onclick="ready();"/>  
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>详细说明：</td>
+                        <td>
+                            <textarea class="bj_container" name="content" style="width: 70%">{$content}</textarea>
+                        </td>
+                    </tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="btn_submit" value=" 立刻发布 " class="am-btn am-btn-primary">
+                    </td>                    
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/kindeditor-min.js"></script>
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/lang/zh_CN.js"></script>
+                    <script>
+                    var editor;
+                    KindEditor.ready(function(K) {
+                        editor = K.create('textarea[name="content"]', {
+                            allowFileManager: true,
+                            afterBlur: function() {
+                                this.sync();
+                            },
+                            items: [
+                                'undo', 'redo', '|', 'fontname', 'fontsize', '|', 'cut', 'copy', 'paste',
+                                'plainpaste', 'wordpaste', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                                'removeformat', 'table', 'hr', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                                'insertunorderedlist', '|', 'image', 'link', 'baidumap'
+                            ]
+                        });
+                    });
+                    </script>
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+</div>
+<script type="text/javascript">
+    function callback(data){
+        alert(data.info);
+        if(data.status==1){
+            window.location.href='__APP__/Hotel/roomlist';
+        }
+    }
+</script>
+<include file="Tpl/public/bottom.html" />

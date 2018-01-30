@@ -1,0 +1,77 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+</style>
+<script type="text/javascript">
+$(function() {
+        $.CurrentNavtab.find('#btn_submit').click(function() {
+            $('#j_custom_form').bjuiajax('ajaxForm', {
+                confirmMsg: '确认提交吗？',
+                callback: function(data) {
+                    if (data.statusCode == 200) {
+                        $(this).alertmsg('ok', data.message);
+                        $(this).navtab({
+                            id: 'Accounts-lists',
+                            url: data.forward,
+                            'title': '分类列表'
+                        });
+                    }
+                    if (data.statusCode == 300) {
+                        $(this).alertmsg('error', data.message)
+                    }
+                },
+                reloadNavtab: true,
+            })
+        })
+    })
+</script>
+<div class="bjui-pageContent">
+    <form action="__APP__/Accounts/saveaccounts" method="post" id="j_custom_form" data-toggle="validate" data-alertmsg="false">
+        <input type="hidden" name="id" value="{$info.hotelid}">
+        <input type="hidden" name="hotelname" value="{$info.hotelname}">
+        <input type="hidden" name="btn_submit" value="true">
+        <table class="table table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="j_custom_name" class="control-label x85">
+                            酒店名称：
+                        </label>
+                        <input type="text" name="name" id="j_custom_title" value="{$info.hotelname}" data-rule="required" style="width: 200px;" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="j_custom_keywords" class="control-label x85">
+                            开始时间：
+                        </label>
+                        <input type="text" name="start" id="order_date" data-toggle="datepicker" data-rule="date" size="12">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_note" class="control-label x85">
+                            结束时间：
+                        </label>
+                        <input type="text" name="end" id="order_date" data-toggle="datepicker" data-rule="date" size="12">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="page_but" style="margin-left:130px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</form>

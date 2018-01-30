@@ -1,0 +1,60 @@
+{
+  "tooltip": {
+    "trigger": "axis"
+  },
+  "grid": {
+      "width" : "85%"
+  },
+  "legend": {
+    "orient": "verticcal",
+    "x": "right",
+    "y": "5%",
+    "data": [
+      {$theme}
+    ],
+    "selected": {$themeSelected}
+  },
+  "toolbox": {
+    "show": true,
+    "orient": "horizontal",
+    "x": "center",
+    "y": "top",
+    "feature": {
+      "mark": {
+        "show": false
+      },
+      "dataView": {
+        "show": true,
+        "readOnly": false
+      },
+      "magicType": {
+        "show": false,
+        "type": [
+          "line"
+        ]
+      },
+      "restore": {
+        "show": false
+      },
+      "saveAsImage": {
+        "show": true
+      }
+    }
+  },
+  "calculable": true,
+  "xAxis": [
+    {
+      "type": "category",
+      "data": {$dayHeader}
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "splitArea": {
+        "show": true
+      }
+    }
+  ],
+  "series": {$monthDataArr}
+}

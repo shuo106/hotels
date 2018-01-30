@@ -1,0 +1,83 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">订单详情</strong> / <small>Order</small></div>
+            </div>
+            <hr>        
+        <form method="post"  action="__APP__/Accounts/update_od/" class="ajaxform">
+            <input type="hidden" name="id" value="{$info.id}">
+            <table class="am-table am-margin-left  am-table-hover">
+                <tr>
+                    <td>
+                        订单编号：
+                    </td>
+                    <td>{$info.yd_addtime}{$info.oid}</td>
+                </tr>
+                <tr>
+                    <td style="width:100px;">预定房间：</td>
+                    <td>{$info.roomname}</td>
+                </tr>
+                <tr>
+                	<td>预订姓名：</td>
+                    <td>{$info['yd_name']}</td>
+                </tr>
+                <tr>
+                    <td>入住时间：</td>
+                    <td><php>echo date('Y-m-d',$info['yd_start']);</php></td>
+                </tr>
+                <tr>
+					<td>离店时间：</td>
+                    <td><php>echo date('Y-m-d',$info['yd_end']);</php> </td>
+                </tr>
+                <tr>
+                    <td>预订数量：</td>
+                    <td>{$info['nums']} 间</td>
+                </tr>
+                <tr>
+                    <td>总&nbsp;金&nbsp;额：</td>
+                    <td>{$info['total']} 元</td>
+                </tr>
+                <tr>
+                    <td>订单来源：</td>
+                    <td>
+                        <php>
+                            if($info['yd_from']==1)echo '手机';
+                            if($info['yd_from']==2)echo '微信';
+                            if($info['yd_from']==3)echo 'APP';
+                            if($info['yd_from']==5)echo '网站';
+                        </php>
+                    </td>
+                </tr>
+                <tr>
+                    <td>订单状态：</td>
+                    <td>
+                    	<volist name="lang.status" id="vo">
+                            <label class="am-radio am-fl am-margin-xs" style="margin-top:0px;">
+                            <input data-am-ucheck name="status" value="{$key}" type="radio" <php>if($key==$info['status'])echo 'checked="checked"'; </php> >{$vo}
+                            </label>
+                        </volist>
+                    </td>
+                </tr>
+                <tr>
+                	<td></td>
+                	<td>
+                	<input name="submit" type="submit" class="am-btn am-btn-primary am-btn-xs" value="确认操作">
+                	</td>
+                </tr>
+            </table>
+        </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<script type="text/javascript">
+	function callback(rs){
+		alert(rs.msg);
+	}
+</script>
+<include file="Tpl/public/bottom.html" />

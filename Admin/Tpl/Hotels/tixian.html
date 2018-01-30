@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>省市管理</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<script type="text/javascript">
+		function shenhe(id){
+		if(confirm("是否确定通过审核?")){
+			$.get('__APP__/Hotels/tixians',{ id : id },function(e){
+				if(e!=0){
+					alert('审核成功！');
+					location.reload(); 
+				}
+			});
+		}
+	}
+</script>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>提现管理</em></h4>
+    <table border="0" class="table_border">
+      <tr>
+        <th colspan="7" align="center" class="table_border_title">提现管理</th>
+      </tr>
+      <tr onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td width="13%" align="center" class="world_Bold">银行名称</td>
+        <td width="20%" align="center" class="world_Bold">银行账号</td>
+		<td width="10%" align="center" class="world_Bold">申请用户</td>
+        <td width="10%" align="center" class="world_Bold">开户名</td>
+        <td width="8%" align="center" class="world_Bold">金额</td>
+        <td width="11%" align="center" class="world_Bold">申请日期</td>
+        <td width="8%" align="center" class="world_Bold">操作</td>
+      </tr>
+	  {section loop=$tixian name=item}
+      <tr class="a_hover" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td align="center">{$tixian[item].txhang}</td>
+		<td>{$tixian[item].txhangnum}</td>
+		<td align="center">{$tixian[item].username}</td>
+		<td align="center">{$tixian[item].txname}</td>
+        <td align="center">{$tixian[item].txjine}</td>
+        <td align="center">{$tixian[item].txdate}</td>
+        <td align="center">
+		{if $tixian[item]['status'] eq 0}<a href="javascript:shenhe({$tixian[item].txid});">审核</a>{else}已提现{/if}|
+		<a href="__APP__/Hotels/txdel/id/{$tixian[item].txid}">删除</a></td>
+      </tr>
+      {/section}
+	  </table>
+    <table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center"><div class="pages">{$page}</div></td>
+      </tr>
+    </table>
+</div>
+</body>
+</html>

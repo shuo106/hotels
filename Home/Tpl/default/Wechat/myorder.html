@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>酒店订单</title>
+    <link href="__PUBLIC__/wap/new/css/index.css" rel="stylesheet" type="text/css" />
+    <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+    function docancel(id, wid) {
+        $.get('__ROOT__/Wechat/docancel/tid/1/', {
+            id: id
+        }, function(d) {
+            eval('data=' + d);
+            alert(data.msg);
+            if (data.status == 1) {
+                location.reload();
+            }
+        })
+    }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <a href="javascript:history.back();" style="float:left"><img src="__PUBLIC__/wechat/images/r.png" /></a>酒店订单
+        <a href="__ROOT__/Wechat/index" style="float:right"><img src="__PUBLIC__/wechat/images/l.png" /></a>
+    </div>
+    {if $myorder} {foreach from=$myorder item=vo}
+    <div class="sucesOrder">
+        <dl>
+            <dt>{$vo['hotelname']}</dt>
+            <dd class="deco1">{$vo['city']} {$vo['city2']} {$vo['city3']}</dd>
+            <dd class="deco2">{date('Y-m-d',$vo['ruzhudate'])}到{date('Y-m-d',$vo['lidiandate'])}　共：{($vo['lidiandate']-$vo['ruzhudate'])/86400} 天 </dd>
+            <dd class="deco3"><span>{$vo['linkman']}</span>{$vo['roomtype']} {$vo['nums']}间　共<span class="trad_price"><b>{$vo['shoufei']}元</b></span></dd>
+        </dl>
+        <div class="deleOrder">
+        <p class="clearfix"><span class="trad">{$LANG['status'][$vo.status]}</span>
+		</p>
+            <a class="ckmyorder" href="__ROOT__/Wechat/orderdetail/id/{$vo['orderid']}">查看订单</a>
+            {if $vo['status'] eq 1||$vo['status'] eq 3||$vo['status'] eq 2||$vo['status'] eq 4}
+            <a href="javascript:docancel({$vo['orderid']});">取消订单</a>
+            {elseif $vo['status'] eq 5 || $vo['status'] eq 7}{if $vo.is_comment eq 1}<a style="color:red;">已点评</a>{else}<a href="__ROOT__/Wechat/comments/id/{$vo['orderid']}">我要点评</a>{/if}{/if}</div>
+    </div>
+    {/foreach} {else}
+    <div class="sucesOrder" style="text-align:center; line-height:40px;">
+        您还没有订单！！！
+    </div>
+    {/if}
+    <div class="pages">{$page}</div>
+</body>
+</html>

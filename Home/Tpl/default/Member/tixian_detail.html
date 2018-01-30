@@ -1,0 +1,77 @@
+{include file="../Common/header.html"}
+{include file="../Common/js.html"}
+<style type="text/css">
+.am-fl.order-status{  color:#FFFFFF;}
+</style>
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="order-r fr">
+        <div class="myorder">
+            <h3><i class="am-icon-th am-margin-left-sm am-text-primary"></i>提现详情</h3>
+        </div>
+        <div class="order-info">
+                    {if $info}
+                    <input type="hidden" name="orderid" value="{$info['orderid']}" />
+                    <table class="am-table">
+                        <tbody>
+                            <tr>
+<!-- 提现ID、申请用户、  提现银行、提现帐户、  开户姓名、身份证号、  提现金额、帐户余额、 申请日期、审核日期、  办理日期、会员手机、办理状态。 -->
+<!-- 提现ID、会员账号、提现银行、提现帐户、开户姓名、身份证号、会员手机、提现金额、帐户余额、申请日期、申请备注、审核日期、审核备注、办理日期、办理人员、办理备注、办理状态。 -->
+                                 <td>提现ID</td>
+                                 <td>{$info.tid}</td>
+                                 <td>会员账号</td>
+                                 <td>{$smarty.session.name}</td>
+                            </tr>
+                            <tr>
+                                 <td>提现银行</td>
+                                 <td>{$info.txhang}</td>
+                                 <td>提现帐户</td>
+                                 <td>{$info.txhangnum}</td>
+                            </tr>
+                            <tr>
+                                <td>开户姓名</td>
+                                 <td>{$info.txname}</td>
+                                 <td>身份证号</td>
+                                 <td>{$info.txshenfen}</td>
+                            </tr>
+                            <tr>
+                                 <td>会员手机</td>
+                                 <td>{$info.txmobile}</td>
+                                 <td>提现金额</td>
+                                 <td>{$info.txjine}</td>
+                            </tr>
+                            <tr>
+                                <td>账户余额</td>
+                                 <td>{$info.remainAmount}</td>
+                                 <td>申请日期</td>
+                                 <td>{$info['txdate']|date_format:"Y-m-d"}</td>
+                            </tr>
+                            <tr> 
+                                <td>申请备注</td>
+                                 <td>{$info['txbeizhu']}</td>
+                                 <td>审核日期</td>
+                                 <td>{$info['handleDate']|date_format:"Y-m-d"}</td>
+                            </tr>
+                            <tr> 
+                                <td>审核备注</td>
+                                 <td>{$info['beizhu']}</td>
+                                <td>办理日期</td>
+                                 <td>{if $info['banliDate']}{$info['banliDate']|date_format:"Y-m-d"}{/if}</td>
+                            </tr>
+                            <tr> 
+                                <td>办理人员</td>
+                                <td>{$info.banliren}</td>
+                                <td>办理备注</td>
+                                 <td>{$info['blbeizhu']}</td>
+                           </tr>
+                            <tr> 
+                                 <td>办理状态</td>
+                                 <td colspan="3">{$info.status}</td>
+                            </tr>
+                            </tbody>
+                    </table>
+                    {else} 操作错误 {/if}
+        </div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

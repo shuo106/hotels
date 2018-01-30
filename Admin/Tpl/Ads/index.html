@@ -1,0 +1,55 @@
+<div class="bjui-pageHeader">
+  <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Article/lists" method="get">
+  </form>
+    <div class="bjui-searchBar" style="margin-top: 3px;">
+  </div>
+</div>
+<div class="bjui-pageContent tableContent">
+  <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+    <thead>
+      <tr style="height:36px;line-height:36px;">
+        <!-- <th style="background:#1078C1;color:#fff;"  width="26">
+          <input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+        </th> -->
+        <th style="background:#1078C1;color:#fff;" >广告位名称</th>
+        <th style="background:#1078C1;color:#fff;" >尺寸（像素）</th>
+        <th style="background:#1078C1;color:#fff;" >状态</th>
+        <th style="background:#1078C1;color:#fff;" >操作
+        &nbsp;&nbsp;&nbsp;&nbsp;<a data-url="__APP__/Ads/edit" class="btn btn-green" data-toggle="dialog" data-id="roleedit-{$v.id}" data-title="添加广告位">新增</a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {foreach from=$place item=v key=k}
+      <tr data-id="{$k}">
+        <!-- <td>
+          <input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+        </td> -->
+        <td>{$v.placename}</td>
+        <td>{$v.width}×{$v.height}</td>
+        <td>{if $v.passed==1}开放{elseif $v.passed==0}锁定{else}未知{/if}</td>
+        <td>
+          <a data-url="__APP__/Ads/edit/id/{$v.placeid}" class="btn btn-green" data-toggle="dialog" data-title="广告位编辑-{$v.placename}">编辑</a>
+          <a href="__APP__/Ads/adslist/id/{$v.placeid}" class="btn btn-green" data-id="Ads-adslist" data-toggle="navtab">广告位列表</a>
+          <a href="__APP__/Ads/placedel/id/{$v.placeid}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+        </td>
+      </tr>
+      {/foreach}
+    </tbody>
+  </table>
+</div>
+<div class="bjui-pageFooter">
+  <!--<div class="pages">
+    <span>每页&nbsp;</span>
+    <div class="selectPagesize">
+      <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+        {foreach from=$pagesizes item=v}
+        <option value="{$v}">{$v}</option>
+        {/foreach}
+      </select>
+    </div>
+    <span>&nbsp;条，共 {$total} 条</span>
+  </div>
+  <div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+  </div>-->
+</div>

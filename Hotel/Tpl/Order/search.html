@@ -1,0 +1,44 @@
+<include file="Tpl/public/header.html" />
+<div id="container">
+  <include file="Tpl/public/menu.html" />
+  <div class="sideright">
+    <h3 class="title">首页>>当前位置</h3>
+    <h4><strong>订单管理</strong></h4>
+    <div class="Tabulation">
+     	<table border="1" width="80%" class="table_border">
+        <tr>
+          <td width="28" align="center" valign="middle" bgcolor="#F8F8F8"><input type="checkbox" name="checkbox" /></td>
+          <td width="85" align="center" valign="middle" bgcolor="#F8F8F8">订单号</td>
+          <td width="135" align="center" valign="middle" bgcolor="#F8F8F8">房型</td>
+          <td width="85" align="center" valign="middle" bgcolor="#F8F8F8">预订人</td>
+          <td width="85" align="center" valign="middle" bgcolor="#F8F8F8">预订人电话</td>
+          <td width="85" align="center" valign="middle" bgcolor="#F8F8F8">入住时间</td>
+          <td width="85" align="center" valign="middle" bgcolor="#F8F8F8">房价</td>
+          <td width="90" align="center" valign="middle" bgcolor="#F8F8F8">订单状态</td>
+          <td width="88" align="center" valign="middle" bgcolor="#F8F8F8">操作</td>
+        </tr>
+       <volist name="orders" id="vo">
+        <tr>
+          <td align="center" valign="middle" bgcolor="#F8F8F8"><input type="checkbox" name="checkbox" /></td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.order_no}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.fangtype}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.linkman}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.telephone}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.ruzhudate}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8">{$vo.shoufei}</td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8"><if condition="$vo.status eq 1"><a href="__APP__/Order/edit/id/{$vo.orderid}">已入住</a>
+          <elseif condition="$vo.status eq 2"/><a href="__APP__/Order/edit/id/{$vo.orderid}">已取消</a>
+          <elseif condition="$vo.status eq 3"/><a href="__APP__/Order/edit/id/{$vo.orderid}">已付款</a>
+          <elseif condition="$vo.status eq 4"/><a href="__APP__/Order/edit/id/{$vo.orderid}">待确认</a>
+          <else/>不知道
+          </if>
+          </td>
+          <td align="left" valign="middle" bgcolor="#F8F8F8"><a href="__APP__/Comment/del/id/{$vo.orderid}">删除</a></td>        
+        </tr>
+        </volist>           
+      </table>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<include file="Tpl/public/footer.html" />

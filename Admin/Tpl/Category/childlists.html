@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站栏目管理</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.form.js"></script>
+<script type="text/javascript">
+	  var locateUrl="__APP__/Cate/lvyounewslist";//操作成功后跳转的页面
+	  var piUrl="__APP__/Cate/pi";
+</script>
+<script src="__PUBLIC__/admin/js/common.js"></script>
+<script src="__PUBLIC__/admin/js/lvyounewslist.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+    <h4 class="tit">您当前的位置：首页>><em>网站栏目管理</em></h4>
+    <!-- <div class="artdh">
+    	<ul>
+    	    <li><strong>旅游新闻分类导航:</strong></li>
+    	    {section loop=$cate name=item}
+              <li><a href="__APP__/Cate/lvyounewslist/catid/{$cate[item].id}" style='{if $catid==$cate[item]["id"]}color:#f00;{/if}'>{$cate[item].name}</a></li>
+    		{/section}
+        </ul>
+    </div> -->
+    <form method="post" class="iform" action="__APP__/Category/sort">
+    <div style="margin-top:15px;">
+      <table border="1" class="table_border" style="margin-bottom:10px;">
+		    <tr>
+	          <th colspan="9" align="center" class="table_border_title">网站栏目管理</th>
+	        </tr>
+	        <tr>
+	          <td width="5%" align="center" valign="middle" class="world_Bold">选中</td>
+			  <td width="5%" align="center" valign="middle" class="world_Bold">ID</td> 
+			  <td align="center" valign="middle" class="world_Bold">排序</td>
+	          <td align="center" valign="middle" class="world_Bold">栏目名称</td>
+	          <td align="center" valign="middle" class="world_Bold">子级栏目管理</td>
+			  <td align="center" valign="middle" class="world_Bold">关键字</td>
+			  <td align="center" valign="middle" class="world_Bold">描述</td>
+	          <td align="center" valign="middle" class="world_Bold">添加时间</td>
+	          <td align="center" valign="middle" class="world_Bold">操作</td>
+	        </tr>
+		{if $list}
+			{foreach from=$list item=v}
+	        <tr>
+	          <!--==多选框 用于批量操作==-->
+	          <td align="center" valign="middle"><input type="checkbox" name="id[]" value="{$v['id']}" class="ids" /></td>
+			  <td align="center" valign="middle">{$v['id']}</td>
+			  <!--==排序顺序==-->
+			  <td align="center" valign="middle">
+			      <input type="text" style="width:50px;height:20px;" name="sort[{$v['id']}]" value="{$v['sort']}" />
+			  </td>
+			  <td align="left" valign="middle">
+					{$v['name']}
+			  </td>
+			  <td align="left" valign="middle">{if $v['num']}{$v['num']}<a href="#">个子级栏目</a>{else}0{/if}</td>
+	          <td align="left" valign="middle">{$v['keywords']}</td>
+			  <td align="left" valign="middle">{$v['description']}</td>
+	          <td align="left" valign="middle">{$v['addtime']|date_format:'%Y-%m-%d %H:%M:%S'}</td>
+	          <!--==操作==-->
+	          <td align="left" valign="middle">
+	             <a href="__APP__/Cate/lvyounews/id/{$v['id']}" target="_blank">&nbsp;添加子级栏目</a> | <a href="__APP__/Cate/lvyounews/id/{$v['id']}" target="_blank">&nbsp;修改</a> | <a href="__APP__/Cate/lvyounewsrecycle/id/{$v['id']}" class="del">删除</a>
+	          </td>
+	        </tr>
+			{/foreach}
+			<td colspan="9" align="center"><div class="pages">{$page}</div></td>
+		{else}
+			<td colspan="9" align="center">网站暂无栏目</td>
+	    {/if}
+      </table>
+	  <!-- <input type="checkbox" name="checkbox" class="quanxuan" /> 全选 -->
+      <!--============对新闻进行批量操作=============-->
+      <!-- <select class="Select_action" id="piliang" name="pl">
+        <option value="0" id='o1'>请选择操作</option>
+        <option value="1">批量删除</option>
+      		<option value="2">批量移动</option>
+      </select>
+      <select class="Select_two" style="display:none;min-width:130px;width:auto;height:21px;line-height:21px;" name="cid">
+            <option value="0">选择移动到的栏目</option>
+      			  {foreach from=$cate item=v}
+      		        <option value="{$v['id']}" {if $catid==$v['id']}selected='selected'{/if}>{$v['name']|indent:$v['lev']:'－'}</option>
+      			  {/foreach}
+      </select> -->
+      <!--end-->
+      <!--============点击旅游栏目调出该栏目下的所有新闻======-->
+      <!-- <select class="Select_one" name="cid">
+            <option value="0">旅游新闻栏目</option>
+      		  {foreach from=$cate item=v}
+      	        <option value="{$v['id']}" {if $catid==$v['id']}selected='selected'{/if}>{$v['name']|indent:$v['lev']:'－'}</option>
+      		  {/foreach}
+      </select> -->
+      <!--end-->
+      <!-- <input type="text" value="" class="Select_two" id="content" />
+      <input type="button" value="新闻查询" class="cx" style="cursor:pointer;" /> -->
+      <input type="submit" name="btn_submit" value="更新排序" class="bton">
+	  </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<div class="bjui-pageHeader">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Member/member" method="get">
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px;line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  width="26">
+					<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+				</th>
+				<th style="background:#1078C1;color:#fff;"  data-order-field="id">会员组ID</th>
+				<th style="background:#1078C1;color:#fff;" >会员组名称</th>
+				<th style="background:#1078C1;color:#fff;" >折扣</th>
+				<th style="background:#1078C1;color:#fff;"  width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$glist item=v key=k}
+			<tr data-id="{$k}">
+				<td>
+					<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+				</td>
+				<td>{$v.id}</td>
+				<td>{$v.gname}</td>
+				<td>{$v.discount}%</td>
+				<td>
+					<a href="__APP__/Member/groupadd/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-id="form" data-title="会员组修改-{$v.gname}">修改</a>
+					<a href="__APP__/Member/groupdel/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确认删除吗">删除</a>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bjui-pageFooter">
+	<!--<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>-->
+</div>

@@ -1,0 +1,236 @@
+{$leibie="酒店预订"}
+{include file="../Common/header.html"}
+<div class="main">
+    <!--导航条-->
+    <div class="hotels_step">
+        <h3>{$roominfo.hotelname}</h3>
+        <ul>
+            <li><span></span><strong>填写信息</strong></li>
+            <li><span></span>提交成功</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!--导航条结束！！！-->
+    <div class="sideleft">
+        <h3 class="title">酒店信息</h3>
+        <dl class="jdxx_dl">
+            {if $roominfo.src}
+            <img src="__ROOT__{$roominfo.src}" alt="" /> {else}
+            <img src="__PUBLIC__/images/jdimg.jpg" alt="" /> {/if}
+            <dt>{$roominfo.hotelname}</dt>
+            <dd><img src="__PUBLIC__/images/star.png"></dd>
+            <dd>{$roominfo.address}</dd>
+        </dl>
+        <ul class="jdxx_li">
+            <li>房&nbsp;&nbsp;型：{$roominfo.roomtype}</li>
+            <li>床&nbsp;&nbsp;型：{$roominfo.fjchuang}</li>
+            <li>早&nbsp;&nbsp;餐：{$roominfo.zaocan}</li>
+            <li>宽&nbsp;&nbsp;带：{$roominfo.swang}</li>
+        </ul>
+        <div class="wxts">
+            <h4>温馨提示：</h4>
+            <p>您的手机号码需要提供给酒店
+                <br />酒店要求入住人持本人身份证件办理</p>
+        </div>
+        <div class="helpin">
+            <h4>需要帮助：</h4>
+            <ul>
+                <li><a href="__ROOT__/Article/category-6.html">预订帮助</a></li>
+                <li>在线客服</li>
+                <li class="dianhua">客服电话：0371-63611389</li>
+            </ul>
+        </div>
+    </div>
+    <div class="sideright">
+        <h3 id="title"><strong>填写订单</strong></h3>
+        <form action="__ROOT__/Hotels/ordertijiao" method="post" name="myform" id="myform" onsubmit="javascript:return telchick()">
+            <div class="siderightcon">
+                <h4 class="headding">预订信息</h4>
+                <ul class="ydxx">
+                    <li>房型名称
+                        <font color="#06f">{$roominfo.roomtype}</font>
+                        <input type="hidden" name="id" value="{$roominfo.id}" />
+                        <li>入住日期
+                            <input name="ruzhudate" id="start" class="Wdate" type="text" value="{$smarty.session.start}" style="width:162px; height:26px; line-height:26px;border: 1px #D0D0D0 solid;">
+                            <font color="#FF0000">*</font>
+                        </li>
+                        <li>离店日期
+                            <input name="lidiandate" id="end" class="Wdate" type="text" value="{$smarty.session.end}" style="width:162px; height:26px; line-height:26px;border: 1px #D0D0D0 solid;">
+                        </li>
+                      <li>预订间数
+                          <button class="am-btn am-btn-primary am-btn-xs"  style="width:18px; height:18px; line-height:18px;padding: 0em 0em;" am-minus="#red_fangshu" data-callback="count" type="button" data-minus="1">-</button>                          
+                          <input name="nums" type="text" class="input_border" id="red_fangshu" readonly="" style="width:40px; text-align:center" value="1">
+                          <button class="am-btn am-btn-primary am-btn-xs" style="width:18px; height:18px; line-height:18px;padding: 0em 0em;" am-plus="#red_fangshu" data-callback="count" type="button">+</button>                          
+                          <font color="#FF0000">*</font>
+                      </li>                         
+                        <li>应付金额
+                            <span id="total" style="color: red;"></span>
+                        </li>
+                        <li class="price_mx"><span>参考价格</span>
+                            <div id="money">{$money}</div>
+                            <div class="clear"></div>
+                        </li>
+                        <li>预订姓名
+                            <input name="linkname" type="text"  style="width:160px;" class="input_border" value="{$minfo.truename}">
+                            <font color="#FF0000">*</font>(每个房间只填1人姓名) </li>
+                        <li>入住人数
+                            <input name="rennums" type="text" class="input_border" id="numbers" value="" style="width:160px;">
+                            <font color="#FF0000">*</font>
+                        </li>
+                        <li>到店时间
+                            <select name="zuizaotime" class="select_bd">
+                                <option>07:00</option>
+                                <option>08:00</option>
+                                <option>09:00</option>
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>12:00</option>
+                                <option>13:00</option>
+                                <option>14:00</option>
+                                <option>15:00</option>
+                                <option>16:00</option>
+                            </select>
+                            <select name="zuiwantime" class="select_bd">
+                                <option>17:00</option>
+                                <option>18:00</option>
+                                <option>19:00</option>
+                                <option>20:00</option>
+                                <option>21:00</option>
+                                <option>22:00</option>
+                                <option>23:00</option>
+                                <option>24:00</option>
+                                <option>01:00</option>
+                                <option>02:00</option>
+                                <option>03:00</option>
+                                <option>04:00</option>
+                                <option>05:00</option>
+                                <option>06:00</option>
+                            </select>
+                            <font color="#FF0000">*</font>（通常酒店14:00办理入住，早到可能需要等待）
+                        </li>
+                        <li class="Special_require"><span>特殊要求</span>
+                            <textarea name="beizhu"></textarea>
+                        </li>
+                </ul>
+                <h4 class="headding">入住信息</h4>
+                <ul class="ydxx">
+                    <li>客人姓名
+                        <input name="kename" type="text" style="width:160px;" class="input_border" value="{$minfo.truename}">
+                        <font color="#FF0000">*</font>
+                    </li>
+                    <li>确认方式
+                        <select class="ConfirmWay">
+                            <option>短信确认</option>
+                            <option>电话确认</option>
+                        </select>
+                        <font color="#FF0000">*</font>
+                    </li>
+                    <li>联系手机
+                        <input name="telephone" type="text" style="width:160px;" class="input_border" value="{$minfo.telephone}" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                        <font color="#FF0000">*</font>(用于接收确认信息) </li>
+                </ul>
+                <p class="tjdd">
+                    <input class="ydButton" type="submit" value="" / onmouseout="this.className='ydButton'" onmouseover="this.className='ydButton2'"> <span>不收预订费</span></p>
+                <p class="zs" style="margin-left: 60px;">注：如需发票，请从酒店前台索要。</p>
+            </div>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+var count;
+$(function() {  
+    //日期选择
+    var nowTemp = new Date();
+    var nowDay = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0).valueOf();
+    var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), 1, 0, 0, 0, 0).valueOf();
+    var nowYear = new Date(nowTemp.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+    var $myStart2 = $('#start');
+    var checkin = $myStart2.datepicker({
+        onRender: function(date, viewMode) {
+            // 默认 days 视图，与当前日期比较
+            var viewDate = nowDay;
+            switch (viewMode) {
+                // moths 视图，与当前月份比较
+                case 1:
+                    viewDate = nowMoth;
+                    break;
+                    // years 视图，与当前年份比较
+                case 2:
+                    viewDate = nowYear;
+                    break;
+            }
+            return date.valueOf() < viewDate ? 'am-disabled' : '';
+        }
+    }).on('changeDate.datepicker.amui', function(ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+        }
+        checkin.close();
+        $('#end')[0].focus();
+    }).data('amui.datepicker');
+    var checkout = $('#end').datepicker({
+        onRender: function(date, viewMode) {
+            var inTime = checkin.date;
+            var inDay = inTime.valueOf();
+            var inMoth = new Date(inTime.getFullYear(), inTime.getMonth(), 1, 0, 0, 0, 0).valueOf();
+            var inYear = new Date(inTime.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+            // 默认 days 视图，与当前日期比较
+            var viewDate = inDay;
+            switch (viewMode) {
+                // moths 视图，与当前月份比较
+                case 1:
+                    viewDate = inMoth;
+                    break;
+                    // years 视图，与当前年份比较
+                case 2:
+                    viewDate = inYear;
+                    break;
+            }
+            return date.valueOf() <= viewDate ? 'am-disabled' : '';
+        }
+    }).on('changeDate.datepicker.amui', function(ev) {
+        checkout.close();
+    }).data('amui.datepicker');
+    $('form').ajaxForm(function(data) {
+        eval('data=' + data);
+        alert(data.msg);
+        if (data.status >1) {
+            window.location.href = '__ROOT__/Hotels/ordersuccess-' + data.status + '.html';
+        }
+        if(data.status==-1){
+            window.location.href="__ROOT__/login.html";
+        }
+    });
+    count=function(){
+        var total=$("input[name='total']").val();
+        var nums= $("input[name='nums']").val();
+        if(nums<1){
+            var nums= $("input[name='nums']").val(1);
+            nums=1;
+        }
+        $("#total").html('￥'+nums*total);
+    }     
+    //获取价格列表
+    $("#start,#end").change(function() {
+      var ru = $("#start").val();
+      var li = $("#end").val();
+      if(!ru||!li){
+        return false;
+      }
+      var rid="{$roominfo.id}";
+      $.get('__APP__/Hotels/getroommoney', {
+          id: rid,
+          ru: ru,
+          li: li
+      }, function(e) {
+          $("#money").html(e);
+          count();
+      });
+    }); 
+    count();  
+})
+</script>
+{include file="../Common/footer.html"}

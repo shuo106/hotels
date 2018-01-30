@@ -1,0 +1,69 @@
+a{
+	color:#0066CC;
+}
+#wrap{
+   width:96%;
+   height: auto;
+   overflow: hidden;	 
+   padding: 0px 10px 5px;
+   margin: 0 auto;
+}
+#wrap .add-app{
+	display: block;
+	width: 100px;
+	height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: #670768;
+    color:#fff;
+    font-size: 14px;
+    font-weight: 900;
+    border-radius: 5px;
+}
+#wrap div.app{
+    border:solid 1px #999;
+    padding: 10px;
+    border-radius: 4px; 
+    margin: 10px 0px;
+}
+#wrap div.app p{
+   height: 30px;
+   line-height: 30px;
+}
+#wrap div.app p span{
+   font-size: 18px;
+   font-weight: 900;
+   color: #0B99d8;	
+} 
+#wrap div.app dl{
+   margin: 10px 0px;
+   border: solid 1px #eeeeee;
+   border-radius: 4px;	
+   height: auto;
+   overflow: hidden;
+   padding: 5px;
+   text-indent: 10px;
+}
+#wrap div.app dl dt{
+   display: block;
+   height: 36px;
+   line-height: 36px;
+   background: #e6e6fa;
+   	
+}
+#wrap div.app dl dt span{
+   font-size: 14px;
+   font-weight: 600;
+   color: #61a1fa;
+}
+#wrap div.app dl dd{
+   float: left;
+   padding: 3px;	
+}
+.do-submit{
+   display:block;
+   cursor:pointer;
+   margin: 10px auto;
+   height: 25px;
+   line-height: 20px;
+}

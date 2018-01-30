@@ -1,0 +1,45 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">房间管理</strong> / <small>Room</small>
+                </div>
+            </div>
+            <hr>
+            <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list" style="margin:0rem 1.6rem;">
+                <volist name="row" id="vo">
+                    <li style="width:190px;">
+                        <a href="__APP__/Hotel/room/id/{$vo.id}">
+                            <img class="am-img-thumbnail am-img-bdrs" src="__ROOT__/{$vo['thumb']}" style="height: 126px;width: 168px;" alt="" />
+                            <div class="gallery-title" style="overflow: hidden;white-space:nowrap;white-space: nowrap;">{$vo['roomtype']}</div>
+                        </a>
+                        <span>
+          <div class="room-status">
+            <if condition=" $vo['is_delete'] eq 2 ">
+            <a href="__APP__/Hotel/jguan/id/{$vo.id}/d/0" class="am-badge am-badge-danger am-radius" style="color: #FFF;">关闭 </a>  
+            <else/>
+            <a href="__APP__/Hotel/jguan/id/{$vo.id}/d/2" class="am-badge am-badge-success am-radius" style="color: #FFF;">正常 </a>  
+            </if>
+          <a href="__APP__/Hotel/room/id/{$vo.id}" class="am-badge am-badge-primary am-radius no-ajax" style="color: #FFF;">编辑</a>     
+          <a href="__APP__/Hotel/addmoney/id/{$vo.id}" class="am-badge am-badge-success am-radius no-ajax" style="color: #FFF;">价格</a>                    
+          <a href="__APP__/Hotel/roomdel/id/{$vo.id}"  class="am-badge am-badge-danger am-radius" style="color: #FFF;" data-confirm="确认要删除改记录吗？">删除 </a>        
+          </div>
+          </span>
+                    </li>
+                </volist>
+            </ul>
+            <div class="am-margin am-cf" style="margin:0rem 1.6rem;">
+                <hr/>
+                <p class="am-fl" style="margin-top:0rem; margin: 0 0 0rem 0;">共 {$total} 条记录</p>
+                <div class="am-fr">{$page}</div>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+</div>
+<include file="Tpl/public/bottom.html" />

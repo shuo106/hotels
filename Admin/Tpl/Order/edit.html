@@ -1,0 +1,146 @@
+<style type="text/css">
+  label.control-label{
+    width: 100px;
+  }
+</style>
+<div class="bjui-pageContent">
+  <form action="__APP__/Order/update" id="j_form_form" class="pageForm" method="get" data-toggle="validate">
+       <input type="hidden" name="id" value="{$order.orderid}" />
+    <div>
+      <fieldset>
+        <legend>{if $smarty.get.read}历史订单详情{else}订单详情{/if}</legend>
+        <table class="table-bordered table-condensed table-hover" width="100%">
+          <tbody>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['ordernumber']}：</label>
+                {$order.addtime}{$order.orderid}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['hotel']}：</label>
+                {$order.hotelname}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['title']}：</label>
+                {$order.roomtype}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['total']}：</label>
+                {$order.shoufei}元
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['point']}：</label>
+                {$order.point}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['nums']}：</label>
+                {$order.nums}间
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['rennums']}：</label>
+                {$order.rennums}人
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['addtime']}：</label>
+                {$order.addtime|date_format:'%Y-%m-%d'}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['start']}：</label>
+                {$order.ruzhudate|date_format:'%Y-%m-%d'}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['end']}：</label>
+                {$order.lidiandate|date_format:'%Y-%m-%d'}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['linkman']}：</label>
+                {$order.linkman}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['telephone']}：</label>
+                {$order.telephone}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['kename']}：</label>
+                {$order.kename}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['remark']}：</label>
+                {$order.beizhu}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['from']}：</label>
+                {foreach from=C('order.from') item=v key=k}
+                {if $order.from==$k}{$v}{/if}
+                {/foreach}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="control-label x85">{$ORDERC['status']}：</label>
+                {if !$smarty.get.read}
+                <select name="status"  data-toggle="selectpicker">
+                  {foreach from=C('order.status') item=v key=kk}<option value="{$kk}" {if $order.status==$kk}selected{/if}>{$v}</option>{/foreach}
+                </select>
+                {else}
+                {foreach from=C('order.status') item=v key=kk}{if $order.status==$kk}{$v}{/if}{/foreach}
+                {/if}
+              </td>
+            </tr>
+            {if !$smarty.get.read}
+            <tr>
+              <td>
+                <label class="control-label x85" style="vertical-align:initial">{$ORDERC['orderlog']}：</label>
+                <input name="remark" style="width: 400px;" />
+              </td>
+            </tr>
+            {/if}
+            <tr>
+            <td>
+              <ul style="margin-left:100px;">
+                {if !$smarty.get.read}<button type="submit" class="btn-default" data-icon="save">保存</button>{/if}
+                <button type="button" class="btn-close" data-icon="close">关闭</button>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div style="padding-top: 10px;margin: 5px;">
+        <ul>
+        {foreach from=$log item=v}
+        <li style="line-height:24px;margin-left:36px"><b>操作说明：</b>{if $v.remark}{$v.remark}{else}暂无，{/if}  操作人：{$v.username} 于 {$v.addtime|date_format:'%Y-%m-%d %H:%M:%S'} 修改订单为 {$v.text} 状态。</li>
+        {/foreach}
+        </ul>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>

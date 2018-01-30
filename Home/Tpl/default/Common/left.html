@@ -1,0 +1,143 @@
+<!--城市选择-->
+<link rel="stylesheet" type="text/css" href="/quang/Public/assets/css/amazeui.citychose.css">
+<script type="text/javascript" src="/quang/Public/assets/js/amazeui.citychose.js"></script> 
+<div class="ny_left">
+    <div class="ny_cx">
+        <div class="ny_cx_from">
+            <ul>
+                <li>
+                    <label class="cx_label" class="cx_label" for="city"><em>*</em> 选择城市：</label>
+                    <div class="cityinput">
+                        <input type="text" id="homecity_name" name="homecity_name" value="{$smarty.session.city_name}" />
+                        <input id="cityid" name="cityid" type="hidden" value="{$smarty.session.city_id}" />
+                    </div>
+                </li>
+                <li>
+                    <label class="cx_label" for="date1"><em>*</em> 入住日期：</label>
+                    <div class="timeinput">
+                        <input class="Wdate" type="text" id="start" value='{$smarty.now|date_format:"%Y-%m-%d"}'>
+                    </div>
+                </li>
+                <li>
+                    <label class="cx_label" for="date2"><em>*</em> 离店日期：</label>
+                    <div class="timeinput">
+                        <input class="Wdate" type="text" id="end" value='{($smarty.now+86400)|date_format:"%Y-%m-%d"}'>
+                    </div>
+                </li>
+                <li>
+                    <label class="cx_label" for="name"> 关键词：</label>
+                    <div class="cxinput">
+                        <input type="text" id="company" value="">
+                    </div>
+                </li>
+                <li class="cx_btn">
+                    <input type="submit" id="search" class="cx_btn_input1" value="" >
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="jsContainer" class="jsContainer" style="height:0">
+        <div id="tuna_alert" style="display:none;position:absolute;z-index:999;overflow:hidden;"></div>
+        <div id="tuna_jmpinfo" style="visibility:hidden;position:absolute;z-index:120;"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="zt2_left">
+        <div class="zt2_left_1">
+            <a href="__ROOT__/Liansuo/index.html">更多</a>
+            <h2>品牌连锁</h2>
+        </div>
+        <div class="zt2_left_2">
+            {foreach from=$brands item=vo}
+            <dl>
+                <dt>
+                    <a href="__ROOT__/Hotels/search-0-0-0-0-0-0-0-{$vo['name']}-0.html">
+                        <img src="__ROOT__{$vo['thumb']}" alt="" width="69px" height="58px" />
+                    </a>
+                </dt>
+                <dd><a href="__ROOT__/Hotels/search-0-0-0-0-0-0-0-{$vo['name']}-0.html">{$vo['name']}</a></dd>
+            </dl>
+            {/foreach}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+        //城市选择
+        var $chose = $("#homecity_name").chose({ data: citydata });
+        $chose.click(function(e, s) {
+            s.next().val(e.data('id'));
+        });
+        //日期选择
+        var nowTemp = new Date();
+        var nowDay = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0).valueOf();
+        var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), 1, 0, 0, 0, 0).valueOf();
+        var nowYear = new Date(nowTemp.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+        var $myStart2 = $('#start');
+        var checkin = $myStart2.datepicker({
+            onRender: function(date, viewMode) {
+                // 默认 days 视图，与当前日期比较
+                var viewDate = nowDay;
+                switch (viewMode) {
+                    // moths 视图，与当前月份比较
+                    case 1:
+                        viewDate = nowMoth;
+                        break;
+                        // years 视图，与当前年份比较
+                    case 2:
+                        viewDate = nowYear;
+                        break;
+                }
+                return date.valueOf() < viewDate ? 'am-disabled' : '';
+            }
+        }).on('changeDate.datepicker.amui', function(ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.close();
+            $('#end')[0].focus();
+        }).data('amui.datepicker');
+        var checkout = $('#end').datepicker({
+            onRender: function(date, viewMode) {
+                var inTime = checkin.date;
+                var inDay = inTime.valueOf();
+                var inMoth = new Date(inTime.getFullYear(), inTime.getMonth(), 1, 0, 0, 0, 0).valueOf();
+                var inYear = new Date(inTime.getFullYear(), 0, 1, 0, 0, 0, 0).valueOf();
+                // 默认 days 视图，与当前日期比较
+                var viewDate = inDay;
+                switch (viewMode) {
+                    // moths 视图，与当前月份比较
+                    case 1:
+                        viewDate = inMoth;
+                        break;
+                        // years 视图，与当前年份比较
+                    case 2:
+                        viewDate = inYear;
+                        break;
+                }
+                return date.valueOf() <= viewDate ? 'am-disabled' : '';
+            }
+        }).on('changeDate.datepicker.amui', function(ev) {
+            checkout.close();
+        }).data('amui.datepicker');
+        //酒店搜索
+        $("#search").click(function() {
+            var city = $("#cityid").val();
+            var ruzhu = $("#start").val();
+            var likai = $("#end").val();
+            if (ruzhu == '' || likai == '') {
+                start = 0;
+                end = 0;
+            } else {
+                start = ruzhu.replace(new RegExp(/(-)/g), '');
+                end = likai.replace(new RegExp(/(-)/g), '');
+            }
+            var company = $("#company").val();
+            if (company == '') {
+                company = 0;
+            }
+            window.location.href = root + '/Hotels/search-' + city + '-0-' + start + '-' + end + '-0-' + company + '-0-0-0.html';
+        })    
+  });
+</script>

@@ -1,0 +1,52 @@
+<div class="bjui-pageContent tableContent">
+   	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Hotels/lslist" method="get">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height:36px;line-height:36px;">
+					<!-- <th style="background:#1078C1;color:#fff;"  width="26">
+						<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+					</th> -->
+					<th style="background:#1078C1;color:#fff;"  width="40">ID</th>
+					<th style="background:#1078C1;color:#fff;" >品牌名称</th>
+					<th style="background:#1078C1;color:#fff;" >品牌LOGO</th>
+					<th style="background:#1078C1;color:#fff;"  width="70">首写字母</th>
+					<th style="background:#1078C1;color:#fff;"  width="90">操作<a href="__APP__/Hotels/liansuo/" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Hotels/liansuo/" data-title="品牌添加" style="margin-left:26px">新增</a></th>
+				</tr>
+			</thead>
+			</form>
+			<form name="sortform" data-toggle="ajaxform" action="__APP__/link/sort" method="post">
+			<tbody>
+				{foreach from=$list item=v key=k}
+				<tr data-id="{$k}">
+					<!-- <td>
+						<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+					</td> -->
+					<td>{$v.id}</td>
+					<td>{$v['name']}</td>
+					<td><img src="__ROOT__{$v['thumb']}" width="88" height="33" /></td>
+					<td>{$v['zimu']}</td>
+					<td>
+						<a href="__APP__/Hotels/liansuo/id/{$v.id}" class="btn btn-green" data-toggle="dialog" data-url="__APP__/Hotels/liansuo/id/{$v.id}" data-title="链接编辑-{$v.name}">编辑</a>
+						<a href="__APP__/Hotels/lsdel/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定要删除吗？">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

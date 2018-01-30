@@ -1,0 +1,124 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<style type="text/css">
+.level-color1 {
+    background-color: #ff7800;
+    color: #fff;
+    display: block;
+    height: 12px;
+    line-height: 13px;
+    overflow: hidden;
+    padding-left: 5px;
+    width: 100%;
+}
+.level-color2 {
+    background-color: #ff7800;
+    color: #fff;
+    display: block;
+    height: 12px;
+    line-height: 13px;
+    overflow: hidden;
+    padding-left: 5px;
+    width: 100%;
+}
+</style>
+<div class="order">
+    {include file="./member_menu.html"}
+    <div class="order-r fr">
+        <div class="order-r-t">
+            <div class="order-r-l fl">
+                <div class="order-r-l-pic fl">
+                    <i>
+                                  <a href="__ROOT__/Member/member_change.html">
+                                   <img src="__ROOT__{$icon|default:'/Public/home/images/notx.png'}">
+                                   </a>
+                                   </i>
+                    <p><a href="__ROOT__/Member/member_change.html">个人会员</a></p>
+                </div>
+                <div class="order-r-l-r fl">
+                    <div class="name-box">
+                        <a href="__ROOT__/Member/member_change.html">{$smarty.session.name}</a>
+                    </div>
+<!--                     <div class="name-box2">
+                        我的积分<span class="line-bottom"><span class="level-color1">{$point}</span></span>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Member/tixian">我要提现</a></label>
+                    </div> -->
+                    <div class="name-box2">
+                        我的资料<span class="line-bottom"><span  style="background-color: #ff7800;color: #fff;display: block;height: 12px;line-height: 13px;overflow: hidden;padding-left: 5px;width: {$baifen};">{$baifen}</span></span>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Member/member_change">完善资料</a></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mem-order fr">
+                <ul>
+                    <li>
+                        <a href="__ROOT__/Member/member_order.html" class="am-icon-btn am-success am-icon-file-text"></a>
+                        <p><a href="__ROOT__/Member/member_order.html">我的订单</a></p>
+                    </li>
+                    <li>
+                        <a href="__ROOT__/Member/member_order.html?status=3" class="am-icon-btn am-success am-icon-credit-card"></a>
+                        <p><a href="__ROOT__/Member/member_order.html?status=3">待支付</a></p>
+                    </li>
+                    <li>
+                        <a href="__ROOT__/Member/member_order.html?status=2,4" class="am-icon-btn am-success am-icon-building"></a>
+                        <p><a href="__ROOT__/Member/member_order.html?status=2,4">待入住</a></p>
+                    </li>
+                    <li>
+                        <a href="__ROOT__/Member/member_order.html?comment=1" class="am-icon-btn am-success am-icon-pencil-square-o"></a>
+                        <p><a href="__ROOT__/Member/member_order.html?comment=1">待点评</a></p>
+                    </li>
+<!--                     <li>
+                        <a href="__APP__/Member/tixian_log" class="am-icon-btn am-success am-icon-jpy"></a>
+                        <p><a href="__APP__/Member/tixian_log">待提现</a></p>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="gg">
+            <a href="javascript:"><img src="__PUBLIC__/assets/images/wddd-ico07-.jpg"></a>
+        </div>
+        <div class="myorder" style="margin-top:10px;">
+            <h3><i><img src="__PUBLIC__/assets/images/wddd-ico08.jpg"></i>我的订单<a href="__ROOT__/Member/member_order.html">查看我的全部订单</a></h3>
+        </div>
+        <div class="order-info">
+            <table class="am-table am-table-hover">
+                <tr class="jddd_dd">
+                    <td>订单编号</td>
+                    <td>酒店名称</td>
+                    <td>预订房间</td>
+                    <td>预订人</td>
+                    <td>订单金额</td>
+                    <td>入住时间</td>
+                    <td>订单状态</td>
+                    <td>订单操作</td>
+                </tr>
+                {if $order} {foreach from=$order item=v}
+                <tr>
+                    <td>{$v['addtime']}{$v['orderid']}</td>
+                    <td align="left" style="padding-left:10px">{$v['hotelname']}</td>
+                    <td align="left" style="padding-left:10px">{$v['roomtype']}</td>
+                    <td>{$v['linkman']}</td>
+                    <td class="red">{$v['shoufei']}元</td>
+                    <td>{$v.addtime|date_format:"Y-m-d"}</td>
+                    <td>
+                    <span class="order-status" style="background: {$LANG['color'][$v['status']]}">
+                        {$LANG['status'][$v['status']]}
+                    </span>
+                    </td>
+                    <td><a href="__APP__/Member/order_content/pid/{$v['orderid']}">详情</a> {if in_array($v.status,order_status_key(array('已入住','已付款','已离店')))}{if $v.is_comment} | 已点评{else}|
+                        <a href="__ROOT__/index.php/Member/member_comments/oid/{$v['orderid']}" style="color:#3c7590;">去点评</a>{/if}{/if}
+                    </td>
+                </tr>
+                {/foreach} {else}
+                <tr>
+                    <td colspan="8">
+                        <center>
+                            <img src="__PUBLIC__/assets/images/dingdan.png"></center>
+                    </td>
+                </tr>
+                {/if}
+            </table>
+        </div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

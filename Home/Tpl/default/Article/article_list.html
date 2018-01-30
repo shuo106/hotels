@@ -1,0 +1,151 @@
+{include file="../Common/header.html"}
+
+<div class="blank20"></div>
+
+<div class="wrapper clearfix">
+
+<!-- 首页列表模块 -->
+
+    <div class="mainCon">
+
+        <div class="m-column">
+
+            <h5 class="cm-lineTit"><i class="am-icon-book"></i>{$catename}</h5>
+
+        </div>
+
+        <div class="index-notes-list m-notes-list">
+
+            <ul>				
+
+			{foreach from=$alist item=vo}                   
+
+				<li id="li_{$vo['articleid']}" value="0">
+
+                    <a href="__ROOT__/Article/show-{$vo['articleid']}.html" class="notes-pic" target="_blank">
+
+                        {if $vo['thumb']}<img src="__ROOT__{$vo['thumb']}">{else}<img src="__PUBLIC__/assets/i/nopic.jpg">{/if}
+
+                    </a>
+
+				<div class="notes-group">
+
+					<div class="info-cont">                                  
+
+						<div class="notes-hd">
+
+							<!-- <h2 class="p-title"><a href="__ROOT__/Article/show-{$vo['articleid']}.html" target="_blank">[{$vo['catename']}]{$vo['title']}</a></h2> -->
+
+                            <h2 class="p-title"><a href="__ROOT__/Article/show-{$vo['articleid']}.html" target="_blank">[{$vo['catename']}]<span style="color: {$vo.color};{if $vo.strong}font-weight: bold;{/if}">{$vo['title']}</span></a></h2>
+
+								<div class="p-author"><span class="author-info">作者：{$vo['username']}  时间：{date('Y-m-d',$vo['addtime'])}</span></div>
+
+						</div>
+
+					</div>
+
+					<div class="p-cont">　　{$vo['description']}<a href="__ROOT__/Article/show-{$vo['articleid']}.html" target="_blank" rel="nofollow" class="link-btn">[<i class="am-icon-location-arrow" style="padding:0px 2px"></i>查看详情]</a></div>
+
+					<div class="p-tag">
+
+						<h2>标签：</h2>
+
+						   {foreach from =$vo['keywords']  item=vo2} 
+
+						    <span class="tag-box">{$vo2}</span>
+
+						   {/foreach}
+
+					</div>
+
+				</div>
+
+				</li>
+
+			{/foreach}
+
+            </ul>
+
+            <div class="more-box">
+
+				<div class="informationListPage">{$page}</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 侧边栏 -->
+
+    <div class="sideBar">
+
+		<!-- 子栏目 -->
+
+        {if $c}				
+
+        <div class="hot-address">
+
+            <h5 class="cm-lineTit">{getArtName($smarty.get.id)}</h5>
+
+            <div class="city-box">
+
+            <ul>
+
+					{foreach from=$c item=vo}
+
+						<li><a href="__ROOT__/Article/category-{$vo['id']}.html">{$vo['name']} </a> </li>
+
+					{/foreach}
+
+             </ul>
+
+            </div>
+
+        </div>
+
+        {/if}
+
+        <!-- 热门目的地 -->
+
+        <div class="hot-address">
+
+            <h5 class="cm-lineTit">热门目的地</h5>
+
+            <div class="city-box">
+
+					{foreach from=$hotlist item=vo}
+                    <a href="__ROOT__/Hotels/search-{$vo.id}-0-0-0-0-0-0-0-0.html" target="_blank"  class="city-bg">{$vo.name}</a>
+                    {/foreach}
+
+            </div>
+
+        </div>
+
+        <!-- 热门文章 -->
+
+<div class="hot-articles mt20" id="sidebar-hotrec">
+
+    <h5 class="cm-lineTit">热门文章</h5>
+
+    <div class="art-lis">
+
+        <ul id="hot-Rec-Articles">
+
+		{foreach  from=$hot  key=key item=vo}
+
+        <li><span class="am-badge {if $key<3}am-badge-warning{else}am-badge-secondary{/if}">{$key+1}</span><a target="_blank" href="__ROOT__/Article/show-{$vo['articleid']}.html">{$vo['title']}</a></li>
+
+	    {/foreach}
+
+		</ul>
+
+	</div>
+
+</div>
+
+    </div>
+
+</div>
+
+{include file="../Common/footer.html"}

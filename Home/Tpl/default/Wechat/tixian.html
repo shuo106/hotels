@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>申请提现</title>
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/font-awesome.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+<script src="__PUBLIC__/wap/js/custom.js"></script>
+<script type="text/javascript">
+function chkmoney(obj){
+var m = {$member.point} ;
+var t = obj.value;
+if(t>m){
+alert('余额不足....');
+}
+}
+function doSave(){
+    $("#info2").submit();
+}
+$(function(){
+    $('form').ajaxForm(function(data){
+        eval('data='+data);
+        alert(data.msg);
+        if(data.status==1){
+            window.location.href="__ROOT__/Wechat/center";
+        }
+    });
+    return false;
+})
+</script>
+</head>
+<body>
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">网页内容加载中...</p>
+        </div>
+    </div>
+    <div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>申请提现<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+    <div class="wrapBox">
+        <div class="main">
+            <div class="members">
+                <div class="hd">申请提现</div>
+                <ul class="nav infoShow clearfix" id="info">
+                    <form action="__APP__/Wechat/tixian" method="post" id="info2" >
+                    <li><label>帐户余额</label>{$member.point}</li>
+                    <li><label>提现金额</label> 
+                    <input type="text"  onchange="chkmoney(this)"  name="txjine"    onkeyup="this.value=this.value.replace(/\D/g,'')" ></li>
+                    <li><label>提现银行</label>  <input type="text" name="txhang"  id="txhang"  ></li>
+                    <li><label>开户姓名</label> <input type="text"  name="txname" id="txname"  ></li>
+                    <li><label>银行账号</label>  <input type="text"  name="txhangnum" id="txhangnum" maxlength="19" onkeyup="this.value=this.value.replace(/\D/g,'')"  ></li>
+                    <li><label>身份证号</label>  <input type="text"  name="txshenfen" id="txshenfen" maxlength="18" onkeyup="this.value=this.value.replace(/\D/g,'')"  ></li>
+                    <li><label>手机号码</label>  <input type="text"  name="txmobile" id="txmobile" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  ></li>
+                    <li style="height: 50px; padding:5px 10px;"><label>申请备注</label> <textarea name="txbeizhu" id="txbeizhu" style="width:70%; height:40px; border: 1px solid #CCC;"></textarea></li>
+                </form>
+                </ul>
+                <div style="margin-top: 10px;"><a href="javascript:doSave();" class="buttonWrap button button-red buttonLong option">申请提现</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

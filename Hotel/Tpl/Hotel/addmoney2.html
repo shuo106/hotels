@@ -1,0 +1,99 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-list1 > li{
+    line-height: 44px;
+    height: 44px;
+	clear:both
+}
+</style>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/amazeui.daymoney.css">
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body am-margin">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">客房价格</strong> / <small>Room</small>
+                </div>
+            </div>
+            <hr>
+            <form action="__APP__/Hotel/savePrice" id="mform" method="post" class="ajaxform am-form">
+                <div>
+                    <input type="hidden" name="id" value="{$id}" />
+                    <span style="font-size: 1.4rem;line-height: 40px;">按日历报价：(单位/元) *0即为删除价格和满房状态 *可以用右侧批量操作价格</span>
+                    <div class="cald">
+                        <div class="am-daymoney am-fl" id="calendar" style=" width: 500px;display: inline-block; height: auto;">
+                        </div>
+                    </div>
+                    <div id="other" class="am-fl" style="width:500px; margin-left:20px;font-size: 1.4rem;">
+                        <div class="other_t">区间报价：</div>
+                        <ul class="am-list1">
+                            <li><span class="am-fl">选择时间：</span>
+                                <input class="am-fl" type="text" name="starttime" style="width:75px; margin-top:7px;" data-am-datepicker readonly required /> <span class="am-fl">--</span>
+                                <input class="am-fl" type="text" name="endtime" style="width:75px; margin-top:7px;" data-am-datepicker readonly required />
+                            </li>
+                            <li style="border:0;"><span class="am-fl">选择周几：</span>
+                                <!-- <select name="week" class="am-select am-fl">
+                                    <option value="7">全部</option>
+                                    <option value="1">周一</option>
+                                    <option value="2">周二</option>
+                                    <option value="3">周三</option>
+                                    <option value="4">周四</option>
+                                    <option value="5">周五</option>
+                                    <option value="6">周六</option>
+                                    <option value="0">周日</option>
+                                </select> -->
+                                周一<input class="w" type="checkbox" name="week[]" value="1">
+                          周二<input class="w" type="checkbox" name="week[]" value="2">
+                          周三<input class="w" type="checkbox" name="week[]" value="3">
+                          周四<input class="w" type="checkbox" name="week[]" value="4">
+                          周五<input class="w" type="checkbox" name="week[]" value="5">
+                          周六<input class="w" type="checkbox" name="week[]" value="6">
+                          周日<input class="w" type="checkbox" name="week[]" value="0">
+                          全部<input type="checkbox"  onclick="selectAll()" id="allCheck" >
+                            </li>
+                            <li style="height:10px"></li>
+                            <li><span class="am-fl">输入价格：</span>
+                                <input class="am-fl" type="text" name="price" onkeyup="javascript:this.value=this.value.replace(/\D/g,'');" style="width:200px;margin-top:7px;"/>单位（元）</li>
+                            <li style="border:0;"><input type="submit" name="btn_submit" value="保存" class="am-btn am-btn-success"></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+    <script type="text/javascript"> 
+    function ready() {
+        var days = '{$daydatas}';
+        var daymoney = $("#calendar").daymoney({
+            daydata: days
+        }).init();
+    }
+    function callback(data){
+    	alert(data.msg);
+    	if(data.status==1){
+    		window.location.reload();
+    	}
+    }
+    function selectAll(){
+ var checklist = document.getElementsByClassName("w");
+   if(document.getElementById("allCheck").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+    </script>
+</div>
+<include file="Tpl/public/bottom.html" />

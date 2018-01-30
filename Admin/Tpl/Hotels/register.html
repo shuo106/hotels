@@ -1,0 +1,251 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+.bootstrap-select {
+	width: 100px !important;
+	}
+</style>
+<script type="text/javascript">
+//改变省份 重新加载城市列表和隐藏县区列表
+function loadcity(p) {
+    $("#city").text('');
+    $("#area").text('');
+    $.get('__APP__/Area/getCity', {
+        p: p
+    }, function(e) {
+        if (e) {
+            $("#city").html(e.split('_')[0]);
+            $("#area").html(e.split('_')[1]);
+        }
+    });
+}
+function loadarea(c) {
+    $("#area").text('');
+    $.get('__APP__/Area/getArea', {
+        c: c
+    }, function(e) {
+        if (e) {
+            $("#area").html(e);
+        }
+    });
+}
+</script>
+<div class="bjui-pageContent">
+  <form action="__APP__/Hotels/register" method="post" id="member_form" data-toggle="validate">
+    <input type="hidden" name="btn_submit" value="true" />
+    <table class="table-bordered table-condensed table-hover" width="100%">
+      <tbody>
+        <tr>
+          <td>
+            <label for="member_account" class="control-label x120">
+              会员帐号：
+            </label>
+            <input type="text" name="username"  id="member_account" data-rule="用户名:required;account;remote(__APP__/Hotels/userCheck, username)" data-rule-account="[{$rule.account},'用户名为3-15位数字、字母、下划线的组合，或1-5个汉字']" data-tip="用户名为3-15位数字、字母、下划线的组合，或1-5个汉字"
+            size="60"><font color="red">*</font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="member_pwd" class="control-label x120">
+              登录密码：
+            </label>
+            <input type="password" name="passwd" id="member_pwd" data-rule="密码:required;password;" data-tip="密码为6-16位数字、字母的组合" size="60"><font color="red">*</font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="member_pwd2" class="control-label x120">
+              确认密码：
+            </label>
+            <input type="password" name="cr_repasswd" id="member_pwd2" data-rule="确认密码:required;match(password)" data-tip="密码为6-16位数字、字母的组合" size="60"><font color="red">*</font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="member_truename" class="control-label x120">
+              酒店名称：
+            </label>   
+            <input type="text" name="hotelname" id="member_hotel"  size="60">
+          </td>
+        </tr>        
+        <tr>
+          <td>
+            <label for="member_truename" class="control-label x120">
+              真实姓名：
+            </label>   
+            <input type="text" name="linkname" id="member_truename"   data-rule="truename"  data-rule-truename="[{$rule.truename},'真实姓名为2-10个汉字']" size="60">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="member_phone" class="control-label x120">
+              联系手机：
+            </label>
+            <input type="text" name="telephone" id="member_phone"  data-rule="required;telephone"  data-rule-telephone="[{$rule.telephone},'请输入正确的手机号']" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" size="60"><font color="red">*</font>
+          </td>
+        </tr>
+        <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            连锁品牌：
+                        </label>
+                        <select name="lspp" data-toggle="selectpicker" style="width:100px">
+                            <option value="">
+                                选择品牌
+                            </option>
+                            {foreach from=$liansuo item=v}
+                            <option value="{$v['id']}" {if $v.id==$info.lspp}selected='selected' {/if}>
+                                {$v.name}
+                            </option>
+                            {/foreach}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            酒店类型：
+                        </label>
+                        <select name="xingji" data-toggle="selectpicker" style="width:100px">
+                            <option value="">
+                                选择类型
+                            </option>
+                            {foreach from=$xingji item=v}
+                            <option value="{$v['id']}" {if $v.id==$info.xingji}selected='selected' {/if}>
+                                {$v.name}
+                            </option>
+                            {/foreach}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            所在城市：
+                        </label>
+                        {$Prov}<span id="city">{$City}</span><span id="area">{$Area}</span>
+                        <input type="text" name="cityfj" value="{$city2}" size="15" /><em style="color: red;">* 如：大学路</em>
+                        <input type="text" name="cityfj2" value="{$city3}" size="15" /><em style="color: red;">* 如：10号</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                            附近地标:
+                        </label>
+                        <input type="text" name="fjdb1" value="{$info.fjdb1}" size="16">
+                        <input type="text" name="fjdb2" value="{$info.fjdb2}" size="16">
+                        <input type="text" name="fjdb3" value="{$info.fjdb3}" size="16">
+                        <input type="text" name="fjdb4" value="{$info.fjdb4}" size="16">
+                        <input type="text" name="fjdb5" value="{$info.fjdb5}" size="16">
+                        <em style="color: red;">*如火车站、地铁、机场</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                            附近景点:
+                        </label>
+                        <input type="text" name="fjlv1" value="{$info.fjlv1}" size="16">
+                        <input type="text" name="fjlv2" value="{$info.fjlv2}" size="16">
+                        <input type="text" name="fjlv3" value="{$info.fjlv3}" size="16">
+                        <input type="text" name="fjlv4" value="{$info.fjlv4}" size="16">
+                        <input type="text" name="fjlv5" value="{$info.fjlv5}" size="16">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                        </label>
+                        <input type="text" name="fjlv6" value="{$info.fjlv6}" size="16">
+                        <input type="text" name="fjlv7" value="{$info.fjlv7}" size="16">
+                        <input type="text" name="fjlv8" value="{$info.fjlv8}" size="16">
+                        <input type="text" name="fjlv9" value="{$info.fjlv9}" size="16">
+                        <input type="text" name="fjlv10" value="{$info.fjlv10}" size="16">
+                        <em style="color: red;">*如嵩山少林寺</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                            附近酒店:
+                        </label>
+                        <input type="text" name="fjhotel1" value="{$info.fjhotel1}" size="16">
+                        <input type="text" name="fjhotel2" value="{$info.fjhotel2}" size="16">
+                        <input type="text" name="fjhotel3" value="{$info.fjhotel3}" size="16">
+                        <input type="text" name="fjhotel4" value="{$info.fjhotel4}" size="16">
+                        <input type="text" name="fjhotel5" value="{$info.fjhotel5}" size="16">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                        </label>
+                        <input type="text" name="fjhotel6" value="{$info.fjhotel6}" size="16">
+                        <input type="text" name="fjhotel7" value="{$info.fjhotel7}" size="16">
+                        <input type="text" name="fjhotel8" value="{$info.fjhotel8}" size="16">
+                        <input type="text" name="fjhotel9" value="{$info.fjhotel9}" size="16">
+                        <input type="text" name="fjhotel10" value="{$info.fjhotel10}" size="16">
+                        <em style="color: red;">*郑州如家快捷酒店</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_keywords" class="control-label x85">
+                            附近小区:
+                        </label>
+                        <input type="text" name="fjdsxq1" value="{$info.fjdsxq1}" size="16">
+                        <input type="text" name="fjdsxq2" value="{$info.fjdsxq2}" size="16">
+                        <input type="text" name="fjdsxq3" value="{$info.fjdsxq3}" size="16">
+                        <input type="text" name="fjdsxq4" value="{$info.fjdsxq4}" size="16">
+                        <input type="text" name="fjdsxq5" value="{$info.fjdsxq5}" size="16">
+                        <em style="color: red;">*如：郑州华林新时代</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_fname" class="control-label x85">
+                            交通信息：
+                        </label>
+                        <input type="text" name="traffic" id="j_custom_copyfrom" value="{$info.traffic}" size="80">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_content" class="control-label x85">酒店提示：</label>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <textarea name="tip" id="j_form_content" class="j-content" style="width:800px;" data-toggle="kindeditor" data-minheight="200">
+                                {$info.tip}
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_content" class="control-label x85">酒店介绍：</label>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <textarea name="introduce" id="j_form_content" class="j-content" style="width:800px;" data-toggle="kindeditor" data-minheight="200">
+                                {$info.introduce}
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>
+        <tr>
+          <td>
+            <div class="page_but" style="margin-left:85px;">
+              <ul>
+                <li>
+                  <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                </li>
+                <li>
+                  <button type="button" class="btn-close" data-icon="close">关闭</button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

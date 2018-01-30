@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>会员登录_免费注册_</title>
+<link href="__PUBLIC__/wechat/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__ROOT__/Wap/login.html";
+		}
+	});
+	return false;
+})
+</script>
+	<div id="preloader">
+		<div id="status">
+			<p class="center-text">网页内容加载中...</p>
+		</div>
+	</div>
+	<div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>会员注册<a class="hdright" href="__ROOT__/Wap/index"><span></span></a></div>
+	<div class="wrapBox">
+		<div class="main">
+			<div class="content">
+				<div class="container">
+					<form action="__APP__/Wap/doRegister" method="post" id="TourExForm" name="TourExForm" type="validate">
+						<div align="center">
+							<table class="formTable">
+								<tr><td><input type="text" placeholder="会员账号/手机号码" name="username" id="U_Name" valType="required" msg="<em>*</em>账号不能为空" /></td></tr>
+								<tr><td><input type="password" placeholder="登陆密码" name="password" id="U_Pass" valType="required" msg="<em>*</em>密码不能为空" /></td></tr>
+                                <tr><td><input type="password" placeholder="重复密码" name="password2" id="U_Pass" valType="required" msg="<em>*</em>密码不能为空" /></td></tr>
+								<tr><td><input type="text" name="Proof" id="Proof" size="6" onfocus="this.onfocus='';get_Code('/');" placeholder="验证码" valType="VALIDATECODE" regString="^[A-Za-z0-9]+$" msg="<em>*</em>请输入验证码" style="min-width:50%; float:left;" /><span id="imgid" style="color: #C10; float: left; margin:6px 0 0 5px;"><img src="__APP__/Register/verify" id="checkcode"  onclick="this.src='__APP__/Register/verify/?id='+Math.random()*5;" style="cursor:pointer;" alt="验证码,看不清楚?请点击刷新验证码" align="absmiddle"/> </span></td></tr>
+								<tr><td><input type="submit" class="buttonWrap button button-green buttonLong" value="马上注册" /></td></tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+   <script type="text/javascript" src="__PUBLIC__/wap/js/jquery.poshytip.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/wap/js/jq.validate.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/wap/js/custom.js"></script>
+</body>
+</html>

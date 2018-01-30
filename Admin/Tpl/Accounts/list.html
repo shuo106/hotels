@@ -1,0 +1,83 @@
+<div class="bjui-pageHeader" style="height:38px">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Accounts/lists" method="get">
+		<div style="margin-left: 0;display: inline-block;margin-top:6px">
+			<div class="btn-group">
+				<!-- <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+				<ul class="dropdown-menu right" role="menu"> -->
+					<!-- <li><a class="btn" href="__APP__/Landlord/pl/type/1" data-toggle="doajaxchecked" data-group="ids">锁定选中</a></li>
+					<li><a class="btn" href="__APP__/Landlord/pl/type/2" data-toggle="doajaxchecked" data-group="ids">解锁选中</a></li> -->
+					<!-- <li><a class="btn" href="__APP__/Landlord/pl/type/3" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="删除不可恢复，确定要删除选中项吗？">删除选中</a></li>
+				</ul> -->
+			</div>
+			<label>酒店名称：</label>
+			<input type="text" value="{$smarty.get.text}" name="text" placeholder="酒店名称" class="form-control" size="14">&nbsp;
+			<label>账单标题：</label>
+			<input type="text" value="{$smarty.get.title}" name="title" placeholder="账单标题" class="form-control" size="20">&nbsp;
+			<label>账单状态：</label>
+			<select name="status" data-toggle="selectpicker" id="status">
+				<option value="0">不限</option>
+				{foreach from=C('order.acc_status') item=v key=kk}
+				<option value="{$kk}" {if $smarty.get.status eq $kk} selected{/if}>{$v}</option>
+				{/foreach}
+			</select>&nbsp;
+
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+			账单数量：{$total}个
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px;line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  width="26">
+					<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+				</th>
+				<th style="background:#1078C1;color:#fff;"   width="50" data-order-field="id">账单id</th>
+				<th style="background:#1078C1;color:#fff;"   width="100">账单标题</th>
+				<th style="background:#1078C1;color:#fff;"   width="120" >酒店名称</th>
+				<th style="background:#1078C1;color:#fff;"  width="40">总金额</th>
+				<th style="background:#1078C1;color:#fff;"  width="40">账单状态</th>
+				<th style="background:#1078C1;color:#fff;"  width="112">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$list item=v key=k}
+			<tr data-id="{$k}">
+				<td>
+					<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+				</td>
+				<td>{$v.acc_addtime}{$v.acc_id}</td>
+				<td>{$v.acc_title}</td>
+				<td>{$v.acc_hotelname}</td>
+				<td>{$v.acc_total}</td>
+				<td style="color:#fff;text-align: center;background: {foreach from=C('order.color') item=vv key=kk}{if $v.acc_status==$kk}{$vv}{/if}{/foreach}">{foreach from=C('order.acc_status') item=vv key=k}{if $v.acc_status==$k}{$vv}{/if}{/foreach}</td>
+				<td><left>
+					<a href="__APP__/Accounts/chakan/id/{$v.acc_id}" class="btn btn-green" data-toggle="navtab" data-id="form" data-title="查看账单">查看</a>
+					<a href="__APP__/Accounts/edit/id/{$v.acc_id}" class="btn btn-green" data-toggle="navtab" data-id="form" data-title="账单详情-{$v.acc_lanname}">编辑</a>
+					<a href="__APP__/Accounts/delete/id/{$v.acc_id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确认删除吗">删除</a>
+					<a href="__APP__/Accounts/outExcel/id/{$v.acc_id}" class="btn btn-green">导出execl</a>
+
+					</left>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bjui-pageFooter">
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

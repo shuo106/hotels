@@ -1,0 +1,92 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-u-sm-2 {width: 12%;}
+.am-u-sm-10 {width:88%;}
+</style>
+<div class="am-cf admin-main">
+<include file="Tpl/public/menu.html" />
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+      </div>
+      <hr/>
+<form class="am-form am-form-horizontal ajaxform" action="__APP__/Member/change" method="post">
+      <div class="am-g">
+<style type="text/css">
+  .am-u-sm-2{
+    padding: 0rem;
+  }
+</style>
+        <div class="am-u-sm-12 am-u-md-7">
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-2 am-form-label">会员ID：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="input_table" value="{$user['hotelid']}" style="width:65%" disabled/>
+              </div>
+            </div>
+            <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-2 am-form-label">会员帐号：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="input_table" value="{$user['username']}" style="width:65%" disabled/>
+              </div>
+            </div>
+	        <div class="am-form-group">
+              <label for="user-QQ" class="am-u-sm-2 am-form-label">真实姓名：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="am-fl" name="linkname" value="{$user['linkname']}" placeholder="输入你姓名" style="width:65%"><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+              </div>
+            </div>
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-2 am-form-label">会员QQ：</label>
+              <div class="am-u-sm-10">
+                <input type="text" name="qq" value="{$user['qq']}" placeholder="输入你的QQ号码" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:65%">
+              </div>
+            </div>
+            <div class="am-form-group">
+              <label for="user-weibo" class="am-u-sm-2 am-form-label">会员手机：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="am-fl" name="telephone" maxlength="11" value="{$user['telephone']}" placeholder="输入你的手机号码" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:65%"><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+              </div>
+            </div>
+            <div class="am-form-group">
+              <label for="user-phone" class="am-u-sm-2 am-form-label">会员地址：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="am-fl" name="address" value="{$user['address']}" placeholder="输入你的地址" style="width:65%"><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+              </div>
+            </div>
+            <!-- <div class="am-form-group"  style="display:none">
+              <label for="user-weibo" class="am-u-sm-2 am-form-label">会员传真：</label>
+              <div class="am-u-sm-10">
+                <input type="text" class="am-fl" name="chuanzhen" value="{$user['chuanzhen']}" placeholder="输入你的传真" style="width:65%"><span class="am-fl" style="color:#F00; margin:5px 5px">*</span>
+              </div>
+            </div> -->
+            <div class="am-form-group">
+            <label for="user-weibo" class="am-u-sm-2 am-form-label"></label>
+              <div class="am-u-sm-10">
+                <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+              </div>
+            </div>
+        </div>
+      </div>
+</form>
+    </div>
+<include file="Tpl/public/footer.html" />
+  </div>
+  <!-- content end -->
+<script type="text/javascript">
+  function ready(){
+    $("#img").click(function(){
+      $("#uploadimg").trigger('click');
+    });
+  }
+  function callback(data){
+    alert(data.info);
+    if(data.status==1){
+      window.location.reload();
+    }
+  }
+</script>
+</div>
+<include file="Tpl/public/bottom.html" />

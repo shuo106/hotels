@@ -1,0 +1,32 @@
+{include file="../Common/header.html"}
+<div class="box">
+	<div class="ny_zt">
+		{include file="../Common/left.html"}
+	<div class="ny_right">
+		<div class="con_zr">
+			<div class="dqwz">当前位置>><a href="__ROOT__">首页</a>>><a href="__ROOT__/Hotels/index.html">全国酒店</a>>><a href="__ROOT__/Hotels/tra">全国火车站附近酒店</a></div>
+			<div class="ppls1">
+			<div class="qgjj_con">
+			{foreach $newtrain as $v}
+			<div class="city_lb">
+			<dl>
+			<dt>{$v@key}</dt>
+			<dd>
+				<ul>
+				{foreach $v as $t}
+					<li><a href="__ROOT__/Hotels/search-{if $t['province']=='北京'||$t['province']=='上海'||$t['province']=='重庆'||$t['province']=='天津'}{$t['province']}{else}{$t['cityname']}{/if}-Train-{$t['train']}.html">{$t['train']}</a></li>
+				{/foreach}					
+				</ul>
+			</dd>
+			</dl>
+			<div class="clear"></div>
+			</div>
+			{/foreach}
+			<div class="clear"></div>
+			</div>
+			</div>
+		</div>
+	</div>	
+	</div>
+</div>
+{include file="../Common/footer.html"}

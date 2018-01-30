@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>品牌添加</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>品牌添加</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Hotel/liansuo/">
+  <input type="hidden" name="id" value="{$id}" />
+    <table border="1" class="table_border">
+      <tr>
+        <th colspan="2" align="center" class="table_border_title">品牌添加</th>
+      </tr>
+      <tr>
+        <td>品牌名：</td>
+        <td><input type="text" maxlength="100" name="name" value="{$name}" class="inputtxt" />
+        </td>
+      </tr>
+	  <tr>
+        <td width="20%">品牌首大写字母（北京 B）：</td>
+        <td>
+			<select name="zimu" id="zimu">
+				<option value="A">请选择</option>
+				<option value="A">&nbsp;A&nbsp;</option>
+				<option value="B">&nbsp;B&nbsp;</option>
+				<option value="C">&nbsp;C&nbsp;</option>
+				<option value="D">&nbsp;D&nbsp;</option>
+				<option value="E">&nbsp;E&nbsp;</option>
+				<option value="F">&nbsp;F&nbsp;</option>
+				<option value="G">&nbsp;G&nbsp;</option>
+				<option value="H">&nbsp;H&nbsp;</option>
+				<option value="I">&nbsp;I&nbsp;</option>
+				<option value="J">&nbsp;J&nbsp;</option>
+				<option value="K">&nbsp;K&nbsp;</option>
+				<option value="L">&nbsp;L&nbsp;</option>
+				<option value="M">&nbsp;M&nbsp;</option>
+				<option value="N">&nbsp;N&nbsp;</option>
+				<option value="O">&nbsp;O&nbsp;</option>
+				<option value="P">&nbsp;P&nbsp;</option>
+				<option value="Q">&nbsp;Q&nbsp;</option>
+				<option value="R">&nbsp;R&nbsp;</option>
+				<option value="S">&nbsp;S&nbsp;</option>
+				<option value="T">&nbsp;T&nbsp;</option>
+				<option value="U">&nbsp;U&nbsp;</option>
+				<option value="V">&nbsp;V&nbsp;</option>
+				<option value="W">&nbsp;W&nbsp;</option>
+				<option value="X">&nbsp;X&nbsp;</option>
+				<option value="Y">&nbsp;Y&nbsp;</option>
+				<option value="Z">&nbsp;Z&nbsp;</option>
+			</select>
+        </td>
+      </tr>
+      <tr>
+        <td>品牌图片：</td>
+        <td><input type="file" name="thumb" size="30" /></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" name="btn_submit" value="提交" class="saving">
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+$(function(){
+	$("#zimu option[value={$zimu}]").attr('selected','selected');
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.href="__APP__/Hotel/lslist";
+		}
+	});
+	return false;
+})
+</script>
+</body>
+</html>

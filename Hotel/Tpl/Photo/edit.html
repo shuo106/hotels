@@ -1,0 +1,39 @@
+<include file="Tpl/public/header.html" />
+<div id="container">
+   <include file="Tpl/public/menu.html" />
+  <div class="sideright">
+    <h3 class="title">当前位置>>首页>>图片修改</h3>
+    <h4><strong>图片修改</strong></h4>
+    <form method="post" class="iform_Editor" action="__APP__/Photo/imgupdate" enctype="multipart/form-data">
+	<input type="hidden" name="hotelid" value="{$photo['hotelid']}" />
+	<input type="hidden" name="photoid" value="{$photo['photoid']}" />
+      <table border="1" class="table_border">
+		 <tr>
+        <td>图片标题：</td>
+        <td><input type="text" maxlength="80" name="title" value="{$photo['title']}" class="input_title"> <font color="red">*</font> </td>
+      </tr>
+         <tr>
+          <td>图片地址：</td>
+          <td><input type="file" name="src"  value="" class="input_table" size="40">
+		 <img src="__ROOT__{$photo.src}" width="100" height="60">
+			</td>
+        </tr>
+	  <tr>
+        <td>设为默认：</td>
+        <td colspan="3" class="tablerow">
+          <input type="radio" name="isdefault" value="0" <if condition="($photo['isdefault'] eq 0)">  checked="checked" </if> >否
+          <input type="radio" name="isdefault" value="1" <if condition="($photo['isdefault'] eq 1)">  checked="checked" </if> >是
+        </td>
+      </tr>
+		<tr>
+          <td></td>
+          <td>
+            <input type="submit" name="btn_submit" value=" 确认修改 " class="buton">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+<include file="Tpl/public/footer.html" />

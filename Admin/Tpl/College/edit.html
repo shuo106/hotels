@@ -1,0 +1,57 @@
+<style type="text/css">
+	label.control-label {
+		width: 80px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/College/edit" method="post" data-toggle="ajaxform">
+		<input type="hidden" name="id" value="{$college['id']}" />
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="j_custom_number" class="control-label x85">
+								名称：
+							</label>
+						<input type="text" name="college" id="j_custom_title" value="{$college.college}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="j_custom_number" class="control-label x85">
+								城市：
+							</label>
+								{literal}
+						       <select id="province" name="province" data-toggle="selectpicker" data-nextselect="#j_form_city" data-refurl="__APP__/Area/getCitys/province/{value}">
+						       {/literal}
+								<option value="">请选择</option>
+								{foreach from=$province item=v}
+								<option value="{$v.name}" {if $college.province==$v.name}selected{/if}>{$v.name}</option>
+								{/foreach}
+								</select>
+								<select id="j_form_city" name="cityname"  data-toggle="selectpicker">
+								<option value="">请选择</option>
+									{foreach from=$city item=v}
+									<option value="{$v.name}" {if $college.cityname==$v.name}selected{/if}>{$v.name}</option>
+									{/foreach}
+								</select>
+					</td>
+				</tr>								
+			</tbody>
+		</table>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 80px;float: left;">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>
+</form>

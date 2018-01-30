@@ -1,0 +1,14 @@
+.qg-thumb{
+	width: 100px;
+	height: 60px;
+}
+.qg-plist{
+	margin-top: 35px;
+}
+.qg-plist ul{
+
+}
+.qg-plist ul li{
+	float: left;
+	margin: 5px;
+}

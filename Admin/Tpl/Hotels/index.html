@@ -1,0 +1,158 @@
+<style type="text/css">
+label.control-label {
+    width: 85px;
+}
+#local .bootstrap-select{
+    width: 100px !important;
+}
+</style>
+<script type="text/javascript">
+//改变省份 重新加载城市列表和隐藏县区列表
+function loadcity(p) {
+    $("#city").text('');
+    $("#area").text('');
+    $.get('__APP__/Area/getCity', {
+        p: p
+    }, function(e) {
+        if (e) {
+            $("#city").html(e.split('_')[0]);
+            $("#area").html(e.split('_')[1]);
+            $.CurrentNavtab.find('#city select').selectpicker({ size: 10});
+            $.CurrentNavtab.find('#area select').selectpicker({ size: 10});
+        }
+    });
+}
+function loadarea(c) {
+    $("#area").text('');
+    $.get('__APP__/Area/getArea', {
+        c: c
+    }, function(e) {
+        if (e) {
+            $("#area").html(e);
+            $.CurrentNavtab.find('#area select').selectpicker({ size: 10});
+        }
+    });
+}
+$.CurrentNavtab.find('#local select').selectpicker({ size: 10});
+</script>
+<div class="bjui-pageContent">
+    <form action="__APP__/Hotels/add" method="post" id="j_custom_form" data-toggle="validate">
+        <input type="hidden" name="id" value="{$info.hotelid}" />
+        <table class="table table-condensed table-hover" width="100%">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_title" class="control-label x85">
+                            酒店名称：
+                        </label>
+                        <input type="text" name="hotelname" id="j_custom_title" value="{$info.hotelname}" size="35">
+                        <em style="color: red;">*酒店名称必须在2-20个汉字之间</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_title" class="control-label x85">
+                            装修时间：
+                        </label>
+                        <input type="text" name="renovation" style="width:120px;" value="{date('Y-m-d',$info.renovation)}"  data-toggle="datepicker"/>
+                        <em style="color: red;">*请选择装修时间</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            连锁品牌：
+                        </label>
+                        <select name="lspp" data-toggle="selectpicker" style="width:100px">
+                            <option value="">
+                                选择品牌
+                            </option>
+                            {foreach from=$liansuo item=v}
+                            <option value="{$v['name']}" {if $v.name==$info.lspp}selected='selected' {/if}>
+                                {$v.name}
+                            </option>
+                            {/foreach}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            酒店类型：
+                        </label>
+                        <select name="xingji" data-toggle="selectpicker" style="width:100px">
+                            <option value="">
+                                选择类型
+                            </option>
+                            {foreach from=$xingji item=v}
+                            <option value="{$v['id']}" {if $v.id==$info.xingji}selected='selected' {/if}>
+                                {$v.name}
+                            </option>
+                            {/foreach}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_sale" class="control-label x85">
+                            特色主题：
+                        </label>
+                        <select name="theme" data-toggle="selectpicker" style="width:100px">
+                            <option value="">
+                                选择主题
+                            </option>
+                            {foreach from=$theme item=v}
+                            <option value="{$v['id']}" {if $v.id==$info.theme}selected='selected' {/if}>
+                                {$v.name}
+                            </option>
+                            {/foreach}
+                        </select>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" id="local">
+                        <label for="j_custom_sale" class="control-label x85">
+                            所在城市：
+                        </label>
+                        {$Prov}<span id="city" style="margin-left: 5px;">{$City}</span><span style="margin-left: 5px;" id="area">{$Area}</span>
+                        <input type="text" name="cityfj" value="{$city2}" size="15" /><em style="color: red;">* 如：紫荆山路56号</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_content" class="control-label x85">酒店介绍：</label>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <textarea name="introduce" id="j_form_content" class="j-content" style="width:800px;" data-toggle="kindeditor" data-min-height="100">
+                                {$info.introduce}
+                            </textarea>
+                        </div>
+                    </td>
+                </tr> 
+                <tr>
+                    <td colspan="4">
+                        <label for="j_custom_content" class="control-label x85">温馨提示：</label>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <textarea name="tip" id="j_form_content" class="j-content" style="width:800px; height:200px" data-toggle="kindeditor" data-min-height="100">
+                                {$info.tip}
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>               
+                <tr>
+                    <td colspan="4">
+                        <div class="page_but" style="margin-left:85px; margin-bottom:2px;">
+                            <ul>
+                                <li>
+                                    <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn-close" data-icon="close">关闭</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

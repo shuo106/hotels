@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,a,p,span,strong,cite,em,i,form,fieldset,input,textarea,select,option,section,button,th,td,hr{ 
+   margin:0;
+   padding:0; 
+   list-style:none;}
+body{ 
+	font-family:Arial,"微软雅黑";
+	font-size:14px; background:#FAFAFA;}
+h1,h2,h3,h4,h5,strong,b{ 
+    font-weight:normal;}
+h1 { 
+    font-size:24px; font-family:"微软雅黑";}
+h2 { font-size:18px;}
+h3 { font-size:14px;}
+h4 { font-size:14px;}
+h5 { font-size:14px;}
+cite,em,i{ 
+   font-style:normal;}
+input,button,select,textarea,a{ 
+   outline:none;}
+a{ text-decoration:none;color:#000;}
+a:focus{ -moz-outline-style: none; }/*去除图片链接时的虚线框 for: FF */
+img {
+	border:0px;}
+font{
+	font-size:12px;}
+.clearfix:after{ content:"."; display:block; clear:both; font-size:0; height:0; line-height:0; visibility:hidden;}
+*html .clearfix{ zoom:1;}/*ie6*/
+*:first-child+html .clearfix{ zoom:1;} /*ie7*/
+.LF{ float:left;}
+.LR{ float:right;}
+.m10{ margin-bottom:10px;}
+
+
+

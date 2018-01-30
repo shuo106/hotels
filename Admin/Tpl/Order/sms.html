@@ -1,0 +1,119 @@
+<style type="text/css">
+  label.control-label{
+    width: 130px;
+  }
+</style>
+<script type="text/javascript">
+function insert(self) {
+  var sms = $("#smscon").val()+self.getAttribute('value');
+  $("#smscon").val(sms)
+}
+</script>
+<div class="bjui-pageContent">
+  <form action="__APP__/Order/smsok" method="post" data-toggle="ajaxform">
+      <input type="hidden" name="id" value="{$id}" />
+      <input type="hidden" name="btn_submit" value="true">
+      <table class="table-bordered table-condensed table-hover" width="100%">
+        <tbody>
+          <tr>
+            <td>
+              <label class="control-label x85">
+                订单编号：
+              </label>
+              {$order.addtime}{$order.orderid}
+            </td>
+            <td>
+              <label class="control-label x85">
+                预订房型：
+              </label>
+              {$order.roomtype}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label x85">
+                入住客人：
+              </label>
+              {$order.kename}
+            </td>
+            <td>
+              <label class="control-label x85">
+                房间数量：
+              </label>
+              {$order.nums}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label x85">
+                会员账号：
+              </label>
+              {$order.username}
+            </td>
+            <td>
+              <label class="control-label x85">
+                应付金额：
+              </label>
+              {$order.shoufei}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label x85">
+                入住人数：
+              </label>
+              {$order.rennums}
+            </td>
+            <td>
+              <label class="control-label x85">
+                联系电话：
+              </label>
+              <input type="text" name="smsphohe" value="{$order.telephone}"  style="height:20px;" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="control-label x85">
+                入住时间：
+              </label>
+              {date('Y-m-d',$order.ruzhudate)}
+            </td>
+            <td>
+              <label class="control-label x85">
+                离店时间：
+              </label>
+              {date('Y-m-d',$order.lidiandate)}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label class="control-label x85">
+                其他要求：
+              </label>
+              {$order.remark}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <label for="smscon" class="control-label x85">
+                短信内容：
+              </label>
+              <textarea name="content" id="smscon" data-toggle="autoheight" rows="3" cols="60">{$content}</textarea>
+              <a href="__APP__/Order/variable/id/{$order.id}" class="btn btn-blue" data-toggle="dialog" data-id="Order-variable" style="display: none;">插入变量</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+                        <div class="page_but" style="margin-left:130px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">发送</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </br>如：{$order.linkman},您预订的{$order.title}房间，入住时间{$order.ruzhudate|date_format:'%Y-%m-%d'}，已预订成功。【鹏程酒店预订网】（一条短信70字以内，不加签名会被拦截）
+                        </div>
+                        </td>
+                    </tr>
+        </tbody>
+      </table>
+</div>
+</form>

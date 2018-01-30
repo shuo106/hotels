@@ -1,0 +1,58 @@
+<script type="text/javascript">
+	$(function() {
+		$.CurrentDialog.find('#btn_submit').click(function() {
+			$.CurrentDialog.find('#j_custom_form').bjuiajax('ajaxForm', {
+				callback: function(data) {
+					if (data.statusCode == 200){
+						$(this).alertmsg('ok', data.message)
+						$(this).navtab('refresh');
+						$.CurrentDialog.find('#btn_close').trigger('click')
+					}else if(data.statusCode == 300) {
+						$(this).alertmsg('error', data.message)
+					}
+				}
+			})
+		})
+	})
+</script>
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Hotel/tixian_banli"  method="post" id="j_custom_form">
+		<input type="hidden" name="id"  value="{$smarty.get.id}" />
+		<input type="hidden" name="btn_submit" value="1" />
+		<table class="table-bordered table-condensed table-hover">
+			<tbody>
+				<tr>
+					<td colspan="4">
+						<label for="email_smtp" class="control-label x85">
+							办理人员：
+						</label>
+						<input type="text" name="banliren" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<label for="email_smtp" class="control-label x85">
+							办理备注：
+						</label>
+						<textarea name="blbeizhu" data-toggle="autoheight" rows="7" cols="45"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+                    <div class="page_but" style="margin-left:100px;">
+                    <ul>
+                    <li><button type="button" class="btn-default" id="btn_submit" data-icon="save">审核</button></li>
+                    <li><button type="button" class="btn-close" id="btn_close" data-icon="close">关闭</button></li>
+                    </ul>
+                    </div>
+                    </td>
+                </tr>
+			</tbody>
+		</table>
+	</form>
+</div>

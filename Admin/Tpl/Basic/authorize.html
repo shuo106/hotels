@@ -1,0 +1,90 @@
+<style type="text/css">
+	label.control-label{ width:130px;}
+</style>
+	<form action="__APP__/Basic/authorize" method="post" id="j_custom_form" data-toggle="ajaxform">
+			<input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="btn_submit" value="true">
+<div class="bjui-pageContent">
+			<table class="table-bordered table-condensed table-hover" width="100%">
+				<tbody>
+					{if $isauth}
+					<tr>
+						<td colspan="4">
+							<label class="control-label x85">
+								授权公司：
+							</label>
+							{$ahthArr['name']}
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="j_custom_number" class="control-label x85"   >
+								授权域名：
+							</label>
+							<input type="text" name="url" id="j_custom_title" value="{$ahthArr['url']}" size="45">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="j_custom_locktime" class="control-label x85"   >
+								授权码：
+							</label>
+							<input type="password" name="code" id="j_custom_locktime" value="{$ahthArr['code']}" size="45">
+						</td>
+					</tr>
+					<tr>
+						<tr>
+						<td colspan="4">
+							<label for="j_custom_locktime" class="control-label x85"   >
+								授权版本：
+							</label>
+							{$ahthArr['version']}
+						</td>
+					</tr>
+						<td colspan="4">
+							<label for="j_custom_locktime" class="control-label x85"   >
+								授权时间：
+							</label>
+							{$ahthArr['atime']|date_format:"%Y-%m-%d" }
+						</td>
+					</tr>
+					{else}
+					<tr>
+						<td colspan="4">
+							<label class="control-label x85">
+								授权信息：
+							</label>
+							系统没有授权！
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="auth_url" class="control-label x85"   >
+								授权域名：
+							</label>
+							<input type="text" name="url" id="auth_url" value="" size="45">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<label for="auth_code" class="control-label x85"   >
+								授权码：
+							</label>
+							<input type="password" name="code" id="auth_code" value="" size="45">
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<td colspan="4">
+                        <div class="page_but" style="margin-left:130px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">{if $isauth}重新{/if}获取授权信息</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+                        </td>
+                    </tr>	
+				</tbody>
+			</table>
+</div>
+</form>

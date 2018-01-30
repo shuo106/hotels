@@ -1,0 +1,50 @@
+<include file="Tpl/public/header.html" />
+<div id="container">
+  <include file="Tpl/public/menu.html" />
+  <div class="sideright">
+    <h3 class="title">当前位置>>首页>>更改联系方式</h3>
+    <h4><strong>更改联系方式</strong></h4>
+    <form method="post" class="iform_Editor" action="__APP__/Member/change">
+      <table border="1" class="table_border">
+      	<tr>
+          <td width="10%">职务：</td>
+          <td width="90%"><input type="text" name="zhiwu" value="{$zhiwu}" size="28" class="input_table"></td>
+        </tr>        	     	     	
+        <tr>
+          <td width="10%">姓名：</td>
+          <td width="90%"><input type="text" name="linkname" value="{$linkname}" size="28"  class="input_table"></td>
+        </tr>
+        <tr>
+        <tr>
+          <td width="10%">电话：</td>
+          <td width="90%"><input type="text" name="guhua" value="{$guhua}"  size="28" class="input_table"></td>
+        </tr>
+          <td>手机：</td>
+          <td><input type="text" name="telephone" value="{$telephone}" size="28"  class="input_table"></td>
+        </tr>
+        <tr>
+          <td width="10%">Q&nbsp;Q：</td>
+          <td width="90%"><input type="text" name="qq" value="{$qq}" size="28"  class="input_table"></td>
+        </tr>
+        <tr>
+          <td>邮箱：</td>
+          <td><input type="text" name="email" value="{$email}"  size="28" class="input_table"></td>
+        </tr>
+        <tr>
+          <td width="10%">传真：</td>
+          <td width="90%"><input type="text" name="chuanzhen" value="{$chuanzhen}" size="28"  class="input_table"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" value=" 确认 " name="btn_submit" class="buton">
+            &nbsp;&nbsp;
+            <input type="reset" value=" 清除 " class="buton">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+ <div class="clear"></div>
+</div>
+<include file="Tpl/public/footer.html"/>

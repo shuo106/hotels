@@ -1,0 +1,85 @@
+<div class="bjui-pageHeader" style="height:38px">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Member/member" method="get">
+		<div style="margin-left: 0;display: inline-block;margin-top:6px">
+			<div class="btn-group">
+				<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+				<ul class="dropdown-menu right" role="menu">
+					<li><a class="btn" href="__APP__/Member/pl/type/1" data-toggle="doajaxchecked" data-group="ids">锁定选中</a></li>
+					<li><a class="btn" href="__APP__/Member/pl/type/2" data-toggle="doajaxchecked" data-group="ids">解锁选中</a></li>
+					<li><a class="btn" href="__APP__/Member/pl/type/3" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="删除不可恢复，确定要删除选中项吗？">删除选中</a></li>
+				</ul>
+			</div>
+			<label>关键字：</label>
+			<input type="text" value="{$smarty.get.text}" name="text" placeholder="用户账号、真实姓名" class="form-control" size="14">&nbsp;
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+			会员数量：{$total}人
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+		<tr style="height:36px;line-height:36px;">
+			<th style="background:#1078C1;color:#fff;"  width="26">
+				<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+			</th>
+			<th style="background:#1078C1;color:#fff;"  data-order-field="id">ID</th>
+			<th style="background:#1078C1;color:#fff;" >用户账号</th>
+			<th style="background:#1078C1;color:#fff;"  data-order-field="point">会员积分</th>
+			<th style="background:#1078C1;color:#fff;" >会员手机</th>
+			<th style="background:#1078C1;color:#fff;" >真实姓名</th>
+			<th style="background:#1078C1;color:#fff;"  data-order-field="regtime">注册时间</th>
+			<th style="background:#1078C1;color:#fff;" >上次登录IP</th>
+			<th style="background:#1078C1;color:#fff;"  data-order-field="lastlogintime">上次登录</th>
+			<th style="background:#1078C1;color:#fff;"  data-order-field="status" width="80">账号状态</th>
+			<th style="background:#1078C1;color:#fff;"  width="100">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		{foreach from=$list item=v key=k}
+		<tr data-id="{$k}">
+			<td>
+				<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+			</td>
+			<td>{$v.id}</td>
+			<td>{$v.username}</td>
+			<td>{$v.point}</td>
+			<td>{$v.telephone}</td>
+			<td>{$v.truename}</td>
+			<td>
+				{if $v.regtime}
+				{date('Y-m-d',$v.regtime)}
+				{/if}
+			</td>
+			<td>{$v.loginip}</td>
+			<td>
+				{if $v.logintime}
+				{date('Y-m-d',$v.logintime)}
+				{/if}
+			</td>
+			<td>{if $v.status==1}<a href="__APP__/Member/jiefeng/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确认解锁禁止访问状态吗？">禁止访问</a>{else}<a href="__APP__/Member/fenghao/id/{$v.id}" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确认禁止该会员吗？">正常访问</a>{/if}</td>
+			<td>
+				<a href="__APP__/Member/member_change/id/{$v.id}" class="btn btn-green" data-toggle="navtab" data-id="form" data-title="会员资料-{$v.username}">修改</a>
+				<a href="__APP__/Member/delete/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确认删除吗">删除</a>
+			</td>
+		</tr>
+		{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bjui-pageFooter">
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

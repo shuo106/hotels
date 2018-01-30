@@ -1,0 +1,54 @@
+<div class="order-l fl">
+    <h3 class="am-text-primary am-text-lg">我的会员中心</h3>
+    <ul class="am-list admin-sidebar-list member-list" id="collapase-nav-1">
+      <li>
+        <a href="__APP__/Member/index"><i class="am-icon-home am-margin-left-sm am-text-primary"></i> 会员首页</a>
+      </li>
+      <li>
+        <a data-am-collapse="{ parent: '#collapase-nav-1', target: '#user-nav' }">
+            <i class="am-icon-file-text am-margin-left-sm am-text-success"></i> 我的订单 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub {if $_menu=='order'}am-in{/if}" id="user-nav">
+            <li style=" padding-left:10px;"><a href="__ROOT__/Member/member_order.html"><i class="am-icon-th am-margin-left-sm am-text-success"></i> 所有订单 </a></li>
+        </ul>
+      </li>
+      <li>
+        <a data-am-collapse="{ parent: '#collapase-nav-1', target: '#comment-nav' }">
+            <i class="am-icon-pencil-square am-margin-left-sm am-text-warning"></i> 我的点评 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub {if $_menu=='comment'}am-in{/if}" id="comment-nav">
+            <li style=" padding-left:10px;"><a href="__ROOT__/Member/member_order.html?comment=1"><span class="am-icon-th am-margin-left-sm am-text-warning"></span> 未点评 </a></li>        
+            <li style=" padding-left:10px;"><a href="__ROOT__/Member/member_comments_manage.html"><span class="am-icon-th am-margin-left-sm am-text-warning"></span> 已点评 </a></li>
+        </ul>
+      </li>
+      <li>
+        <a data-am-collapse="{ parent: '#collapase-nav-1', target: '#company-nav' }">
+            <i class="am-icon-star am-margin-left-sm am-text-comment"></i> 我的收藏 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub {if $_menu=='permanent'}am-in{/if}" id="company-nav">
+            <li style=" padding-left:10px;"><a href="__ROOT__/Member/member_permanent.html"><span class="am-icon-th am-margin-left-sm am-text-comment"></span> 我的收藏 </a></li>
+        </ul>
+      </li> 
+<!--       <li>
+        <a data-am-collapse="{ parent: '#collapase-nav-1', target: '#pay-nav' }">
+            <i class="am-icon-paypal am-margin-left-sm am-text-jifen"></i> 积分提现 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub {if $_menu=='tixian'}am-in{/if}" id="pay-nav">
+            <li style=" padding-left:10px;"><a href="__APP__/Member/point"><span class="am-icon-th am-margin-left-sm am-text-jifen"></span> 积分流水 </a></li>
+            <li style=" padding-left:10px;"><a href="__APP__/Member/tixian_log"><span class="am-icon-th am-margin-left-sm am-text-jifen"></span> 提现记录 </a></li>
+        </ul>
+      </li> -->
+      <li>
+        <a data-am-collapse="{ parent: '#collapase-nav-1', target: '#role-nav' }">
+            <i class="am-icon-user am-margin-left-sm am-text-secondary"></i> 我的账户 <i class="am-icon-angle-right am-fr am-margin-right"></i>
+        </a>
+        <ul class="am-list am-collapse admin-sidebar-sub {if $_menu=='member'}am-in{/if}" id="role-nav">
+            <li style=" padding-left:10px;"><a href="__ROOT__/Member/member_change.html"><span class="am-icon-th am-margin-left-sm am-text-secondary"></span> 修改资料 </a></li>
+            <!-- <li style=" padding-left:10px;"><a href="__ROOT__/Member/change_password.html"><span class="am-icon-th am-margin-left-sm am-text-secondary"></span> 修改密码 </a></li> -->
+        </ul>
+      </li>
+		<li>
+        <a href="__APP__/login/loginOut"><i class="am-icon-power-off am-margin-left-sm am-text-danger"></i> 安全退出</a>
+      </li>
+    </ul>
+</div>

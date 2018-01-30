@@ -1,0 +1,76 @@
+<script type="text/javascript">
+	function changecate() {
+		$.CurrentNavtab.find('#towhere').css('display', 'inline-block');
+	}
+</script>
+<script type="text/javascript"></script>
+<div class="bjui-pageHeader" style="height: 38px;">	
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Exhibit/index" method="get" >
+		<div class="bjui-searchBar"  style="margin-top:3px">
+			<label>&nbsp;&nbsp;&nbsp;会展名称：</label>
+			<input type="text" value="{$smarty.get.text}" name="text" class="form-control" size="8">&nbsp;
+			<label>所属省份：</label>
+			<select name="province" data-toggle="selectpicker">
+				<option value="">全部</option>
+				{foreach from=$province item=v}
+				<option value="{$v.name}" {if $smarty.get.province==$v.name}selected{/if}>{$v.name}</option>
+				{/foreach}
+			</select>&nbsp;
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Exhibit/index" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height: 36px; line-height: 36px;">
+					<th style="background:#1078C1;color:#fff;">ID</th>
+					<th style="background:#1078C1;color:#fff;">会展名称</th>
+					<th style="background:#1078C1;color:#fff;">所属城市</th>
+					<th style="background:#1078C1;color:#fff;" width="100">操作
+					&nbsp;&nbsp;&nbsp;
+					<a href="__APP__/Exhibit/edit" class="btn btn-green" data-toggle="dialog" data-id="Exhibit-edit" data-title="添加">添加</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$exhibit item=v key=k}
+				<tr data-id="{$k}">
+					<td>{$v.id}</td>
+					<td>{$v.exhibit}</td>
+					<td>{$v.province}
+					{if $v.cityname}
+						,{$v.cityname}
+					{/if}
+					</td>
+					<td>
+						<a href="__APP__/Exhibit/edit/id/{$v.id}" class="btn btn-green" data-toggle="dialog" data-id="Exhibit-edit" data-title="编辑-{$v.exhibit}">编辑</a>
+						<a href="__APP__/Exhibit/del/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

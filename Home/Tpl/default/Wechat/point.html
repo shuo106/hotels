@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>我的积分</title>
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.css">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/app.css"></head>
+  <style type="text/css">
+   .am-table{  font-size:12px;}
+   .pages{ font-size:12px; }
+  </style>
+<body>
+  <!-- Header -->
+  <header data-am-widget="header"
+          class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+      <a href="javascript:history.back();" class=""> <i class="am-menu-toggle-icon am-icon-angle-left am-icon-md"></i>
+      </a>
+    </div>
+    <h1 class="am-header-title">积分流水</h1>
+    <div class="am-header-right am-header-nav">
+      <a href="__ROOT__/Wechat/index/wechatid/{$smarty.get.wechatid}" class=""> <i class="am-menu-toggle-icon am-icon-home am-icon-md"></i>
+      </a>
+    </div>
+  </header>
+  <!-- Slider -->
+  <table class="am-table" style="margin-bottom: 0rem;">
+    <thead>
+        <tr>
+            <th>积分流水ID</th>
+            <th>订单ID/提现ID</th>
+            <th>积分变化</th>
+            <th>预订时间</th>
+        </tr>
+    </thead>
+    {if $list}
+    <tbody>
+        {foreach from=$list item=v}
+        <tr>
+            <td>{$v.ctime}{$v['id']}</td>
+            <td>
+                <a style="color:#0055aa">
+                {$v.ctime}{$v['foreign_key']}
+                 </a>
+              <!-- {if !$v.type}
+                 <a style="color:#0055aa">{$v.oid}</a> 
+                 {elseif $v.type=1}
+                 <a style="color:#0055aa">{$v.tid}</a> 
+                 {/if}  -->   
+            </td>
+            <td>       
+            {if !$v.type}
+                <span style="color:green">+{$v.total}</span>
+            {else}
+                <span style="color:red">-{$v.total}</span>
+            {/if}
+            </td>
+            <td>{$v.ctime|date_format:'Y-m-d'}</td>
+        </tr>
+        {/foreach}
+    </tbody>
+    {else}
+    <div class="sucesOrder" style="text-align:center; line-height:40px;">暂无</div>
+    {/if}
+</table>
+  <div  style="padding-left:0.7rem; font-weight:600; width:100% ; text-align:right; font-size:14px; padding-right:10px;">当前积分: <span style="color:#f60">{$point}</span></div>
+  <div class="pages"  style="margin-top: 5px;">{$page} </div>
+</body>
+</html>

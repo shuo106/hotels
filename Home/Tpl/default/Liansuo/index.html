@@ -1,0 +1,64 @@
+{$leibie='连锁品牌'} {include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/subpage.css" />
+<div class="content_wap">
+    <div class="main">
+        <div class="city_nav">
+            <img src="__PUBLIC__/images/nav_bg.gif" alt="" class="netOrder" />
+            <a href="">连锁酒店品牌</a>
+        </div>
+        <div class="bg"></div>
+        <div class="sitemap">
+            <div data-am-widget="tabs" class="am-tabs am-tabs-default">
+                <ul class="am-tabs-nav am-cf">
+                    {foreach from=$all key=key item=vo}
+                    <li{if $key==0} class="am-active" {/if}><a href="[data-tab-panel-{$key}]">{$vo}</a></li>
+                        {/foreach}
+                </ul>
+                <div class="am-tabs-bd">
+                    {foreach from=$all key=key item=vo}
+                    <div data-tab-panel-{$key} class="am-tab-panel am-active">
+                        <div class="city_list">
+                            <dl class="hot">
+                                <dt><strong>热门</strong></dt>
+                                <dd>
+                                    <ul>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/如家快捷"><img src="__PUBLIC__/images/1_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/如家快捷"><span>如家快捷</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/汉庭"><img src="__PUBLIC__/images/5_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/汉庭"><span>汉庭</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/锦江之星"><img src="__PUBLIC__//images/2_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/锦江之星"><span>锦江之星</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/莫泰168"><img src="__PUBLIC__/images/6_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/莫泰168"><span>莫泰168</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/格林豪泰"><img src="__PUBLIC__/images/7_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/格林豪泰"><span>格林豪泰</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/速8连锁"><img src="__PUBLIC__/images/4_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/速8连锁"><span>速8连锁</span></a></li>
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/布丁连锁"><img src="__PUBLIC__/images/58_b.jpg" alt="" /></a><a href="__APP__/hotels/liansuo/brand/布丁连锁"><span>布丁连锁</span></a></li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><strong><a name="{$vo}">{$vo}</a></strong></dt>
+                                <dd>
+                                    <ul id="chain">
+                                        {foreach from=$row item=v} {if $v['zimu'] == $vo}
+                                        <li>
+                                            <a href="__APP__/hotels/liansuo/brand/{$v['name']}"><img src="__ROOT__{$v['thumb']}" alt="" /><span>{$v['name']}</span></a>
+                                        </li>
+                                        {/if} {/foreach}
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <div style="clear:both; height:5px;"></div>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+</div>
+{include file="../Common/footer.html"}

@@ -1,0 +1,362 @@
+<include file="Tpl/public/header.html" />
+<style>
+.am-form select {
+    max-width: 200px;
+    float: left;
+    margin-right: 5px;
+    line-height: 1.2
+}
+.zhong {
+    line-height: 30px;
+}
+.hotel_sheshi ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+.hotel_sheshi ul{
+    padding-left: 0;
+}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg"><empty name="info.id">资料维护<else/>资料维护</empty></strong> / <small>Hotel info</small>
+                </div>
+            </div>
+            <hr>
+            <form method="post" id="room-form" class="am-form ajaxform" action="__APP__/Hotel/add" enctype="multipart/form-data">
+                <table class="am-table am-margin-left am-margin-right">
+                    <tr>
+                        <td style="width: 10%">酒店名称：</td>
+                        <td>
+                            <input type="text" class="am-fl" size="15" style=" width:240px"  name="hotelname" value="{$hotelname}" />
+                            <span class="am-fl" style=" margin:0px 5px;color: red;"> *</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否连锁：</td>
+                        <td>
+                            <select name="lspp" class="am-select">
+                                <option value="">若为连锁请选择</option>
+                                <volist name="ls" id="vo">
+                                    <option value="{$vo.name}" <if condition=" $lspp eq $vo.name "> selected="selected" </if>>{$vo.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>酒店类型：</td>
+                        <td>
+                            <select name="xingji" class="am-select">
+                                <volist name="xj" id="v">
+                                    <option value="{$v.id}" <if condition=" $xingji eq $v.id "> selected="selected" </if> >{$v.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>特色主题：</td>
+                        <td>
+                            <select name="theme" class="am-select">
+                                <volist name="themes" id="v">
+                                    <option value="{$v.id}" <if condition=" $theme eq $v.id "> selected="selected" </if> >{$v.name}</option>
+                                </volist>
+                            </select>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td>酒店地址：</td>
+                        <td>
+                            <div style="display: inline;" class="am-fl">
+                                {$Prov} <span id="city">{$City}</span> <span id="area">{$Area}</span>
+                            </div>
+                            <div class="am-fl" style="margin-left: 5px;margin-top: 3px;">
+                            <input class="am-fl" type="text" name="cityfj" value="{$city2}" style="width: 189px;" size="15" />
+                            <span class="am-fl" style=" margin:0px 5px"> 如：紫荆山路56号</span>    
+                            </div>
+                        </td>
+                    </tr>
+					<tr>
+                        <td>商业区：</td>
+                        <td>
+                            <input type="text" name="syq" value='{$syq}' style=" width:240px">
+                        </td>
+                    </tr>
+                    <if condition="$sheshis">
+                        <tr>
+                            <td>服务设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul style="margin: 0;">
+                                        <volist name="sheshis" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input class="f" type="checkbox" name="sheshi[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($sheshi)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" onclick="selectAll()" id="allCheck"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$canyins">
+                        <tr>
+                            <td>餐饮设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul style="margin: 0;">
+                                            <volist name="canyins" id="v">
+                                                    <li>
+                                                        <label class="am-checkbox">
+                                                            <input class="c" type="checkbox" name="canyin[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($canyin)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" onclick="selectAllc()" id="allCheckc"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$kfsheshis">
+                        <tr>
+                            <td>客房设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul style="margin: 0;">
+                                        <volist name="kfsheshis" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input class="k" type="checkbox" name="kfsheshi[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($kfsheshi)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" onclick="selectAllk()" id="allCheckk"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$yules">
+                        <tr>
+                            <td>娱乐设施：</td>
+                            <td style="line-height:2em;">
+                                <div class="hotel_sheshi">
+                                    <ul style="margin: 0;">
+                                        <volist name="yules" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input class="y" type="checkbox" name="yule[]" value="{$v.name}" data-am-ucheck <if condition="(in_array($v['name'],json_decode($yule)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" onclick="selectAlly()" id="allChecky"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <if condition="$creditcards">
+                    <tr>
+                            <td>信用卡：</td>
+                            <td style="line-height:1em;">
+                                <div class="hotel_sheshi">
+                                    <ul style="margin: 0;">
+                                        <volist name="creditcards" id="v">
+                                            <li>
+                                                <label class="am-checkbox">
+                                                    <input class="x" type="checkbox" name="creditcard[]" value="{$v.name}" data-am-ucheck 
+                                                    <if condition="(in_array($v['name'],json_decode($xinyongka)))"> checked </if>> {$v.name}
+                    </label>
+                    </li>
+                    </volist>
+                    <li>
+                        <label class="am-checkbox">
+                            <input data-am-ucheck type="checkbox" onclick="selectAllx()" id="allCheckx"> 全选
+                        </label>
+                    </li>
+                    </ul>
+                    </div>
+                    </td>
+                    </tr>
+                    </if>
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/kindeditor-min.js"></script>
+                    <script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.5/lang/zh_CN.js"></script>
+                    <script>
+                    var editor;
+                    KindEditor.ready(function(K) {
+                        editor = K.create('textarea[name="introduce"],textarea[name="tip"]', {
+                            allowFileManager: true,
+                            afterBlur: function() {
+                                this.sync();
+                            },
+                        });
+                    });
+                    function checkall(c) {
+                        for (var i = 0; i < $("." + c).length; i++) {
+                            $("." + c).eq(i).attr({
+                                checked: 'checked'
+                            });
+                        }
+                    }
+                    </script>
+                    <tr>
+                        <td>酒店介绍：</td>
+                        <td>
+                            <textarea class="bj_container" style="height:200%;width: 70%;" name="introduce">{$introduce}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>温馨提示：</td>
+                        <td>
+                            <textarea class="Other_services" name="tip" style="width: 70%;">{$tip}</textarea>
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td width="10%"></td>
+                        <td>
+                            <input class="am-btn am-btn-primary am-fl" type="submit" value=" 保存 " class="buton">
+                        </td>
+                    </tr>                    
+                </table>
+            </form>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+</div>
+<script type="text/javascript">
+var loadcity, loadarea;
+function ready() {
+    loadcity = function(p) {
+        $("#city").text('');
+        $("#area").text('');
+        $.get('__APP__/Area/getCity', {
+            p: p
+        }, function(e) {
+            if (e) {
+                $("#city").html(e.split('_')[0]);
+                $("#area").html(e.split('_')[1]);
+                $('.am-select').mySelected();
+            }
+        });
+    }
+    loadarea = function(c) {
+        p = $("#prov").val();
+        if (p != '北京' && p != '上海' && p != '重庆' && p != '天津') {
+            $("#area").text('');
+            $.get('__APP__/Area/getArea', {
+                c: c
+            }, function(e) {
+                if (e) {
+                    $("#area").html(e);
+                    $('.am-select').mySelected();
+                }
+            });
+        }
+    }
+}
+function callback(data){
+    alert(data.info);
+    if(data.status==1){
+        window.location.href="__APP__/";
+    }
+}
+function selectAll(){
+ var checklist = document.getElementsByClassName("f");
+   if(document.getElementById("allCheck").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+function selectAllc(){
+ var checklist = document.getElementsByClassName("c");
+   if(document.getElementById("allCheckc").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+function selectAllk(){
+ var checklist = document.getElementsByClassName("k");
+   if(document.getElementById("allCheckk").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+function selectAlly(){
+ var checklist = document.getElementsByClassName("y");
+   if(document.getElementById("allChecky").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+function selectAllx(){
+ var checklist = document.getElementsByClassName("x");
+   if(document.getElementById("allCheckx").checked)
+   {
+   for(var i=0;i<checklist.length;i++)
+   {
+      checklist[i].checked = 1;
+   }
+ }else{
+  for(var j=0;j<checklist.length;j++)
+  {
+     checklist[j].checked = 0;
+  }
+ }
+}
+</script>
+<include file="Tpl/public/bottom.html" />

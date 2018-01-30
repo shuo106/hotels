@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>right</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>酒店列表</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Hotels/pl">
+    <table border="0" class="table_border">
+      <tr>
+        <th colspan="11" align="center" class="table_border_title">酒店列表</th>
+      </tr>
+      <tr onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td width="5%" align="center" class="world_Bold">选中</td>
+		<td width="5%" align="center" class="world_Bold">排序</td>
+        <td width="5%" align="center" class="world_Bold">ID</td>
+        <td width="21%" align="center" class="world_Bold">酒店名称</td>
+        <td width="11%" align="center" class="world_Bold">用户名</td>
+        <td width="11%" align="center" class="world_Bold">省市</td>
+        <td width="6%" align="center" class="world_Bold">联系人</td>
+        <td width="8%" align="center" class="world_Bold">电话</td>
+		<td width="7%" align="center" class="world_Bold">酒店推荐</td>
+		<td width="8%" align="center" class="world_Bold">加入时间</td>
+        <td align="center" class="world_Bold">管理操作</td>
+      </tr>
+	  {if $list}
+	  {foreach from=$list item=v}
+      <tr class="a_hover" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+        <td><input type="checkbox" name="id[]" value="{$v['hotelid']}" /></td>
+		<td><input type="text" name="sort[{$v['hotelid']}]" style="width:40px;height:20px;" value="{$v['sort']}" /></td>
+        <td>{$v['hotelid']}</td>
+		<td><a href="__ROOT__/index.php/Hotels/show/id/{$v['hotelid']}" target="_blank">{$v['hotelname']}</a></td>
+		<td>{$v['username']}</td>
+		<td>{$v['city']}</td>
+		<td>{$v['linkname']}</td>
+		<td>{$v['telephone']}</td>
+		<td>{if $v['is_tuijian'] == 1}<a href="__APP__/Hotels/butuijian/id/{$v['hotelid']}" class="butuijian" title="单击取消推荐">推荐</a>{else}<a href="__APP__/Hotels/tuijian/id/{$v['hotelid']}" class="tuijian" title="单击推荐">不推荐</a>{/if}</td>
+        <td>{$v['regtime']|date_format:"%Y-%m-%d"}</td>
+        <td><a href="__APP__/Hotels/index/id/{$v['hotelid']}">编辑</a> | <a href="__APP__/Hotels/del/id/{$v['hotelid']}" class="del">删除</a>|<a href="__APP__/Hotels/jguan/id/{$v['hotelid']}/d/{$v['is_delete']}" class="guan">{if $v['is_delete'] eq "0"}关闭{else}开启{/if}</a></td>
+      </tr>
+      {/foreach}
+	  {else}
+	  <tr class="a_hover" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#EDF8FE'">
+	  <td colspan="6">暂无酒店</td>
+	   </tr>
+	  {/if}
+	  </table>
+    <table width="100%" align="center" style="margin-top:8px;">
+       <tr>
+        <td width="100"><input name="chkall" type="checkbox" id="chkall" value="check"> 全选/反选</td>
+        <td>
+		  <input type="submit" name="btn_submit" value="更新排序" class="bton">
+          <input type="submit" name="btn_submit" value="酒店推荐" class="bton">
+		  <input type="submit" name="btn_submit" value="取消推荐" class="bton">
+          &nbsp;&nbsp;
+          <input type="submit" name="btn_submit" value="批量关闭" class="bton">
+          <input type="submit" name="btn_submit" value="批量删除" class="bton">
+        </td>
+      </tr>
+    </table>
+	</form>
+	<table width="100%" border="0" style="margin-top:8px;">
+	  <tr>
+	    <td align="right" width="50%"><input type="text" maxlength="100" class="inputtxt" id="content" /></td>
+		<td><input type="button" value="搜 索" class="bton" id="search"></td>
+	  </tr>
+	</table>
+	 <script>
+	  $('#search').click(function(){
+		var con = $('#content').val();
+		if(con == ''){
+			alert('请输入酒店名称或者用户名');
+			return false;
+		}
+		window.location.href="__APP__/Hotels/lists/text/"+con+"";
+	  })
+	  </script>
+    <table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center"><div class="pages">{$page}</div></td>
+      </tr>
+    </table>
+</div>
+<script>
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.reload();
+		}
+	});
+	$('#chkall').click(function(){
+	if($(this).attr('checked')=='checked'){
+		$("input[type=checkbox][name='id[]']").attr('checked','checked');
+	}else{
+		$("input[type=checkbox][name='id[]']").removeAttr('checked','checked');
+	}
+})
+	$('.del').click(function(){
+		if(confirm('你确定要删除该酒店吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	$('.guan').click(function(){
+		if(confirm('你确定要关闭该酒店吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	$('.tuijian').click(function(){
+		if(confirm('你确定推荐该酒店吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	$('.butuijian').click(function(){
+		if(confirm('你确定取消该酒店推荐吗？')){
+			$.get($(this).attr('href'),function(data){
+				eval('data='+data);
+				alert(data.msg);
+				if(data.status==1){
+					window.location.reload();
+				}
+			});
+		}
+		return false;
+	});
+	return false;
+})
+</script>
+</body>
+</html>

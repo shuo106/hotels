@@ -1,0 +1,43 @@
+{include file="../Common/header.html"}
+<div class="clear"></div>
+<div class="con_z">
+	{include file="../Member/member_menu.html"}
+	<div class="con_zru"><div class="dqwzb"><span>您好，{$smarty.session.name}，欢迎光临</span>当前位置>><a href="__ROOT__">酒店首页</a> >> <a href="__APP__/member/index">我的会员中心</a> >> 我的常住酒店 </div>
+	<div class="jddd"><div class="jddd_t">我的常住酒店 </div>
+	 {if $row}
+	 {foreach from=$row item=v}
+	 <div class="jddd_con3">
+		<div class="jddd_l">
+		<a href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank"  title="{$v['hotelname']}">{if empty($v['src'])}<img src="__PUBLIC__/images/zanwu.gif" width="151px" height="106px" />{else}<a href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank"  title="{$v['hotelname']}"><img src="{$v['src']}" width="151px" height="106px" />{/if}</a>
+		</div>
+		<div class="jddd_r">
+		 <ul>
+		  <li>
+			<span>订单号</span>
+			<span>{$v['addtime']}{$v['orderid']}</span>
+		  </li>
+		  <li>
+			<span>酒店名称 </span><a href="__ROOT__/Hotels/show-{$v['hotelid']}.html">{$v['hotelname']}</a>
+			<span>{if $v['status'] eq 1 and !$v['iscom']}<a href="__APP__/Member/member_comments/oid/{$v['orderid']}">我要点评</a>{elseif $v['iscom']}已点评{/if}</span>
+		  </li>
+		<li>
+			<span>酒店简介：</span>{mb_substr($v['introduce'],0,100,'utf-8')}<a  href="__ROOT__/Hotels/show-{$v['hotelid']}.html" target="_blank"  title="{$v['hotelname']}" style="color:#FF0000;">[详细]</a>
+		</li>
+		  <li>
+			<span>地址：</span>{$v['address']}
+		  </li>
+		</ul>
+		</div>
+	</div>
+	<div class="clear"></div>
+	{/foreach}
+	{else}
+	<ul style="width:765px;">
+	<li style="text-align:center;margin:10px;">您还没有入住过哦，赶快去订购吧！</li>
+	</ul>
+	{/if}
+	</div>
+	</div>
+</div>
+<div class="clear"></div>
+{include file="../Common/footer.html"}

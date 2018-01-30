@@ -1,0 +1,39 @@
+<include file="Tpl/public/header.html" />
+<div class="am-cf admin-main">
+<include file="Tpl/public/menu.html" />
+   <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf">
+          <strong class="am-text-primary am-text-lg">房间回收站</strong> / <small>Room</small>
+        </div>
+      </div>
+      <hr>
+      <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
+        <volist name="row" id="vo">
+        <li style="width:190px;">
+          <a href="__APP__/Room/room/id/{$vo.id}">
+            <img class="am-img-thumbnail am-img-bdrs" src="__ROOT__/{$vo['thumb']}" style="height: 116px;width: 168px;" alt=""/>
+            <div class="gallery-title" style="overflow: hidden;white-space:nowrap;white-space: nowrap;">{$vo['roomtype']}</div>
+          </a>
+          <span>
+          <div class="room-status">
+          <a href="__APP__/Hotel/huanyuan/id/{$vo.id}"  class="am-badge am-badge-success am-radius" style="color: #FFF;">还原</a>
+          <a href="__APP__/Hotel/roomdel2/id/{$vo.id}" class="am-badge am-badge-danger am-radius" style="color: #FFF;" data-confirm="确认要彻底删除该记录吗？">删除 </a>            
+          </div>
+          </span>
+        </li>
+        </volist>
+      </ul>
+      <div class="am-margin am-cf">
+        <hr/>
+        <p class="am-fl" style="margin-top:0rem; margin: 0 0 0rem 0;">共 {$total} 条记录</p>
+        <div class="am-fr">{$page}</div>
+      </div>
+    </div>
+<include file="Tpl/public/footer.html" />
+  </div>
+  <!-- content end -->
+</div>
+<include file="Tpl/public/bottom.html" />

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>安全设置</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/style.css">
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+</head>
+<body style="margin-right:8px;">
+<div class="the_right">
+  <h4 class="tit">您当前的位置：首页>><em>安全设置</em></h4>
+  <form method="post" class="iform_Editor" action="__APP__/Safety/add">
+  <input type="hidden" name="id" value="{$id}" />
+    <table border="1" class="table_border">
+      <tr>
+        <th colspan="2" align="center" class="table_border_title">安全设置</th>
+      </tr>
+	  <tr>
+        <td width="35%"><span style="font-weight:900">允许访问后台的IP列表</span><br />只有当管理员处于本列表中的 IP 地址时才可以访问网站后台，列表以外的地址访问将无法访问，但仍可访问网站前台界面，请务必慎重使用本功能。每个 IP 一行<br />
+<span style="color:red;">留空则所有 IP 均可访问网站后台</span></td>
+        <td><textarea name="ip" rows="7" cols="25">{$ip}</textarea></td>
+      </tr>
+	   <tr>
+        <td><span style="font-weight:900">后台最大登陆失败次数</span><br />登陆失败次数超过后系统将自动锁定该IP，0表示不限制次数</td>
+        <td><input type="text" maxlength="100" name="number" size="5"  value="{$number}" />次</td>
+      </tr>
+	  <tr>
+        <td><span style="font-weight:900">IP锁定时间：</span></td>
+        <td><input type="text" maxlength="100" name="locktime" size="5" value="{$locktime}" />小时</td>
+      </tr>
+	  <tr>
+      	<td></td>
+        <td><input type="submit" name="btn_submit" class="saving" maxlength="100"  value="保存" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+<script>
+$(function(){
+	$('form').ajaxForm(function(data){
+		eval('data='+data);
+		alert(data.msg);
+		if(data.status==1){
+			window.location.reload();
+		}
+	});
+	return false;
+})
+</script>
+</html>

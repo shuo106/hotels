@@ -1,0 +1,81 @@
+<style type="text/css">
+	label.control-label{
+		width: 100px;
+	}
+</style>
+<script type="text/javascript">
+    $(function(){
+        $.CurrentNavtab.find('#btn_submit').click(function (){
+           $('#j_custom_form').bjuiajax('ajaxForm', {
+            callback: function(data){
+                if(data.statusCode==200){
+                    $(this).alertmsg('ok', data.message)
+                    $(this).navtab('refresh')
+                    data.closeCurrent && $(this).navtab('closeCurrentTab')
+                    data.forward && $(this).navtab('switchTab',data.forward)
+                }
+                if(data.statusCode==300)
+                $(this).alertmsg('error', data.message)
+            },
+            reloadNavtab:true,
+           })
+        })
+    })
+</script>
+<div class="bjui-pageContent">
+	<form action="__APP__/Activity/add" method="post" id="j_custom_form" data-toggle="ajaxform">
+		<input type="hidden" name="tid" value="{$smarty.get.id}" />
+		<input type="hidden" name="id" value="{$reply['id']}" />
+		<input type="hidden" name="rid" value="{$reply['rid']}" />
+		<table class="table table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							中奖等级：
+						</label>
+						<input type="text" name="prize">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							奖品名称：
+						</label>
+						<input type="text" name="award">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							奖品数量：
+						</label>
+						<input type="text" name="nums">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="name" class="control-label x85">
+							中奖机率：
+						</label>
+						<input type="text" name="v">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 100px;float:left">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" id="btn_submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>

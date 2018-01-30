@@ -1,0 +1,95 @@
+<style type="text/css">
+  label.control-label{ width:85px;}
+  font{
+    color: red;
+  }
+</style>
+<script type="text/javascript">
+  function pic_upload_success(file, data) {
+    var json = $.parseJSON(data)
+    if (data.statusCode == 200)
+      $(this).alertmsg('ok', data.message)
+    if (data.status == 300)
+      $(this).alertmsg('error', data.message)
+    $(this).bjuiajax('ajaxDone', json)
+    if (json[BJUI.keys.statusCode] == BJUI.statusCode.ok) {
+      $.CurrentDialog.find('#j_custom_yuantu').val(json.yuantu)
+      $.CurrentDialog.find('#j_custom_pic').html('<img class="qg-thumb" src=__ROOT__' + json.yuantu + ' />')
+    }
+  }
+</script>
+<form action="__APP__/Ads/addadsin" method="post" data-toggle="ajaxform">
+  <div class="bjui-pageContent">
+    <input type="hidden" name="adsid" value="{$adsid}" />
+    <input type="hidden" name="placeid" value="{$placeid}" />
+    <input type="hidden" name="btn_submit" value="true">
+    <table class="table-bordered table-condensed table-hover" width="100%">
+      <tbody>
+        <tr>
+          <td>
+            <label for="j_custom_title" class="control-label x85">
+              广告名称：
+            </label>
+            <input type="text" name="adsname" id="j_custom_title" value="{$place.adsname}" size="15"><font>*</font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="j_custom_locktime" class="control-label x85">
+              广告介绍：
+            </label>
+            <input type="text" name="introduce" id="j_custom_locktime" value="{$place.introduce}" size="15"><font>*</font>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="control-label x85">
+              广告内容：
+            </label>
+            <div style="display: inline-block; vertical-align: middle;">
+              <div  data-toggle="upload" data-uploader="__APP__/Upload/index/dir/ads" data-file-size-limit="1024000000" data-file-type-exts="*.jpg;*.png;*.gif;*.mpg" data-multi="true" data-auto="true" data-on-upload-success="pic_upload_success" data-icon="cloud-upload">             
+              </div>
+              <span id="j_custom_pic">
+                          {if $place.imageurl}
+                          <img class="qg-thumb" src="__ROOT__{$place.imageurl}" alt=""/>
+                          {/if}
+              </span>               
+              <input type="hidden" name="imageurl" value="{$place.imageurl}" id="j_custom_yuantu" >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="control-label x85">
+              连接地址：
+            </label>
+           <input type="text" name="linkurl" value="{$place.linkurl}" >
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="control-label x85">
+              是否启用：
+            </label>
+            <input type="radio" name="passed" value="1" size="5" data-toggle="icheck" data-label="是" {if $place.passed==1}checked{/if}/>
+            <input type="radio" name="passed" value="0" size="5" data-toggle="icheck" data-label="否" {if $place.passed==0}checked{/if}/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="page_but" style="margin-left:85px;">
+              <ul>
+                <li>
+                  <button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button>
+                </li>
+                <li>
+                  <button type="button" class="btn-close" data-icon="close">关闭</button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

@@ -1,0 +1,152 @@
+{$leibie="点评列表"} {include file="../Common/header.html"}
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+
+<div class="box">
+
+    <div class="ny_zt">
+
+        {include file="../Common/left.html"}
+
+        <div class="ny_right">
+
+            <div class="con_zr">
+
+                <div class="dqwz"><h3><i class="am-icon-commenting"></i>点评列表</h3></div>
+
+                <div class="ppls1">
+
+                    <div class="jddpa">
+
+                        <!--<div class="jddpa_t"><span><a href="__ROOT__/login/index">我要点评</a></span>酒店点评</div>-->
+
+                        <div class="dqwz_x">
+
+                            <span class="gddp">
+
+            <a href="__ROOT__/Comment/index.html">全部</a> | <a href="__ROOT__/Comment/cate-1.html{$key}">好评</a> | <a href="__ROOT__/Comment/cate-2.html{$key}">中评</a> | <a href="__ROOT__/Comment/cate-3.html{$key}">差评</a> | <a href="__ROOT__/Comment/cate-4.html{$key}">投诉</a>
+
+            </span> 共有 {$num} 条酒店点评
+
+                        </div>
+
+                        <div class="jddpa_con">
+
+                            <div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3" style="padding: 0 1.25rem;">
+
+                                <ul class="am-comments-list admin-content-comment">
+
+                                    {if $row} {foreach from=$row item=v}
+
+                                    <li class="am-comment">
+
+                                        <span style="width:50px;height:80px;">
+
+                                            <img src="{if $v['head']}__ROOT__{$v['head']}{else}__PUBLIC__/assets/i/couple.jpg{/if}" alt="" class="am-comment-avatar" style="height: 65px;width: 65px;">
+
+                                        <span style="float: left; margin-top: 65px;margin-left: -60px;">{$v['uname']}</span>
+
+                                        </span>
+
+                                        <div class="am-comment-main" style="margin-left: 70px;">
+
+                                            <header class="am-comment-hd"style="margin-left: 10px;">
+
+                                                <div class="am-comment-meta">
+
+                                                    <span class="am-fl">{$v['username']}  评论 {$v['hotelname']} <span class="am-badge am-badge-success" style="font-size:12px; line-height: 18px;">{$v['label']}</span></span>
+
+                                                    <time class="am-fr">{$v['addtime']|date_format:'%Y-%m-%d %H:%M:%S'}</time>
+
+                                                </div>
+
+                                            </header>
+
+                                            <div class="am-comment-bd" style="margin-left: 10px;">
+
+                                                <img src="__ROOT__{$v.src|default:'/Public/images/zanwu.gif'}" width="80" height="60" class="am-fr" />
+
+                                                <p style="line-height:30px">点评内容：{$v['content']}</p>
+
+                                                {if $v.thumb}
+
+                                                <p style="line-height:30px">
+
+                                                    <ul class="comment_pl" style="margin-left:62px;height:auto">
+
+                                                        {foreach from=$v.thumb item=vo}
+
+                                                        <li style="width:98px !important; height:auto">
+
+                                                            <img src="__ROOT__{$vo}" data-popup style="width:93px; height:70px;">
+
+                                                        </li>
+
+                                                        {/foreach}
+
+                                                    </ul>
+
+                                                </p>
+
+                                                    {if $v['reply']}
+
+                                                    <p style="line-height:30px; clear: both;">
+
+                                                        <span style="color:#659a3e; font-weight:bold;">酒店回复：{$v['reply']}</span></p>
+
+                                                    {/if}
+
+                                                {else}
+
+                                                    {if $v['reply']}
+
+                                                    <p style="line-height:30px; ">
+
+                                                        <span style="color:#659a3e; font-weight:bold;">酒店回复：{$v['reply']}</span></p>
+
+                                                    {/if}
+
+												{/if} 
+
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+
+                                    {/foreach} {else}
+
+                                    <center>
+
+                                        <img src="__PUBLIC__/assets/images/dianping.png"></center> {/if}
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="pages">{$page}</div>
+
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<style>
+    #guanzhu{
+        position: relative;
+        left:-20px;
+    }
+</style>
+
+{include file="../Common/footer.html"}
+

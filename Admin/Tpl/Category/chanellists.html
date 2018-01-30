@@ -1,0 +1,65 @@
+<div class="bjui-pageHeader">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Category/chanellists" method="get">
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Category/sort" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height: 36px; line-height: 36px;">
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;" data-order-field="id">ID</th>
+					<th style="background:#1078C1;color:#fff;" data-order-field="sort" width="50">排序</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">栏目名称</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">栏目类型</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">栏目描述</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">添加时间</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">状态</th>
+					<th style="background:#1078C1;color:#fff;" style="background:#1078C1;color:#fff;">操作
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="__APP__/Category/index" class="btn btn-green" data-toggle="navtab" data-id="cate_index_pid-{$v.id}">新增</a>
+                    </th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$list item=v key=k}
+				<tr data-id="{$k}">
+					<td>{$v.id}</td>
+					<td>
+						<input type="text" class="ids" name="sort[{$v.id}]" value="{$v.sort}" style="width:100%" />
+					</td>
+					<td>{$v['html']|indent:($v['lev']-1):'&nbsp;'}{$v['name']}</td>
+					<td>{if $v['type']==1} <span style='font-weight:bold;'>顶部导航</span>{elseif $v['type']==2}<span style='font-weight:bold;'>底部导航</span>{/if}</td>
+					<td>{$v['description']}</td>
+					<td>{$v['addtime']|date_format:'%Y-%m-%d'}</td>
+					<td>{if $v['is_show']}
+						<a href="__APP__/Category/isshow/id/{$v['id']}_0" class="btn btn-green" data-toggle="doajax">关闭导航</a> {else}
+						<a href="__APP__/Category/isshow/id/{$v['id']}_1" class="btn btn-red" data-toggle="doajax">开启导航</a> {/if}
+					</td>
+					<td>
+						<a href="__APP__/Category/index/pid/{$v['id']}" class="btn btn-orange" data-toggle="navtab" data-id="cate_index_pid-{$v.id}">添加子级栏目</a>
+						<a href="__APP__/Category/index/id/{$v['id']}" class="btn btn-green" data-toggle="navtab" data-id="channellist-{$v.id}" data-title="修改-{$v.name}">修改</a>
+						<a href="__APP__/Category/del/id/{$v['id']}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="子导航也会永久删除，确定要删除吗？">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

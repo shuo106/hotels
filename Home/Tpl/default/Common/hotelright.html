@@ -1,0 +1,26 @@
+    <div class="lljl"><h3 class="caption">浏览记录</h3><p>您最近没有浏览记录</p></div>
+    <div class="area_zxdd">
+      <h3 class="caption">促销信息</h3>
+      <ul>
+         	{foreach from="$cuxiao" item="vo"}
+			<li><a href="__ROOT__/Article/show-{$vo['articleid']}.html">{$vo['title']|truncate:15:""}</a></li>
+			{/foreach}
+      </ul>
+    </div>
+    <div class="area_zxdd">
+      <h3 class="caption">快捷找酒店</h3>
+         <ul>
+        {if $hotelinfo.fjhotel1}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel1}-0-0-0.html">{$hotelinfo.fjhotel1}</a></li>{/if}
+        {if $hotelinfo.fjhotel2}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel5}-0-0-0.html">{$hotelinfo.fjhotel2}</a></li>{/if}
+        {if $hotelinfo.fjhotel3}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel3}-0-0-0.html">{$hotelinfo.fjhotel3}</a></li>{/if}
+        {if $hotelinfo.fjhotel4}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel4}-0-0-0.html">{$hotelinfo.fjhotel4}</a></li>{/if}
+        {if $hotelinfo.fjhotel5}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel5}-0-0-0.html">{$hotelinfo.fjhotel5}</a></li>{/if}
+        {if $hotelinfo.fjhotel6}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel6}-0-0-0.html">{$hotelinfo.fjhotel6}</a></li>{/if}
+        {if $hotelinfo.fjhotel7}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel7}-0-0-0.html">{$hotelinfo.fjhotel7}</a></li>{/if}
+        {if $hotelinfo.fjhotel8}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel8}-0-0-0.html">{$hotelinfo.fjhotel8}</a></li>{/if}
+        {if $hotelinfo.fjhotel9}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel9}-0-0-0.html">{$hotelinfo.fjhotel9}</a></li>{/if}
+        {if $hotelinfo.fjhotel10}<li><a href="__ROOT__/Hotels/search-{$city.id}-0-0-0-0-{$hotelinfo.fjhotel10}-0-0-0.html">{$hotelinfo.fjhotel10}</a></li>{/if}
+        </ul> 
+      <div class="clear"></div>
+    </div>
+    <div class="lxtel"><img src="__PUBLIC__/images/telimg.jpg" /><p>客服电话：0371-63611389</p></div>

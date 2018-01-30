@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>后台登陆</title>
+		<link href="__PUBLIC__/admin/css/login.css" rel="stylesheet" type="text/css" />
+		<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+		<script src="__PUBLIC__/js/jquery.form.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('form').ajaxForm(function(data) {
+					eval('data=' + data);
+					if (data.status == 1) {
+						window.location.href = "__APP__/Index/index";
+					}
+					if (data.status == 0) {
+						alert(data.msg);
+						window.location.reload();
+					}
+				});
+			})
+			function changeVerify() {
+				var timenow = new Date().getTime();
+				document.getElementById('checkcode').src = '__ROOT__/index.php/register/verify/' + timenow;
+			}
+		</script>
+		<style>
+			.logo {
+				margin-top: 80px;
+				margin-bottom: 0px;
+			}
+			.head{
+				/* margin-top: 80px; */
+				display: flex;
+			}
+			.logo-img {
+				height: 70px;
+			}
+			.logo-title {
+				margin: 10px 0 0 10px;
+				font-size: 32px;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logo">
+			<div class="head">
+				<img class="logo-img" src="__PUBLIC__/bestjui/images/logo.png" />
+				<p class="logo-title">缘中源酒店预订管理系统</p>
+			</div>
+		</div>
+		<div class="loginbg">
+			<div class="login"> <img src="__PUBLIC__/admin/regimg/htdl_03.jpg" class="float" style="width:340px;height:320px;"/>
+				<div class="logincon">
+					<h2>用户登录</h2>
+					<form action="__APP__/Public/login" method="post">
+						<p class="inputMD" style="position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_06.jpg" class="float" />
+							<input class="phInput" type="text" value="" id="myinput" name="username" />
+							<span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 40px; top: 0;">用户名</span>
+						</p>
+						<p class="inputMD" style="position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_10.png" class="float" />
+							<input class="phInput" type="password" value="" id="myinputmm" name="password" />
+							<span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 40px; top: 0;">密　码</span>
+						</p>
+						<p class="inputMD" style="height:37px;position: relative;"><img src="__PUBLIC__/admin/regimg/htdl_11.png" class="float" />
+							<img id="checkcode" src="__ROOT__/index.php/register/verify" style="float:right; margin: 2px 2px 0 10px;width: 91px;height: 34px;" onclick="changeVerify()" />
+							<input class="phInput" type="text" value="" id="myinputyz" name="checkcodestr" checked="checked" style="width:100px;float:left;height: 34px;padding: 0px;" />
+							<span class="phText" style="clear: both; height: 33px; line-height: 33px; color: #aaa; position: absolute; left: 45px; top: 0;">验证码</span>
+						</p>
+						<p style="border:none; font-size:12px; height:17px">
+							<!-- <span><a href="__APP__/Public/miss_pwd">忘记密码？</a></span> -->
+							<input type="checkbox" id="ck_rmbUser" style="width:15px; float:left; margin-right:10px; padding-top: 0px;" />记住密码</p>
+						<p style=" border:none; height:50px">
+							<input type="submit" name="dosubmit" value="" style="background:url(__PUBLIC__/admin/regimg/htdl_16.jpg);width: 299px;height: 49px;cursor:pointer;border: 0;" />
+							<!--<a href="#"><img src="__PUBLIC__/admin/regimg/htdl_16.jpg" /></a>-->
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="footer"> Copyright &copy;2012-2018 缘中源酒店预订网站管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript()" target="_blank"></a></div>
+		<div class="zhuyi clearfix">
+			<p>本网站采用Html5+Css3技术，请使用以下浏览器登录</p>
+			<span class="chrome"><img src="__PUBLIC__/admin/regimg/chrome.png"/>谷歌浏览器<sup>&nbsp;</sup></span>
+			<span class="firefox"><img src="__PUBLIC__/admin/regimg/firefox.png"/>火狐浏览器<sup>&nbsp;</sup></span>
+			<span class="ie"><img src="__PUBLIC__/admin/regimg/ie.png"/>IE8<sup>+</sup>浏览器</span>
+		</div>
+	</body>
+	<script language="JavaScript" type="text/javascript">
+		function _placeholderText(phInput, phText) { //定义函数，传递2个参数——input输入框和text提示文本的id或者class
+			var $input = $(phInput);
+			var $text = $(phText);
+			$input.each(function() { //页面加载时遍历所有仿placeholder的input
+				var _this = $(this);
+				var _text = _this.siblings(phText);
+				if ($.trim(_this.val()) == '') {
+					_this.val("");
+					_text.show();
+				} else {
+					_text.hide();
+				}
+			});
+			$text.on('click', function() { //点击提示信息，input获取焦点
+				$(this).siblings(phInput).focus();
+			});
+			$input.on('input propertychange blur', function() { //为input注册事件，value值改变（其实是属性发生变化）时以及失去焦点时判断value值是否为空
+				var _this = $(this);
+				if (_this.val() == '') {
+					_this.siblings(phText).show();
+				} else {
+					_this.siblings(phText).hide();
+				}
+			});
+			$input.on('focus', function() { //为input注册事件，value值改变（其实是属性发生变化）时以及失去焦点时判断value值是否为空
+				!$(this).val() && $(this).siblings(phText).hide();
+			})
+		}
+		_placeholderText('.phInput', '.phText');
+	</script>
+</html>

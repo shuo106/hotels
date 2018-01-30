@@ -1,0 +1,89 @@
+<div class="bjui-pageHeader" style="height:38px">
+	<form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Rbac/adminlist" method="get">
+		<div class="bjui-searchBar" style="margin-top:6px">
+			<div style="display: inline-block;">
+				<div class="btn-group">
+					<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+					<ul class="dropdown-menu right" role="menu">
+						<li><a class="btn" href="__APP__/Rbac/pl/type/0" data-toggle="doajaxchecked" data-group="ids">锁定选中</a></li>
+						<li><a class="btn" href="__APP__/Rbac/pl/type/1" data-toggle="doajaxchecked" data-group="ids">解锁选中</a></li>
+						<li><a class="btn" href="__APP__/Rbac/pl/type/2" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="删除不可恢复，确定要删除选中项吗？">删除选中</a></li>	
+					</ul>
+				</div>
+			</div>&nbsp;&nbsp;
+			<label>用户名或真实姓名关键字：</label>
+			<input type="text" value="{$smarty.get.text}" name="text" class="form-control" size="8">&nbsp;
+			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
+			<a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+		</div>
+	</form>
+</div>
+<div class="bjui-pageContent tableContent">
+	<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+		<thead>
+			<tr style="height:36px; line-height:36px;">
+				<th style="background:#1078C1;color:#fff;"  width="26">
+					<input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+				</th>
+				<th style="background:#1078C1;color:#fff;"  data-order-field="userid">ID</th>
+				<th style="background:#1078C1;color:#fff;" >用户名</th>
+				<th style="background:#1078C1;color:#fff;" >操作权限</th>
+				<th style="background:#1078C1;color:#fff;" >真实姓名</th>
+				<th style="background:#1078C1;color:#fff;" >联系手机</th>
+				<th style="background:#1078C1;color:#fff;" >联系邮箱</th>
+				<th style="background:#1078C1;color:#fff;"  data-order-field="lasttime">最后登录时间</th>
+				<th style="background:#1078C1;color:#fff;" >账号状态</th>
+				<th style="background:#1078C1;color:#fff;"  width="100">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="__APP__/Rbac/addadmin" class="btn btn-green" data-toggle="navtab" data-id="roleedit-{$v.id}" data-title="添加管理员">新增</a>	
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$adminlist item=v key=k}
+			<tr data-id="{$k}">
+				<td>
+					<input type="checkbox" name="ids" data-toggle="icheck" value="{$v.userid}">
+				</td>
+				<td>{$v.userid}</td>
+				<td>{if $smarty.get.text}{str_replace($text,"<span style='color:red;'>{$text}</span>",$v.username)}{else}{$v.username}{/if}</td>
+				<td>
+					{$v.role}
+				</td>
+				<td>{if $text}{str_replace($text,"<span style='color:#f00;'>{$text}</span>",$v.truename)}{else}{$v.truename}{/if}</td>
+				<td>{$v.mobile}</td>
+				<td>{$v.email}</td>
+				<td>
+				{if $v.lasttime}
+				{date('Y-m-d H:i:s',$v.lasttime)}
+				{else}
+				从未登录
+				{/if}
+				</td>
+				<td>{if $v.disabled}
+					<a href="__APP__/Rbac/suoding/uid/{$v.userid}/type/{$v.disabled}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="现在为锁定状态,确定要解锁吗？">解锁</a> {else}
+					<a href="__APP__/Rbac/suoding/uid/{$v.userid}/type/{$v.disabled}" class="btn btn-green" data-toggle="doajax" data-confirm-msg="现在为正常状态,确定要锁定吗？">锁定</a> {/if}
+				</td>
+				<td>
+					<a href="__APP__/Rbac/addadmin/uid/{$v.userid}" class="btn btn-green" data-toggle="navtab" data-title="编辑-{$v.username}">编辑</a>
+					<a href="__APP__/Rbac/del/uid/{$v.userid}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bjui-pageFooter">
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

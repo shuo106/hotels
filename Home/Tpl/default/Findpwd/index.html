@@ -1,0 +1,83 @@
+{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/assets/css/member.css" />
+<style>
+.am-active a {
+    color: #0e90d2 !important
+}
+</style>
+<div class="hyy">
+    <div class="m-wrap">
+        <div class="hyy-l fl">
+            <img src="__PUBLIC__/assets/images/bg1.png">
+        </div>
+        <div class="hyy-r fr">
+            <div class="ptdl fl">
+                <div class="am-panel am-panel-primary" style="margin-bottom: 0px;margin-top: 0px;">
+                    <div class="am-panel-hd" style="padding: 1.6rem 1.25rem;">
+                        <font style="font-size: 14px;">密码找回</font>
+                    </div>
+                    <div class="am-panel-bd">
+                        <form method="post" action="__APP__/Login/findpwd" id="login1">
+                            <input name="landlord" value="{$smarty.get.landlord}" type="hidden" />
+                            <div class="ptdl-name">
+                                <i><img src="__PUBLIC__/assets/images/ico4.png"></i>
+                                <input type="text" name="mobile" id="mobile" placeholder="手机号" style="width: 280px;" />
+                            </div>
+                            <div class="ptdl-name">
+                                <i><img src="__PUBLIC__/assets/images/ico5.png"></i>
+                                <input type="password" name="password" placeholder="新密码" style="width: 280px;" />
+                            </div>
+                            <div class="am-input-group">
+                                <input type="text" name="code" class="am-form-field">
+                                <span class="am-input-group-btn">
+                                        <button class="am-btn am-btn-default" type="button" id="getCode" data-mobile="#mobile"   data-url="__APP__/Login/getVerify/type/{if $smarty.get.landlord}2{else}1{/if}/mobile/">获取验证码</button>
+                                        </span>
+                            </div>
+                        </form>
+                        <div class="ptdl-cont">
+                            <div class="qx">
+                                <h5>
+                                <a href="javascript:" ajaxform data-form="#login1" id="login_submit1">立即找回</a>
+                                </h5>
+                            </div>
+                            <!--<div class="zh">
+                                <h3>使用合作账号登录：</h3>
+                                <ul class="m-login-list">
+                                    <li>
+                                        <a href=""><img src="__PUBLIC__/assets/images/ico6.png"></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><img src="__PUBLIC__/assets/images/ico7.png"></a>
+                                    </li>
+                                </ul>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    $('#doc-tab-demo-1').find('a').on('opened.tabs.amui', function(e) {
+        var login_type = $(this).data('login');
+        console.log(login_type);
+        if (login_type == 1) {
+            $("#login_submit1").show();
+            $("#login_submit2").hide();
+        } else {
+            $("#login_submit1").hide();
+            $("#login_submit2").show();
+        }
+    })
+});
+function callback(rs) {
+    alert(rs.msg);
+    var landlord = "{$smarty.get.landlord}";
+    if (rs.status == 1) {
+        window.location.href = landlord.length > 0 ? "__APP__/Login/landlord" : "__APP__/Member/index";
+    }
+}
+</script>
+{include file="../Common/footer.html"}

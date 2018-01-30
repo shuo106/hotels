@@ -1,0 +1,95 @@
+<style type="text/css">
+	label.control-label{ width:200px;}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Member/memberset" method="post" data-toggle="validate" id="j_custom_form">
+		<input type="hidden" name="btn_submit" value="1">
+		<input type="hidden" name="id" id="id" value="{$id}" />
+		<table class="table table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label class="control-label x85" style="width: 200px;">
+							是否允许新会员注册：
+						</label>
+						<input type="radio" name="isreg" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $isreg}checked{/if}>
+						<input type="radio" name="isreg" data-toggle="icheck" value="0" data-label="否" {if !$isreg}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85" style="width: 200px;">
+							新会员注册是否需要邮件验证：
+						</label>
+						<input type="radio" name="isemail" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $isemail}checked{/if}>
+						<input type="radio" name="isemail" data-toggle="icheck" value="0" data-label="否" {if !$isemail}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85" style="width: 200px;">
+							每个Email是否允许注册多次：
+						</label>
+						<input type="radio" name="isnum" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $isnum}checked{/if}>
+						<input type="radio" name="isnum" data-toggle="icheck" value="0" data-label="否" {if !$isnum}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85" style="width: 200px;">
+							会员注册是否启用验证码功能：
+						</label>
+						<input type="radio" name="iscode" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $iscode}checked{/if}>
+						<input type="radio" name="iscode" data-toggle="icheck" value="0" data-label="否" {if !$iscode}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="control-label x85" style="width: 200px;">
+							会员登录是否启用验证码功能：
+						</label>
+						<input type="radio" name="islogin" data-toggle="icheck" value="1" data-label="是&nbsp;&nbsp;" {if $islogin}checked{/if}>
+						<input type="radio" name="islogin" data-toggle="icheck" value="0" data-label="否" {if !$islogin}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label for="ban_user" class="control-label x85" style="width: 200px;">
+							禁止在注册用户名中使用的词语：
+						</label>
+						<textarea name="user" id="ban_user" data-toggle="autoheight" cols="68.5" rows="1">{$user}</textarea>
+						<br />多个词之间用","分隔,例如如果你禁用了"admin"，那么所有含有"admin"(如:administrator)的用户名将被禁止使用
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label for="xieyi_name" class="control-label x85" style="width: 200px;">
+							前台会员注册协议的名称：
+						</label>
+						<input type="text" name="xieyi_name" id="xieyi_name" value="{$xieyi_name}" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<label for="member_xieyi" class="control-label x85" style="width: 200px;">用户注册协议：</label>
+						<div style="display: inline-block; vertical-align: middle;">
+							<textarea name="xieyi" id="member_xieyi" class="j-content" style="width:800px;" data-toggle="kindeditor" data-minheight="200">
+								{$xieyi}
+							</textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<div class="page_but" style="margin-left:200px;">
+                        <ul>
+                        <li><button type="submit" class="but btn-blue" id="btn_submit" data-icon="save">保存</button></li>
+                        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+                        </ul>
+                        </div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

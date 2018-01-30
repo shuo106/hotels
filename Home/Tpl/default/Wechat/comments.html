@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<title>我要点评</title>
+
+<link href="__PUBLIC__/wap/css/style.css" rel="stylesheet">
+
+<link href="__PUBLIC__/wap/css/framework.css" rel="stylesheet">
+
+<link href="__PUBLIC__/wap/css/font-awesome.css" rel="stylesheet">
+
+<link href="__PUBLIC__/wap/css/stylewechat.css" rel="stylesheet">
+
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+
+<script src="__PUBLIC__/js/jquery.form.js"></script>
+
+<script src="__PUBLIC__/wap/js/custom.js"></script>
+
+<script type="text/javascript">
+
+function doSave(){
+
+    $("#info2").submit();
+
+}
+
+$(function(){
+
+    $('form').ajaxForm(function(data){
+
+
+        eval('data='+data);
+
+        alert(data.msg);
+
+        if(data.status==1){
+
+            window.location.href="__ROOT__/Wechat/center";
+
+        }
+
+    });
+
+    return false;
+
+})
+
+</script>
+
+</head>
+
+<body>
+
+    <div id="preloader">
+
+        <div id="status">
+
+            <p class="center-text">网页内容加载中...</p>
+
+        </div>
+
+    </div>
+
+    <div class="header"><a class="hdleft" href="javascript:history.go(-1);"></a>我要点评<a class="hdright" href="__ROOT__/Wechat/index"><span></span></a></div>
+    <div class="wrapBox">
+        <div class="main">
+            <div class="members">
+                <div class="hd">我要点评</div>
+                <ul class="nav infoShow clearfix" id="info">
+                    <form action="__APP__/Wechat/docomment" method="post" id="info2" >
+                    <li><label>入住客房</label> 
+                        <input type="text"  name="tname"  value="{$roomname}" readonly="true">
+                        <input type="hidden" name="orderid" value="{$id}">
+                    </li>
+
+                    <li><label>评价等级</label> 
+                        <select id="" name="dengji" style="width:30%;">
+                            <option value="好">好评</option>
+                            <option value="中">中评</option>
+                            <option value="差">差评</option>
+                            <option value="投">投诉</option>
+                        </select>
+                    </li>
+
+                    <li><label>满意程度</label> 
+                        <select id="" name="manyi" style="width:30%;">
+                            <option value="100%">100%</option>
+                            <option value="90%">90%</option>
+                            <option value="80%">80%</option>
+                            <option value="70%">70%</option>
+                            <option value="60%">60%</option>
+                            <option value="50%">50%</option>
+                            <option value="40%">40%</option>
+                            <option value="30%">30%</option>
+                            <option value="20%">20%</option>
+                            <option value="10%">10%</option>
+                        </select>
+
+                    </li>
+
+                    <li style="height: 50px; padding:5px 10px;"><label>点评内容</label> <textarea name="comment" id="" style="width:70%; height:40px; border: 1px solid #CCC;"></textarea></li>
+
+                </form>
+
+                </ul>
+
+                <div style="margin-top: 10px;"><a href="javascript:doSave();" class="buttonWrap button button-red buttonLong option">确定</a></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

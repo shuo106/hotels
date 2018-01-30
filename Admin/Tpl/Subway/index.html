@@ -1,0 +1,32 @@
+<script type="text/javascript">
+	function changecate() {
+		$.CurrentNavtab.find('#towhere').css('display', 'inline-block');
+	}
+</script>
+<script type="text/javascript"></script>
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Subway/index" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height: 36px; line-height: 36px;">
+					<th style="background:#1078C1;color:#fff;">ID</th>
+					<th style="background:#1078C1;color:#fff;">城市</th>
+					<th style="background:#1078C1;color:#fff;" width="100">操作
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$city item=v key=k}
+				<tr data-id="{$k}">
+					<td>{$v.id}</td>
+					<td>{$v.city}
+					</td>
+					<td>
+						<a href="__APP__/Subway/lists/id/{$v.city}" class="btn btn-green" data-toggle="navtab" data-id="Subway-lists" data-title="地铁管理">地铁管理</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>

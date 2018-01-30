@@ -1,0 +1,82 @@
+<div class="bjui-pageHeader" style="height:38px">
+  <form id="pagerForm" data-toggle="ajaxsearch" action="__APP__/Comment/huishou" method="get">
+    <div style="margin-left: 0;display: inline-block; margin-top:6px">
+      <div class="btn-group">
+        <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="check-square-o">批量操作<span class="caret"></span></button>
+        <ul class="dropdown-menu right" role="menu">
+          <li><a class="btn" href="__APP__/Comment/pi/type/2" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要还原选中项吗？">还原选中</a></li>
+          <li><a class="btn" href="__APP__/Comment/pi/type/3" data-toggle="doajaxchecked" data-group="ids" data-confirm-msg="确定要彻底删除选中项吗？">删除选中</a></li>
+        </ul>
+      </div>
+      <label for="order_no">点评客人：</label>
+      <input type="text" id="order_no" value="{$username}" name="username" class="form-control" size="12">&nbsp;
+      <label for="order_no">点评酒店：</label>
+      <input type="text" id="order_no" value="{$title}" name="title" class="form-control" size="12">&nbsp;
+      <label>评价等级：</label>
+      <select name="label" data-toggle="selectpicker">
+        <option value="">不限</option><!-- 不起作用？？？ {if $label eq $smarty.get.label}selected{/if} -->
+        <option value="好" {if $smarty.get.label eq '好'}selected{/if}>好评</option>
+        <option value="中" {if $smarty.get.label eq '中'}selected{/if}>中评</option>
+        <option value="差" {if $smarty.get.label eq '差'}selected{/if}>差评</option>
+        <option value="投诉" {if $smarty.get.label eq '投诉'}selected{/if}>投诉</option>
+      </select>&nbsp;
+      <button type="submit" class="btn-default" data-icon="search" id="chaxun">查询</button>&nbsp;
+      <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>&nbsp;&nbsp;
+      {if $comments} 点评数量：{$total} 条 {/if}
+    </div>
+  </form>
+</div>
+<div class="bjui-pageContent tableContent">
+    <table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+      <thead>
+        <tr style="height:36px;line-height:36px;">
+        <th style="background:#1078C1;color:#fff;"  width="26">
+          <input type="checkbox" class="checkboxCtrl" data-group="ids" data-toggle="icheck">
+        </th>
+        <th style="background:#1078C1;color:#fff;"  data-order-field="id" width="40">ID</th>
+        <th style="background:#1078C1;color:#fff;" width="120">入住酒店</th>
+        <th style="background:#1078C1;color:#fff;" width="70">点评客人</th>
+        <th style="background:#1078C1;color:#fff;" width="280">点评内容</th>
+        <th style="background:#1078C1;color:#fff;" width="160">酒店回复</th>
+        <th style="background:#1078C1;color:#fff;" width="60">评价等级</th>
+        <th style="background:#1078C1;color:#fff;" width="80" data-order-field="addtime">点评时间</th>
+        <th style="background:#1078C1;color:#fff;" width="150">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+        {foreach from=$comments item=v key=k}
+      <tr data-id="{$k}">
+        <td>
+          <input type="checkbox" name="ids" data-toggle="icheck" value="{$v.id}">
+        </td>
+        <td>{$v.id}</td>
+        <td>{$v.hotelName}</td>
+        <td>{$v.uname}</td>
+        <td>{$v.content}</td>
+        <td>{$v.reply}</td>
+        <td>{$v.label}</td>
+        <td>{$v.addtime|date_format:"Y-m-d"}</td>
+        <td>
+            <a href="__APP__/Comment/huanyuan/id/{$v.id}" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要还原该记录吗？">还原</a>
+            <a href="__APP__/Comment/chedidel/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="删除不可恢复，确定删除吗？">删除</a>
+          </td>
+      </tr>
+      {/foreach}
+      </tbody>
+    </table>
+</div>
+<div class="bjui-pageFooter">
+  <div class="pages">
+    <span>每页&nbsp;</span>
+    <div class="selectPagesize">
+      <select data-toggle="selectpicker" data-toggle-change="changepagesize">
+        {foreach from=$pagesizes item=v}
+        <option value="{$v}">{$v}</option>
+        {/foreach}
+      </select>
+    </div>
+    <span>&nbsp;条，共 {$total} 条</span>
+  </div>
+  <div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+  </div>
+</div>

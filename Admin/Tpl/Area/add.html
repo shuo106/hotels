@@ -1,0 +1,44 @@
+<style type="text/css">
+	label.control-label {
+		width: 80px;
+	}
+</style>
+<div class="bjui-pageContent">
+	<form action="__APP__/Area/doAdd" method="post" data-toggle="ajaxform">
+		{if $smarty.get.id}
+			<input type="hidden" name="level" value="{$info['level']}" />
+			<input type="hidden" name="id" value="{$info['id']}" />
+			<input type="hidden" name="sort" value="{$info['sort']}" />
+		{/if}
+		{if $smarty.get.pid}
+			<input type="hidden" name="level" value="{$level}" />
+			<input type="hidden" name="pid" value="{$pid}" />		
+		{/if}
+		<table class="table-bordered table-condensed table-hover" width="100%">
+			<tbody>
+				<tr>
+					<td>
+						<label for="j_custom_number" class="control-label x85">
+								名称：
+							</label>
+						<input type="text" name="names" id="j_custom_title" value="{$info.name}">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+<div class="bjui-pageFooter">
+	<ul style="margin-left: 80px;float: left;">
+		<li>
+			<button type="button" class="btn-close" data-icon="close">
+				取消
+			</button>
+		</li>
+		<li>
+			<button type="submit" class="btn-default" data-icon="save">
+				保存
+			</button>
+		</li>
+	</ul>
+</div>
+</form>

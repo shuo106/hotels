@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>酒店地图-{$title}</title>
+<meta name="keywords" content="{$keywords}">
+<meta name="description" content="{$description}">
+<meta name="author" content="郑州鹏程计算机技术有限公司（www.pchotelcms.com）">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/ny.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/subpage.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css"/>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+<!-- 城市 -->
+<!-- 城市 -->
+<SCRIPT type="text/javascript">
+	if(navigator.platform.indexOf('Win32')!=0){ 
+		window.location.href="http://localhost:8082/";
+	}
+  var hotelurl = '__ROOT__/Hotels/';
+  var city ='{$city}';
+  var  root='__ROOT__';
+  var hot="{$hot}";
+  var allPY="{$allPY}";
+  var ABC="{$ABC}";
+  var DEF="{$DEF}";
+  var GHI="{$GHI}";
+  var JKL="{$JKL}";
+  var MNO="{$MNO}";
+  var PQR="{$PQR}";
+  var STU="{$STU}";
+  var VWX="{$VWX}";
+  var YZ="{$YZ}";
+</SCRIPT>
+</head>
+<body>
+<div class="header">
+<img src="__ROOT__/{$logo}" />
+<ul>
+<p><span><a href="__ROOT__/register.html">免费注册</a></span><span>|</span><span><a href="__ROOT__/Member/member_order.html">订单查询</a></span><span>|</span><span><a href="javascript:window.external.AddFavorite('http://www.baidu.com/', '鹏程酒店预订网站管理系统演示版')">收藏本站</a></span><span>|</span><span><a href="__ROOT__/Article/category-6.html">预订帮助</a></span></p>
+<img src="__PUBLIC__/images/phone_06.jpg" />
+</ul>
+</div>
+<!-------header  over------------>
+<div class="navbg clear">
+<div class="nav">
+<ul>
+<li><a href="__ROOT__/">首页</a></li>
+<li><a href="__ROOT__/Hotels/index.html">全国酒店</a></li>
+<li><a href="__ROOT__/Liansuo/index.html">连锁酒店</a></li>
+<li><a href="__ROOT__/Comment/index.html">点评</a></li>
+<li><a href="__ROOT__/Article/category-4.html">促销信息</a></li>
+<li><a href="__ROOT__/Article/category-5.html">旅游攻略</a></li>
+<li><a href="__ROOT__/map.html">网站地图</a></li>
+</ul>
+<p>
+{if $smarty.session.name}
+<span><a href="__ROOT__/Member/index.html" class="hyname">你好,{$smarty.session.name}</a></span>
+<span style="background:url(__PUBLIC__/images/huiyuan_03.jpg) no-repeat left 13px; text-indent:20px;"><a href="__APP__/login/loginOut">退出</a></span>
+{else}
+<span><a href="__ROOT__/login.html">登录</a></span>
+<span style="background:url(__PUBLIC__/images/huiyuan_03.jpg) no-repeat left 13px; text-indent:20px;"><a href="__ROOT__/Member/index.html">我的账户</a></span>
+{/if}	
+</p>
+</div>
+</div>
+<!--------nav  over----------->

@@ -1,0 +1,54 @@
+<script type="text/javascript">
+	function changecate() {
+		$.CurrentNavtab.find('#towhere').css('display', 'inline-block');
+	}
+</script>
+<script type="text/javascript"></script>
+<div class="bjui-pageContent tableContent">
+	<form name="sortform" data-toggle="ajaxform" action="__APP__/Airport/index" method="post">
+		<table data-toggle="tablefixed" data-width="100%" data-nowrap="true">
+			<thead>
+				<tr style="height: 36px; line-height: 36px;">
+					<th style="background:#1078C1;color:#fff;">ID</th>
+					<th style="background:#1078C1;color:#fff;">地铁线路</th>
+					<th style="background:#1078C1;color:#fff;">站名</th>
+					<th style="background:#1078C1;color:#fff;" width="100">操作
+					&nbsp;&nbsp;&nbsp;
+					<a href="__APP__/Subway/edit/city/{$smarty.get.id}" class="btn btn-green" data-toggle="dialog" data-id="Subway-edit" data-title="添加">添加</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$subway item=v key=k}
+				<tr data-id="{$k}">
+					<td>{$v.id}</td>
+					<td>{$v.ditie}</td>
+					<td>{$v.zhanpai}</td>
+					<td>
+						<a href="__APP__/Subway/edit/id/{$v.id}/city/{$v.city}" class="btn btn-green" data-toggle="dialog" data-id="Subway-edit" data-title="编辑-{$v.subway}">编辑</a>
+						<a href="__APP__/Subway/del/id/{$v.id}" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要删除该行信息吗？">删除</a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>
+<div class="bjui-pageFooter">
+	<button type="submit" class="btn-blue" data-icon="refresh" style="float:left">
+		更新排序
+	</button>
+	<div class="pages">
+		<span>每页&nbsp;</span>
+		<div class="selectPagesize">
+			<select data-toggle="selectpicker" data-toggle-change="changepagesize">
+				{foreach from=$pagesizes item=v}
+				<option value="{$v}">{$v}</option>
+				{/foreach}
+			</select>
+		</div>
+		<span>&nbsp;条，共 {$total} 条</span>
+	</div>
+	<div class="pagination-box" data-toggle="pagination" data-total="{$total}" data-page-size="{$pagesize}" data-page-current="{$pageCurrent}">
+	</div>
+</div>

@@ -1,0 +1,62 @@
+﻿{include file="../Common/header.html"}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/order.css">
+<!--导航条-->
+<div class="hotels_step">
+  <h3>{$orderdata['hotelname']}</h3>
+  <ul>
+    <li><span></span><strong>填写信息</strong></li>
+    <li><span></span>提交成功</li>
+  </ul>
+  <div class="clear"></div>
+</div>
+<!--导航条结束！！！-->
+<div class="main" style="width:992px;">  
+  <div class="sideleft">
+    <h3 class="title">酒店信息</h3>
+    <dl class="jdxx_dl">
+	  {if $orderdata['src']}
+      <img src="{$orderdata['src']}" alt="" />
+	  {else}
+      <img src="__PUBLIC__/images/jdimg.jpg" alt="" />
+	  {/if}
+      <dt>{$orderdata['hotelname']}</dt>
+      <dd><img src="__PUBLIC__/images/stars{$orderdata.xingji}.png">
+	  </dd>
+      <dd>{$orderdata['address']}</dd>
+    </dl>
+    <ul class="jdxx_li">
+      <li>房&nbsp;&nbsp;型：{$orderdata.roomtype}</li>
+      <li>床&nbsp;&nbsp;型：{$orderdata.fjchuang}</li>
+      <li>早&nbsp;&nbsp;餐：{$orderdata.zaocan}</li>
+      <li>宽&nbsp;&nbsp;带：{$orderdata.swang}</li>
+    </ul>
+    <div class="wxts">
+      <h4>温馨提示：</h4>
+      <p>您的手机号码需要提供给酒店<br />酒店要求入住人持本人有效大陆身份证办理</p>
+    </div>
+    <div class="helpin">
+      <h4>需要帮助：</h4>
+      <ul>
+        <li><a href="__ROOT__/Article/category-6.html">预订帮助</a></li>
+        <li>在线客服</li>
+        <li class="dianhua">客服电话：0371-63611389</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sideright">
+  <h3 id="title"><strong>在线支付</strong></h3>
+	<div class="siderightcon">
+    <h4 class="headding">支付方式</h4>
+   <div class="paystyle">
+  <ul>
+    <li><a href="#"><input type="radio" name="radio"><span><img src="__PUBLIC__/home/images/platform01.gif" alt="" /></span></a></li>
+    <li><a href="#"><input type="radio" name="radio"><span><img src="__PUBLIC__/home/images/platform02.gif" alt="" /></span></a></li>
+  </ul>
+  <p><strong>网上支付：</strong>网上支付即时到账，准确快捷，推荐您使用！</p>
+</div>
+	<div class="paystyle"><p class="tjdd"><input class="ydButton" type="submit" value="" style="cursor:pointer;"> <span>不收预订费</span></p></div>
+	</div>
+  </div>
+  <div class="clear"></div>
+</div>
+{include file="../Common/footer.html"}

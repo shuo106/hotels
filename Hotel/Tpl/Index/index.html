@@ -1,0 +1,290 @@
+<include file="Tpl/public/header.html" />
+<script src="__PUBLIC__/assets/js/echarts.min.js" type="text/javascript">
+</script>
+<script src="__PUBLIC__/assets/js/macarons.js" type="text/javascript">
+</script>
+<style type="text/css">
+.am-padding { padding:5px;}
+.am-table > tbody > tr > td, .am-table > tfoot > tr > td { padding: 0.3rem;}
+</style>
+<div class="am-cf admin-main">
+    <include file="Tpl/public/menu.html" />
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-lg">
+                        酒店首页
+                    </strong>
+                    /
+                    <small>
+                        Home
+                    </small>
+                </div>
+            </div>
+            <ul class="am-avg-sm-1 am-avg-md-6 am-margin am-padding am-text-center admin-content-list ">
+                <li>
+                    <a class="am-text-success" href="__APP__/Order/index/status/1">
+                        <span class="am-icon-btn am-primary am-icon-file-text">
+                        </span>
+                        <br/>
+                        新订单({$ordernums[1]|default="0"})
+                    </a>
+                </li>
+                <li>
+                    <a class="am-text-warning" href="__APP__/Order/index/status/4">
+                        <span class="am-icon-btn am-primary am-icon-paypal">
+                        </span>
+                        <br/>
+                        已付款({$ordernums[4]|default="0"})
+                    </a>
+                </li>
+                <li>
+                    <a class="am-text-danger" href="__APP__/Hotel/roomlist">
+                        <span class="am-icon-btn am-primary am-icon-building-o">
+                        </span>
+                        <br/>
+                        客房维护({$roomnums|default="0"})
+                    </a>
+                </li>
+                <li>
+                    <a class="am-text-secondary" href="__APP__/Comment/index">
+                        <span class="am-icon-btn am-primary am-icon-user-md">
+                        </span>
+                        <br/>
+                        客人点评({$commentnums|default="0"})      
+                    </a>
+                </li>
+                <li>
+                    <a class="am-text-secondary" href="__APP__/Data/index">
+                        <span class="am-icon-btn am-primary am-icon-bar-chart">
+                        </span>
+                        <br/>
+                        数据分析
+                    </a>
+                </li>
+                <li>
+                    <a class="am-text-secondary" href="__APP__/Member/change">
+                        <span class="am-icon-btn am-primary am-icon-edit">
+                        </span>
+                        <br/>
+                        修改资料
+                    </a>
+                </li>
+            </ul>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <table class="am-table am-table-bd am-table-striped admin-content-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    订单号
+                                </th>
+                                <th class="table-title am-hide-sm-only">
+                                    房间标题
+                                </th>
+                                <th class="table-type am-hide-sm-only">
+                                    预订客人
+                                </th>
+                                <th class="table-author am-hide-sm-only">
+                                    联系电话
+                                </th>
+                                <th class="table-date am-hide-sm-only">
+                                    入住时间
+                                </th>
+                                <th class="table-date am-hide-sm-only">
+                                    离店时间
+                                </th>
+                                <th class="table-author am-hide-sm-only">
+                                    应付金额
+                                </th>
+                                <th class="table-date">
+                                    订单状态
+                                </th>
+                                <th>
+                                    管理
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <empty name="neworder">
+                                <tr>
+                                    <td colspan="9">
+                                        <center>
+                                            <img src="__PUBLIC__/assets/images/dingdan.png">
+                                            </img>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <else />
+                                <volist id="vo" name="neworder">
+                                    <tr>
+                                        <td>
+                                            {$vo.addtime}{$vo.id}
+                                        </td>
+                                        <td class="table-title am-hide-sm-only">
+                                            {$vo.roomtype}
+                                        </td>
+                                        <td class="table-type am-hide-sm-only">
+                                            {$vo.linkman}
+                                        </td>
+                                        <td class="table-author am-hide-sm-only">
+                                            {$vo.telephone}
+                                        </td>
+                                        <td class="table-date am-hide-sm-only">
+                                            <php>
+                                                echo date('Y-m-d',$vo['ruzhudate']);
+                                            </php>
+                                        </td>
+                                        <td class="table-date am-hide-sm-only">
+                                            <php>
+                                                echo date('Y-m-d',$vo['lidiandate']);
+                                            </php>
+                                        </td>
+                                        <td class="table-author am-hide-sm-only">
+                                            {$vo.shoufei}元
+                                        </td>
+                                        <td>
+                                            <span style="background-color: {$lang['color'][$vo['status']]};color:#FFF;padding: 5px;">
+                                                {$lang['status'][$vo['status']]}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="am-btn-toolbar">
+                                                <div class="am-btn-group am-btn-group-xs">
+                                                    <a class="am-btn am-btn-default am-btn-xs" href="__APP__/Order/edit/id/{$vo.orderid}">
+                                                        <span class="am-icon-pencil-square-o">
+                                                        </span>
+                                                        管理
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </empty>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">
+                            订单来源统计
+                        </div>
+                        <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
+                            <div id="echarts" style="height: 250px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">
+                            最新点评
+                            <span class="am-fr">
+                                <a href="__APP__/Comment/index" style="font-size:14px">
+                                    更多
+                                </a>
+                            </span>
+                        </div>
+                        <div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3" style="height: 286px;margin-top:-12px;">
+                            <empty name="newcomment">
+                                <center>
+                                    <img src="__PUBLIC__/assets/images/dianping.png">
+                                    </img>
+                                </center>
+                                <else/>
+                                <ul class="am-comments-list admin-content-comment">
+                                    <volist id="vo" name="newcomment">
+                                        <li class="am-comment" style="margin: 1.57rem 0 0 0;">
+                                             <if condition="$vo.src ">
+                                                <img alt="" class="am-comment-avatar" height="48" src="__ROOT__{$vo.src}" width="48" />
+                                             <else />
+                                                 <img alt="" class="am-comment-avatar" height="48" src="__ROOT__/Public/home/images/notx.png" width="48" />
+			  </if>
+                                            <div class="am-comment-main">
+                                                <header class="am-comment-hd">
+                                                    <div class="am-comment-meta">
+                                                        <span class="am-fl">
+                                                            <a class="am-comment-author" href="#">
+                                                                {$vo['truename']}
+                                                            </a>
+                                                            评论 {$vo['title']}
+                                                        </span>
+                                                        <time class="am-fr">
+                                                            {$vo['addtime']|date="Y-m-d H:i:s",###}
+                                                        </time>
+                                                    </div>
+                                                </header>
+                                                <div class="am-comment-bd" style="padding:10px">
+                                                    <p class="am-text-truncate" style="margin-top: 0;margin: 0 0 0 0; line-height:26px;">
+                                                        客人点评：{$vo['content']}
+                                                    </p>
+                                                    <empty name="vo['reply']">
+                                                        <p class="am-text-truncate" style="margin-top: 0;margin: 0 0 0 0;line-height:26px;">
+                                                            <a href="__APP__/Comment/edit/id/{$vo['id']}">
+                                                                立即回复
+                                                            </a>
+                                                        </p>
+                                                        <else/>
+                                                        <p class="am-text-truncate" style="margin-top: 0;margin: 0 0 0 0;line-height:26px;color:#659a3e; ">
+                                                            房东回复：{$vo['reply']}
+                                                        </p>
+                                                    </empty>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </volist>
+                                </ul>
+                            </empty>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <include file="Tpl/public/footer.html" />
+    </div>
+    <!-- content end -->
+    <script type="text/javascript">
+        function ready() {
+        var myChart = echarts.init(document.getElementById('echarts'), 'macarons');
+        $.get('__APP__/Data/from',function(rs){
+            var option = {
+                title : {
+                    text: '订单来源',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: rs.list
+                },
+                series : [{
+                        name: '订单来源',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:rs.order,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        },'json');
+    }
+    </script>
+</div>
+<include file="Tpl/public/bottom.html" />
