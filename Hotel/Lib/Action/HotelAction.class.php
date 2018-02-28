@@ -112,9 +112,9 @@ class HotelAction extends BaseAction{
 		$res = $m->where("username = '{$_SESSION['hotel_name']}'")->save();
 
 		if($res){
-			 die(json_encode(array('status'=>1,'info'=>'操作成功')));    
+			 die(json_encode(array('status'=>1,'info'=>'操作成功')));
 		}else{
-			 die(json_encode(array('status'=>0,'info'=>'操作失败')));    
+			 die(json_encode(array('status'=>0,'info'=>'操作失败')));
 		}
 			
 	}

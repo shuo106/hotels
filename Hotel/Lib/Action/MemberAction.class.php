@@ -58,14 +58,15 @@ class MemberAction extends BaseAction{
                     $this->error( '手机号或电话号码错误');
                 }
             }
-			if(empty($_POST['chuanzhen'])){
+/* 			if(empty($_POST['chuanzhen'])){
 				$this->error('传真不能为空');
-			}
+			} */
 			$data['linkname']	=$this->_post('linkname');
 			$data['chuanzhen']		=$this->_post('chuanzhen');
 			$data['telephone']	=$this->_post('telephone');
 			$data['address']	=$this->_post('address');
 			$data['qq']			=$this->_post('qq');
+			$data['tuijianren'] = $this->_post('tuijianren');
 			//为确保手机号码的唯一性进行验证
 			 if($this->_post('telephone') and  $this->_post('telephone') != $user['telephone']){ 
 			 		$t=M('member_hotel')->where('telephone = '.$this->_post('telephone'))->find();
@@ -79,16 +80,131 @@ class MemberAction extends BaseAction{
 
              
 
-			if($row){
-				 die(json_encode(array('status'=>1,'info'=>'操作成功')));    
-			}else{
-				 die(json_encode(array('status'=>0,'info'=>'操作失败')));    
-			}
+		if($row){
+
+			$res = $this->register_hotel();
+			die(json_encode(array('status'=>1,'info'=>'操作成功'.$res)));    
+		}else{
+			die(json_encode(array('status'=>0,'info'=>'操作失败')));    
+		}
 
 
 		}else{
 			$this->display();
 		}
+	}
+
+
+	/**
+	 * 商城端注册
+	 */
+	public function register_hotel(){
+		$info = M('member_hotel')->where(['username' => $_SESSION['hotel_name']])->field('address,telephone,password,tuijianren')->find();
+		$address = str_replace(' ','',$info['address']);
+		$data = [
+			'mobile' => $info['telephone'],
+			'password' => $info['password'],
+			'province_id' => null,
+			'city_id' => null,
+			'region_id' => $this->getmap($address),
+			'town_id' => null,
+			'referee_mobile' => $info['tuijianren']
+		];
+		$str = $this->encrypt(json_encode($data));
+		$url = C('javadomain').'/api/shop/member/hotel-regist.do?params='.$str;
+		$res = $this->curl_get($url);
+		// var_dump($str);exit();
+		return $res->message;
+	}
+
+		/**
+	 * GET
+	 */
+	public function curl_get($url){
+		// 百度地图的key
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+		$res = curl_exec($ch);
+		curl_close($ch);
+		return json_decode($res);
+	}
+	/**
+	 * 获取经纬度
+	 * @param	string		地址信息
+	 */
+	public function getmap($str = '广东省广州市番禺大学城南路'){
+		$url = 'http://api.map.baidu.com/geocoder/v2/?address='.$str.'&output=json&ak=1WUEFbk93ac9WfceIMKzXGMRywP08Wz2'; //GET请求
+		// $key = '35e38873ef563e681945f209da17d9c1';
+		// $url = 'http://restapi.amap.com/v3/geocode/geo?key=35e38873ef563e681945f209da17d9c1&address='.$str;
+		$info = $this->curl_get($url);
+		if ($info->status == 0) {
+			$map = $info->result->location->lat.','.$info->result->location->lng;
+			// echo $map;
+			return $this->getaddr($map);
+		}
+		return '';
+	}
+	/**
+	 * 根据经纬度获取对应的省市编号
+	 * @param	string		经纬度
+	 */
+	public function getaddr($map = '39.934,116.329'){
+		$url = 'http://api.map.baidu.com/geocoder/v2/?location='.$map.'&output=json&pois=1&ak=1WUEFbk93ac9WfceIMKzXGMRywP08Wz2'; //GET请求
+		$info = $this->curl_get($url);
+		if($info->status == 0){
+			$adcode = $info->result->addressComponent->adcode;
+			return $adcode;
+		}
+		return $info;
+	}
+
+	public function getmember($arr = ''){
+		$arr = [
+			'member' => '13333333333',
+			'password' => md5('123456'),
+			'tuijianren' => '16666666666',
+			'adcode' => '440133'
+		];
+		$res = $this->encrypt(json_encode($arr));
+
+		$info = [
+			'result' => 1,
+			'data' => $res
+		];
+		echo json_encode($info);
+	}
+
+	/**
+	 * DES 加密
+	 * @param	string	$data	json字符串加密数据
+	 * @param	string	$key	加密秘钥
+	 * @return	string	16进制字符串
+	 */
+	function encrypt($str, $key = 'haozhaoli510.com')      
+	{      
+		$block = mcrypt_get_block_size('des', 'ecb');      
+		$pad = $block - (strlen($str) % $block);      
+		$str .= str_repeat(chr($pad), $pad);      
+		$key = substr($key, 0, 8);
+		return bin2hex(mcrypt_encrypt(MCRYPT_DES, $key, $str, MCRYPT_MODE_ECB));      
+	}
+		/**
+	 * DES 解密
+	 * @param	string	$data	加密数据
+	 * @param	string	$key	加密秘钥
+	 * 
+	 */
+	function decrypt($str, $key = 'haozhaoli510.com')      
+	{ 
+		$key = substr($key, 0, 8);
+		$str = hex2bin($str);
+		$str = mcrypt_decrypt(MCRYPT_DES, $key, $str, MCRYPT_MODE_ECB);      
+		  
+		$block = mcrypt_get_block_size('des', 'ecb');      
+		$pad = ord($str[($len = strlen($str)) - 1]);      
+		return substr($str, 0, strlen($str) - $pad);      
 	}
 
 	public function hotel(){
@@ -160,7 +276,7 @@ class MemberAction extends BaseAction{
 
 
 			if($row){
-				 die(json_encode(array('status'=>1,'info'=>'操作成功')));    
+				 die(json_encode(array('status'=>1,'info'=>'操作成功')));
 			}else{
 				 die(json_encode(array('status'=>0,'info'=>'操作失败')));    
 			}
